@@ -31,8 +31,9 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-// RFP
 /*
+
+       Status: RFP
        CREATED DATE: 8/25/2022
        UPDATED DATE: 8/25/2022
  */
@@ -56,8 +57,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public PostAdapter(List<PostItem> items, Context context) {
         this.items = items;
         this.context = context;
-        auth=FirebaseAuth.getInstance();
-        firebaseUser=auth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        firebaseUser = auth.getCurrentUser();
     }
 
     @NonNull
@@ -70,59 +71,63 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         init();
         p = items.get(position);
-        String ID=p.getPostid();
-        SetDetails(p,holder);
+        String ID = p.getPostid();
+        SetDetails(p, holder);
 
+        holder.social_page_place_a_comment.setOnClickListener(view -> {
+            Intent intent = new Intent(context, CommentDetailActivity.class);
+            intent.putExtra("postid", ID);
+            context.startActivity(intent);
+        });
+
+        holder.social_page_strike.setOnClickListener(view -> {
+            Intent intent = new Intent(context, CommentDetailActivity.class);
+            intent.putExtra("postid", ID);
+            context.startActivity(intent);
+        });
         // Number of hearts
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                holder.social_page_number_of_likes.setText(snapshot.getChildrenCount()+"  ");
+                holder.social_page_number_of_likes.setText(snapshot.getChildrenCount() + "  ");
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        postLike(holder.social_page_like,ID);
+        postLike(holder.social_page_like, ID);
 
         //Number of strikes
-      referenceStrikes.child(ID).child(p.getPublisher()).addValueEventListener(new ValueEventListener() {
+        referenceStrikes.child(ID).child(p.getPublisher()).addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                holder.social_page_number_of_comments.setText(snapshot.getChildrenCount()+ "   ");
+                holder.social_page_number_of_comments.setText(snapshot.getChildrenCount() + "   ");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
-      referenceStrikes.child(ID).addValueEventListener(new ValueEventListener() {
-          @SuppressLint("SetTextI18n")
-          @Override
-          public void onDataChange(@NonNull DataSnapshot snapshot) {
-              holder.social_page_number_of_comments.setText(snapshot.getChildrenCount()+ "");
-          }
+        referenceStrikes.child(ID).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                holder.social_page_number_of_comments.setText(snapshot.getChildrenCount() + "");
+            }
 
-          @Override
-          public void onCancelled(@NonNull DatabaseError error) {
-
-          }
-      });
-
-        holder.social_page_place_a_comment.setOnClickListener(view -> {
-           Intent intent=new Intent(context, CommentDetailActivity.class);
-            intent.putExtra("postid",ID);
-            intent.putExtra("authorid",ID);
-            context.startActivity(intent);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
+
 
     }
 
-    private void postLike(ImageView img,String ID) {
+    private void postLike(ImageView img, String ID) {
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -135,6 +140,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     img.setTag("heart");
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -143,7 +149,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
 
-    private void SetDetails(PostItem p,@NonNull ViewHolder holder){
+    private void SetDetails(PostItem p, @NonNull ViewHolder holder) {
         reference.child(p.getPublisher()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -160,12 +166,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
                 } else {
                     assert firebaseUser != null;
-                    if(firebaseUser.getPhotoUrl()==null){
+                    if (firebaseUser.getPhotoUrl() == null) {
                         holder.social_page_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
 
-                    }
-                    else
-                        Glide.with(context).load(firebaseUser.getPhotoUrl()).into( holder.social_page_image_profile);
+                    } else
+                        Glide.with(context).load(firebaseUser.getPhotoUrl()).into(holder.social_page_image_profile);
 
                     holder.social_page_username.setText(u.getUsername());
                     holder.social_page_image_description.setText(p.getDescription());
@@ -173,7 +178,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
                 }
                 holder.social_page_strike.setImageResource(R.drawable.ic_baseline_bolt_24);
-
                 holder.social_page_like.setOnClickListener(v -> {
                     if (holder.social_page_like.getTag().equals("heart")) {
                         assert firebaseUser != null;
@@ -186,6 +190,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     }
                 });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -197,9 +202,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //FirebaseDatabase
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");
-        referenceHearts=database.getReference().child("hearts");
-        referenceStrikes=database.getReference().child("strikes");
-
+        referenceHearts = database.getReference().child("hearts");
+        referenceStrikes = database.getReference().child("strikes");
     }
 
     @Override
@@ -218,6 +222,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         final TextView social_page_number_of_comments;
         final ImageView social_page_like;
         final ImageView social_page_strike;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             social_page_image_profile = itemView.findViewById(R.id.social_page_image_profile);
@@ -227,8 +232,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             social_page_place_a_comment = itemView.findViewById(R.id.social_page_place_a_comment);
             social_page_number_of_likes = itemView.findViewById(R.id.social_page_number_of_likes);
             social_page_number_of_comments = itemView.findViewById(R.id.social_page_number_of_comments);
-            social_page_like=itemView.findViewById(R.id.social_page_like);
-            social_page_strike=itemView.findViewById(R.id.social_page_strike);
+            social_page_like = itemView.findViewById(R.id.social_page_like);
+            social_page_strike = itemView.findViewById(R.id.social_page_strike);
         }
     }
 }

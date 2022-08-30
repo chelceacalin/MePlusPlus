@@ -39,7 +39,13 @@ import java.util.Map;
 import java.util.Objects;
 
 /*
-CREATED DATE: 8/29/2022
+        Status: RFP
+        CREATED DATE: 8/29/2022
+        UPDATED DATE: 8/29/2022
+
+        1.
+        UPDATE DATE: 8/29/2022
+        Reason: OnActivityResult e deprecated
 */
 @SuppressWarnings("ALL")
 public class EditProfile extends AppCompatActivity {
@@ -52,21 +58,27 @@ public class EditProfile extends AppCompatActivity {
     EditText editprofile_username;
     EditText editprofile_bio;
     ImageView editprofile_rotate_image;
-    int rotationInit = 0;
+
     //Firebase
     FirebaseDatabase database;
     DatabaseReference ref;
     FirebaseAuth auth;
     FirebaseUser user;
+    FirebaseStorage storage;
+    StorageReference reference;
 
     //Pt imagine
     Uri imageviewuri;
     String imageURL;
     StorageTask uploadtask;
-    FirebaseStorage storage;
-    StorageReference reference;
+
+    //Diverse
+    int rotationInit;
     ProgressDialog progressDialog;
 
+    //Update
+    Map<String, Object> map;
+    Uri imgURiDownload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +96,9 @@ public class EditProfile extends AppCompatActivity {
 
         editprofile_button_save.setOnClickListener(view -> {
             fuploadImage();
-        finish();
+            finish();
         });
-        /*
-        UPDATE DATE: 8/29/2022
-        Reason: OnActivityResult e deprecated
-         */
+
         final ActivityResultLauncher<Intent> launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -99,7 +108,6 @@ public class EditProfile extends AppCompatActivity {
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageviewuri);
                             editprofile_photo.setImageBitmap(bitmap);
-
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -119,11 +127,9 @@ public class EditProfile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 editprofile_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                 editprofile_bio.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getBio());
-
                 if (Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl().equals("default")) {
                     Glide.with(getApplicationContext()).load(user.getPhotoUrl()).into(editprofile_photo);
-                }
-                else{
+                } else {
                     Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).placeholder(R.drawable.ic_baseline_person).into(editprofile_photo);
                 }
             }
@@ -133,20 +139,17 @@ public class EditProfile extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     private void init() {
         //Controale
         editprofile_closeImg = findViewById(R.id.editprofile_closeImg);
-        editprofile_button_save=findViewById(R.id.editprofile_button_save);
+        editprofile_button_save = findViewById(R.id.editprofile_button_save);
         editprofile_photo = findViewById(R.id.editprofile_photo);
         editprofile_change_image = findViewById(R.id.editprofile_change_image);
         editprofile_username = findViewById(R.id.editprofile_username);
         editprofile_bio = findViewById(R.id.editprofile_bio);
-        editprofile_rotate_image=findViewById(R.id.editprofile_rotate_image);
+        editprofile_rotate_image = findViewById(R.id.editprofile_rotate_image);
 
         //Firebase
         auth = FirebaseAuth.getInstance();
@@ -156,6 +159,10 @@ public class EditProfile extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference("uploads");
+
+        //Diverse
+        map = new HashMap<>();
+        rotationInit = 0;
 
     }
 
@@ -169,24 +176,20 @@ public class EditProfile extends AppCompatActivity {
             uploadtask = reference.putFile(imageviewuri);
 
             uploadtask.continueWithTask(task -> reference.getDownloadUrl()).addOnFailureListener(e -> {
-                progressDialog.dismiss();
-                Toast.makeText(EditProfile.this, "Error Uploading", Toast.LENGTH_SHORT).show();
-            })
+                        progressDialog.dismiss();
+                        Toast.makeText(EditProfile.this, "Error Uploading", Toast.LENGTH_SHORT).show();
+                    })
                     .addOnCompleteListener((OnCompleteListener<Uri>) task -> {
-                        if(!task.isSuccessful()){
+                        if (!task.isSuccessful()) {
                             Toast.makeText(EditProfile.this, "Error", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
-                        }
-                        else
-                        {
+                        } else {
                             progressDialog.dismiss();
-                            Uri downloadUri = task.getResult();
-                            imageURL = downloadUri.toString();
+                            imgURiDownload = task.getResult();
+                            imageURL = imgURiDownload.toString();
                             ref.child(user.getUid()).child("imageurl").setValue(imageURL);
                             Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
-
-                            Map<String, Object> map = new HashMap<>();
                             map.put("username", editprofile_username.getText().toString());
                             map.put("bio", editprofile_bio.getText().toString());
                             ref.child(user.getUid()).updateChildren(map);
@@ -198,9 +201,9 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
-            @Override
-            protected void onDestroy() {
+    @Override
+    protected void onDestroy() {
         progressDialog.dismiss();
-                super.onDestroy();
-            }
-        }
+        super.onDestroy();
+    }
+}

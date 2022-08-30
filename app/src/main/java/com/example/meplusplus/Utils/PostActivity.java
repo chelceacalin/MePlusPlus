@@ -34,9 +34,17 @@ import java.util.Map;
 
 
 /*
-       CREATED DATE: 8/25/2022
-       UPDATED DATE: 8/25/2022
- */
+
+       Status: RFP
+
+       CREATED DATE: 8/21/2022
+       UPDATED DATE: 8/21/2022
+
+       1.
+        UPDATE DATE: 8/25/2022
+        Notes: OnActivityResult e deprecated
+         */
+
 @SuppressWarnings("ALL")
 public class PostActivity extends AppCompatActivity {
     //Controale
@@ -59,9 +67,9 @@ public class PostActivity extends AppCompatActivity {
     StorageTask uploadtask;
 
     //Pt Imagine
-    static final int REQUEST_CODE = 69;
+    static int REQUEST_CODE;
     Uri imageviewuri;
-    int rotationInit = 0;
+    int rotationInit;
     String imageURL;
 
     @Override
@@ -71,15 +79,12 @@ public class PostActivity extends AppCompatActivity {
         //Initializare
         init();
 
-
         postactivity_rotate_image.setOnClickListener(view -> {
             rotationInit += 90;
             postactivity_imageProfile.setRotation(rotationInit);
         });
 
-
         postactivity_buttonpost.setOnClickListener(view -> {
-            //insertIntoFirebase();
             fuploadImage();
 
         });
@@ -87,14 +92,9 @@ public class PostActivity extends AppCompatActivity {
             Intent intent = new Intent(PostActivity.this, MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
-
+            finish();
         });
 
-
-        /*
-        UPDATE DATE: 8/22/2022
-        Reason: OnActivityResult e deprecated
-         */
         final ActivityResultLauncher<Intent> launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -104,7 +104,6 @@ public class PostActivity extends AppCompatActivity {
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageviewuri);
                             postactivity_imageProfile.setImageBitmap(bitmap);
-
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -141,6 +140,10 @@ public class PostActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         databaseReference = database.getReference("posts");
         auth = FirebaseAuth.getInstance();
+
+        //Divers
+        REQUEST_CODE = 69;
+        rotationInit = 0;
     }
 
     private String getFext() {
@@ -150,42 +153,37 @@ public class PostActivity extends AppCompatActivity {
 
     private void fuploadImage() {
 
-        if (imageviewuri != null)
-        {
+        if (imageviewuri != null) {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
             reference = reference.child(System.currentTimeMillis() + "." + getFext());
             uploadtask = reference.putFile(imageviewuri);
-
             uploadtask.continueWithTask(task -> reference.getDownloadUrl()).addOnFailureListener(e -> {
                 progressDialog.dismiss();
                 Toast.makeText(PostActivity.this, "Error Uploading", Toast.LENGTH_SHORT).show();
-            })
-                    .addOnCompleteListener((OnCompleteListener<Uri>) task -> {
-                        progressDialog.dismiss();
-                        Uri downloadUri = task.getResult();
-                        imageURL = downloadUri.toString();
+            }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                progressDialog.dismiss();
+                Uri downloadUri = task.getResult();
+                imageURL = downloadUri.toString();
 
-                        String postID = databaseReference.push().getKey(); // un id unic
-                        String description = postactivity_description.getText().toString();
-                        String IDpublisher = auth.getCurrentUser().getUid();
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("postid", postID);
-                        map.put("imageurl", imageURL);
-                        map.put("description","   "+description);
-                        map.put("publisher", IDpublisher);
-                        assert postID != null;
-                        databaseReference.child(postID).setValue(map);
+                String postID = databaseReference.push().getKey(); // un id unic
+                String description = postactivity_description.getText().toString();
+                String IDpublisher = auth.getCurrentUser().getUid();
+                Map<String, Object> map = new HashMap<>();
+                map.put("postid", postID);
+                map.put("imageurl", imageURL);
+                map.put("description", "   " + description);
+                map.put("publisher", IDpublisher);
+                assert postID != null;
+                databaseReference.child(postID).setValue(map);
 
-                        Toast.makeText(PostActivity.this, "Post Uploaded", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(PostActivity.this, Social_PageFragment.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
-                        finish();
-                    });
-        }
-        else
-        {
+                Toast.makeText(PostActivity.this, "Post Uploaded", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PostActivity.this, Social_PageFragment.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
+                finish();
+            });
+        } else {
             Toast.makeText(this, "Please Select an Image", Toast.LENGTH_SHORT).show();
         }
     }
@@ -197,18 +195,4 @@ public class PostActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select image ..."), REQUEST_CODE);
     }
-
-    private void insertIntoFirebase() {
-        String postID = databaseReference.push().getKey(); // un id unic
-        String description = postactivity_description.getText().toString();
-        String IDpublisher = auth.getCurrentUser().getUid();
-        Map<String, Object> map = new HashMap<>();
-        map.put("postid", postID);
-        map.put("imageurl", imageURL);
-        map.put("description", description);
-        map.put("publisher", IDpublisher);
-        databaseReference.child(postID).setValue(map);
-    }
-
-
 }

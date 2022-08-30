@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -43,14 +42,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-// RFP
+
 
 /*
+
+       Status: RFP
        CREATED DATE: 8/29/2022
        UPDATED DATE: 8/29/2022
  */
-@SuppressWarnings("ALL")
 public class AccountFragment extends Fragment {
+
+    //Controale
+    TextView fragment_account_username, fragment_account_number_of_posts, fragment_account_description;
+    Button fragment_account_edit_button;
+    ImageView fragment_account_options, fragment_account_image_profile;
 
     //Firebase
     FirebaseAuth auth;
@@ -59,19 +64,23 @@ public class AccountFragment extends Fragment {
     DatabaseReference reference;
     DatabaseReference referencePosts;
 
-    //Controale
-    TextView fragment_account_username, fragment_account_number_of_posts, fragment_account_description;
-    Button fragment_account_edit_button;
-    ImageView fragment_account_options, fragment_account_image_profile;
-
     //Recycler
     RecyclerView fragment_account_recyclerView_posts;
     AccountPhotos adapter;
     GridLayoutManager manager;
     List<PostItem> items;
+
+    //Diverse
     String pID;
     int contor;
+
+    //Redirect
     String received;
+
+    //Pop up menu
+    PopupMenu popup;
+    Menu menu;
+    MenuInflater inflater;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,13 +90,11 @@ public class AccountFragment extends Fragment {
         init(view);
         setDetails();
 
-
         //No Of Posts
         referencePosts.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 for (DataSnapshot i : snapshot.getChildren()) {
                     if (Objects.requireNonNull(i.getValue(PostItem.class)).getPublisher().equals(pID)) {
                         contor++;
@@ -98,11 +105,8 @@ public class AccountFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
-
 
 
         getposts();
@@ -129,52 +133,39 @@ public class AccountFragment extends Fragment {
         referencePosts = database.getReference("posts");
         pID = user.getUid();
 
-        received= requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).getString("profileId", "empty");
-
+        received = requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).getString("profileId", "empty");
         if (!received.equals("empty")) {
             //DACA PRIMESC CEVA
             pID = received;
-            getContext().getSharedPreferences("PID", Context.MODE_PRIVATE).edit().clear().apply();
+            requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).edit().clear().apply();
             fragment_account_edit_button.setText("Say Hi");
 
             //De completat cand fac partea de chat app
 
         } else {
             pID = user.getUid();
-         //   fragment_account_edit_button.setText("Edit");
             fragment_account_edit_button.setText("Edit");
-            fragment_account_edit_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(getContext(), EditProfile.class));
-                }
-            });
-
-
+            fragment_account_edit_button.setOnClickListener(view1 -> startActivity(new Intent(getContext(), EditProfile.class)));
         }
 
-
+        //Recyclerview
         manager = new GridLayoutManager(getContext(), 2);
         manager.setSpanCount(2);
         items = new ArrayList<>();
         adapter = new AccountPhotos(getContext(), items);
         fragment_account_recyclerView_posts.setLayoutManager(manager);
         fragment_account_recyclerView_posts.setAdapter(adapter);
-
         fragment_account_recyclerView_posts.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 int position = parent.getChildAdapterPosition(view); // item position
                 //spacing between views in grid
-
-                // item column
-                outRect.left = 0; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = 0; // (column + 1) * ((1f / spanCount) * spacing)
+                outRect.left = 0;
+                outRect.right = 0;
                 outRect.top = 30;
-                outRect.bottom = 30; // item bottom
+                outRect.bottom = 30;
             }
         });
-
         //Diverse
         contor = 0;
     }
@@ -187,49 +178,36 @@ public class AccountFragment extends Fragment {
                 fragment_account_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                 fragment_account_description.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getBio());
                 if (Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl().equals("default")) {
-                    //fragment_account_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
                     Glide.with(requireContext()).load(user.getPhotoUrl()).into(fragment_account_image_profile);
-
-                } else{
-                   Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(fragment_account_image_profile);
+                } else {
+                    Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(fragment_account_image_profile);
                 }
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
         // Pop up menu
-        fragment_account_options.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popup = new PopupMenu(getContext(),
-                        fragment_account_options);
-                Menu menu = popup.getMenu();
-
-                popup.getMenuInflater().inflate(R.menu.menu_options_profile, menu);
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        // Toast message on menu item clicked
-                        if(menuItem.getTitle().equals("Sign Out")){
-                            auth.signOut();
-                            Intent intent=new Intent(getContext(),LoginActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(getContext(), "You've been signed out", Toast.LENGTH_SHORT).show();
-
-                        }
-                        else  if(menuItem.getTitle().equals("Dark Mode")){
-                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
-                        }
-                        return true;
-                    }
-                });
-                popup.show();
-            }
+        fragment_account_options.setOnClickListener(view -> {
+            popup = new PopupMenu(getContext(), fragment_account_options);
+            menu = popup.getMenu();
+            //CAM TARANIE, AR TRB MODIFICAT
+            popup.getMenuInflater().inflate(R.menu.menu_options_profile, menu);
+            popup.setOnMenuItemClickListener(menuItem -> {
+                if (menuItem.getTitle().equals("Sign Out")) {
+                    auth.signOut();
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getContext(), "You've been signed out", Toast.LENGTH_SHORT).show();
+                } else if (menuItem.getTitle().equals("Dark Mode")) {
+                    Toast.makeText(getContext(), "Dark Mode", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            });
+            popup.show();
         });
 
     }
@@ -248,20 +226,16 @@ public class AccountFragment extends Fragment {
                 Collections.reverse(items);
                 adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
-
     }
 
-
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-            MenuInflater inflater= requireActivity().getMenuInflater();
-            inflater.inflate(R.menu.menu_options_profile,menu);
-     return true;
+        inflater = requireActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_options_profile, menu);
+        return true;
     }
 }

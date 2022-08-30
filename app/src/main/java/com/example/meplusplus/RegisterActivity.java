@@ -29,18 +29,18 @@ import java.util.Objects;
 @SuppressWarnings("FieldCanBeLocal")
 public class RegisterActivity extends AppCompatActivity {
     //Controale
-     Button registerActivity_btn_register, registerActivity_button_Login;
-     EditText registeractivity_edit_text_username;
-     EditText registeractivity_edit_text_name;
-     EditText registeractivity_edit_text_email;
-     EditText registerActivity_edit_text_password;
-     ProgressDialog progressDialog;
-     CheckBox showpasswordCheckBox;
+    Button registerActivity_btn_register, registerActivity_button_Login;
+    EditText registeractivity_edit_text_username;
+    EditText registeractivity_edit_text_name;
+    EditText registeractivity_edit_text_email;
+    EditText registerActivity_edit_text_password;
+    ProgressDialog progressDialog;
+    CheckBox showpasswordCheckBox;
 
     //Firebase
-     FirebaseDatabase database;
-     DatabaseReference reference;
-     FirebaseAuth auth;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    FirebaseAuth auth;
 
     //Validari
     String username, name, email, password;

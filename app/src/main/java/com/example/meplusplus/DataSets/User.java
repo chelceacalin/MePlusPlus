@@ -3,6 +3,7 @@ package com.example.meplusplus.DataSets;
 import androidx.annotation.NonNull;
 
 /*
+       Status: RFP
        CREATED DATE: 8/17/2022
        UPDATED DATE: 8/17/2022
  */
@@ -23,17 +24,17 @@ public class User {
         this.username = username;
     }
 
-    public User()
-    {
-        this.username="N/A";
-        this.name="N/A";
+    public User() {
+        this.username = "N/A";
+        this.name = "N/A";
         this.email = "N/A";
         this.id = "N/A";
         this.bio = "N/A";
-        this.imageurl="N/A";
+        this.imageurl = "N/A";
     }
-    public User(String username,String name, String email, String id, String bio, String imageurl) {
-     this.username=username;
+
+    public User(String username, String name, String email, String id, String bio, String imageurl) {
+        this.username = username;
         this.name = name;
         this.email = email;
         this.id = id;

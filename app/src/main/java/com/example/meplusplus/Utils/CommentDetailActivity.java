@@ -55,9 +55,13 @@ public class CommentDetailActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference strikes;
-
+    Map<String, Object> map;
     //Intent
     String postID;
+
+    //Diverse
+    String comment="";
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +71,12 @@ public class CommentDetailActivity extends AppCompatActivity {
         setProfileImage();
 
         activity_comment_detail_button_post.setOnClickListener(view -> {
-            String comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
+             comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
             if (comment.equals("")) {
                 Toast.makeText(CommentDetailActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
             } else {
-
-                Map<String, Object> map = new HashMap<>();
                 strikes.child(postID);
-                String id= strikes.child(postID).push().getKey();
+                id= strikes.child(postID).push().getKey();
                 map.put("id",id);
                 map.put("publisher", user.getUid());
                 map.put("strike", comment);
@@ -93,14 +95,12 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
-
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl().equals("default")) {
                     Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(activity_comment_detail_img);
                 } else
                     activity_comment_detail_img.setImageResource(R.drawable.ic_baseline_face_24);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -113,19 +113,17 @@ public class CommentDetailActivity extends AppCompatActivity {
         strikes.child(postID).addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    list.add(snapshot.getValue(Comm.class));
+                for (DataSnapshot i : snapshot.getChildren()) {
+                    list.add(i.getValue(Comm.class));
                 }
-
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -134,8 +132,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
     //Initializare
     private void init() {
-        Intent intent = getIntent();
-        postID = intent.getStringExtra("postid");
+        postID = getIntent().getStringExtra("postid");
 
         //Controale
         activity_comment_detail_recyclerview = findViewById(R.id.activity_comment_detail_recyclerview);
@@ -156,5 +153,8 @@ public class CommentDetailActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");
         strikes=database.getReference().child("strikes");
+
+        //Diverse
+        map = new HashMap<>();
     }
 }

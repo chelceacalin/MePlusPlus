@@ -15,16 +15,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-// RFP
+
 /*
+       Status: RFP
        CREATED DATE: 8/29/2022
        UPDATED DATE: 8/29/2022
  */
 public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder> {
 
-     final Context context;
-     final List<PostItem> items;
-     PostItem post;
+    final Context context;
+    final List<PostItem> items;
+    PostItem post;
 
     public AccountPhotos(Context mContext, List<PostItem> mPosts) {
         this.context = mContext;
@@ -40,11 +41,11 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         post = items.get(position);
-        setDetails(post,holder);
+        setDetails(post, holder);
 
     }
 
-    private void setDetails(PostItem post,ViewHolder holder) {
+    private void setDetails(PostItem post, ViewHolder holder) {
         Picasso.get().load(post.getImageurl()).into(holder.imageView);
     }
 

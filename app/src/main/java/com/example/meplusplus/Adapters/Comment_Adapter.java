@@ -28,14 +28,15 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-//RFP
+
 /*
 
-CREATED DATE: 8/28/2022
-UPDATED DATE: 8/28/2022
+            Status: RFP
+            CREATED DATE: 8/28/2022
+            UPDATED DATE: 8/28/2022
 
-
--- UPDATED DATE: 8/29/2022
+        1.
+        UPDATED DATE: 8/29/2022
         Added Glide to put the profile image for Google Sign In users
  */
 
@@ -75,8 +76,6 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
         comm = list.get(position);
         SeeDetails(comm, holder);
 
-
-
         holder.itemView.setOnClickListener(view -> {
             AlertDialog alertDialog= new AlertDialog.Builder(context).create();
             if(comm.getPublisher().equals(user.getUid())){
@@ -95,7 +94,6 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
                 alertDialog.show();
             }
         });
-
     }
 
 
@@ -111,7 +109,6 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
                 }
                 holder.comment_card_item_people_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                 holder.comment_card_item_comment_text.setText(comm.getStrike());
-
             }
 
             @Override
@@ -141,7 +138,6 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
 
     private void init() {
         //FirebaseDatabase
-
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");
 

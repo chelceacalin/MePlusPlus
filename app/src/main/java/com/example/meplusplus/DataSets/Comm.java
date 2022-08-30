@@ -1,5 +1,8 @@
 package com.example.meplusplus.DataSets;
+
 /*
+
+       Status: RFP
        CREATED DATE: 8/27/2022
        UPDATED DATE: 8/27/2022
  */
@@ -10,14 +13,14 @@ public class Comm {
     String strike;
 
     public Comm() {
-        this.id="N/A";
-        this.publisher="N/A";
-    this.strike="N/A";
+        this.id = "N/A";
+        this.publisher = "N/A";
+        this.strike = "N/A";
     }
 
-    public Comm(String id,String publisher, String strike) {
+    public Comm(String id, String publisher, String strike) {
 
-        this.id=id;
+        this.id = id;
         this.publisher = publisher;
         this.strike = strike;
     }

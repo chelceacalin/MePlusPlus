@@ -3,21 +3,22 @@ package com.example.meplusplus.DataSets;
 import androidx.annotation.NonNull;
 
 /*
+       Status: RFP
        CREATED DATE: 8/25/2022
        UPDATED DATE: 8/25/2022
  */
 @SuppressWarnings("ALL")
 public class PostItem {
-     String description;
-     String imageurl;
-     String postid;
-     String publisher;
+    String description;
+    String imageurl;
+    String postid;
+    String publisher;
 
     public PostItem() {
-        this.description="N/A";
-        this.imageurl="N/A";
-        this.postid="N/A";
-        this.publisher="N/A";
+        this.description = "N/A";
+        this.imageurl = "N/A";
+        this.postid = "N/A";
+        this.publisher = "N/A";
     }
 
     public PostItem(String description, String imageurl, String postid, String publisher) {

@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     //Diverse
     String email_text;
     String passowrd_text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +81,8 @@ public class LoginActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.fade_out, R.anim.slide_out);
         });
         imageViewNextButton.setOnClickListener(view -> {
-             email_text = email.getText().toString();
-             passowrd_text = password.getText().toString();
+            email_text = email.getText().toString();
+            passowrd_text = password.getText().toString();
             if (!email_text.equals("") && !passowrd_text.equals("")) {
                 loginUser(email_text, passowrd_text);
             } else {
@@ -179,11 +180,10 @@ public class LoginActivity extends AppCompatActivity {
                             map.put("id", auth.getCurrentUser().getUid());
                             map.put("bio", "");
                             map.put("imageurl", "default");
-                        if(user.getPhotoUrl()==null){
-                            map.put("imageurl", "default");
-                            }
-                        else
-                            map.put("imageurl", user.getPhotoUrl()+"");
+                            if (user.getPhotoUrl() == null) {
+                                map.put("imageurl", "default");
+                            } else
+                                map.put("imageurl", user.getPhotoUrl() + "");
 
                             reference.child("users").child(user.getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -200,7 +200,9 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Database Failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                        } else { Toast.makeText(LoginActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show(); }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
@@ -213,13 +215,14 @@ public class LoginActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
-  @Override
+
+    @Override
     protected void onStart() {
         super.onStart();
-        if(user!=null){
-            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+        if (user != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-            overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
             finish();
         }
 

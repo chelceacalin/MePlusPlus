@@ -13,6 +13,7 @@ import com.example.meplusplus.Fragments.SearchPeopleFragment;
 import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.Utils.PostActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 /*
 
        Status: NM - change switch logic
@@ -24,8 +25,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     //Controale
-     BottomNavigationView bottomNavigationView;
-     Fragment fragment;
+    BottomNavigationView bottomNavigationView;
+    Fragment fragment;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -36,42 +37,41 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener((BottomNavigationView.OnNavigationItemSelectedListener) item -> {
 
-            int id =item.getItemId();
+            int id = item.getItemId();
 
-            switch(id){
+            switch (id) {
                 case R.id.me_page:
-                    fragment=new MeFragment();
+                    fragment = new MeFragment();
                     break;
 
                 case R.id.social_page:
-                    fragment=new Social_PageFragment();
+                    fragment = new Social_PageFragment();
                     break;
 
                 case R.id.add_post:
-                  Intent intent=new Intent(MainActivity.this, PostActivity.class);
-                  startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                    startActivity(intent);
                     break;
 
                 case R.id.search_page:
-                    fragment=new SearchPeopleFragment();
+                    fragment = new SearchPeopleFragment();
                     break;
 
                 case R.id.account_page:
-                    fragment=new AccountFragment();
+                    fragment = new AccountFragment();
                     break;
             }
 
-            if(fragment!=null)
-            {
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,fragment).commit();
+            if (fragment != null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, fragment).commit();
             }
             return true;
         });
     }
 
     //Initializare
-    private void init(){
-        bottomNavigationView=findViewById(R.id.main_bottom_navigation);
+    private void init() {
+        bottomNavigationView = findViewById(R.id.main_bottom_navigation);
     }
 
 

@@ -9,19 +9,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-// RFP
 /*
+
+       Status: RFP
+
        CREATED DATE: 8/18/2022
        UPDATED DATE: 8/18/2022
  */
 public class ForgotPassword extends AppCompatActivity {
 
     //Controale
-     EditText forgotpassowrd_edit_text_email_recover;
-     Button forgotpassword_button_send_recovery_email;
+    EditText forgotpassowrd_edit_text_email_recover;
+    Button forgotpassword_button_send_recovery_email;
 
     //Firebase
-     FirebaseAuth auth;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -25,6 +25,7 @@ import java.util.List;
 
 
 /*
+       Status: RFP
        CREATED DATE: 8/27/2022
        UPDATED DATE: 8/27/2022
  */
@@ -36,8 +37,6 @@ public class Social_PageFragment extends Fragment {
     List<PostItem> items;
     PostAdapter adapter;
     LinearLayoutManager manager;
-
-
     PostItem pItem;
 
     //Firebase
@@ -48,28 +47,31 @@ public class Social_PageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_social__page, container, false);
-        social_page_recyclerviewPosts = view.findViewById(R.id.social_page_recyclerviewPosts);
-        init();
+        init(view);
+        initRecycler();
         readPosts();
         return view;
     }
+    private void init(View view) {
 
-    private void init() {
+        //Firebase
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        reference = database.getReference().child("posts");
         //Controale
+        social_page_recyclerviewPosts = view.findViewById(R.id.social_page_recyclerviewPosts);
+
+    }
+    private void initRecycler() {
         manager = new LinearLayoutManager(getContext());
         manager.setReverseLayout(true);
         manager.setStackFromEnd(true);
         social_page_recyclerviewPosts.setLayoutManager(manager);
 
-        //Initializari
         items = new ArrayList<>();
         adapter = new PostAdapter(items, getContext());
         social_page_recyclerviewPosts.setAdapter(adapter);
-
-        //Firebase
-        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference().child("posts");
     }
+
 
     private void readPosts() {
         reference.addValueEventListener(new ValueEventListener() {

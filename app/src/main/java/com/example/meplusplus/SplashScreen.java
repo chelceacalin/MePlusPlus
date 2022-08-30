@@ -14,34 +14,31 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-   /*
-   Statuses:
-       RFP - ready for production
-       TC - to complete ( features to be added )
-       NM - needs to be modified/refactored
+/*
+Statuses:
+    RFP - ready for production
+    TC - to complete ( features to be added )
+    NM - needs to be modified/refactored
 
-       Status: RFP
-       CREATED DATE: 8/17/2022
-       UPDATED DATE: 8/17/2022
+    Status: RFP
+    CREATED DATE: 8/17/2022
+    UPDATED DATE: 8/17/2022
 
-       1.
-       UPDATED DATE 8/30/2022
-       Note: Refactored Notes and assigned variables in init
-    */
+    1.
+    UPDATED DATE 8/30/2022
+    Note: Refactored Notes and assigned variables in init
+ */
 @SuppressLint("CustomSplashScreen")
 @SuppressWarnings("FieldCanBeLocal")
 public class SplashScreen extends AppCompatActivity {
 
-    //Animatie
-    Animation animFadeIn;
-
-
     //Timer
     public static long Duration;
-    public static  long interval;
+    public static long interval;
     public int i;
     public int total;
-
+    //Animatie
+    Animation animFadeIn;
     //Declarare
     private ImageView imageView;
     private CountDownTimer timer;
@@ -56,17 +53,18 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         init();
 
-        timer=new CountDownTimer(Duration,interval) {
+        timer = new CountDownTimer(Duration, interval) {
             @Override
             public void onTick(long l) {
-                i+=20;
+                i += 20;
                 horiontalProgressBar.setProgress(i);
                 circularProgressBar.setProgress(i);
             }
+
             @Override
             public void onFinish() {
-                startActivity(new Intent(SplashScreen.this,LoginActivity.class));
-                overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+                startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 finish();
             }
         };
@@ -74,34 +72,34 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     //Initializare Controale
-   public void init(){
+    public void init() {
         //Controale
-        imageView=findViewById(R.id.sp_screen_logo);
-        circularProgressBar =findViewById(R.id.sp_screen_pg_bar);
+        imageView = findViewById(R.id.sp_screen_logo);
+        circularProgressBar = findViewById(R.id.sp_screen_pg_bar);
         circularProgressBar.setProgress(total);
-        horiontalProgressBar=findViewById(R.id.sp_screen_pg_bar_horizontal);
+        horiontalProgressBar = findViewById(R.id.sp_screen_pg_bar_horizontal);
         horiontalProgressBar.setProgress(total);
-        meplusplus=findViewById(R.id.meplusplus);
-        sp_screen_pls_wait=findViewById(R.id.sp_screen_pls_wait);
+        meplusplus = findViewById(R.id.meplusplus);
+        sp_screen_pls_wait = findViewById(R.id.sp_screen_pls_wait);
 
         //Animatii
-       animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),
-               R.anim.fade_in);
+        animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.fade_in);
 
-       //Pornim animatiile cand porneste aplicatia
-       meplusplus.setVisibility(View.VISIBLE);
-       meplusplus.startAnimation(animFadeIn);
-       imageView.setVisibility(View.VISIBLE);
-       imageView.startAnimation(animFadeIn);
-       sp_screen_pls_wait.setVisibility(View.VISIBLE);
-       sp_screen_pls_wait.startAnimation(animFadeIn);
+        //Pornim animatiile cand porneste aplicatia
+        meplusplus.setVisibility(View.VISIBLE);
+        meplusplus.startAnimation(animFadeIn);
+        imageView.setVisibility(View.VISIBLE);
+        imageView.startAnimation(animFadeIn);
+        sp_screen_pls_wait.setVisibility(View.VISIBLE);
+        sp_screen_pls_wait.startAnimation(animFadeIn);
 
-       //Diverse
-       Duration=2500;
-       interval=600;
-       total=3;
-       i=0;
-   }
+        //Diverse
+        Duration = 2500;
+        interval = 600;
+        total = 3;
+        i = 0;
+    }
 
     //Cand apesi pe back cand esti pe pagina de login
     @Override

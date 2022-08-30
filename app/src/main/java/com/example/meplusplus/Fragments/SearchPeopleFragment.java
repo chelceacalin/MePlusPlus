@@ -27,36 +27,41 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-// RFP
+
 /*
+       Status: RFP
        CREATED DATE: 8/24/2022
        UPDATED DATE: 8/24/2022
 
-
+       1.
        UPDATED DATE: 8/30/2022
-         Noted: When you click on someone it redirects you to their page
+         Notes: When you click on someone it redirects you to their page
  */
 public class SearchPeopleFragment extends Fragment {
 
     //Controale
-    RecyclerView fragment_search_recyclerView;
     EditText searchPeopleEditText;
+
+    //RecyclerView
+    RecyclerView fragment_search_recyclerView;
     List<User> users;
     User_Adapter user_adapter;
-    User item;
     Query q;
+
     //Firebase
     FirebaseDatabase database;
     DatabaseReference databaseReference;
 
+    //Diverse
+    String stringText;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search_people, container, false);
-        //init
         init();
         initRecycler(view);
+        readusers();
 
         searchPeopleEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -65,20 +70,14 @@ public class SearchPeopleFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                searchUser(charSequence.toString().toLowerCase());
+                searchUser(charSequence.toString().toLowerCase().trim());
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
             }
         });
-        readusers();
-
-
-
         return view;
-
     }
 
 
@@ -106,23 +105,18 @@ public class SearchPeopleFragment extends Fragment {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String stringText = searchPeopleEditText.getText().toString();
-
+                 stringText = searchPeopleEditText.getText().toString();
                 if (stringText.equals("")) {
                     users.clear();
                     for (DataSnapshot i : dataSnapshot.getChildren()) {
-                        item = i.getValue(User.class);
-                        users.add(item);
+                        users.add(i.getValue(User.class));
                     }
                     user_adapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
-
         });
     }
 
@@ -135,15 +129,13 @@ public class SearchPeopleFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 users.clear();
                 for (DataSnapshot i : snapshot.getChildren()) {
-                    item = i.getValue(User.class);
-                    users.add(item);
-                    user_adapter.notifyDataSetChanged();
+                    users.add(i.getValue(User.class));
                 }
+                user_adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
