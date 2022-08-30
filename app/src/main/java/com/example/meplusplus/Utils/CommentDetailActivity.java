@@ -1,0 +1,176 @@
+package com.example.meplusplus.Utils;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.example.meplusplus.Adapters.Comment_Adapter;
+import com.example.meplusplus.DataSets.Comm;
+import com.example.meplusplus.DataSets.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+
+import com.example.meplusplus.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+/*
+       CREATED DATE: 8/27/2022
+       UPDATED DATE: 8/27/2022
+ */
+public class CommentDetailActivity extends AppCompatActivity {
+    //Controale
+    CircleImageView activity_comment_detail_img;
+    EditText activity_comment_detail_edit_Text_comment;
+    Button activity_comment_detail_button_post;
+
+    //Recycler
+    RecyclerView activity_comment_detail_recyclerview;
+    Comment_Adapter adapter;
+    List<Comm> list;
+    LinearLayoutManager manager;
+
+    //Firebase
+    FirebaseAuth auth;
+    FirebaseUser user;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    DatabaseReference strikes;
+
+    //Intent
+    String postID;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_comment_detail);
+        init();
+        setProfileImage();
+
+        activity_comment_detail_button_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
+                if (comment.equals("")) {
+                    Toast.makeText(CommentDetailActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Map<String, Object> map = new HashMap<>();
+                    strikes.child(postID);
+                    String id= strikes.child(postID).push().getKey();
+                    map.put("id",id);
+                    map.put("publisher", user.getUid());
+                    map.put("strike", comment);
+
+                    strikes.child(postID).child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                activity_comment_detail_edit_Text_comment.setText("");
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(CommentDetailActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+     readStrikes();
+    }
+
+    private void setProfileImage() {
+
+        reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.getValue(User.class).getImageurl().equals("default")) {
+                    Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(activity_comment_detail_img);
+                } else
+                    activity_comment_detail_img.setImageResource(R.drawable.ic_baseline_face_24);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+    }
+
+    private void readStrikes() {
+
+        strikes.child(postID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    list.add(snapshot.getValue(Comm.class));
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    //Initializare
+    private void init() {
+        Intent intent = getIntent();
+        postID = intent.getStringExtra("postid");
+
+        //Controale
+        activity_comment_detail_recyclerview = findViewById(R.id.activity_comment_detail_recyclerview);
+        activity_comment_detail_edit_Text_comment = findViewById(R.id.activity_comment_detail_edit_Text_comment);
+        activity_comment_detail_button_post = findViewById(R.id.activity_comment_detail_button_post);
+        activity_comment_detail_img = findViewById(R.id.activity_comment_detail_img);
+
+        //Recycler
+        manager = new LinearLayoutManager(this);
+        activity_comment_detail_recyclerview.setLayoutManager(manager);
+        list = new ArrayList<>();
+        adapter = new Comment_Adapter(this, postID,list);
+        activity_comment_detail_recyclerview.setAdapter(adapter);
+
+        //Firebase
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        reference = database.getReference().child("users");
+        strikes=database.getReference().child("strikes");
+    }
+}

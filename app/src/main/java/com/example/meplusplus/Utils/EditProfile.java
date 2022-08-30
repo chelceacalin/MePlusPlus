@@ -1,0 +1,234 @@
+package com.example.meplusplus.Utils;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.example.meplusplus.DataSets.User;
+import com.example.meplusplus.Fragments.AccountFragment;
+import com.example.meplusplus.Fragments.Social_PageFragment;
+import com.example.meplusplus.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+        /*
+       CREATED DATE: 8/29/2022
+        */
+public class EditProfile extends AppCompatActivity {
+
+    //Controale
+    ImageView editprofile_closeImg;
+    ImageView editprofile_photo;
+    Button editprofile_change_image;
+    Button editprofile_button_save;
+    EditText editprofile_username;
+    EditText editprofile_bio;
+    ImageView editprofile_rotate_image;
+    int rotationInit = 0;
+    //Firebase
+    FirebaseDatabase database;
+    DatabaseReference ref;
+    FirebaseAuth auth;
+    FirebaseUser user;
+
+    //Pt imagine
+    Uri imageviewuri;
+    String imageURL;
+    StorageTask uploadtask;
+    FirebaseStorage storage;
+    StorageReference reference;
+    ProgressDialog progressDialog;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_profile);
+        init();
+
+        editprofile_rotate_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rotationInit += 90;
+                editprofile_photo.setRotation(rotationInit);
+            }
+        });
+
+
+        editprofile_closeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        editprofile_button_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fuploadImage();
+            finish();
+            }
+        });
+        /*
+        UPDATE DATE: 8/29/2022
+        Reason: OnActivityResult e deprecated
+         */
+        final ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK
+                            && result.getData() != null) {
+                        imageviewuri = result.getData().getData();
+                        try {
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageviewuri);
+                            editprofile_photo.setImageBitmap(bitmap);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        );
+
+
+        editprofile_change_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                launcher.launch(intent);
+            }
+        });
+
+
+        ref.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                editprofile_username.setText(snapshot.getValue(User.class).getUsername());
+                editprofile_bio.setText(snapshot.getValue(User.class).getBio());
+
+                if (snapshot.getValue(User.class).getImageurl().equals("default")) {
+                    Glide.with(getApplicationContext()).load(user.getPhotoUrl()).into(editprofile_photo);
+                }
+                else{
+                    Picasso.get().load(snapshot.getValue(User.class).getImageurl()).placeholder(R.drawable.ic_baseline_person).into(editprofile_photo);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+    }
+
+    private void init() {
+        //Controale
+        editprofile_closeImg = findViewById(R.id.editprofile_closeImg);
+        editprofile_button_save=findViewById(R.id.editprofile_button_save);
+        editprofile_photo = findViewById(R.id.editprofile_photo);
+        editprofile_change_image = findViewById(R.id.editprofile_change_image);
+        editprofile_username = findViewById(R.id.editprofile_username);
+        editprofile_bio = findViewById(R.id.editprofile_bio);
+        editprofile_rotate_image=findViewById(R.id.editprofile_rotate_image);
+
+        //Firebase
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        ref = database.getReference().child("users");
+        progressDialog = new ProgressDialog(this);
+        storage = FirebaseStorage.getInstance();
+        reference = storage.getReference("uploads");
+
+    }
+
+
+    private void fuploadImage() {
+
+        if (imageviewuri != null) {
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+            reference = reference.child(System.currentTimeMillis() + ".jpeg");
+            uploadtask = reference.putFile(imageviewuri);
+
+            uploadtask.continueWithTask(new Continuation() {
+                        @Override
+                        public Object then(@NonNull Task task) throws Exception {
+                            return reference.getDownloadUrl();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(EditProfile.this, "Error Uploading", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if(!task.isSuccessful()){
+                                Toast.makeText(EditProfile.this, "Error", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+                            else
+                            {
+                                progressDialog.dismiss();
+                                Uri downloadUri = task.getResult();
+                                imageURL = downloadUri.toString();
+                                ref.child(user.getUid()).child("imageurl").setValue(imageURL);
+                                Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
+
+
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("username", editprofile_username.getText().toString());
+                                map.put("bio", editprofile_bio.getText().toString());
+                                ref.child(user.getUid()).updateChildren(map);
+                            }
+
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "Please Select an Image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+            @Override
+            protected void onDestroy() {
+        progressDialog.dismiss();
+                super.onDestroy();
+            }
+        }

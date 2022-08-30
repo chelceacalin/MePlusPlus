@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.131" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/activity_comment_detail.xml" value="0.1748610517315092" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/activity_edit_profile.xml" value="0.2" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/activity_forgot_password.xml" value="0.1748610517315092" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/activity_post.xml" value="0.22402736212056434" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/fragment_account.xml" value="0.4" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/fragment_me.xml" value="0.22402736212056434" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/fragment_search_people.xml" value="0.1748610517315092" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/fragment_social__page.xml" value="0.1748610517315092" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/grid_photo.xml" value="0.1748610517315092" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/layout/social_page_post_item.xml" value="0.22402736212056434" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/menu/menu.xml" value="0.20852680455888561" />
+        <entry key="..\:/APLICATIE_LICENTA - Copy/app/src/main/res/menu/menu_options_profile.xml" value="0.20852680455888561" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.302" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/custom_email.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/custom_face.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/custom_input.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/custom_lock.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/custom_username.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_add_photo.xml" value="0.185" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_account_circle_focused.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_close.xml" value="0.185" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_email_focused.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_face_focused.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_favorite.xml" value="0.161" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.185" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_lock_focused.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2775" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_rotate_right_24.xml" value="0.185" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_blurry_gradient_haikei__1_.xml" value="0.185" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_launcher_background.xml" value="0.302" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_layered_waves_haikei.xml" value="0.178" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_moon.xml" value="0.2815" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/ic_stacked_waves_haikei.xml" value="0.178" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/image_border.xml" value="0.178" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/imgborder_maipatrat.xml" value="0.178" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/drawable/rounded_border.xml" value="0.187" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/font/fonts.xml" value="0.25885416666666666" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_comment_detail.xml" value="0.264" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_forgot_password.xml" value="0.3099615220179564" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_forgot_password2.xml" value="0.31338178708849934" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_login.xml" value="0.31338178708849934" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_main.xml" value="0.38177083333333334" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_post.xml" value="0.19794784095767423" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_register.xml" value="0.3099615220179564" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/activity_splash_screen.xml" value="0.3232150491663104" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/comment_card_item.xml" value="0.264" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/fragment_account.xml" value="0.264" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/fragment_add_post.xml" value="0.19794784095767423" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/fragment_me.xml" value="0.1616075245831552" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/fragment_photoclickdetail.xml" value="0.16" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/fragment_post_detail.xml" value="0.18041898247114152" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/fragment_search_people.xml" value="0.22402736212056434" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/fragment_social__page.xml" value="0.22402736212056434" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/grid_photo.xml" value="0.16" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/people_card_item.xml" value="0.22402736212056434" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/social_page_item_post.xml" value="0.18426678067550234" />
+        <entry key="..\:/APLICATIE_LICENTA/app/src/main/res/layout/social_page_post_item.xml" value="0.264" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_add_photo.xml" value="0.144" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_add.xml" value="0.2125" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_bolt_24.xml" value="0.2055" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_favorite.xml" value="0.2055" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_home.xml" value="0.1" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_person.xml" value="0.2205" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_baseline_search.xml" value="0.1805" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_stacked_waves_haikei__3_.xml" value="0.2055" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/ic_upload_IMG_background.xml" value="0.144" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/image_border.xml" value="0.1435" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/drawable/itemselected.xml" value="0.1" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/activity_forgot_password.xml" value="0.22402736212056434" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/activity_login.xml" value="0.22402736212056434" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/activity_post.xml" value="0.264" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/activity_register.xml" value="0.22402736212056434" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/activity_splash_screen.xml" value="0.21889696451474988" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/fragment_account.xml" value="0.21376656690893545" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/fragment_add_post.xml" value="0.22119037568594344" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/fragment_me.xml" value="0.1" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/fragment_search_people.xml" value="0.21376656690893545" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/fragment_social__page.xml" value="0.31338178708849934" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/people_card_item.xml" value="0.6011644832605532" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/layout/social_page_post_item.xml" value="0.31252672082086363" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN - Copy/APLICATIE_LICENTA/app/src/main/res/mipmap-anydpi-v26/ic_upload_IMG.xml" value="0.144" />
+        <entry key="..\:/APPLICENTA FINAL DESIGN/APLICATIE_LICENTA/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/drawable/custom_lock.xml" value="0.2135" />
+        <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/layout/activity_forgot_password.xml" value="0.22402736212056434" />
+        <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/layout/activity_login.xml" value="0.4" />
+        <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/layout/activity_main.xml" value="0.2214621633176571" />
+        <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/layout/activity_register.xml" value="0.22402736212056434" />
+        <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/layout/activity_splash_screen.xml" value="0.21376656690893545" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

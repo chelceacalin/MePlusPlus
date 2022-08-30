@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_options_profile_dark_White_mode"
+        android:title="Dark Mode"
+        android:icon="@drawable/ic_baseline_dark_mode_24"
+        ></item>
+
+    <item
+        android:id="@+id/menu_options_profile_signout"
+        android:title="Sign Out"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        ></item>
+
+
+
+</menu>
