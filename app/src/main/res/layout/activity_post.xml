@@ -18,10 +18,12 @@
             android:id="@+id/postactivity_closeImg"
             android:layout_width="40dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0.1"
-            app:srcCompat="@drawable/ic_baseline_close" />
+            app:srcCompat="@drawable/ic_baseline_close"
+            android:contentDescription="TODO"
+            tools:ignore="ContentDescription,HardcodedText" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,18 +31,20 @@
             android:layout_marginTop="15dp"
             android:layout_weight="0.7"
             android:fontFamily="@font/sabandija"
-            android:text="New Post"
+            android:text="@string/new_post"
             android:textColor="@color/white"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/postactivity_rotate_image"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="17dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_weight="0.1"
-            android:background="@drawable/ic_baseline_rotate_right_24" />
+            android:background="@drawable/ic_baseline_rotate_right_24"
+            android:contentDescription="TODO"
+            tools:ignore="ContentDescription,HardcodedText" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -57,7 +61,9 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_add_photo" />
+            app:srcCompat="@drawable/ic_add_photo"
+            android:contentDescription="TODO"
+            tools:ignore="ContentDescription,HardcodedText" />
 
         <Button
             android:id="@+id/postactivity_selectimage"
@@ -66,7 +72,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/DarkBlue"
-            android:text="Select Image"
+            android:text="@string/select_image"
             android:textColor="@color/white"
             app:cornerRadius="15dp" />
 
@@ -78,10 +84,12 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="15dp"
-            android:hint="  Add Description..."
+            android:hint="@string/add_description"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            android:autofillHints=""
+            tools:ignore="TextFields" />
 
 
         <Button
@@ -90,7 +98,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="80dp"
             android:backgroundTint="@color/DarkBlue"
-            android:text="Upload Post"
+            android:text="@string/upload_post"
             android:textColor="@color/white"
             app:cornerRadius="15dp">
 

@@ -18,23 +18,26 @@
             android:id="@+id/fragment_search_magnifying_glass"
             android:layout_width="40dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_weight="0.1"
-            app:srcCompat="@drawable/ic_baseline_search" />
+            app:srcCompat="@drawable/ic_baseline_search"
+            tools:ignore="ContentDescription" />
 
         <EditText
             android:id="@+id/fragment_search_search_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_weight="0.7"
-            android:hint="Search People..."
+            android:hint="@string/search_people"
             android:textColor="@color/WhiteSmoke"
             android:textColorHint="@color/WhiteSmoke"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:importantForAutofill="no"
+            tools:ignore="TextFields" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

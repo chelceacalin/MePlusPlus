@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/ic_wave__2_"
     android:orientation="vertical"
@@ -19,36 +18,39 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="550dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="515dp"
                 android:layout_marginTop="50dp"
-                android:background="@drawable/login_form_picture" />
+                android:background="@drawable/login_form_picture"
+                android:contentDescription="TODO"
+                tools:ignore="ContentDescription,HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="22dp">
+                android:layout_marginStart="22dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="80dp"
-                    android:text="Login"
+                    android:text="@string/login"
                     android:textColor="@color/black"
-                    android:textSize="34dp"
+                    android:textSize="34sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
-                    android:text="Email"
+                    android:text="@string/email"
                     android:textColor="#c2c2c2"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/loginactivity_edit_text_email"
@@ -62,17 +64,19 @@
                     android:selectAllOnFocus="false"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:visibility="visible"
-                    tools:visibility="visible" />
+                    tools:visibility="visible"
+                    android:autofillHints=""
+                    tools:ignore="HardcodedText,RtlSymmetry" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="Password"
+                    android:text="@string/password"
                     android:textColor="#c2c2c2"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
 
 
                 <EditText
@@ -81,18 +85,20 @@
                     android:layout_height="43dp"
                     android:layout_marginTop="5dp"
                     android:drawableStart="@drawable/custom_lock"
-                    android:hint="   Introduce Password"
+                    android:hint="@string/introduce_password"
                     android:inputType="textPassword"
                     android:paddingEnd="12dp"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:textSize="14dp" />
+                    android:textSize="14sp"
+                    android:autofillHints=""
+                    tools:ignore="RtlSymmetry" />
 
                 <CheckBox
                     android:id="@+id/login_activity_checkBox"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:text="Show Password"
+                    android:text="@string/show_password"
                     android:textColor="@color/black"
                     />
 
@@ -102,10 +108,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginEnd="25dp"
                     android:text="Forgot Password?"
                     android:textColor="#c2c2c2"
-                    android:textSize="15dp" />
+                    android:textSize="15sp"
+                    tools:ignore="HardcodedText" />
 
 
                 <ImageView
@@ -114,25 +121,30 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="25dp"
                     android:src="@drawable/ic_facebook"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    tools:ignore="ContentDescription,HardcodedText" />
 
                 <ImageView
                     android:id="@+id/login_activity_btn_google_sign_up"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="-10dp"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
                     android:src="@drawable/ic_google"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/login_activity_imageview_next"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="end"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_marginTop="25dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_24" />
+                    android:src="@drawable/ic_baseline_arrow_forward_24"
+                    android:contentDescription="TODO"
+                    tools:ignore="ContentDescription,HardcodedText" />
 
 
             </LinearLayout>
@@ -153,15 +165,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Don't have an account?"
+                android:text="@string/don_t_have_an_account"
                 android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/loginActivity_button_sign_up"
@@ -169,10 +182,10 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:gravity="center_horizontal"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:textAllCaps="false"
                 android:textColor="#F86262"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_marginTop="5dp"
                 />
 

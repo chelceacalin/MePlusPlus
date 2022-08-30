@@ -18,10 +18,12 @@
             android:id="@+id/editprofile_closeImg"
             android:layout_width="40dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0.1"
-            app:srcCompat="@drawable/ic_baseline_close" />
+            app:srcCompat="@drawable/ic_baseline_close"
+            android:contentDescription="@string/todo"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,18 +32,20 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:fontFamily="@font/sabandija"
-            android:text="Edit Profile"
+            android:text="@string/edit_profile"
             android:textColor="@color/white"
-            android:textSize="21dp" />
+            android:textSize="21sp" />
 
         <ImageView
             android:id="@+id/editprofile_rotate_image"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="17dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_weight="0.1"
-            android:background="@drawable/ic_baseline_rotate_right_24" />
+            android:background="@drawable/ic_baseline_rotate_right_24"
+            android:contentDescription="@string/todo2"
+            tools:ignore="ContentDescription" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -60,7 +64,9 @@
             android:layout_marginRight="50dp"
             android:layout_height="300dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_add_photo" />
+            app:srcCompat="@drawable/ic_add_photo"
+            android:contentDescription="@string/todo3"
+            tools:ignore="ContentDescription" />
 
         <Button
             android:id="@+id/editprofile_change_image"
@@ -70,7 +76,7 @@
             android:layout_marginTop="30dp"
             android:background="@color/fui_transparent"
             android:backgroundTint="@color/fui_transparent"
-            android:text="Change Image"
+            android:text="@string/change_image"
             android:textColor="@color/DeepPink"
             android:textStyle="bold" />
 
@@ -82,10 +88,12 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="15dp"
-            android:hint="  Username..."
+            android:hint="@string/username"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            android:autofillHints=""
+            tools:ignore="TextFields" />
 
 
         <EditText
@@ -95,10 +103,12 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="15dp"
-            android:hint="  Bio..."
+            android:hint="@string/bio"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            android:autofillHints=""
+            tools:ignore="TextFields" />
 
         <Button
             android:id="@+id/editprofile_button_save"
@@ -107,7 +117,7 @@
             android:layout_marginTop="50dp"
             android:layout_gravity="end"
             android:backgroundTint="@color/DarkBlue"
-            android:text="Update Profile"
+            android:text="@string/update_profile"
             android:textColor="@color/white"
             app:cornerRadius="15dp">
         </Button>

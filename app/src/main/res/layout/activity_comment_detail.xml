@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/deltaRelative1"
-    >
+    android:id="@+id/deltaRelative1">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_comment_detail_recyclerview"
@@ -34,16 +32,17 @@
 
         <EditText
             android:id="@+id/activity_comment_detail_edit_Text_comment"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="40dp"
-            android:hint="  Place comment..."
-            android:textSize="13dp"
+            android:hint="@string/place_comment"
+            android:textSize="13sp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:layout_gravity="center_vertical"
             android:background="@color/fui_transparent"
             android:layout_weight="0.1"
-            />
+            android:autofillHints=""
+            tools:ignore="TextFields" />
 
         <Button
             android:id="@+id/activity_comment_detail_button_post"
@@ -52,11 +51,11 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:layout_gravity="center_vertical"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:backgroundTint="@color/fui_transparent"
             android:textColor="@color/Black"
             android:textStyle="bold"
-            android:text="Post" />
+            android:text="@string/post" />
 
 
     </LinearLayout>

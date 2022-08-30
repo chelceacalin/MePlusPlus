@@ -20,28 +20,29 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="700dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="660dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/login_form_picture"
-                />
+                tools:ignore="ContentDescription" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="80dp"
-                    android:text="Register"
+                    android:text="@string/register"
                     android:textColor="@color/black"
-                    android:textSize="34dp"
+                    android:textSize="34sp"
                     android:textStyle="bold" />
 
 
@@ -52,7 +53,8 @@
                     android:text="Username"
                     android:textColor="#c2c2c2"
                     android:inputType="textPersonName"
-                    android:textSize="18dp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText,TextViewEdits" />
 
                 <EditText
                     android:id="@+id/registeractivity_edit_text_username"
@@ -65,9 +67,11 @@
                     android:selectAllOnFocus="false"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:visibility="visible"
-                    tools:visibility="visible" />
+                    tools:visibility="visible"
+                    android:autofillHints=""
+                    tools:ignore="HardcodedText,RtlSymmetry,TextFields" />
 
 
                 <TextView
@@ -76,7 +80,8 @@
                     android:layout_marginTop="20dp"
                     android:text="Name"
                     android:textColor="#c2c2c2"
-                    android:textSize="18dp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/registeractivity_edit_text_name"
@@ -84,15 +89,17 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="5dp"
                     android:drawableStart="@drawable/custom_face"
-                    android:hint="    Introduce Name"
+                    android:hint="@string/introduce_name"
                     android:paddingEnd="12dp"
                     android:inputType="textPersonName"
                     android:selectAllOnFocus="false"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:visibility="visible"
-                    tools:visibility="visible" />
+                    tools:visibility="visible"
+                    android:importantForAutofill="no"
+                    tools:ignore="RtlSymmetry" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -100,7 +107,8 @@
                     android:layout_marginTop="20dp"
                     android:text="Email"
                     android:textColor="#c2c2c2"
-                    android:textSize="18dp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/registeractivity_edit_text_email"
@@ -114,9 +122,11 @@
                     android:selectAllOnFocus="false"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:visibility="visible"
-                    tools:visibility="visible" />
+                    tools:visibility="visible"
+                    android:autofillHints=""
+                    tools:ignore="HardcodedText,RtlSymmetry" />
 
 
                 <TextView
@@ -125,7 +135,8 @@
                     android:layout_marginTop="20dp"
                     android:text="Password"
                     android:textColor="#c2c2c2"
-                    android:textSize="18dp" />
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/registerActivity_edit_text_password"
@@ -138,7 +149,9 @@
                     android:paddingEnd="12dp"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:textSize="14dp" />
+                    android:textSize="14sp"
+                    android:autofillHints=""
+                    tools:ignore="HardcodedText,RtlSymmetry" />
 
                 <CheckBox
                     android:id="@+id/register_activity_checkBox"
@@ -146,7 +159,7 @@
                     android:layout_height="20dp"
                     android:text="Show Password"
                     android:textColor="@color/black"
-                    />
+                    tools:ignore="HardcodedText" />
 
 
                 <Button
@@ -161,8 +174,9 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:textSize="14dp"
-                    app:cornerRadius="20dp" />
+                    android:textSize="14sp"
+                    app:cornerRadius="20dp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
 
 
             </LinearLayout>
@@ -184,14 +198,15 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Already have an account?"
+                android:text="@string/already_have_an_account"
                 android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/registerActivity_button_Login"
@@ -202,7 +217,8 @@
                 android:text="Login"
                 android:textAllCaps="false"
                 android:textColor="#F86262"
-                android:textSize="15dp" />
+                android:textSize="15sp"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 

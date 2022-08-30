@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
 
     <androidx.cardview.widget.CardView
@@ -44,13 +43,14 @@
                     android:id="@+id/social_page_username"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="2dp"
                     android:gravity="center"
                     android:text="username"
                     android:textColor="@color/white"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <View
@@ -59,7 +59,8 @@
                 android:layout_alignParentBottom="true"
                 android:paddingBottom="3dp"
                 android:layout_marginBottom="3dp"
-                android:background="#276AF1" />
+                android:background="#276AF1"
+                tools:ignore="ObsoleteLayoutParam" />
             <TextView
                 android:id="@+id/social_page_image_description"
                 android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                 android:minHeight="30dp"
                 android:paddingBottom="2dp"
                 android:textColor="@color/AliceBlue"
-                android:textSize="14dp" />
+                android:textSize="14sp" />
 
 
             <LinearLayout
@@ -79,13 +80,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_baseline_person_pin_24"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="5dp"
                 android:layout_gravity="center_vertical"
@@ -99,9 +101,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="123 likes "
+                    android:text=""
                     android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
 
                 <ImageView
                     android:id="@+id/social_page_like"
@@ -109,17 +112,18 @@
                     android:layout_height="21dp"
                     android:layout_gravity="center_vertical"
                     android:background="@color/fui_transparent"
-                    />
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/social_page_number_of_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    android:text="123 comments "
+                    android:layout_marginStart="15dp"
+                    android:text=""
                     android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
 
                 <ImageView
                     android:id="@+id/social_page_strike"
@@ -127,7 +131,7 @@
                     android:layout_height="25dp"
                     android:background="@color/fui_transparent"
                     android:layout_gravity="center_vertical"
-                    />
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <TextView
@@ -142,9 +146,9 @@
                 android:background="@drawable/image_border"
                 android:foregroundGravity="center_vertical"
                 android:gravity="center_vertical"
-                android:text="  Place a comment..."
+                android:text="@string/place_a_comment"
                 android:textColor="#c2c2c2"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:layout_marginBottom="5dp"
                 />
 

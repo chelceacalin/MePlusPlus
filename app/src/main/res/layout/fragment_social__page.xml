@@ -11,9 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="   See what's up "
+        android:text="@string/see_what_s_up"
         android:textStyle="bold"
-        android:textSize="28dp"
+        android:textSize="28sp"
         android:textColor="@color/white"
         />
 
