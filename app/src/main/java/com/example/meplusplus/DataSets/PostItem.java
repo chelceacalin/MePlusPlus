@@ -1,9 +1,12 @@
 package com.example.meplusplus.DataSets;
 
+import androidx.annotation.NonNull;
+
 /*
        CREATED DATE: 8/25/2022
        UPDATED DATE: 8/25/2022
  */
+@SuppressWarnings("ALL")
 public class PostItem {
      String description;
      String imageurl;
@@ -24,6 +27,7 @@ public class PostItem {
         this.publisher = publisher;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "PostItem{" +

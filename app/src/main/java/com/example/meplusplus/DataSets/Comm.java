@@ -3,6 +3,7 @@ package com.example.meplusplus.DataSets;
        CREATED DATE: 8/27/2022
        UPDATED DATE: 8/27/2022
  */
+@SuppressWarnings("ALL")
 public class Comm {
     String id;
     String publisher;

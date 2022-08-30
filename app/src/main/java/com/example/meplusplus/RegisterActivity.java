@@ -5,31 +5,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
 /*
        CREATED DATE: 8/18/2022
        UPDATED DATE: 8/18/2022
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class RegisterActivity extends AppCompatActivity {
     //Controale
      Button registerActivity_btn_register, registerActivity_button_Login;
@@ -56,43 +51,35 @@ public class RegisterActivity extends AppCompatActivity {
         //Initializare
         init();
 
-        registerActivity_btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                username = registeractivity_edit_text_username.getText().toString();
-                name = registeractivity_edit_text_name.getText().toString();
-                email = registeractivity_edit_text_email.getText().toString();
-                password = registerActivity_edit_text_password.getText().toString();
-                isFieldChecked = CheckValidations();
-                if (isFieldChecked) {
-                    if (!username.equals("") && !name.equals("") && !email.equals("") && !password.equals("")) {
-                        registerUser(username, name, email, password);
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
-                    }
+        //new View.OnClickListener() {
+        //            @Override
+        registerActivity_btn_register.setOnClickListener(view -> {
+            username = registeractivity_edit_text_username.getText().toString();
+            name = registeractivity_edit_text_name.getText().toString();
+            email = registeractivity_edit_text_email.getText().toString();
+            password = registerActivity_edit_text_password.getText().toString();
+            isFieldChecked = CheckValidations();
+            if (isFieldChecked) {
+                if (!username.equals("") && !name.equals("") && !email.equals("") && !password.equals("")) {
+                    registerUser(username, name, email, password);
                 } else {
+                    Toast.makeText(RegisterActivity.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        registerActivity_button_Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
+        registerActivity_button_Login.setOnClickListener(view -> {
+            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
 
-            }
         });
 
 
-        showpasswordCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    registerActivity_edit_text_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                } else {
-                    registerActivity_edit_text_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
+        showpasswordCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                registerActivity_edit_text_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                registerActivity_edit_text_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         });
 
@@ -131,10 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean CheckValidations() {
 
-        if (validatePass(password) == false || validateName(name) == false || validateUser(username) == false) {
-            return false;
-        }
-        return true;
+        return validatePass(password) && validateName(name) && validateUser(username);
 
     }
 
@@ -172,38 +156,29 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading");
         progressDialog.show();
 
-        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("username", username);
-                map.put("name", name);
-                map.put("email", email);
-                map.put("id", auth.getCurrentUser().getUid());
-                map.put("bio", "");
-                map.put("imageurl", "default");
+        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("username", username);
+            map.put("name", name);
+            map.put("email", email);
+            map.put("id", Objects.requireNonNull(auth.getCurrentUser()).getUid());
+            map.put("bio", "");
+            map.put("imageurl", "default");
 
-                reference.child("users").child(auth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            progressDialog.dismiss();
-                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                            overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
-                            Toast.makeText(RegisterActivity.this, "Registration Completed", Toast.LENGTH_SHORT).show();
-                        }
+            reference.child("users").child(auth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    progressDialog.dismiss();
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
+                    Toast.makeText(RegisterActivity.this, "Registration Completed", Toast.LENGTH_SHORT).show();
+                }
 
-                    }
-                });
+            });
 
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+        }).addOnFailureListener(e -> {
+            progressDialog.dismiss();
+            Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 }

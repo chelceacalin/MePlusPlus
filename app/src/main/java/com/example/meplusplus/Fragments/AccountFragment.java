@@ -1,20 +1,10 @@
 package com.example.meplusplus.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
-
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,11 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.meplusplus.Adapters.AccountPhotos;
@@ -45,9 +39,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 // RFP
 
@@ -55,6 +49,7 @@ import java.util.List;
        CREATED DATE: 8/29/2022
        UPDATED DATE: 8/29/2022
  */
+@SuppressWarnings("ALL")
 public class AccountFragment extends Fragment {
 
     //Firebase
@@ -89,11 +84,12 @@ public class AccountFragment extends Fragment {
 
         //No Of Posts
         referencePosts.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot i : snapshot.getChildren()) {
-                    if (i.getValue(PostItem.class).getPublisher().equals(pID)) {
+                    if (Objects.requireNonNull(i.getValue(PostItem.class)).getPublisher().equals(pID)) {
                         contor++;
                     }
                     fragment_account_number_of_posts.setText(contor + "");
@@ -113,6 +109,7 @@ public class AccountFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("SetTextI18n")
     private void init(View view) {
         //Controale
         fragment_account_username = view.findViewById(R.id.fragment_account_username);
@@ -132,7 +129,7 @@ public class AccountFragment extends Fragment {
         referencePosts = database.getReference("posts");
         pID = user.getUid();
 
-        received= getContext().getSharedPreferences("PID", Context.MODE_PRIVATE).getString("profileId", "empty");
+        received= requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).getString("profileId", "empty");
 
         if (!received.equals("empty")) {
             //DACA PRIMESC CEVA
@@ -166,12 +163,11 @@ public class AccountFragment extends Fragment {
 
         fragment_account_recyclerView_posts.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 int position = parent.getChildAdapterPosition(view); // item position
-                int spanCount = 2;
-                int spacing = 10;//spacing between views in grid
+                //spacing between views in grid
 
-                int column = position % spanCount; // item column
+                // item column
                 outRect.left = 0; // spacing - column * ((1f / spanCount) * spacing)
                 outRect.right = 0; // (column + 1) * ((1f / spanCount) * spacing)
                 outRect.top = 30;
@@ -188,14 +184,14 @@ public class AccountFragment extends Fragment {
         reference.child(pID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                fragment_account_username.setText(snapshot.getValue(User.class).getUsername());
-                fragment_account_description.setText(snapshot.getValue(User.class).getBio());
-                if (snapshot.getValue(User.class).getImageurl().equals("default")) {
+                fragment_account_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
+                fragment_account_description.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getBio());
+                if (Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl().equals("default")) {
                     //fragment_account_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
-                    Glide.with(getContext()).load(user.getPhotoUrl()).into(fragment_account_image_profile);
+                    Glide.with(requireContext()).load(user.getPhotoUrl()).into(fragment_account_image_profile);
 
                 } else{
-                   Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(fragment_account_image_profile);
+                   Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(fragment_account_image_profile);
                 }
 
             }
@@ -240,11 +236,12 @@ public class AccountFragment extends Fragment {
 
     private void getposts() {
         referencePosts.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();
                 for (DataSnapshot i : snapshot.getChildren()) {
-                    if (i.getValue(PostItem.class).getPublisher().equals(pID)) {
+                    if (Objects.requireNonNull(i.getValue(PostItem.class)).getPublisher().equals(pID)) {
                         items.add(i.getValue(PostItem.class));
                     }
                 }
@@ -263,7 +260,7 @@ public class AccountFragment extends Fragment {
 
 
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-            MenuInflater inflater= getActivity().getMenuInflater();
+            MenuInflater inflater= requireActivity().getMenuInflater();
             inflater.inflate(R.menu.menu_options_profile,menu);
      return true;
     }

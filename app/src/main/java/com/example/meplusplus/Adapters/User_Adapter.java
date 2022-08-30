@@ -61,7 +61,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new User_Adapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.people_card_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.people_card_item, parent, false));
     }
 
     @Override
@@ -72,14 +72,11 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
 
 
 
-      holder.circleImageView.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              context.getSharedPreferences("PID", Context.MODE_PRIVATE)
-                      .edit().putString("profileId", list.get(position).getId()).apply();
-              ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                      .replace(R.id.main_fragment_container, new AccountFragment()).commit();
-          }
+      holder.circleImageView.setOnClickListener(view -> {
+          context.getSharedPreferences("PID", Context.MODE_PRIVATE)
+                  .edit().putString("profileId", list.get(position).getId()).apply();
+          ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                  .replace(R.id.main_fragment_container, new AccountFragment()).commit();
       });
 
     }
@@ -103,11 +100,12 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private Button sayhiButton;
-        private CircleImageView circleImageView;
-        private TextView username, name;
+        private final Button sayhiButton;
+        private final CircleImageView circleImageView;
+        private final TextView username;
+        private final TextView name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

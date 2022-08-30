@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +37,7 @@ import java.util.Map;
        CREATED DATE: 8/18/2022
        UPDATED DATE: 8/18/2022
  */
+@SuppressWarnings("ALL")
 public class LoginActivity extends AppCompatActivity {
 
     //Controale
@@ -65,58 +64,40 @@ public class LoginActivity extends AppCompatActivity {
 
         //initializare
         init();
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-            }
+        signUp.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         });
-        forgotpassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        forgotpassword.setOnClickListener(view -> {
 
-                Intent intent = new Intent(LoginActivity.this, ForgotPassword.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_out, R.anim.slide_out);
-            }
-
+            Intent intent = new Intent(LoginActivity.this, ForgotPassword.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_out, R.anim.slide_out);
         });
-        imageViewNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        imageViewNextButton.setOnClickListener(view -> {
 
-                String email_text = email.getText().toString();
-                String passowrd_text = password.getText().toString();
+            String email_text = email.getText().toString();
+            String passowrd_text = password.getText().toString();
 
-                if (!email_text.equals("") && !passowrd_text.equals("")) {
-                    loginUser(email_text, passowrd_text);
-                } else {
-                    Toast.makeText(LoginActivity.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
-                }
+            if (!email_text.equals("") && !passowrd_text.equals("")) {
+                loginUser(email_text, passowrd_text);
+            } else {
+                Toast.makeText(LoginActivity.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
             }
         });
 
 
         //pt show password
-        showpassCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {
-                if (ischecked) {
-                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                } else {
-                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
+        showpassCheckBox.setOnCheckedChangeListener((compoundButton, ischecked) -> {
+            if (ischecked) {
+                password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                password.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         });
 
-        googleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
+        googleButton.setOnClickListener(view -> signIn());
     }
 
     //Initializam controalele

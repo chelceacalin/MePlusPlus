@@ -1,27 +1,20 @@
 package com.example.meplusplus.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.meplusplus.Adapters.Comment_Adapter;
-import com.example.meplusplus.DataSets.Comm;
-import com.example.meplusplus.DataSets.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import com.example.meplusplus.Adapters.Comment_Adapter;
+import com.example.meplusplus.DataSets.Comm;
+import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -72,35 +66,24 @@ public class CommentDetailActivity extends AppCompatActivity {
         init();
         setProfileImage();
 
-        activity_comment_detail_button_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
-                if (comment.equals("")) {
-                    Toast.makeText(CommentDetailActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
-                } else {
+        activity_comment_detail_button_post.setOnClickListener(view -> {
+            String comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
+            if (comment.equals("")) {
+                Toast.makeText(CommentDetailActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
+            } else {
 
-                    Map<String, Object> map = new HashMap<>();
-                    strikes.child(postID);
-                    String id= strikes.child(postID).push().getKey();
-                    map.put("id",id);
-                    map.put("publisher", user.getUid());
-                    map.put("strike", comment);
-
-                    strikes.child(postID).child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                activity_comment_detail_edit_Text_comment.setText("");
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(CommentDetailActivity.this, "Failure", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                Map<String, Object> map = new HashMap<>();
+                strikes.child(postID);
+                String id= strikes.child(postID).push().getKey();
+                map.put("id",id);
+                map.put("publisher", user.getUid());
+                map.put("strike", comment);
+                assert id != null;
+                strikes.child(postID).child(id).setValue(map).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        activity_comment_detail_edit_Text_comment.setText("");
+                    }
+                }).addOnFailureListener(e -> Toast.makeText(CommentDetailActivity.this, "Failure", Toast.LENGTH_SHORT).show());
             }
         });
      readStrikes();
@@ -112,8 +95,8 @@ public class CommentDetailActivity extends AppCompatActivity {
             @Override
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.getValue(User.class).getImageurl().equals("default")) {
-                    Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(activity_comment_detail_img);
+                if (!Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl().equals("default")) {
+                    Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(activity_comment_detail_img);
                 } else
                     activity_comment_detail_img.setImageResource(R.drawable.ic_baseline_face_24);
             }
@@ -128,6 +111,7 @@ public class CommentDetailActivity extends AppCompatActivity {
     private void readStrikes() {
 
         strikes.child(postID).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();

@@ -1,7 +1,6 @@
 package com.example.meplusplus;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,13 +11,15 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.meplusplus.R;
+import androidx.appcompat.app.AppCompatActivity;
 
 // RFP
    /*
        CREATED DATE: 8/17/2022
        UPDATED DATE: 8/17/2022
     */
+@SuppressLint("CustomSplashScreen")
+@SuppressWarnings("FieldCanBeLocal")
 public class SplashScreen extends AppCompatActivity {
 
     //Animatie

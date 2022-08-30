@@ -1,6 +1,6 @@
 package com.example.meplusplus.Fragments;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +36,6 @@ public class Social_PageFragment extends Fragment {
     List<PostItem> items;
     PostAdapter adapter;
     LinearLayoutManager manager;
-    Context context;
 
 
     PostItem pItem;
@@ -74,6 +73,7 @@ public class Social_PageFragment extends Fragment {
 
     private void readPosts() {
         reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();

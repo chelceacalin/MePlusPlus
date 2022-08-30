@@ -1,5 +1,6 @@
 package com.example.meplusplus.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.meplusplus.DataSets.PostItem;
 import com.example.meplusplus.DataSets.User;
-import com.example.meplusplus.Utils.CommentDetailActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.Utils.CommentDetailActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -63,7 +63,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new PostAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.social_page_post_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.social_page_post_item, parent, false));
     }
 
     @Override
@@ -75,6 +75,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         // Number of hearts
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 holder.social_page_number_of_likes.setText(snapshot.getChildrenCount()+"  ");
@@ -87,6 +88,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         //Number of strikes
       referenceStrikes.child(ID).child(p.getPublisher()).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 holder.social_page_number_of_comments.setText(snapshot.getChildrenCount()+ "   ");
@@ -99,6 +101,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         });
 
       referenceStrikes.child(ID).addValueEventListener(new ValueEventListener() {
+          @SuppressLint("SetTextI18n")
           @Override
           public void onDataChange(@NonNull DataSnapshot snapshot) {
               holder.social_page_number_of_comments.setText(snapshot.getChildrenCount()+ "");
@@ -110,14 +113,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
           }
       });
 
-        holder.social_page_place_a_comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Intent intent=new Intent(context, CommentDetailActivity.class);
-                intent.putExtra("postid",ID);
-                intent.putExtra("authorid",ID);
-                context.startActivity(intent);
-            }
+        holder.social_page_place_a_comment.setOnClickListener(view -> {
+           Intent intent=new Intent(context, CommentDetailActivity.class);
+            intent.putExtra("postid",ID);
+            intent.putExtra("authorid",ID);
+            context.startActivity(intent);
         });
 
     }
@@ -147,7 +147,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 u = snapshot.getValue(User.class);
-                String imgURL = u.getImageurl().toString();
+                assert u != null;
+                String imgURL = u.getImageurl();
                 if (!imgURL.equals("default")) {
                     holder.social_page_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
 
@@ -156,7 +157,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     Picasso.get().load(p.getImageurl()).into(holder.social_page_image_content);
                     Picasso.get().load(u.getImageurl()).into(holder.social_page_image_profile);
 
-                    holder.social_page_strike.setImageResource(R.drawable.ic_baseline_bolt_24);
                 } else {
                     if(firebaseUser.getPhotoUrl()==null){
                         holder.social_page_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
@@ -168,20 +168,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     holder.social_page_username.setText(u.getUsername());
                     holder.social_page_image_description.setText(p.getDescription());
                     Picasso.get().load(p.getImageurl()).into(holder.social_page_image_content);
-                    holder.social_page_strike.setImageResource(R.drawable.ic_baseline_bolt_24);
 
                 }
+                holder.social_page_strike.setImageResource(R.drawable.ic_baseline_bolt_24);
 
-                holder.social_page_like.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (holder.social_page_like.getTag().equals("heart")) {
-                            referenceHearts
-                                    .child(p.getPostid()).child(firebaseUser.getUid()).setValue(true);
-                        } else {
-                            referenceHearts
-                                    .child(p.getPostid()).child(firebaseUser.getUid()).removeValue();
-                        }
+                holder.social_page_like.setOnClickListener(v -> {
+                    if (holder.social_page_like.getTag().equals("heart")) {
+                        referenceHearts
+                                .child(p.getPostid()).child(firebaseUser.getUid()).setValue(true);
+                    } else {
+                        referenceHearts
+                                .child(p.getPostid()).child(firebaseUser.getUid()).removeValue();
                     }
                 });
             }
@@ -206,7 +203,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView social_page_image_profile;
         TextView social_page_username;

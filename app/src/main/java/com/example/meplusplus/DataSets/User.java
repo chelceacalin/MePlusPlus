@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
        CREATED DATE: 8/17/2022
        UPDATED DATE: 8/17/2022
  */
+@SuppressWarnings("ALL")
 public class User {
     String username;
     String name;
@@ -40,6 +41,7 @@ public class User {
         this.imageurl = imageurl;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "User{" +

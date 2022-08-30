@@ -1,10 +1,5 @@
 package com.example.meplusplus.Utils;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,21 +7,20 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.example.meplusplus.DataSets.User;
-import com.example.meplusplus.Fragments.AccountFragment;
-import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.R;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,9 +36,12 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-        /*
-       CREATED DATE: 8/29/2022
-        */
+import java.util.Objects;
+
+/*
+CREATED DATE: 8/29/2022
+*/
+@SuppressWarnings("ALL")
 public class EditProfile extends AppCompatActivity {
 
     //Controale
@@ -77,28 +74,17 @@ public class EditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         init();
 
-        editprofile_rotate_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rotationInit += 90;
-                editprofile_photo.setRotation(rotationInit);
-            }
+        editprofile_rotate_image.setOnClickListener(view -> {
+            rotationInit += 90;
+            editprofile_photo.setRotation(rotationInit);
         });
 
 
-        editprofile_closeImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        editprofile_closeImg.setOnClickListener(view -> finish());
 
-        editprofile_button_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fuploadImage();
-            finish();
-            }
+        editprofile_button_save.setOnClickListener(view -> {
+            fuploadImage();
+        finish();
         });
         /*
         UPDATE DATE: 8/29/2022
@@ -122,26 +108,23 @@ public class EditProfile extends AppCompatActivity {
         );
 
 
-        editprofile_change_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                launcher.launch(intent);
-            }
+        editprofile_change_image.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            launcher.launch(intent);
         });
 
 
         ref.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                editprofile_username.setText(snapshot.getValue(User.class).getUsername());
-                editprofile_bio.setText(snapshot.getValue(User.class).getBio());
+                editprofile_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
+                editprofile_bio.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getBio());
 
-                if (snapshot.getValue(User.class).getImageurl().equals("default")) {
+                if (Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl().equals("default")) {
                     Glide.with(getApplicationContext()).load(user.getPhotoUrl()).into(editprofile_photo);
                 }
                 else{
-                    Picasso.get().load(snapshot.getValue(User.class).getImageurl()).placeholder(R.drawable.ic_baseline_person).into(editprofile_photo);
+                    Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).placeholder(R.drawable.ic_baseline_person).into(editprofile_photo);
                 }
             }
 
@@ -185,41 +168,30 @@ public class EditProfile extends AppCompatActivity {
             reference = reference.child(System.currentTimeMillis() + ".jpeg");
             uploadtask = reference.putFile(imageviewuri);
 
-            uploadtask.continueWithTask(new Continuation() {
-                        @Override
-                        public Object then(@NonNull Task task) throws Exception {
-                            return reference.getDownloadUrl();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+            uploadtask.continueWithTask(task -> reference.getDownloadUrl()).addOnFailureListener(e -> {
+                progressDialog.dismiss();
+                Toast.makeText(EditProfile.this, "Error Uploading", Toast.LENGTH_SHORT).show();
+            })
+                    .addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                        if(!task.isSuccessful()){
+                            Toast.makeText(EditProfile.this, "Error", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
-                            Toast.makeText(EditProfile.this, "Error Uploading", Toast.LENGTH_SHORT).show();
                         }
-                    })
-                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if(!task.isSuccessful()){
-                                Toast.makeText(EditProfile.this, "Error", Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-                            }
-                            else
-                            {
-                                progressDialog.dismiss();
-                                Uri downloadUri = task.getResult();
-                                imageURL = downloadUri.toString();
-                                ref.child(user.getUid()).child("imageurl").setValue(imageURL);
-                                Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
+                        else
+                        {
+                            progressDialog.dismiss();
+                            Uri downloadUri = task.getResult();
+                            imageURL = downloadUri.toString();
+                            ref.child(user.getUid()).child("imageurl").setValue(imageURL);
+                            Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
 
-                                Map<String, Object> map = new HashMap<>();
-                                map.put("username", editprofile_username.getText().toString());
-                                map.put("bio", editprofile_bio.getText().toString());
-                                ref.child(user.getUid()).updateChildren(map);
-                            }
-
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("username", editprofile_username.getText().toString());
+                            map.put("bio", editprofile_bio.getText().toString());
+                            ref.child(user.getUid()).updateChildren(map);
                         }
+
                     });
         } else {
             Toast.makeText(this, "Please Select an Image", Toast.LENGTH_SHORT).show();

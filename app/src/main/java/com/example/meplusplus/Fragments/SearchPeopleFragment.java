@@ -1,5 +1,6 @@
 package com.example.meplusplus.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -102,6 +103,7 @@ public class SearchPeopleFragment extends Fragment {
 
     private void readusers() {
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String stringText = searchPeopleEditText.getText().toString();
@@ -128,6 +130,7 @@ public class SearchPeopleFragment extends Fragment {
     private void searchUser(String usr) {
         q = databaseReference.orderByChild("username").startAt(usr).endAt(usr + "\uf8ff");
         q.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 users.clear();

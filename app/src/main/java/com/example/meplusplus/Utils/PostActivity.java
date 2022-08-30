@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,16 +15,12 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,6 +37,7 @@ import java.util.Map;
        CREATED DATE: 8/25/2022
        UPDATED DATE: 8/25/2022
  */
+@SuppressWarnings("ALL")
 public class PostActivity extends AppCompatActivity {
     //Controale
     ImageView postactivity_closeImg;
@@ -76,31 +72,22 @@ public class PostActivity extends AppCompatActivity {
         init();
 
 
-        postactivity_rotate_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rotationInit += 90;
-                postactivity_imageProfile.setRotation(rotationInit);
-            }
+        postactivity_rotate_image.setOnClickListener(view -> {
+            rotationInit += 90;
+            postactivity_imageProfile.setRotation(rotationInit);
         });
 
 
-        postactivity_buttonpost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //insertIntoFirebase();
-                fuploadImage();
+        postactivity_buttonpost.setOnClickListener(view -> {
+            //insertIntoFirebase();
+            fuploadImage();
 
-            }
         });
-        postactivity_closeImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PostActivity.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
+        postactivity_closeImg.setOnClickListener(view -> {
+            Intent intent = new Intent(PostActivity.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
 
-            }
         });
 
 
@@ -125,21 +112,15 @@ public class PostActivity extends AppCompatActivity {
                 }
         );
 
-        selectimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //fselectimage();
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                launcher.launch(intent);
-            }
+        selectimage.setOnClickListener(view -> {
+            //fselectimage();
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            launcher.launch(intent);
         });
 
-        postactivity_imageProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                launcher.launch(intent);
-            }
+        postactivity_imageProfile.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            launcher.launch(intent);
         });
     }
 
@@ -162,7 +143,7 @@ public class PostActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
     }
 
-    private String getFext(Uri uri) {
+    private String getFext() {
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(this.getContentResolver().getType(imageviewuri));
     }
 
@@ -173,44 +154,34 @@ public class PostActivity extends AppCompatActivity {
         {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
-            reference = reference.child(System.currentTimeMillis() + "." + getFext(imageviewuri));
+            reference = reference.child(System.currentTimeMillis() + "." + getFext());
             uploadtask = reference.putFile(imageviewuri);
 
-            uploadtask.continueWithTask(new Continuation() {
-                        @Override
-                        public Object then(@NonNull Task task) throws Exception {
-                            return reference.getDownloadUrl();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(PostActivity.this, "Error Uploading", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            progressDialog.dismiss();
-                            Uri downloadUri = task.getResult();
-                            imageURL = downloadUri.toString();
+            uploadtask.continueWithTask(task -> reference.getDownloadUrl()).addOnFailureListener(e -> {
+                progressDialog.dismiss();
+                Toast.makeText(PostActivity.this, "Error Uploading", Toast.LENGTH_SHORT).show();
+            })
+                    .addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                        progressDialog.dismiss();
+                        Uri downloadUri = task.getResult();
+                        imageURL = downloadUri.toString();
 
-                            String postID = databaseReference.push().getKey(); // un id unic
-                            String description = postactivity_description.getText().toString();
-                            String IDpublisher = auth.getCurrentUser().getUid();
-                            Map<String, Object> map = new HashMap<>();
-                            map.put("postid", postID);
-                            map.put("imageurl", imageURL);
-                            map.put("description","   "+description);
-                            map.put("publisher", IDpublisher);
-                            databaseReference.child(postID).setValue(map);
+                        String postID = databaseReference.push().getKey(); // un id unic
+                        String description = postactivity_description.getText().toString();
+                        String IDpublisher = auth.getCurrentUser().getUid();
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("postid", postID);
+                        map.put("imageurl", imageURL);
+                        map.put("description","   "+description);
+                        map.put("publisher", IDpublisher);
+                        assert postID != null;
+                        databaseReference.child(postID).setValue(map);
 
-                            Toast.makeText(PostActivity.this, "Post Uploaded", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(PostActivity.this, Social_PageFragment.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
-                            finish();
-                        }
+                        Toast.makeText(PostActivity.this, "Post Uploaded", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(PostActivity.this, Social_PageFragment.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
+                        finish();
                     });
         }
         else

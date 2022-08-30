@@ -34,7 +34,7 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new AccountPhotos.ViewHolder(LayoutInflater.from(context).inflate(R.layout.grid_photo, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.grid_photo, parent, false));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;
 
