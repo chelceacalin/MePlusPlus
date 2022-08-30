@@ -14,6 +14,9 @@ import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.Utils.PostActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 /*
+
+       Status: NM - change switch logic
+
        CREATED DATE: 8/21/2022
        UPDATED DATE: 8/21/2022
  */
@@ -21,7 +24,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     //Controale
-
      BottomNavigationView bottomNavigationView;
      Fragment fragment;
 
@@ -31,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-
-
 
         bottomNavigationView.setOnItemSelectedListener((BottomNavigationView.OnNavigationItemSelectedListener) item -> {
 
@@ -50,18 +50,15 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.add_post:
                   Intent intent=new Intent(MainActivity.this, PostActivity.class);
                   startActivity(intent);
-
                     break;
 
                 case R.id.search_page:
                     fragment=new SearchPeopleFragment();
                     break;
 
-
                 case R.id.account_page:
                     fragment=new AccountFragment();
                     break;
-
             }
 
             if(fragment!=null)
@@ -75,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
     //Initializare
     private void init(){
         bottomNavigationView=findViewById(R.id.main_bottom_navigation);
-
-
     }
 
 
@@ -86,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         overridePendingTransition(R.anim.fade_in, R.anim.slide_up);
     }
+
     //Cand apas butonul de back de la telefon
     @Override
     public void onBackPressed() {

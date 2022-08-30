@@ -32,8 +32,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-// RFP and TC google/facebook auth
 /*
+
+       Status: TC - google to work on all devices, Facebook to work
        CREATED DATE: 8/18/2022
        UPDATED DATE: 8/18/2022
  */
@@ -57,6 +58,9 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference reference;
 
+    //Diverse
+    String email_text;
+    String passowrd_text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +80,8 @@ public class LoginActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.fade_out, R.anim.slide_out);
         });
         imageViewNextButton.setOnClickListener(view -> {
-
-            String email_text = email.getText().toString();
-            String passowrd_text = password.getText().toString();
-
+             email_text = email.getText().toString();
+             passowrd_text = password.getText().toString();
             if (!email_text.equals("") && !passowrd_text.equals("")) {
                 loginUser(email_text, passowrd_text);
             } else {
@@ -102,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Initializam controalele
     public void init() {
+        //Controale
         email = findViewById(R.id.loginactivity_edit_text_email);
         password = findViewById(R.id.loginActivity_edit_text_password);
         forgotpassword = findViewById(R.id.loginActivity_forgot_password);
@@ -210,7 +213,7 @@ public class LoginActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
-/*  @Override
+  @Override
     protected void onStart() {
         super.onStart();
         if(user!=null){
@@ -220,7 +223,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-    }*/
+    }
 
 
     //Cand minimizezi aplicatia

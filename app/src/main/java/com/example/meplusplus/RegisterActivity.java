@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /*
+       Status: RFP
+
        CREATED DATE: 8/18/2022
        UPDATED DATE: 8/18/2022
  */
@@ -51,8 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
         //Initializare
         init();
 
-        //new View.OnClickListener() {
-        //            @Override
         registerActivity_btn_register.setOnClickListener(view -> {
             username = registeractivity_edit_text_username.getText().toString();
             name = registeractivity_edit_text_name.getText().toString();
@@ -74,7 +74,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         });
 
-
         showpasswordCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 registerActivity_edit_text_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -82,7 +81,6 @@ public class RegisterActivity extends AppCompatActivity {
                 registerActivity_edit_text_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         });
-
     }
 
 
@@ -146,6 +144,7 @@ public class RegisterActivity extends AppCompatActivity {
         //ProgressDialog
         progressDialog = new ProgressDialog(this);
 
+        //Firebase
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference();
@@ -172,10 +171,7 @@ public class RegisterActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
                     Toast.makeText(RegisterActivity.this, "Registration Completed", Toast.LENGTH_SHORT).show();
                 }
-
             });
-
-
         }).addOnFailureListener(e -> {
             progressDialog.dismiss();
             Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();

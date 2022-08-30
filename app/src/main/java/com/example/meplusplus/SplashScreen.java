@@ -13,10 +13,20 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-// RFP
+
    /*
+   Statuses:
+       RFP - ready for production
+       TC - to complete ( features to be added )
+       NM - needs to be modified/refactored
+
+       Status: RFP
        CREATED DATE: 8/17/2022
        UPDATED DATE: 8/17/2022
+
+       1.
+       UPDATED DATE 8/30/2022
+       Note: Refactored Notes and assigned variables in init
     */
 @SuppressLint("CustomSplashScreen")
 @SuppressWarnings("FieldCanBeLocal")
@@ -24,15 +34,21 @@ public class SplashScreen extends AppCompatActivity {
 
     //Animatie
     Animation animFadeIn;
-    public static final long Duration=2500; // 2.5 s
-    public static final long interval=600; //250 ms
-    public int i=0;
-    public final int total=3;
+
+
+    //Timer
+    public static long Duration;
+    public static  long interval;
+    public int i;
+    public int total;
+
     //Declarare
     private ImageView imageView;
     private CountDownTimer timer;
-    private TextView meplusplus,sp_screen_pls_wait;
-    private ProgressBar circularProgressBar,horiontalProgressBar;
+    private TextView meplusplus;
+    private TextView sp_screen_pls_wait;
+    private ProgressBar circularProgressBar;
+    private ProgressBar horiontalProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +75,7 @@ public class SplashScreen extends AppCompatActivity {
 
     //Initializare Controale
    public void init(){
+        //Controale
         imageView=findViewById(R.id.sp_screen_logo);
         circularProgressBar =findViewById(R.id.sp_screen_pg_bar);
         circularProgressBar.setProgress(total);
@@ -67,7 +84,7 @@ public class SplashScreen extends AppCompatActivity {
         meplusplus=findViewById(R.id.meplusplus);
         sp_screen_pls_wait=findViewById(R.id.sp_screen_pls_wait);
 
-
+        //Animatii
        animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),
                R.anim.fade_in);
 
@@ -78,7 +95,13 @@ public class SplashScreen extends AppCompatActivity {
        imageView.startAnimation(animFadeIn);
        sp_screen_pls_wait.setVisibility(View.VISIBLE);
        sp_screen_pls_wait.startAnimation(animFadeIn);
-    }
+
+       //Diverse
+       Duration=2500;
+       interval=600;
+       total=3;
+       i=0;
+   }
 
     //Cand apesi pe back cand esti pe pagina de login
     @Override
