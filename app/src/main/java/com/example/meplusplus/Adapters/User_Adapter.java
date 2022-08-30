@@ -43,8 +43,8 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
 
     //Controale
     Context context;
-    List<User> list;
-    boolean eF;
+    final List<User> list;
+    final boolean eF;
     User item;
 
     public User_Adapter() {
@@ -67,6 +67,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         init();
+        assert list != null;
         item = list.get(position);
         setdDetails(user, holder);
 
@@ -107,6 +108,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
+        assert list != null;
         return list.size();
     }
 

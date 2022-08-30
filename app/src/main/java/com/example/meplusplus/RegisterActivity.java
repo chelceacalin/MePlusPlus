@@ -26,7 +26,6 @@ import java.util.Objects;
        CREATED DATE: 8/18/2022
        UPDATED DATE: 8/18/2022
  */
-@SuppressWarnings("FieldCanBeLocal")
 public class RegisterActivity extends AppCompatActivity {
     //Controale
     Button registerActivity_btn_register, registerActivity_button_Login;

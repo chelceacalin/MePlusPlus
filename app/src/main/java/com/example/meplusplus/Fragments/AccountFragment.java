@@ -50,6 +50,7 @@ import java.util.Objects;
        CREATED DATE: 8/29/2022
        UPDATED DATE: 8/29/2022
  */
+@SuppressWarnings("ALL")
 public class AccountFragment extends Fragment {
 
     //Controale
