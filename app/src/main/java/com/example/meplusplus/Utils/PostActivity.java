@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,8 @@ import com.google.firebase.storage.StorageTask;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 
 /*
@@ -160,7 +164,13 @@ public class PostActivity extends AppCompatActivity {
             uploadtask = reference.putFile(imageviewuri);
             uploadtask.continueWithTask(task -> reference.getDownloadUrl()).addOnFailureListener(e -> {
                 progressDialog.dismiss();
-                Toast.makeText(PostActivity.this, "Error Uploading", Toast.LENGTH_SHORT).show();
+                new StyleableToast.Builder(PostActivity.this)
+                        .text("Error Uploading")
+                        .textColor(Color.RED)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_error_outline_24)
+                        .show();
             }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
                 progressDialog.dismiss();
                 Uri downloadUri = task.getResult();

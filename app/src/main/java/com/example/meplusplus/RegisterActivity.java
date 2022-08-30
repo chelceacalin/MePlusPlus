@@ -2,6 +2,7 @@ package com.example.meplusplus;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.meplusplus.Utils.CommentDetailActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 /*
        Status: RFP
@@ -62,7 +66,13 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!username.equals("") && !name.equals("") && !email.equals("") && !password.equals("")) {
                     registerUser(username, name, email, password);
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
+                    new StyleableToast.Builder(RegisterActivity.this)
+                            .text("Empty Credentials")
+                            .textColor(Color.RED)
+                            .backgroundColor(getResources().getColor(R.color.white))
+                            .cornerRadius(25)
+                            .iconStart(R.drawable.ic_baseline_error_outline_24)
+                            .show();
                 }
             }
         });

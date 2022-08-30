@@ -1,6 +1,7 @@
 package com.example.meplusplus.Utils;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.meplusplus.Adapters.Comment_Adapter;
 import com.example.meplusplus.DataSets.Comm;
 import com.example.meplusplus.DataSets.User;
+import com.example.meplusplus.LoginActivity;
 import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.github.muddz.styleabletoast.StyleableToast;
 
 /*
        CREATED DATE: 8/27/2022
@@ -72,7 +75,13 @@ public class CommentDetailActivity extends AppCompatActivity {
         activity_comment_detail_button_post.setOnClickListener(view -> {
              comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
             if (comment.equals("")) {
-                Toast.makeText(CommentDetailActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
+                new StyleableToast.Builder(CommentDetailActivity.this)
+                        .text("Comment cannot be empty!")
+                        .textColor(Color.RED)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_error_outline_24)
+                        .show();
             } else {
                 strikes.child(postID);
                 id= strikes.child(postID).push().getKey();
