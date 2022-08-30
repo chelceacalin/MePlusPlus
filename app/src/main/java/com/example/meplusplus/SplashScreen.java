@@ -67,9 +67,11 @@ public class SplashScreen extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 finish();
             }
+
         };
         timer.start();
     }
+
 
     //Initializare Controale
     public void init() {
@@ -101,12 +103,18 @@ public class SplashScreen extends AppCompatActivity {
         i = 0;
     }
 
+
     //Cand apesi pe back cand esti pe pagina de login
     @Override
     public void onBackPressed() {
-        System.exit(0);
-        finish();
+        goHome();
         super.onBackPressed();
     }
+    private void goHome() {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addCategory(Intent.CATEGORY_HOME);
+        startActivity(i);
 
+    }
 }

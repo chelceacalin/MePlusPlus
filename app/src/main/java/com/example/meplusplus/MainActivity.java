@@ -3,9 +3,14 @@ package com.example.meplusplus;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.meplusplus.Fragments.AccountFragment;
 import com.example.meplusplus.Fragments.MeFragment;
@@ -13,7 +18,6 @@ import com.example.meplusplus.Fragments.SearchPeopleFragment;
 import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.Utils.PostActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 /*
 
        Status: NM - change switch logic
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment fragment;
 
+    //Diverse
+    int ID_fragment;
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +48,12 @@ public class MainActivity extends AppCompatActivity {
             switch (id) {
                 case R.id.me_page:
                     fragment = new MeFragment();
+                    ID_fragment=1;
                     break;
 
                 case R.id.social_page:
                     fragment = new Social_PageFragment();
+                    ID_fragment=2;
                     break;
 
                 case R.id.add_post:
@@ -55,15 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.search_page:
                     fragment = new SearchPeopleFragment();
+                    ID_fragment=3;
                     break;
 
                 case R.id.account_page:
                     fragment = new AccountFragment();
+                    ID_fragment=4;
                     break;
             }
 
             if (fragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, fragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, fragment).addToBackStack(null).commit();
             }
             return true;
         });
@@ -72,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     //Initializare
     private void init() {
         bottomNavigationView = findViewById(R.id.main_bottom_navigation);
+        fragment=new Fragment();
     }
 
 
@@ -85,8 +96,23 @@ public class MainActivity extends AppCompatActivity {
     //Cand apas butonul de back de la telefon
     @Override
     public void onBackPressed() {
-        finish();
-        System.exit(0);
-        super.onBackPressed();
+      if (getFragmentManager().getBackStackEntryCount() > 0){
+            getFragmentManager().popBackStack();
+            goHome();
+        } else {
+          //Daca nu e MeFragment
+          bottomNavigationView.getMenu().getItem(0).setChecked(true);
+          super.onBackPressed();
+      }
+
     }
+
+    private void goHome() {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addCategory(Intent.CATEGORY_HOME);
+        startActivity(i);
+
+    }
+
 }

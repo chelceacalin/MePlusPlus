@@ -1,6 +1,7 @@
 package com.example.meplusplus;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -31,6 +32,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 /*
 
@@ -168,7 +171,14 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Google Sign In Successful", Toast.LENGTH_SHORT).show();
+                            new StyleableToast
+                                    .Builder(LoginActivity.this)
+                                    .text("Google Sign In Successful")
+                                    .textColor(Color.WHITE)
+                                    .backgroundColor(R.color.navy)
+                                    .cornerRadius(25)
+                                    .iconStart(R.drawable.ic_google)
+                                    .show();
                             user = auth.getCurrentUser();
                             String arr[] = user.getDisplayName().split(" ", 2);
                             String username = arr[0];

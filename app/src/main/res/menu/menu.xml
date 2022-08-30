@@ -5,7 +5,8 @@
     <item
         android:id="@+id/me_page"
         android:title=""
-        android:icon="@drawable/ic_baseline_home" />
+        android:icon="@drawable/ic_baseline_home"
+        />
 
     <item
         android:id="@+id/social_page"
