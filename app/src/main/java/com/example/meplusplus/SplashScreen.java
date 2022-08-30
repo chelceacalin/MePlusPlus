@@ -25,8 +25,9 @@ public class SplashScreen extends AppCompatActivity {
     //Animatie
     Animation animFadeIn;
     public static final long Duration=2500; // 2.5 s
-    public static long interval=600; //250 ms
-    public int i=0,total=3;
+    public static final long interval=600; //250 ms
+    public int i=0;
+    public final int total=3;
     //Declarare
     private ImageView imageView;
     private CountDownTimer timer;

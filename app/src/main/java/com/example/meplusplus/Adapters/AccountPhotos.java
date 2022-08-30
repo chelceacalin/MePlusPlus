@@ -22,8 +22,8 @@ import java.util.List;
  */
 public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder> {
 
-     Context context;
-     List<PostItem> items;
+     final Context context;
+     final List<PostItem> items;
      PostItem post;
 
     public AccountPhotos(Context mContext, List<PostItem> mPosts) {
@@ -56,7 +56,7 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView imageView;
+        public final ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

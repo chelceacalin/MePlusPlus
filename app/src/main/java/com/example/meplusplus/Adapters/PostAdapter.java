@@ -41,16 +41,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     //Utilitati
     PostItem p;
     User u;
-    Context context;
-    List<PostItem> items;
+    final Context context;
+    final List<PostItem> items;
 
     //Firebase
-    FirebaseUser firebaseUser;
+    final FirebaseUser firebaseUser;
     FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference referenceHearts;
     DatabaseReference referenceStrikes;
-    FirebaseAuth auth;
+    final FirebaseAuth auth;
 
 
     public PostAdapter(List<PostItem> items, Context context) {
@@ -126,6 +126,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                assert firebaseUser != null;
                 if (dataSnapshot.child(firebaseUser.getUid()).exists()) {
                     img.setImageResource(R.drawable.ic_baseline_favorite);
                     img.setTag("NotFail");
@@ -158,6 +159,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     Picasso.get().load(u.getImageurl()).into(holder.social_page_image_profile);
 
                 } else {
+                    assert firebaseUser != null;
                     if(firebaseUser.getPhotoUrl()==null){
                         holder.social_page_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
 
@@ -174,9 +176,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
                 holder.social_page_like.setOnClickListener(v -> {
                     if (holder.social_page_like.getTag().equals("heart")) {
+                        assert firebaseUser != null;
                         referenceHearts
                                 .child(p.getPostid()).child(firebaseUser.getUid()).setValue(true);
                     } else {
+                        assert firebaseUser != null;
                         referenceHearts
                                 .child(p.getPostid()).child(firebaseUser.getUid()).removeValue();
                     }
@@ -205,13 +209,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView social_page_image_profile;
-        TextView social_page_username;
-        TextView social_page_image_description;
-        ImageView social_page_image_content;
-        TextView social_page_place_a_comment;
-        TextView social_page_number_of_likes, social_page_number_of_comments;
-        ImageView social_page_like,social_page_strike;
+        final CircleImageView social_page_image_profile;
+        final TextView social_page_username;
+        final TextView social_page_image_description;
+        final ImageView social_page_image_content;
+        final TextView social_page_place_a_comment;
+        final TextView social_page_number_of_likes;
+        final TextView social_page_number_of_comments;
+        final ImageView social_page_like;
+        final ImageView social_page_strike;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             social_page_image_profile = itemView.findViewById(R.id.social_page_image_profile);

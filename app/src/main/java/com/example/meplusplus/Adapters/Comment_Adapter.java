@@ -42,18 +42,18 @@ UPDATED DATE: 8/28/2022
 public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHolder> {
 
     //Controale
-    Context context;
-    List<Comm> list;
+    final Context context;
+    final List<Comm> list;
     Comm comm;
     User u;
 
     //Firebase
     FirebaseDatabase database;
     DatabaseReference reference;
-    FirebaseUser user;
-    FirebaseAuth auth;
+    final FirebaseUser user;
+    final FirebaseAuth auth;
     DatabaseReference reference1;
-    String ID;
+    final String ID;
 
     public Comment_Adapter(Context context, String ID, List<Comm> list) {
         this.context = context;
@@ -127,9 +127,9 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView comment_card_item_people_profile_image;
-        TextView comment_card_item_people_username;
-        TextView comment_card_item_comment_text;
+        final CircleImageView comment_card_item_people_profile_image;
+        final TextView comment_card_item_people_username;
+        final TextView comment_card_item_comment_text;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

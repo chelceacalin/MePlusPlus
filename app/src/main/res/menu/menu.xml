@@ -5,30 +5,25 @@
     <item
         android:id="@+id/me_page"
         android:title=""
-        android:icon="@drawable/ic_baseline_home"
-        ></item>
+        android:icon="@drawable/ic_baseline_home" />
 
     <item
         android:id="@+id/social_page"
         android:title=""
-        android:icon="@drawable/ic_baseline_social"
-        ></item>
+        android:icon="@drawable/ic_baseline_social" />
 
     <item
         android:id="@+id/add_post"
         android:title=""
-        android:icon="@drawable/ic_baseline_add"
-        ></item>
+        android:icon="@drawable/ic_baseline_add" />
 
     <item
         android:id="@+id/search_page"
         android:title=""
-        android:icon="@drawable/ic_baseline_search"
-        ></item>
+        android:icon="@drawable/ic_baseline_search" />
 
     <item
         android:id="@+id/account_page"
         android:title=""
-        android:icon="@drawable/ic_baseline_person"
-        ></item>
+        android:icon="@drawable/ic_baseline_person" />
 </menu>
