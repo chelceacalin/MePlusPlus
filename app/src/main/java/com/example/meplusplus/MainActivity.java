@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Diverse
     int ID_fragment;
+    boolean openF2;
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null && extras.containsKey("openSocialPageFragment"))
+            openF2= extras.getBoolean("openSocialPageFragment");
+        if(openF2){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new Social_PageFragment()).addToBackStack(null).commit();
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        }
     }
 
     //Initializare

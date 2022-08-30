@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -89,7 +88,13 @@ public class LoginActivity extends AppCompatActivity {
             if (!email_text.equals("") && !passowrd_text.equals("")) {
                 loginUser(email_text, passowrd_text);
             } else {
-                Toast.makeText(LoginActivity.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
+                new StyleableToast.Builder(LoginActivity.this)
+                        .text("Empty Credentials")
+                        .textColor(Color.RED)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_error_outline_24)
+                        .show();
             }
         });
 
@@ -143,7 +148,15 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         } else
-            Toast.makeText(this, "Invalid Request Code", Toast.LENGTH_SHORT).show();
+            new StyleableToast.Builder(LoginActivity.this)
+                    .text("Empty Credentials")
+                    .textColor(Color.RED)
+                    .backgroundColor(getResources().getColor(R.color.white))
+                    .cornerRadius(25)
+                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                    .show();
+
+
     }
 
 
@@ -159,12 +172,18 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Eroare", Toast.LENGTH_SHORT).show();
+            new StyleableToast.Builder(LoginActivity.this)
+                    .text("Error")
+                    .textColor(Color.RED)
+                    .backgroundColor(getResources().getColor(R.color.white))
+                    .cornerRadius(25)
+                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                    .show();
         }
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        //  Toast.makeText(this, "firebaseAuthWithGoogle:" + acct.getId(), Toast.LENGTH_SHORT).show();
+
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -207,11 +226,23 @@ public class LoginActivity extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(LoginActivity.this, "Database Failed", Toast.LENGTH_SHORT).show();
+                                    new StyleableToast.Builder(LoginActivity.this)
+                                            .text("Database Failed")
+                                            .textColor(Color.RED)
+                                            .backgroundColor(getResources().getColor(R.color.white))
+                                            .cornerRadius(25)
+                                            .iconStart(R.drawable.ic_baseline_error_outline_24)
+                                            .show();
                                 }
                             });
                         } else {
-                            Toast.makeText(LoginActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
+                            new StyleableToast.Builder(LoginActivity.this)
+                                    .text("Sign In Failed")
+                                    .textColor(Color.RED)
+                                    .backgroundColor(getResources().getColor(R.color.white))
+                                    .cornerRadius(25)
+                                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                                    .show();
                         }
                     }
                 });
@@ -262,7 +293,13 @@ public class LoginActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginActivity.this, "Wrong Credentials!", Toast.LENGTH_SHORT).show();
+                new StyleableToast.Builder(LoginActivity.this)
+                        .text("Wrong Credentials!")
+                        .textColor(Color.RED)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_error_outline_24)
+                        .show();
             }
         });
     }

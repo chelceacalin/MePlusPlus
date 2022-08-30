@@ -12,16 +12,13 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
-import com.example.meplusplus.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -90,6 +87,7 @@ public class PostActivity extends AppCompatActivity {
 
         postactivity_buttonpost.setOnClickListener(view -> {
             fuploadImage();
+
 
         });
         postactivity_closeImg.setOnClickListener(view -> {
@@ -172,10 +170,18 @@ public class PostActivity extends AppCompatActivity {
                         .iconStart(R.drawable.ic_baseline_error_outline_24)
                         .show();
             }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+
                 progressDialog.dismiss();
+
+                new StyleableToast.Builder(PostActivity.this)
+                        .text("Post Uploaded")
+                        .textColor(Color.BLUE)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .textSize(22)
+                        .show();
                 Uri downloadUri = task.getResult();
                 imageURL = downloadUri.toString();
-
                 String postID = databaseReference.push().getKey(); // un id unic
                 String description = postactivity_description.getText().toString();
                 String IDpublisher = auth.getCurrentUser().getUid();
@@ -187,14 +193,22 @@ public class PostActivity extends AppCompatActivity {
                 assert postID != null;
                 databaseReference.child(postID).setValue(map);
 
-                Toast.makeText(PostActivity.this, "Post Uploaded", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(PostActivity.this, Social_PageFragment.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
+
+                // Schimbam din activitate in fragment
+                Intent intent = new Intent(PostActivity.this, MainActivity.class);
+                intent.putExtra("openSocialPageFragment",true);
+                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 finish();
+                startActivity(intent);
             });
         } else {
-            Toast.makeText(this, "Please Select an Image", Toast.LENGTH_SHORT).show();
+            new StyleableToast.Builder(PostActivity.this)
+                    .text("Please Select an Image")
+                    .textColor(Color.RED)
+                    .backgroundColor(getResources().getColor(R.color.white))
+                    .cornerRadius(25)
+                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                    .show();
         }
     }
 

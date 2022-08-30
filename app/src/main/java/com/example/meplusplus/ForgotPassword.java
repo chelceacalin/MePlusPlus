@@ -1,13 +1,15 @@
 package com.example.meplusplus;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 /*
 
@@ -37,7 +39,13 @@ public class ForgotPassword extends AppCompatActivity {
             if (!emailText.equals("")) {
                 sendRecoveryMail(emailText);
             } else {
-                Toast.makeText(ForgotPassword.this, "You have to introduce and email! ", Toast.LENGTH_SHORT).show();
+                new StyleableToast.Builder(ForgotPassword.this)
+                        .text("You have to introduce and email! ")
+                        .textColor(Color.RED)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_error_outline_24)
+                        .show();
             }
         });
     }
@@ -46,10 +54,31 @@ public class ForgotPassword extends AppCompatActivity {
 
         auth.sendPasswordResetEmail(emailText).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Toast.makeText(ForgotPassword.this, "Please check your email!", Toast.LENGTH_SHORT).show();
+                new StyleableToast.Builder(ForgotPassword.this)
+                        .text("Please check your email! ")
+                        .textColor(Color.GREEN)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_mark_email_unread_24)
+                        .show();
             } else
-                Toast.makeText(ForgotPassword.this, "Invalid Mail", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(e -> Toast.makeText(ForgotPassword.this, "Email Failure", Toast.LENGTH_SHORT).show());
+                new StyleableToast.Builder(ForgotPassword.this)
+                        .text("Invalid Mail")
+                        .textColor(Color.RED)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_error_outline_24)
+                        .show();
+        }).addOnFailureListener(e ->
+
+                new StyleableToast.Builder(ForgotPassword.this)
+                        .text("Email Failure")
+                        .textColor(Color.RED)
+                        .backgroundColor(getResources().getColor(R.color.white))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_error_outline_24)
+                        .show()
+                );
     }
 
     //Cand apas butonul de back de la telefon

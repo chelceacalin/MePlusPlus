@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="username"
+                android:text=""
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="name"
+                android:text=""
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 

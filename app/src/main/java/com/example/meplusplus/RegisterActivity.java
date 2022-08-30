@@ -9,11 +9,9 @@ import android.text.method.PasswordTransformationMethod;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.meplusplus.Utils.CommentDetailActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -178,12 +176,17 @@ public class RegisterActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
-                    Toast.makeText(RegisterActivity.this, "Registration Completed", Toast.LENGTH_SHORT).show();
+
+                    new StyleableToast
+                            .Builder(RegisterActivity.this)
+                            .text("Registration Completed")
+                            .textColor(Color.GREEN)
+                            .backgroundColor( getResources().getColor(R.color.white))
+                            .cornerRadius(25)
+                            .iconStart(R.drawable.ic_baseline_check_circle_24)
+                            .show();
                 }
             });
-        }).addOnFailureListener(e -> {
-            progressDialog.dismiss();
-            Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        });
+        }).addOnFailureListener(e -> progressDialog.dismiss());
     }
 }

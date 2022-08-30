@@ -3,6 +3,7 @@ package com.example.meplusplus.Fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,6 +42,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import io.github.muddz.styleabletoast.StyleableToast;
 
 
 /*
@@ -199,12 +200,27 @@ public class AccountFragment extends Fragment {
             popup.getMenuInflater().inflate(R.menu.menu_options_profile, menu);
             popup.setOnMenuItemClickListener(menuItem -> {
                 if (menuItem.getTitle().equals("Sign Out")) {
+                    new StyleableToast.Builder(getContext())
+                            .text("You have been signed out")
+                            .textColor(Color.BLUE)
+                            .backgroundColor(getResources().getColor(R.color.white))
+                            .textSize(19)
+                            .cornerRadius(25)
+                            .show();
                     auth.signOut();
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);
-                    Toast.makeText(getContext(), "You've been signed out", Toast.LENGTH_SHORT).show();
+
+
+
                 } else if (menuItem.getTitle().equals("Dark Mode")) {
-                    Toast.makeText(getContext(), "Dark Mode", Toast.LENGTH_SHORT).show();
+                    new StyleableToast.Builder(getContext())
+                            .text("Dark Mode")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(getResources().getColor(R.color.Black))
+                            .cornerRadius(25)
+                            .iconStart(R.drawable.ic_baseline_dark_mode_24)
+                            .show();
                 }
                 return true;
             });

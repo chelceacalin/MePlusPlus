@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 /*
         Status: RFP
@@ -177,19 +179,35 @@ public class EditProfile extends AppCompatActivity {
 
             uploadtask.continueWithTask(task -> reference.getDownloadUrl()).addOnFailureListener(e -> {
                         progressDialog.dismiss();
-                        Toast.makeText(EditProfile.this, "Error Uploading", Toast.LENGTH_SHORT).show();
+                        new StyleableToast.Builder(EditProfile.this)
+                                .text("Error Uploading")
+                                .textColor(Color.RED)
+                                .backgroundColor(getResources().getColor(R.color.white))
+                                .cornerRadius(25)
+                                .iconStart(R.drawable.ic_baseline_error_outline_24)
+                                .show();
                     })
                     .addOnCompleteListener((OnCompleteListener<Uri>) task -> {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(EditProfile.this, "Error", Toast.LENGTH_SHORT).show();
+                            new StyleableToast.Builder(EditProfile.this)
+                                    .text("Error")
+                                    .textColor(Color.RED)
+                                    .backgroundColor(getResources().getColor(R.color.white))
+                                    .cornerRadius(25)
+                                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                                    .show();
                             progressDialog.dismiss();
                         } else {
                             progressDialog.dismiss();
                             imgURiDownload = task.getResult();
                             imageURL = imgURiDownload.toString();
                             ref.child(user.getUid()).child("imageurl").setValue(imageURL);
-                            Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
-
+                            new StyleableToast.Builder(EditProfile.this)
+                                    .text("Profile Updated")
+                                    .textColor(Color.WHITE)
+                                    .backgroundColor(getResources().getColor(R.color.blue))
+                                    .cornerRadius(25)
+                                    .show();
                             map.put("username", editprofile_username.getText().toString());
                             map.put("bio", editprofile_bio.getText().toString());
                             ref.child(user.getUid()).updateChildren(map);
@@ -197,7 +215,13 @@ public class EditProfile extends AppCompatActivity {
 
                     });
         } else {
-            Toast.makeText(this, "Please Select an Image", Toast.LENGTH_SHORT).show();
+            new StyleableToast.Builder(EditProfile.this)
+                    .text("Please Select an Image")
+                    .textColor(Color.RED)
+                    .backgroundColor(getResources().getColor(R.color.white))
+                    .cornerRadius(25)
+                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                    .show();
         }
     }
 

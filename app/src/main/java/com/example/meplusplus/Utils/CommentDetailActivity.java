@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.meplusplus.Adapters.Comment_Adapter;
 import com.example.meplusplus.DataSets.Comm;
 import com.example.meplusplus.DataSets.User;
-import com.example.meplusplus.LoginActivity;
 import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -93,7 +91,7 @@ public class CommentDetailActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         activity_comment_detail_edit_Text_comment.setText("");
                     }
-                }).addOnFailureListener(e -> Toast.makeText(CommentDetailActivity.this, "Failure", Toast.LENGTH_SHORT).show());
+                });
             }
         });
      readStrikes();
