@@ -100,9 +100,10 @@ public class MainActivity extends AppCompatActivity {
     //Cand apas butonul de back de la telefon
     @Override
     public void onBackPressed() {
-      if (getFragmentManager().getBackStackEntryCount() > 0){
-            getFragmentManager().popBackStack();
-            goHome();
+  if (getFragmentManager().getBackStackEntryCount() > 0){
+      //  getFragmentManager().popBackStack();
+      moveTaskToBack(true);
+            //goHome();
         } else {
           //Daca nu e MeFragment
           bottomNavigationView.getMenu().getItem(0).setChecked(true);
@@ -111,12 +112,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void goHome() {
+
+   /* private void goHome() {
         Intent i = new Intent(Intent.ACTION_MAIN);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.addCategory(Intent.CATEGORY_HOME);
         startActivity(i);
 
-    }
+    }*/
 
 }

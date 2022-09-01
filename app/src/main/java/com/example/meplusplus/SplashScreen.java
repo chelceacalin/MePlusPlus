@@ -2,6 +2,7 @@ package com.example.meplusplus;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -47,11 +48,57 @@ public class SplashScreen extends AppCompatActivity {
     private ProgressBar circularProgressBar;
     private ProgressBar horiontalProgressBar;
 
+    SharedPreferences settings ;
+    boolean firstRun;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         init();
+
+         settings = getSharedPreferences("prefs", 0);
+         firstRun = settings.getBoolean("firstRun", false);
+        if (!firstRun)
+        {
+            editor = settings.edit();
+            editor.putBoolean("firstRun", true);
+            editor.commit();
+            timer = new CountDownTimer(Duration, interval) {
+                @Override
+                public void onTick(long l) {
+                    i += 20;
+                    horiontalProgressBar.setProgress(i);
+                    circularProgressBar.setProgress(i);
+                }
+
+                @Override
+                public void onFinish() {
+                    startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                    finish();
+                }
+            };
+            timer.start();
+        } else {
+            startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+
+            finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        editor = settings.edit();
+        editor.putBoolean("firstRun", false);
+        editor.commit();
+        super.onDestroy();
+
+    }
+
+
+    /*
 
         timer = new CountDownTimer(Duration, interval) {
             @Override
@@ -69,8 +116,7 @@ public class SplashScreen extends AppCompatActivity {
             }
 
         };
-        timer.start();
-    }
+        timer.start();*/
 
 
     //Initializare Controale
@@ -101,20 +147,15 @@ public class SplashScreen extends AppCompatActivity {
         interval = 600;
         total = 3;
         i = 0;
+
+
     }
 
 
     //Cand apesi pe back cand esti pe pagina de login
     @Override
     public void onBackPressed() {
-        goHome();
         super.onBackPressed();
     }
-    private void goHome() {
-        Intent i = new Intent(Intent.ACTION_MAIN);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addCategory(Intent.CATEGORY_HOME);
-        startActivity(i);
 
-    }
 }
