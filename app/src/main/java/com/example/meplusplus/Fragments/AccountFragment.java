@@ -187,7 +187,6 @@ public class AccountFragment extends Fragment {
                     Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(fragment_account_image_profile);
                 }
 
-
             }
 
             @Override
