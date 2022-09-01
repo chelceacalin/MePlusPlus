@@ -151,23 +151,25 @@ public class AccountFragment extends Fragment {
         }
 
         //Recyclerview
-        manager = new GridLayoutManager(getContext(), 2);
-        manager.setSpanCount(2);
+        manager = new GridLayoutManager(getContext(), 3);
+       // manager.setSpanCount(2);
         items = new ArrayList<>();
         adapter = new AccountPhotos(getContext(), items);
         fragment_account_recyclerView_posts.setLayoutManager(manager);
         fragment_account_recyclerView_posts.setAdapter(adapter);
-        fragment_account_recyclerView_posts.addItemDecoration(new RecyclerView.ItemDecoration() {
+
+     fragment_account_recyclerView_posts.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 int position = parent.getChildAdapterPosition(view); // item position
                 //spacing between views in grid
                 outRect.left = 0;
-                outRect.right = 0;
-                outRect.top = 30;
-                outRect.bottom = 30;
+                outRect.right = 5;
+                outRect.top = 10;
+                outRect.bottom = 5;
             }
         });
+
         //Diverse
         contor = 0;
     }
