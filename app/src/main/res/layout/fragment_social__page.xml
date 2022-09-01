@@ -7,20 +7,29 @@
     android:background="#051255"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/see_what_s_up"
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:textColor="@color/white"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_blurry_gradient_haikei"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_gravity="center_vertical"
+            android:text="@string/see_what_s_up"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="13dp"
         android:orientation="vertical"
         android:layout_marginBottom="60dp"
 

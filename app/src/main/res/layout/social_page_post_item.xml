@@ -37,7 +37,8 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/social_page_image_profile"
                     android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    tools:ignore="ImageContrastCheck" />
 
                 <TextView
                     android:id="@+id/social_page_username"
@@ -81,7 +82,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_baseline_person_pin_24"
                     android:scaleType="fitXY"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
             </LinearLayout>
 
             <LinearLayout
@@ -129,9 +130,9 @@
                     android:id="@+id/social_page_strike"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
-                    android:background="@color/fui_transparent"
                     android:layout_gravity="center_vertical"
-                    tools:ignore="ContentDescription" />
+                    android:background="@color/fui_transparent"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
             </LinearLayout>
 
             <TextView
@@ -146,7 +147,7 @@
                 android:background="@drawable/image_border"
                 android:foregroundGravity="center_vertical"
                 android:gravity="center_vertical"
-                android:text="@string/place_a_comment"
+                android:text="@string/place_a_comment2"
                 android:textColor="#c2c2c2"
                 android:textSize="14sp"
                 android:layout_marginBottom="5dp"
