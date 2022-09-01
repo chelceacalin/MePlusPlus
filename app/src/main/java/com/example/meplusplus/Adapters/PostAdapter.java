@@ -17,6 +17,8 @@ import com.example.meplusplus.DataSets.PostItem;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Utils.CommentDetailActivity;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +38,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
        Status: RFP
        CREATED DATE: 8/25/2022
        UPDATED DATE: 8/25/2022
+
+        1.
+       UPDATED DATE: 9/01/2022
+       Notes: Added zoom in feature on pictures
  */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -53,6 +59,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     DatabaseReference referenceStrikes;
     final FirebaseAuth auth;
 
+    //Zoom in
+
+    PhotoViewAttacher mAttacher;
 
     public PostAdapter(List<PostItem> items, Context context) {
         this.items = items;
@@ -131,7 +140,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                assert firebaseUser != null;
                 if (dataSnapshot.child(firebaseUser.getUid()).exists()) {
                     img.setImageResource(R.drawable.ic_baseline_favorite);
                     img.setTag("NotFail");
@@ -169,12 +177,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     if (firebaseUser.getPhotoUrl() == null) {
                         holder.social_page_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
 
-                    } else
+                    } else{
                         Glide.with(context).load(firebaseUser.getPhotoUrl()).into(holder.social_page_image_profile);
+                    }
 
                     holder.social_page_username.setText(u.getUsername());
                     holder.social_page_image_description.setText(p.getDescription());
                     Picasso.get().load(p.getImageurl()).into(holder.social_page_image_content);
+                    mAttacher = new PhotoViewAttacher(holder.social_page_image_content);
+
 
                 }
                 holder.social_page_strike.setImageResource(R.drawable.ic_baseline_bolt_24);
@@ -216,7 +227,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         final CircleImageView social_page_image_profile;
         final TextView social_page_username;
         final TextView social_page_image_description;
-        final ImageView social_page_image_content;
+        final PhotoView social_page_image_content;
         final TextView social_page_place_a_comment;
         final TextView social_page_number_of_likes;
         final TextView social_page_number_of_comments;

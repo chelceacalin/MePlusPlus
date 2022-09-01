@@ -6,7 +6,7 @@
     android:layout_gravity="center_horizontal"
     >
 
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/account_photos_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
