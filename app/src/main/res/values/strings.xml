@@ -50,4 +50,11 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="sign_out">Sign Out</string>
     <string name="place_a_comment2">Place a comment…</string>
+    <string name="give_feedback">Give Feedback</string>
+    <string name="help">Help</string>
+    <string name="help_give_feedback">Help / Give FeedbacK</string>
+    <string name="tell_us_something">Tell us something ッ</string>
+    <string name="subject">Subject …</string>
+    <string name="your_message">Your message …</string>
+    <string name="send_email">Send Email</string>
 </resources>

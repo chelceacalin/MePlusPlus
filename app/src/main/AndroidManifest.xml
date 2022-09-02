@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+<uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,10 +20,14 @@
         android:theme="@style/Theme.Meplusplus"
         tools:targetApi="31">
         <activity
-            android:name=".Utils.EditProfile"
+            android:name=".Utils.FeedBackActivity"
             android:exported="true"
             android:theme="@style/Theme.Meplusplus.NoActionBar"
             />
+        <activity
+            android:name=".Utils.EditProfile"
+            android:exported="true"
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Utils.CommentDetailActivity"
             android:exported="true"
@@ -33,7 +37,8 @@
             android:name=".Utils.PostActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
+            android:theme="@style/Theme.Meplusplus.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.example.meplusplus.ForgotPassword"
             android:exported="true"

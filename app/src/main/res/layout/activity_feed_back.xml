@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Utils.FeedBackActivity"
+    android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="700dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="605dp"
+                    android:layout_marginTop="80dp"
+                    android:background="@drawable/login_form_picture"
+                    android:contentDescription="TODO"
+                    tools:ignore="ContentDescription,HardcodedText" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="22dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="100dp"
+                        android:layout_marginTop="120dp"
+                        android:layout_marginRight="100dp"
+                        android:src="@drawable/ic_baseline_help_outline_24"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/tell_us_something"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/feedbackactivity_subject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="55dp"
+                        android:autofillHints=""
+                        android:hint="@string/subject"
+                        android:paddingEnd="12dp"
+                        android:selectAllOnFocus="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="#c2c2c2"
+                        android:textSize="14sp"
+                        android:visibility="visible"
+                        tools:ignore="RtlSymmetry,TextFields"
+                        tools:visibility="visible" />
+
+                    <EditText
+                        android:id="@+id/feedbackactivity_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="100dp"
+                        android:layout_marginTop="25dp"
+                        android:autofillHints=""
+                        android:hint="@string/your_message"
+                        android:paddingEnd="12dp"
+                        android:selectAllOnFocus="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="#c2c2c2"
+                        android:textSize="14sp"
+                        android:visibility="visible"
+                        tools:ignore="RtlSymmetry,TextFields"
+                        tools:visibility="visible" />
+
+
+                    <Button
+                        android:id="@+id/feedbackactivity_send_mail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="75sp"
+                        android:backgroundTint="@color/Black"
+                        android:hint="@string/send_email"
+                        android:paddingEnd="12dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textColorHint="#c2c2c2"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="20dp"
+                        tools:ignore="RtlSymmetry"
+
+                        />
+
+                </LinearLayout>
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>

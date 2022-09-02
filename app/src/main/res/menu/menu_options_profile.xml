@@ -6,11 +6,19 @@
         android:title="@string/dark_mode"
         android:icon="@drawable/ic_baseline_dark_mode_24" />
 
+
+
+    <item
+        android:id="@+id/menu_options_Help"
+        android:title="@string/help_give_feedback"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        />
+
+
     <item
         android:id="@+id/menu_options_profile_signout"
         android:title="@string/sign_out"
         android:icon="@drawable/ic_baseline_exit_to_app_24" />
-
 
 
 </menu>

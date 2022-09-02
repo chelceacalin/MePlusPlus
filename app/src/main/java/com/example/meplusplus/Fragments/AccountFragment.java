@@ -1,6 +1,7 @@
 package com.example.meplusplus.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.LoginActivity;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Utils.EditProfile;
+import com.example.meplusplus.Utils.FeedBackActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -224,6 +226,11 @@ public class AccountFragment extends Fragment {
                             .cornerRadius(25)
                             .iconStart(R.drawable.ic_baseline_dark_mode_24)
                             .show();
+                }
+                else if(menuItem.getTitle().equals("Help / Give FeedbacK")){
+                    Intent i = new Intent(getActivity(), FeedBackActivity.class);
+                    startActivity(i);
+                    ((Activity) getActivity()).overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 }
                 return true;
             });
