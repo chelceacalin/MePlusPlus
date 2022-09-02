@@ -1,10 +1,13 @@
 package com.example.meplusplus;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.example.meplusplus.Fragments.AccountFragment;
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     int ID_fragment;
     boolean openF2;
     Bundle extras;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    boolean isDarkModeOn;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -45,13 +51,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
 
+        sharedPreferences = this.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
         bottomNavigationView.setOnItemSelectedListener((BottomNavigationView.OnNavigationItemSelectedListener) item -> {
             displayFragment(item.getItemId());
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, fragment).addToBackStack(null).commit();
             return true;
         });
 
-         extras = getIntent().getExtras();
+        extras = getIntent().getExtras();
         if (extras != null && extras.containsKey("openSocialPageFragment"))
             openF2 = extras.getBoolean("openSocialPageFragment");
         if (openF2) {

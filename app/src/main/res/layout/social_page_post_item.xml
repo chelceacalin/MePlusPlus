@@ -89,7 +89,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
                 android:layout_marginBottom="5dp"
                 android:layout_gravity="center_vertical"
                 android:gravity="start"
@@ -147,11 +146,11 @@
                 android:background="@drawable/image_border"
                 android:foregroundGravity="center_vertical"
                 android:gravity="center_vertical"
-                android:text="@string/place_a_comment2"
+                android:text="   Place a comment..."
                 android:textColor="#c2c2c2"
                 android:textSize="14sp"
                 android:layout_marginBottom="5dp"
-                />
+                tools:ignore="HardcodedText" />
 
 
         </LinearLayout>

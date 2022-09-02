@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.BlendMode;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -114,6 +117,8 @@ public class AccountFragment extends Fragment {
 
 
         getposts();
+
+
         return view;
     }
 
@@ -154,13 +159,13 @@ public class AccountFragment extends Fragment {
 
         //Recyclerview
         manager = new GridLayoutManager(getContext(), 3);
-       // manager.setSpanCount(2);
+        // manager.setSpanCount(2);
         items = new ArrayList<>();
         adapter = new AccountPhotos(getContext(), items);
         fragment_account_recyclerView_posts.setLayoutManager(manager);
         fragment_account_recyclerView_posts.setAdapter(adapter);
 
-     fragment_account_recyclerView_posts.addItemDecoration(new RecyclerView.ItemDecoration() {
+        fragment_account_recyclerView_posts.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 int position = parent.getChildAdapterPosition(view); // item position
@@ -197,12 +202,38 @@ public class AccountFragment extends Fragment {
             }
         });
 
+
+        SharedPreferences sharedPreferences
+                = getContext().getSharedPreferences(
+                "sharedPrefs", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor
+                = sharedPreferences.edit();
+        final boolean isDarkModeOn
+                = sharedPreferences
+                .getBoolean(
+                        "isDarkModeOn", false);
+
+        if (isDarkModeOn) {
+            AppCompatDelegate
+                    .setDefaultNightMode(
+                            AppCompatDelegate
+                                    .MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate
+                    .setDefaultNightMode(
+                            AppCompatDelegate
+                                    .MODE_NIGHT_NO);
+        }
+
+
         // Pop up menu
         fragment_account_options.setOnClickListener(view -> {
             popup = new PopupMenu(getContext(), fragment_account_options);
             menu = popup.getMenu();
             //CAM TARANIE, AR TRB MODIFICAT
             popup.getMenuInflater().inflate(R.menu.menu_options_profile, menu);
+
+
             popup.setOnMenuItemClickListener(menuItem -> {
                 if (menuItem.getTitle().equals("Sign Out")) {
                     new StyleableToast.Builder(getContext())
@@ -217,17 +248,37 @@ public class AccountFragment extends Fragment {
                     startActivity(intent);
 
 
-
                 } else if (menuItem.getTitle().equals("Dark Mode")) {
-                    new StyleableToast.Builder(getContext())
-                            .text("Dark Mode")
-                            .textColor(Color.WHITE)
-                            .backgroundColor(getResources().getColor(R.color.Black))
-                            .cornerRadius(25)
-                            .iconStart(R.drawable.ic_baseline_dark_mode_24)
-                            .show();
-                }
-                else if(menuItem.getTitle().equals("Help / Give FeedbacK")){
+
+                    if (isDarkModeOn) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        editor.putBoolean("isDarkModeOn", false);
+                        editor.apply();
+                        new StyleableToast.Builder(getContext())
+                                .text("Dark Mode Turned OFF ")
+                                .textColor(Color.BLACK)
+                                .backgroundColor(getResources().getColor(R.color.WhiteSmoke))
+                                .cornerRadius(25)
+                                .iconStart(R.drawable.ic_baseline_dark_mode_24)
+                                .show();
+
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        editor.putBoolean("isDarkModeOn", true);
+                        editor.apply();
+
+                        new StyleableToast.Builder(getContext())
+                                .text("Dark Mode Turned ON")
+                                .textColor(Color.WHITE)
+                                .backgroundColor(getResources().getColor(R.color.Black))
+                                .cornerRadius(25)
+                                .iconStart(R.drawable.ic_baseline_dark_mode_24)
+                                .show();
+                    }
+
+
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO   );
+                } else if (menuItem.getTitle().equals("Help / Give FeedbacK")) {
                     Intent i = new Intent(getActivity(), FeedBackActivity.class);
                     startActivity(i);
                     ((Activity) getActivity()).overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
@@ -253,6 +304,7 @@ public class AccountFragment extends Fragment {
                 Collections.reverse(items);
                 adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
