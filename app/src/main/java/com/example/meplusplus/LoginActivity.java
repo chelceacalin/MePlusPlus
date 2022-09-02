@@ -43,26 +43,27 @@ import io.github.muddz.styleabletoast.StyleableToast;
 @SuppressWarnings("ALL")
 public class LoginActivity extends AppCompatActivity {
 
+    //Google
+    private static final int RC_SIGN_IN = 1;
+    //Diverse
+    String email_text;
+    String passowrd_text;
     //Controale
     private EditText email, password;
     private TextView forgotpassword;
     private ImageView facebookButton, googleButton, imageViewNextButton;
     private Button signUp;
     private CheckBox showpassCheckBox;
-
-    //Google
-    private static final int RC_SIGN_IN = 1;
     private GoogleSignInClient mGoogleSignInClient;
-
     //Firebase
     private FirebaseAuth auth;
     private FirebaseUser user;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-
-    //Diverse
-    String email_text;
-    String passowrd_text;
+    Map<String, Object> map;
+    String userID;
+    //Google
+    GoogleSignInOptions gso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +73,11 @@ public class LoginActivity extends AppCompatActivity {
         //initializare
         init();
         signUp.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         });
         forgotpassword.setOnClickListener(view -> {
-
-            Intent intent = new Intent(LoginActivity.this, ForgotPassword.class);
-            startActivity(intent);
+            startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
             overridePendingTransition(R.anim.fade_out, R.anim.slide_out);
         });
         imageViewNextButton.setOnClickListener(view -> {
@@ -98,7 +96,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         //pt show password
         showpassCheckBox.setOnCheckedChangeListener((compoundButton, ischecked) -> {
             if (ischecked) {
@@ -107,7 +104,6 @@ public class LoginActivity extends AppCompatActivity {
                 password.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         });
-
         googleButton.setOnClickListener(view -> signIn());
     }
 
@@ -128,9 +124,10 @@ public class LoginActivity extends AppCompatActivity {
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference();
+        map = new HashMap<>();
 
         //Google
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("432467919065-e2s07mhf5b56sf3nusdefascua25qbih.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
@@ -201,12 +198,12 @@ public class LoginActivity extends AppCompatActivity {
                             user = auth.getCurrentUser();
                             String arr[] = user.getDisplayName().split(" ", 2);
                             String username = arr[0];
+                            userID=auth.getCurrentUser().getUid();
 
-                            Map<String, Object> map = new HashMap<>();
                             map.put("username", username.toString());
                             map.put("name", user.getDisplayName().toString());
                             map.put("email", user.getEmail().toString());
-                            map.put("id", auth.getCurrentUser().getUid());
+                            map.put("id", userID);
                             map.put("bio", "");
                             map.put("imageurl", "default");
                             if (user.getPhotoUrl() == null) {
@@ -214,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else
                                 map.put("imageurl", user.getPhotoUrl() + "");
 
-                            reference.child("users").child(user.getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            reference.child("users").child(userID).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
@@ -261,8 +258,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (user != null) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
             finish();
         }
@@ -282,10 +278,8 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                     finish();
                 }

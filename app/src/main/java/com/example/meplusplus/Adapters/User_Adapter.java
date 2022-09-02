@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -35,7 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
          Notes: When you click on someone it redirects you to their page
 
  */
-public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> {
+public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder>  {
 
     //Firebase
     FirebaseAuth auth;
@@ -71,30 +72,16 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
         item = list.get(position);
         setdDetails(user, holder);
 
-        holder.circleImageView.setOnClickListener(view -> {
-            context.getSharedPreferences("PID", Context.MODE_PRIVATE)
-                    .edit().putString("profileId", list.get(position).getId()).apply();
-            ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_fragment_container, new AccountFragment()).commit();
-        });
+        holder.sayhiButton.setOnClickListener(view -> Toast.makeText(context, "HI", Toast.LENGTH_SHORT).show());
 
-        holder.username.setOnClickListener(view -> {
-            context.getSharedPreferences("PID", Context.MODE_PRIVATE)
-                    .edit().putString("profileId", list.get(position).getId()).apply();
-            ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_fragment_container, new AccountFragment()).commit();
-        });
-        holder.name.setOnClickListener(view -> {
-            context.getSharedPreferences("PID", Context.MODE_PRIVATE)
-                    .edit().putString("profileId", list.get(position).getId()).apply();
-            ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_fragment_container, new AccountFragment()).commit();
-        });
-
-        holder.sayhiButton.setOnClickListener(view -> {
-
+        holder.itemView.setOnClickListener(view -> {
+                    context.getSharedPreferences("PID", Context.MODE_PRIVATE)
+                            .edit().putString("profileId", list.get(position).getId()).apply();
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.main_fragment_container, new AccountFragment()).commit();
         });
     }
+
     private void setdDetails(FirebaseUser user, ViewHolder holder) {
         String imageURL = item.getImageurl();
         holder.username.setText(item.getUsername());
@@ -111,6 +98,8 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
         assert list != null;
         return list.size();
     }
+
+
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

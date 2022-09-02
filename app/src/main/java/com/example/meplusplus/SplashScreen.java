@@ -48,7 +48,8 @@ public class SplashScreen extends AppCompatActivity {
     private ProgressBar circularProgressBar;
     private ProgressBar horiontalProgressBar;
 
-    SharedPreferences settings ;
+    // Sa porneasca splash screen doar odata
+    SharedPreferences settings;
     boolean firstRun;
     SharedPreferences.Editor editor;
     @Override
@@ -83,41 +84,9 @@ public class SplashScreen extends AppCompatActivity {
         } else {
             startActivity(new Intent(SplashScreen.this, LoginActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-
             finish();
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        editor = settings.edit();
-        editor.putBoolean("firstRun", false);
-        editor.commit();
-        super.onDestroy();
-
-    }
-
-
-    /*
-
-        timer = new CountDownTimer(Duration, interval) {
-            @Override
-            public void onTick(long l) {
-                i += 20;
-                horiontalProgressBar.setProgress(i);
-                circularProgressBar.setProgress(i);
-            }
-
-            @Override
-            public void onFinish() {
-                startActivity(new Intent(SplashScreen.this, LoginActivity.class));
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-                finish();
-            }
-
-        };
-        timer.start();*/
-
 
     //Initializare Controale
     public void init() {
@@ -147,9 +116,37 @@ public class SplashScreen extends AppCompatActivity {
         interval = 600;
         total = 3;
         i = 0;
+    }
 
+    @Override
+    protected void onDestroy() {
+        editor = settings.edit();
+        editor.putBoolean("firstRun", false);
+        editor.commit();
+        super.onDestroy();
 
     }
+
+    /*
+
+        timer = new CountDownTimer(Duration, interval) {
+            @Override
+            public void onTick(long l) {
+                i += 20;
+                horiontalProgressBar.setProgress(i);
+                circularProgressBar.setProgress(i);
+            }
+
+            @Override
+            public void onFinish() {
+                startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                finish();
+            }
+
+        };
+        timer.start();*/
+
 
 
     //Cand apesi pe back cand esti pe pagina de login

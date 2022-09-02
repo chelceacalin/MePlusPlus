@@ -48,6 +48,8 @@ import io.github.muddz.styleabletoast.StyleableToast;
 
 @SuppressWarnings("ALL")
 public class PostActivity extends AppCompatActivity {
+    //Pt Imagine
+    static int REQUEST_CODE;
     //Controale
     ImageView postactivity_closeImg;
     ImageView postactivity_imageProfile;
@@ -56,22 +58,21 @@ public class PostActivity extends AppCompatActivity {
     Button postactivity_buttonpost;
     ProgressDialog progressDialog;
     Button selectimage;
-
     //Firebase
     FirebaseStorage storage;
     StorageReference reference;
-
+    String UniqueID;
     //Firebase - Stocare Postare
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     StorageTask uploadtask;
-
-    //Pt Imagine
-    static int REQUEST_CODE;
+    Map<String, Object> map;
     Uri imageviewuri;
     int rotationInit;
     String imageURL;
+    String user;
+    String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +92,7 @@ public class PostActivity extends AppCompatActivity {
 
         });
         postactivity_closeImg.setOnClickListener(view -> {
-            Intent intent = new Intent(PostActivity.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(PostActivity.this, MainActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
             finish();
         });
@@ -146,6 +146,7 @@ public class PostActivity extends AppCompatActivity {
         //Divers
         REQUEST_CODE = 69;
         rotationInit = 0;
+        map = new HashMap<>();
     }
 
     private String getFext() {
@@ -172,31 +173,31 @@ public class PostActivity extends AppCompatActivity {
             }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
 
                 progressDialog.dismiss();
-
                 new StyleableToast.Builder(PostActivity.this)
                         .text("Post Uploaded")
                         .textColor(Color.BLUE)
                         .backgroundColor(getResources().getColor(R.color.white))
-                        .cornerRadius(25)
-                        .textSize(22)
+                        .cornerRadius(15)
+                        .textSize(17)
                         .show();
+
                 Uri downloadUri = task.getResult();
                 imageURL = downloadUri.toString();
-                String postID = databaseReference.push().getKey(); // un id unic
-                String description = postactivity_description.getText().toString();
-                String IDpublisher = auth.getCurrentUser().getUid();
-                Map<String, Object> map = new HashMap<>();
-                map.put("postid", postID);
+                UniqueID = databaseReference.push().getKey(); // un id unic
+                description = postactivity_description.getText().toString().trim();
+                user = auth.getCurrentUser().getUid();
+
+                map.put("postid", UniqueID);
                 map.put("imageurl", imageURL);
                 map.put("description", "   " + description);
-                map.put("publisher", IDpublisher);
-                assert postID != null;
-                databaseReference.child(postID).setValue(map);
+                map.put("publisher", user);
+                assert UniqueID != null;
+                databaseReference.child(UniqueID).setValue(map);
 
 
                 // Schimbam din activitate in fragment
                 Intent intent = new Intent(PostActivity.this, MainActivity.class);
-                intent.putExtra("openSocialPageFragment",true);
+                intent.putExtra("openSocialPageFragment", true);
                 overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 finish();
                 startActivity(intent);

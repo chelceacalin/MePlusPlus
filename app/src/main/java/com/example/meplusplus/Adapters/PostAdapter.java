@@ -43,24 +43,22 @@ import de.hdodenhof.circleimageview.CircleImageView;
        UPDATED DATE: 9/01/2022
        Notes: Added zoom in feature on pictures
  */
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements View.OnClickListener {
 
+    final Context context;
+    final List<PostItem> items;
+    //Firebase
+    final FirebaseUser firebaseUser;
+    final FirebaseAuth auth;
     //Utilitati
     PostItem p;
     User u;
-    final Context context;
-    final List<PostItem> items;
-
-    //Firebase
-    final FirebaseUser firebaseUser;
     FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference referenceHearts;
     DatabaseReference referenceStrikes;
-    final FirebaseAuth auth;
-
+    String ID;
     //Zoom in
-
     PhotoViewAttacher mAttacher;
 
     public PostAdapter(List<PostItem> items, Context context) {
@@ -80,20 +78,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         init();
         p = items.get(position);
-        String ID = p.getPostid();
+        ID = p.getPostid();
         SetDetails(p, holder);
+        holder.social_page_place_a_comment.setOnClickListener(this);
+        holder.social_page_strike.setOnClickListener(this);
 
-        holder.social_page_place_a_comment.setOnClickListener(view -> {
-            Intent intent = new Intent(context, CommentDetailActivity.class);
-            intent.putExtra("postid", ID);
-            context.startActivity(intent);
-        });
-
-        holder.social_page_strike.setOnClickListener(view -> {
-            Intent intent = new Intent(context, CommentDetailActivity.class);
-            intent.putExtra("postid", ID);
-            context.startActivity(intent);
-        });
         // Number of hearts
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -177,7 +166,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     if (firebaseUser.getPhotoUrl() == null) {
                         holder.social_page_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
 
-                    } else{
+                    } else {
                         Glide.with(context).load(firebaseUser.getPhotoUrl()).into(holder.social_page_image_profile);
                     }
 
@@ -220,6 +209,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.social_page_place_a_comment:
+            case R.id.social_page_strike:
+                Intent intent = new Intent(context, CommentDetailActivity.class);
+                intent.putExtra("postid", ID);
+                context.startActivity(intent);
+                break;
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -42,10 +42,12 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     FirebaseAuth auth;
+    Map<String, Object> map;
 
     //Validari
     String username, name, email, password;
     boolean isFieldChecked = false;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,29 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    //Initializare controale
+    public void init() {
+        //Butoane
+        registerActivity_btn_register = findViewById(R.id.registerActivity_btn_register);
+        registerActivity_button_Login = findViewById(R.id.registerActivity_button_Login);
+        showpasswordCheckBox = findViewById(R.id.register_activity_checkBox);
+
+        //EditText-uri
+        registeractivity_edit_text_username = findViewById(R.id.registeractivity_edit_text_username);
+        registeractivity_edit_text_name = findViewById(R.id.registeractivity_edit_text_name);
+        registeractivity_edit_text_email = findViewById(R.id.registeractivity_edit_text_email);
+        registerActivity_edit_text_password = findViewById(R.id.registerActivity_edit_text_password);
+        //ProgressDialog
+        progressDialog = new ProgressDialog(this);
+
+        //Firebase
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        reference = database.getReference();
+        map= new HashMap<>();
+
+
+    }
 
 
     private boolean validatePass(String uPass) {
@@ -122,9 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean CheckValidations() {
-
         return validatePass(password) && validateName(name) && validateUser(username);
-
     }
 
 
@@ -135,43 +158,21 @@ public class RegisterActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
     }
 
-    //Initializare controale
-    public void init() {
-        //Butoane
-        registerActivity_btn_register = findViewById(R.id.registerActivity_btn_register);
-        registerActivity_button_Login = findViewById(R.id.registerActivity_button_Login);
-        showpasswordCheckBox = findViewById(R.id.register_activity_checkBox);
-
-        //EditText-uri
-        registeractivity_edit_text_username = findViewById(R.id.registeractivity_edit_text_username);
-        registeractivity_edit_text_name = findViewById(R.id.registeractivity_edit_text_name);
-        registeractivity_edit_text_email = findViewById(R.id.registeractivity_edit_text_email);
-        registerActivity_edit_text_password = findViewById(R.id.registerActivity_edit_text_password);
-
-        //ProgressDialog
-        progressDialog = new ProgressDialog(this);
-
-        //Firebase
-        auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference();
-
-    }
 
     private void registerUser(String username, String name, String email, String password) {
         progressDialog.setMessage("Loading");
         progressDialog.show();
 
         auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
-            Map<String, Object> map = new HashMap<>();
             map.put("username", username);
             map.put("name", name);
             map.put("email", email);
-            map.put("id", Objects.requireNonNull(auth.getCurrentUser()).getUid());
+            userID=auth.getCurrentUser().getUid();
+            map.put("id", Objects.requireNonNull(userID));
             map.put("bio", "");
             map.put("imageurl", "default");
 
-            reference.child("users").child(auth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(task -> {
+            reference.child("users").child(userID).setValue(map).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
