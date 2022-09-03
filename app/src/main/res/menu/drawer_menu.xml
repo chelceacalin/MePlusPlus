@@ -52,7 +52,7 @@
         tools:ignore="HardcodedText">
         <menu>
             <item
-                android:id="@+id/signout"
+                android:id="@+id/drawer_signout"
                 android:icon="@drawable/ic_baseline_exit_to_app_24"
                 android:title="Sign Out">
             </item>

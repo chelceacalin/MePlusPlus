@@ -65,4 +65,7 @@
     <string name="openDrawer">Open</string>
     <string name="closeDrawer">Close</string>
     <string name="me2">Me++</string>
+    <string name="fitness">Fitness</string>
+    <string name="workout">Workout</string>
+    <string name="welcome">Welcome,</string>
 </resources>

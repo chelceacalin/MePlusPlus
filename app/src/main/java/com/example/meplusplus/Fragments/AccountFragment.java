@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BlendMode;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -193,7 +192,6 @@ public class AccountFragment extends Fragment {
                 } else {
                     Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(fragment_account_image_profile);
                 }
-
 
             }
 

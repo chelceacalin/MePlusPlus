@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:background="@color/DarkBlue"
+    android:background="#072439"
   android:paddingTop="15dp"
     android:paddingStart="15dp"
     android:orientation="vertical"
@@ -11,27 +11,48 @@
     tools:ignore="RtlSymmetry">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        android:layout_marginTop="20sp"
         android:id="@+id/drawer_circle_image_view_profile"
         />
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginTop="4dp"
-        android:textStyle="bold"
-        android:textColor="?android:textColorPrimary"
+        android:orientation="horizontal">
 
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:textColor="?android:textColorPrimary"
+            android:layout_marginEnd="2sp"
+            />
 
-    <TextView
+        <TextView
+            android:id="@+id/header_for_drawer_text_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:textColor="@color/Coral"
+            />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/header_for_drawer_button_view_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/view_profile"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="@color/IndianRed" />
+        android:background="@color/fui_transparent"
+        android:backgroundTint="@color/fui_transparent"
+        android:text="View Profile"
+        android:textColor="@color/IndianRed"
+        android:padding="2dp"
+        tools:ignore="HardcodedText" />
+
 </LinearLayout>

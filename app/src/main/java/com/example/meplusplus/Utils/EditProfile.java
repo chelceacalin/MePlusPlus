@@ -207,6 +207,7 @@ public class EditProfile extends AppCompatActivity {
                                     .textColor(Color.WHITE)
                                     .backgroundColor(getResources().getColor(R.color.blue))
                                     .cornerRadius(25)
+                                    .iconStart(R.drawable.ic_baseline_check_circle_24)
                                     .show();
                             map.put("username", editprofile_username.getText().toString());
                             map.put("bio", editprofile_bio.getText().toString());
@@ -215,13 +216,17 @@ public class EditProfile extends AppCompatActivity {
 
                     });
         } else {
+            map.put("username", editprofile_username.getText().toString());
+            map.put("bio", editprofile_bio.getText().toString());
+            ref.child(user.getUid()).updateChildren(map);
             new StyleableToast.Builder(EditProfile.this)
-                    .text("Please Select an Image")
-                    .textColor(Color.RED)
-                    .backgroundColor(getResources().getColor(R.color.white))
-                    .cornerRadius(25)
-                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                    .text("Profile Updated Without Profile Image ")
+                    .textColor(Color.WHITE)
+                    .textSize(17)
+                    .backgroundColor(getResources().getColor(R.color.navy))
+                    .cornerRadius(15)
                     .show();
+
         }
     }
 
