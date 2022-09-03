@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+    <item android:title="@string/fitness">
+        <menu>
+        <item
+            android:id="@+id/drawer_workout"
+            android:icon="@drawable/ic_baseline_fitness_center_24"
+            android:title="@string/workout" />
+        <item
+            android:id="@+id/drawer_calorie_calculator"
+            android:icon="@drawable/ic_baseline_calculator"
+            android:title="Calorie Calculator"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/drawer_drink"
+            android:icon="@drawable/ic_baseline_drink"
+            android:title="Drink Water"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/drawer_progress"
+            android:icon="@drawable/ic_baseline_progress"
+            android:title="Check My Progress"
+            tools:ignore="HardcodedText" />
+
+        </menu>
+
+    </item>
+
+
+    <item android:title="Productivity"
+        tools:ignore="HardcodedText">
+        <menu>
+            <item
+                android:id="@+id/todolist"
+                android:icon="@drawable/ic_baseline_todolist"
+                android:title="To Do List"
+                tools:ignore="HardcodedText">
+            </item>
+            <item
+                android:id="@+id/timerzenmode"
+                android:icon="@drawable/ic_baseline_zenmode"
+                android:title="Zen Time" />
+        </menu>
+    </item>
+
+    <item android:title="Settings"
+        tools:ignore="HardcodedText">
+        <menu>
+            <item
+                android:id="@+id/signout"
+                android:icon="@drawable/ic_baseline_exit_to_app_24"
+                android:title="Sign Out">
+            </item>
+
+        </menu>
+    </item>
+</menu>
