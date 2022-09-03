@@ -118,17 +118,32 @@
         <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/layout/activity_main.xml" value="0.2214621633176571" />
         <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/layout/activity_register.xml" value="0.22402736212056434" />
         <entry key="..\:/DeContinuareAPPLicenta/APLICATIE_LICENTA/app/src/main/res/layout/activity_splash_screen.xml" value="0.21376656690893545" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/drawable/ic_baseline_add.xml" value="0.224" />
         <entry key="..\:/MePlusPlus/app/src/main/res/drawable/ic_baseline_face_24.xml" value="0.32" />
         <entry key="..\:/MePlusPlus/app/src/main/res/drawable/ic_baseline_face_focused.xml" value="0.32" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.196" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/drawable/ic_baseline_send.xml" value="0.196" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/drawable/imgborder_maipatrat.xml" value="0.19" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_comment_detail.xml" value="0.2390625" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_edit_profile.xml" value="0.2390625" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_feed_back.xml" value="0.28072916666666664" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_forgot_password.xml" value="0.28072916666666664" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_login.xml" value="0.2390625" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_post.xml" value="0.2015625" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_register.xml" value="0.28072916666666664" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_splash_screen.xml" value="0.2390625" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/comment_card_item.xml" value="0.2390625" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/fragment_account.xml" value="0.28072916666666664" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/fragment_me.xml" value="0.4" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/fragment_recipes.xml" value="0.27291666666666664" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/fragment_search_people.xml" value="0.2390625" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/fragment_social__page.xml" value="0.49654218533886585" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/grid_photo.xml" value="0.28072916666666664" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/header_for_drawer.xml" value="0.4" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/people_card_item.xml" value="0.28072916666666664" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/social_page_post_item.xml" value="0.38177083333333334" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/menu/drawer_menu.xml" value="0.271875" />
         <entry key="..\:/MePlusPlus/app/src/main/res/menu/menu.xml" value="0.38177083333333334" />
         <entry key="..\:/MePlusPlus/app/src/main/res/menu/menu_options_profile.xml" value="0.38177083333333334" />
       </map>

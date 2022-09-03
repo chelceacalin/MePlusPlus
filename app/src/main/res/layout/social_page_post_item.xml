@@ -69,6 +69,7 @@
                 android:minHeight="30dp"
                 android:paddingBottom="2dp"
                 android:textColor="@color/AliceBlue"
+                android:background="@drawable/imgborder_maipatrat"
                 android:textSize="14sp" />
 
 
@@ -80,7 +81,6 @@
                     android:id="@+id/social_page_image_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_person_pin_24"
                     android:scaleType="fitXY"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
             </LinearLayout>

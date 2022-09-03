@@ -56,5 +56,13 @@
     <string name="tell_us_something">Tell us something ッ</string>
     <string name="subject">Subject …</string>
     <string name="your_message">Your message …</string>
-    <string name="send_email">Send Email</string>
+   <string name="send_email">Send Email</string>
+    <string name="view_profile">View Profile</string>
+
+    <!--
+    Drawer 
+    -->
+    <string name="openDrawer">Open</string>
+    <string name="closeDrawer">Close</string>
+    <string name="me2">Me++</string>
 </resources>

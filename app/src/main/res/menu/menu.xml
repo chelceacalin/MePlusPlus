@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
 
 
     <item
@@ -14,9 +17,9 @@
         android:icon="@drawable/ic_baseline_social" />
 
     <item
-        android:id="@+id/add_post"
+        android:id="@+id/recipes"
         android:title=""
-        android:icon="@drawable/ic_baseline_add" />
+        android:icon="@drawable/ic_baseline_recipes" />
 
     <item
         android:id="@+id/search_page"
