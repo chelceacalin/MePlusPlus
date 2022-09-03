@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.meplusplus.Fragments.AccountFragment;
 import com.example.meplusplus.Fragments.MeFragment;
+import com.example.meplusplus.Fragments.RecipesFragment;
 import com.example.meplusplus.Fragments.SearchPeopleFragment;
 import com.example.meplusplus.Fragments.Social_PageFragment;
-import com.example.meplusplus.Utils.PostActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /*
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     //Controale
     BottomNavigationView bottomNavigationView;
     Fragment fragment;
-
     //Diverse
     int ID_fragment;
     boolean openF2;
@@ -49,22 +48,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
 
-        sharedPreferences = this.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
-        if (isDarkModeOn) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        init();
+        loadDarkWhiteModeOnsTART();
+
+        //Daca nu avem niciun fragment
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().
+                    beginTransaction().replace(R.id.main_fragment_container,new MeFragment()).commit();
         }
+
         bottomNavigationView.setOnItemSelectedListener((BottomNavigationView.OnNavigationItemSelectedListener) item -> {
             displayFragment(item.getItemId());
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, fragment).addToBackStack(null).commit();
             return true;
         });
 
+        //Switch from PostActivity to SocialPageFragment
         extras = getIntent().getExtras();
         if (extras != null && extras.containsKey("openSocialPageFragment"))
             openF2 = extras.getBoolean("openSocialPageFragment");
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Switch Between Fragments
     private void displayFragment(int itemId) {
         if (R.id.me_page == itemId) {
             fragment = new MeFragment();
@@ -87,15 +88,15 @@ public class MainActivity extends AppCompatActivity {
         } else if (R.id.account_page == itemId) {
             fragment = new AccountFragment();
             ID_fragment = 4;
-        } else if (R.id.add_post == itemId) {
-            startActivity(new Intent(MainActivity.this, PostActivity.class));
+        } else if (R.id.recipes == itemId) {
+            fragment=new RecipesFragment();
+            ID_fragment=5;
         }
     }
 
     //Initializare
     private void init() {
         bottomNavigationView = findViewById(R.id.main_bottom_navigation);
-        fragment = new Fragment();
     }
 
 
@@ -109,16 +110,14 @@ public class MainActivity extends AppCompatActivity {
     //Cand apas butonul de back de la telefon
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-            // moveTaskToBack(true);
-            goHome();
-            finish();
-        } else {
-            //Daca nu e MeFragment
+        //Daca nu e MeFragment
+        if (getFragmentManager().getBackStackEntryCount() <= 0)
             bottomNavigationView.getMenu().getItem(0).setChecked(true);
-            super.onBackPressed();
-        }
+            // moveTaskToBack(true);
+            //  goHome();
+            //finish();
+
+        super.onBackPressed();
 
     }
 
@@ -129,5 +128,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    private void loadDarkWhiteModeOnsTART() {
+        //Load White/Dark Mode on App Start
+        sharedPreferences = this.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
 
 }
