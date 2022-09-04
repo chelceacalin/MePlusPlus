@@ -76,14 +76,14 @@ public class SplashScreen extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     startActivity(new Intent(SplashScreen.this, LoginActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+               overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.fade_out);
                     finish();
                 }
             };
             timer.start();
         } else {
             startActivity(new Intent(SplashScreen.this, LoginActivity.class));
-            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+           overridePendingTransition(R.anim.slide_right_to_left_transition,R.anim.slide_left_to_right_transition);
             finish();
         }
     }

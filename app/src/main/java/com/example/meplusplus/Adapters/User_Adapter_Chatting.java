@@ -46,7 +46,7 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.people_card_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.people_card_item_chatting, parent, false));
     }
 
     @Override
@@ -57,15 +57,16 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
         setdDetails(user, holder);
 
 
-        holder.sayhiButton.setOnClickListener(view -> Toast.makeText(context, "HI", Toast.LENGTH_SHORT).show());
-
 
         Objects.requireNonNull(holder).itemView.setOnClickListener(view -> {
-                    context.startActivity(new Intent(context, MessageActivity.class));
-                    activity = (Activity) context;
-                    activity.overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-                    activity.finish();
-                }
+            Intent intent=new Intent(context,MessageActivity.class);
+            intent.putExtra("userTargetID",list.get(position).getId());
+            intent.putExtra("userTarget",list.get(position).getUsername());
+            intent.putExtra("userImgUrl",list.get(position).getImageurl());
+            context.startActivity(intent);
+            activity = (Activity) context;
+            activity.finish();
+            }
         );
 
     }
@@ -91,21 +92,17 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
         this.context = context;
         this.list = list;
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final Button sayhiButton;
         private final CircleImageView circleImageView;
         private final TextView username;
         private final TextView name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            circleImageView = itemView.findViewById(R.id.people_profile_image);
-            username = itemView.findViewById(R.id.people_username);
-            name = itemView.findViewById(R.id.people_name);
-            sayhiButton = itemView.findViewById(R.id.people_say_hi);
+            circleImageView = itemView.findViewById(R.id.chatting_people_profile_image);
+            username = itemView.findViewById(R.id.chatting_people_username);
+            name = itemView.findViewById(R.id.chatting_people_name);
         }
     }
-
 }

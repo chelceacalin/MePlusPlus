@@ -1,9 +1,9 @@
 package com.example.meplusplus.Chatting;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.meplusplus.Adapters.User_Adapter;
 import com.example.meplusplus.Adapters.User_Adapter_Chatting;
 import com.example.meplusplus.DataSets.User;
 
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -83,4 +84,11 @@ public class ChattingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ChattingActivity.this,MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        finish();
+        super.onBackPressed();
+    }
 }

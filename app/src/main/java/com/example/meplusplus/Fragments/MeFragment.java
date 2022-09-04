@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
@@ -100,10 +101,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 }
         );
 
-        fragment_me_chatActivity.setOnClickListener(view1 ->{
-            startActivity(new Intent(getContext(), ChattingActivity.class));
-            getActivity().overridePendingTransition(R.anim.slide_right_to_left_transition,R.anim.slide_right_to_left_transition);
-        });
+        fragment_me_chatActivity.setOnClickListener(view1 ->startActivity(new Intent(getContext(), ChattingActivity.class)) );
+
         return view;
     }
 
@@ -140,9 +139,16 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Glide.with(getContext()).load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(drawer_circle_image_view_profile);
-                header_for_drawer_text_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
-            }
+                if(snapshot.getValue(User.class).getImageurl().equals(""))
+                {
+
+                }
+                else{
+                    Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
+                 //   Glide.with(getContext()).load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
+                    header_for_drawer_text_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
+                }
+                }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
