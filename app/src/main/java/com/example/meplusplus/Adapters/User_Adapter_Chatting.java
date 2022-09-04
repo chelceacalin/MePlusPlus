@@ -1,5 +1,6 @@
 package com.example.meplusplus.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class User_Adapter_Chatting extends  RecyclerView.Adapter<User_Adapter_Chatting.ViewHolder> {
+public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Chatting.ViewHolder> {
 
     //Firebase
     FirebaseAuth auth;
@@ -32,17 +33,20 @@ public class User_Adapter_Chatting extends  RecyclerView.Adapter<User_Adapter_Ch
 
     //Controale
     Context context;
-     List<User> list;
+    List<User> list;
     User item;
 
-    public User_Adapter_Chatting(){
-        this.list=null;
+    //Pt a face tranzitia mai frumoasa intre slide-uri
+    Activity activity;
+
+    public User_Adapter_Chatting() {
+        this.list = null;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.people_card_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.people_card_item, parent, false));
     }
 
     @Override
@@ -56,8 +60,17 @@ public class User_Adapter_Chatting extends  RecyclerView.Adapter<User_Adapter_Ch
         holder.sayhiButton.setOnClickListener(view -> Toast.makeText(context, "HI", Toast.LENGTH_SHORT).show());
 
 
-        Objects.requireNonNull(holder).itemView.setOnClickListener(view -> context.startActivity(new Intent(context, MessageActivity.class)));
+        Objects.requireNonNull(holder).itemView.setOnClickListener(view -> {
+                    context.startActivity(new Intent(context, MessageActivity.class));
+                    activity = (Activity) context;
+                    activity.overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                    activity.finish();
+                }
+        );
+
     }
+
+
     private void setdDetails(FirebaseUser user, User_Adapter_Chatting.ViewHolder holder) {
         String imageURL = item.getImageurl();
         holder.username.setText(item.getUsername());
@@ -68,6 +81,7 @@ public class User_Adapter_Chatting extends  RecyclerView.Adapter<User_Adapter_Ch
     private void init() {
         user = auth.getInstance().getCurrentUser();
     }
+
     @Override
     public int getItemCount() {
         return list.size();

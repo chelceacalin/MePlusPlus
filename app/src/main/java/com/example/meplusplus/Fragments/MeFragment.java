@@ -102,7 +102,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
         fragment_me_chatActivity.setOnClickListener(view1 ->{
             startActivity(new Intent(getContext(), ChattingActivity.class));
-            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+            getActivity().overridePendingTransition(R.anim.slide_right_to_left_transition,R.anim.slide_right_to_left_transition);
         });
         return view;
     }
