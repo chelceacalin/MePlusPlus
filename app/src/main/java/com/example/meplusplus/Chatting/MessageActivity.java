@@ -89,7 +89,7 @@ public class MessageActivity extends AppCompatActivity {
 
         activity_message_button.setOnClickListener(view -> {
             message=activity_message_edit_text.getText().toString().trim();
-            if(!message.equals("empty")){
+            if(!message.equals("")){
                         send(message);
              }
             else

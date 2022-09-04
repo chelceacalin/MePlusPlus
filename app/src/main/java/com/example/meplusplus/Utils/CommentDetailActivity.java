@@ -87,11 +87,8 @@ public class CommentDetailActivity extends AppCompatActivity {
                 map.put("publisher", user.getUid());
                 map.put("strike", comment);
                 assert id != null;
-                strikes.child(postID).child(id).setValue(map).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        activity_comment_detail_edit_Text_comment.setText("");
-                    }
-                });
+                strikes.child(postID).child(id).setValue(map);
+                activity_comment_detail_edit_Text_comment.setText("");
             }
         });
      readStrikes();
