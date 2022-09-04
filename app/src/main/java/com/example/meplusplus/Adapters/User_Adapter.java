@@ -2,6 +2,7 @@ package com.example.meplusplus.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meplusplus.Chatting.MessageActivity;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.Fragments.AccountFragment;
 import com.example.meplusplus.R;
@@ -72,7 +74,13 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
         item = list.get(position);
         setdDetails(user, holder);
 
-        holder.sayhiButton.setOnClickListener(view -> Toast.makeText(context, "HI", Toast.LENGTH_SHORT).show());
+        holder.sayhiButton.setOnClickListener(view ->{
+            Intent intent=new Intent(context, MessageActivity.class);
+            intent.putExtra("userTargetID",list.get(position).getId());
+            intent.putExtra("userTarget",list.get(position).getUsername());
+            intent.putExtra("userImgUrl",list.get(position).getImageurl());
+            context.startActivity(intent);
+        } );
 
         holder.itemView.setOnClickListener(view -> {
                     context.getSharedPreferences("PID", Context.MODE_PRIVATE)

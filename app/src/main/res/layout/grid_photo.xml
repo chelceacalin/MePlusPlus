@@ -9,7 +9,7 @@
         android:id="@+id/account_photos_image"
         android:layout_width="140dp"
         android:layout_height="100dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         tools:ignore="ContentDescription" />
 
 </LinearLayout>

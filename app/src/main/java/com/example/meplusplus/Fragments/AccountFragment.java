@@ -146,7 +146,7 @@ public class AccountFragment extends Fragment {
             //DACA PRIMESC CEVA
             pID = received;
             requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).edit().clear().apply();
-            fragment_account_edit_button.setText("Say Hi");
+            fragment_account_edit_button.setVisibility(View.GONE);
 
             //De completat cand fac partea de chat app
 
