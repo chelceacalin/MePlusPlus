@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +23,13 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
+/*
+    STATUS: RFP
+  CREATED DATE: 04/09/2022
+  UPDATED DATE: 04/09/2022
+
+ */
 public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Chatting.ViewHolder> {
 
     //Firebase
@@ -55,7 +60,6 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
         assert list != null;
         item = list.get(position);
         setdDetails(user, holder);
-
 
 
         Objects.requireNonNull(holder).itemView.setOnClickListener(view -> {

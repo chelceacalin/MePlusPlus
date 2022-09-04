@@ -20,16 +20,13 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     String Uname;
     List<Message> list;
     public boolean isSender;
-    int send;
-    int received;
+    Message item;
 
     public Message_Adapter(Context context,String uname, List<Message> list) {
         Uname = uname;
         this.context=context;
         this.list = list;
         isSender=false;
-        send=1;
-        received=2;
     }
 
     @NonNull
@@ -37,20 +34,20 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view;
-        if(viewType==send){
-            view=LayoutInflater.from(context).inflate(R.layout.message_sent,parent,false);
+        if(viewType==2){
+            view=LayoutInflater.from(context).inflate(R.layout.message_received,parent,false);
+
         }
         else{
-            view=LayoutInflater.from(context).inflate(R.layout.message_received,parent,false);
+            view=LayoutInflater.from(context).inflate(R.layout.message_sent,parent,false);
         }
         return new Viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-
-        holder.textView.setText(list.get(position).getMessage());
-
+        item=list.get(position);
+        holder.textView.setText(item.getMessage());
     }
 
     @Override
@@ -63,13 +60,11 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
         TextView textView;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            if(isSender){
-                textView=itemView.findViewById(R.id.message_sent_message);
-            }
-            else
-            {
+            if(!isSender)
                 textView=itemView.findViewById(R.id.message_received_message);
-            }
+            else
+                textView=itemView.findViewById(R.id.message_sent_message);
+
         }
     }
 
@@ -78,12 +73,12 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
         if (list.get(position).getWhosentit().equals(Uname))
         {
             isSender = true;
-            return send;
+            return 1;
         }
         else
         {
             isSender = false;
-            return received;
+            return 2;
         }
 
     }
