@@ -19,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.meplusplus.Chatting.ChattingActivity;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Utils.EditProfile;
@@ -81,16 +82,28 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
 
         navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
-        header_for_drawer_button_view_profile.setOnClickListener(view13 -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,new AccountFragment()).commit());
 
-        header_for_drawer_text_username.setOnClickListener(view1 ->
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,new AccountFragment()).commit()
-                );
+        header_for_drawer_button_view_profile.setOnClickListener(view14 -> {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,new AccountFragment()).commit();
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+        });
 
-        drawer_circle_image_view_profile.setOnClickListener(view1 ->
-startActivity(new Intent(getContext(), EditProfile.class))
+        header_for_drawer_text_username.setOnClickListener(view13 -> {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,new AccountFragment()).commit();
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+        });
+
+
+        drawer_circle_image_view_profile.setOnClickListener(view1 ->{
+                    startActivity(new Intent(getContext(), EditProfile.class));
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+                }
         );
 
+        fragment_me_chatActivity.setOnClickListener(view1 ->{
+            startActivity(new Intent(getContext(), ChattingActivity.class));
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+        });
         return view;
     }
 

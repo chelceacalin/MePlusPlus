@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,10 +21,20 @@
         android:theme="@style/Theme.Meplusplus"
         tools:targetApi="31">
         <activity
-            android:name=".Utils.FeedBackActivity"
-            android:exported="true"
+            android:name=".Chatting.MessageActivity"
+            android:exported="false"
+            android:label="MessageActivity"
             android:theme="@style/Theme.Meplusplus.NoActionBar"
             />
+        <activity
+            android:name=".Chatting.ChattingActivity"
+            android:exported="true"
+            android:label="@string/title_activity_chatting"
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity
+            android:name=".Utils.FeedBackActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Utils.EditProfile"
             android:exported="true"
@@ -43,27 +54,32 @@
             android:name="com.example.meplusplus.ForgotPassword"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
+            android:theme="@style/Theme.Meplusplus.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.example.meplusplus.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
+            android:theme="@style/Theme.Meplusplus.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.example.meplusplus.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
+            android:theme="@style/Theme.Meplusplus.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.example.meplusplus.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
+            android:theme="@style/Theme.Meplusplus.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.example.meplusplus.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar">
+            android:theme="@style/Theme.Meplusplus.NoActionBar"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
