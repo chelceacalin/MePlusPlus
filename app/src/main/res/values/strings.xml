@@ -70,4 +70,5 @@
     <string name="welcome">Welcome,</string>
     <string name="title_activity_chatting">ChattingActivity</string>
     <string name="send">Send</string>
+    <string name="title_activity_calories">CaloriesActivity</string>
 </resources>

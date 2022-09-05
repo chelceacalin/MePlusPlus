@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodTracking.CaloriesActivity"
+    android:background="@drawable/ic_stacked_waves_haikei__3_"
+    >
+
+    <ImageView
+        android:id="@+id/activity_calories_close_button"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="3sp"
+        android:contentDescription="TODO"
+        app:srcCompat="@drawable/ic_baseline_close"
+        tools:ignore="ContentDescription,HardcodedText" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7sp"
+        android:layout_marginTop="45sp"
+        android:layout_marginEnd="7sp"
+        android:orientation="vertical">
+
+
+
+
+        <EditText
+            android:id="@+id/activity_calories_items_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:gravity="start"
+            android:hint="Introduce food items"
+            android:textColorHint="#1E1616"
+            android:textSize="15sp"
+            android:autofillHints=""
+            android:textColor="?android:attr/textColorPrimary"
+            android:cursorVisible="true"
+            android:paddingStart="10sp" />
+
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/MediumBlue"
+            android:textColor="@color/white"
+            android:text="Show Items"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

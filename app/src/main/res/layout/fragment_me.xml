@@ -13,16 +13,17 @@
     tools:openDrawer="start"
     -->
 
+    <!--  Top Navigation -->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
 
             <ImageView
                 android:id="@+id/fragment_me_open_drawer"
@@ -70,8 +71,181 @@
                 tools:ignore="ContentDescription,HardcodedText" />
 
         </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35sp"
+            android:layout_gravity="center_horizontal"
+            android:text="Un citat motivational luat din baza de date zilnic"
+            android:textColor="@color/white"
+            android:padding="15sp"
+            android:background="@drawable/imgborder_maipatrat"
+            ></TextView>
+
+
+        <!-- Calories Consumed-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="35sp"
+            android:layout_marginStart="8sp"
+            android:layout_marginEnd="8sp"
+            android:background="@drawable/imgborder_maipatrat"
+            android:padding="7sp"
+            android:gravity="center_horizontal"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="Calories Consumed:   "
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="X"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" / "
+                android:textStyle="bold"
+                android:textSize="17sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" 2000"/>
         </LinearLayout>
 
+      <!-- PROTEIN CARBS FATS-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="8sp"
+            android:layout_marginEnd="8sp"
+            android:background="@color/Blue"
+            android:gravity="center_horizontal"
+            android:padding="7sp"
+            >
+
+            <!-- PROTEIN-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Protein:   "
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="X"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" / "
+                android:textStyle="bold"
+                android:textSize="17sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" 200"/>
+
+
+                <!-- CARBS -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginStart="7sp"
+                android:text="Carbs:   "
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="X"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" / "
+                android:textStyle="bold"
+                android:textSize="17sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" 200"/>
+
+
+
+
+            <!-- FATS -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginStart="7sp"
+                android:text="Fats:   "
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="X"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" / "
+                android:textStyle="bold"
+                android:textSize="17sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" 200"/>
+        </LinearLayout>
+
+
+
+
+
+        <Button
+
+            android:id="@+id/fragment_me_add_food_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Food Item"
+            android:layout_marginTop="10sp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/Crimson"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"
+
+            />
+
+
+    </LinearLayout>
 
        <!-- Fara headerLayout nu vezi partea de sus cu profilul -->
     <com.google.android.material.navigation.NavigationView

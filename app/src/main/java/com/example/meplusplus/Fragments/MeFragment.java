@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.meplusplus.Chatting.ChattingActivity;
 import com.example.meplusplus.DataSets.User;
+import com.example.meplusplus.FoodTracking.CaloriesActivity;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.PostActivity;
@@ -53,6 +54,13 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     ImageView fragment_me_open_drawer;
     ImageView fragment_me_chatActivity;
     ImageView fragment_me_add_post;
+
+
+    //CALORIE TRACKING
+    Button fragment_me_add_food_item;;
+
+
+
     //Drawer
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
@@ -103,6 +111,13 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
         fragment_me_chatActivity.setOnClickListener(view1 ->startActivity(new Intent(getContext(), ChattingActivity.class)) );
 
+
+        fragment_me_add_food_item.setOnClickListener(view1 ->{
+
+            startActivity(new Intent(getContext(), CaloriesActivity.class));
+        });
+
+
         return view;
     }
 
@@ -117,8 +132,11 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         fragment_me_add_post = view.findViewById(R.id.fragment_me_add_post);
 
 
-        navigationView = view.findViewById(R.id.drawerNavigationView);
+        //CALORIE TRACKING
+        fragment_me_add_food_item=view.findViewById(R.id.fragment_me_add_food_item);
 
+
+        navigationView = view.findViewById(R.id.drawerNavigationView);
         //Sa putem modifica imaginea din header - S.O
         View header=navigationView.getHeaderView(0);
         //Drawrs items

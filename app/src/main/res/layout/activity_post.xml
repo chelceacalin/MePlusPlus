@@ -21,8 +21,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0.1"
-            app:srcCompat="@drawable/ic_baseline_close"
             android:contentDescription="TODO"
+            app:srcCompat="@drawable/ic_baseline_close"
             tools:ignore="ContentDescription,HardcodedText" />
 
         <TextView

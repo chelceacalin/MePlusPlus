@@ -21,11 +21,15 @@
         android:theme="@style/Theme.Meplusplus"
         tools:targetApi="31">
         <activity
+            android:name=".FoodTracking.CaloriesActivity"
+            android:exported="false"
+            android:label="@string/title_activity_calories"
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity
             android:name=".Chatting.MessageActivity"
             android:exported="false"
             android:label="MessageActivity"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
-            />
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Chatting.ChattingActivity"
             android:exported="true"
