@@ -7,7 +7,7 @@ import java.util.Objects;
 public class FoodModel {
     String name;
     String MeasureUnits;
-    String sugar;
+    float   sugar;
     float calories;
     int quantity;
     float fats;
@@ -23,11 +23,11 @@ public FoodModel(){
     fats=0;
     carbs=0;
     protein=0;
-    sugar="N/A";
+    sugar=0;
 }
 
 
-    public FoodModel(String name, float calories, int quantity, String MeasureUnits, float fats, float carbs, float protein, String  sugar) {
+    public FoodModel(String name, float calories, int quantity, String MeasureUnits, float fats, float carbs, float protein, float  sugar) {
         this.name = name;
         this.calories = calories;
         this.quantity = quantity;
@@ -44,6 +44,12 @@ public FoodModel(){
         if (o == null || getClass() != o.getClass()) return false;
         FoodModel foodModel = (FoodModel) o;
         return Float.compare(foodModel.calories, calories) == 0 && quantity == foodModel.quantity && Float.compare(foodModel.fats, fats) == 0 && Float.compare(foodModel.carbs, carbs) == 0 && Float.compare(foodModel.protein, protein) == 0 && Objects.equals(name, foodModel.name) && Objects.equals(MeasureUnits, foodModel.MeasureUnits);
+    }
+
+    @NonNull
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override
@@ -107,11 +113,11 @@ public FoodModel(){
         this.protein = protein;
     }
 
-    public String  getSugar() {
+    public float  getSugar() {
         return sugar;
     }
 
-    public void setSugar(String sugar) {
+    public void setSugar(float sugar) {
         this.sugar = sugar;
     }
 

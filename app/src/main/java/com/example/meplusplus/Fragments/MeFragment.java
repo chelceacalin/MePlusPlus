@@ -107,17 +107,17 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 }
         );
 
-        fragment_me_chatActivity.setOnClickListener(view1 ->startActivity(new Intent(getContext(), ChattingActivity.class)) );
+        fragment_me_chatActivity.setOnClickListener(view1 ->{startActivity(new Intent(getContext(), ChattingActivity.class));
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+        } );
 
 
         fragment_me_add_food_item.setOnClickListener(view1 ->{
 
             startActivity(new Intent(getContext(), CaloriesActivity.class));
-            getActivity().overridePendingTransition(R.anim.right, R.anim.fade_out);
+            getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             getActivity().finish();
         });
-
-
         return view;
     }
 

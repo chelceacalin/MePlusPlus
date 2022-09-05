@@ -69,6 +69,7 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
             intent.putExtra("userImgUrl",list.get(position).getImageurl());
             context.startActivity(intent);
             activity = (Activity) context;
+            activity.overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
             activity.finish();
             }
         );

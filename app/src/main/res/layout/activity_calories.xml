@@ -22,7 +22,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7sp"
         android:layout_marginTop="45sp"
         android:layout_marginEnd="-1dp"
         android:layout_marginBottom="1dp"
@@ -47,34 +46,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_horizontal"
-            >
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/activity_calories_show_items_button"
+                android:id="@+id/activity_calories_search_items"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="15sp"
+                android:backgroundTint="@color/MediumBlue"
+                android:text="Search"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+            <Button
+                android:id="@+id/activity_calories_show_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
                 android:backgroundTint="@color/MediumBlue"
                 android:text="Show Items"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 tools:ignore="ButtonStyle,HardcodedText"
-                android:layout_marginEnd="15sp"/>
-
-            <Button
-                android:id="@+id/activity_calories_add_items"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/MediumBlue"
-                android:text="Add Items"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                tools:ignore="ButtonStyle,HardcodedText"
-                android:layout_marginStart="15sp"
 
                 />
+
+
         </LinearLayout>
 
         <ListView
@@ -82,12 +82,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:layout_marginBottom="30sp"
-            >
-        </ListView>
+            android:layout_marginBottom="80sp" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30sp"
+        android:gravity="center_horizontal"
+        >
+
+        <Button
+            android:id="@+id/activity_calories_add_items"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:backgroundTint="@color/MediumBlue"
+            android:text="Add Items"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+
+    <!-- MACROS-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,69 +122,105 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Total Calories: "
+            android:text="T: "
             android:textSize="17sp"
             android:textStyle="bold"
              />
+
         <TextView
+            android:id="@+id/activity_calories_total_calories"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TOTAL"
-            android:textColor="@color/white"
-           />
+            android:layout_height="19sp"
+            android:textStyle="bold"
+            android:text=""
+            android:textColor="@color/red"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            />
 
         <TextView
             android:paddingStart="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="P/C/F: "
-            android:textSize="17sp"
+            android:text="🥩: "
+            android:textSize="14sp"
             android:textStyle="bold"
             />
 
         <TextView
+            android:id="@+id/activity_calories_protein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20"
-            android:textColor="@color/white"
-            android:textSize="17sp"
+            android:textStyle="bold"
+            android:text=""
+            android:textColor="@color/red"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             />
 
         <TextView
-            android:paddingStart="5sp"
+            android:paddingStart="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="/"
             android:textColor="@color/white"
-            android:textSize="17sp"
-            />
-        <TextView
-            android:paddingStart="5sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="20"
-            android:textColor="@color/white"
-            android:textSize="17sp"
+            android:text="🍞: "
+            android:textSize="14sp"
+            android:textStyle="bold"
             />
 
         <TextView
-            android:paddingStart="5sp"
+            android:id="@+id/activity_calories_carbs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="/"
-            android:textColor="@color/white"
-            android:textSize="17sp"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             />
         <TextView
+            android:paddingStart="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20"
             android:textColor="@color/white"
-            android:paddingStart="5sp"
-            android:textSize="17sp"
+            android:text=" 🧀: "
+            android:textSize="14sp"
+            android:textStyle="bold"
             />
 
+
+        <TextView
+            android:id="@+id/activity_calories_fats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:paddingStart="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="🍬: "
+            android:textSize="14sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/activity_calories_sugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            />
 
     </LinearLayout>
 

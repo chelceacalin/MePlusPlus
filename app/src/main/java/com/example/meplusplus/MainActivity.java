@@ -72,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new Social_PageFragment()).addToBackStack(null).commit();
             bottomNavigationView.getMenu().getItem(1).setChecked(true);
         }
+        //Switch from Calories Activity to MeFragment
+        if (extras != null && extras.containsKey("MeFragmentPLS"))
+            openF2 = extras.getBoolean("MeFragmentPLS");
+        if (openF2) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).addToBackStack(null).commit();
+            bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        }
     }
 
     //Switch Between Fragments
@@ -104,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(R.anim.fade_in, R.anim.slide_up);
     }
 
     //Cand apas butonul de back de la telefon
