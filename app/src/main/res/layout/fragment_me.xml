@@ -73,7 +73,6 @@
         </LinearLayout>
 
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,7 +82,7 @@
             android:textColor="@color/white"
             android:padding="15sp"
             android:background="@drawable/imgborder_maipatrat"
-            ></TextView>
+            tools:ignore="HardcodedText" />
 
 
         <!-- Calories Consumed-->
@@ -106,12 +105,13 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:text="Calories Consumed:   "
                 android:textStyle="bold"
-                />
+                tools:ignore="HardcodedText" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="X"/>
+                android:text="X"
+                tools:ignore="HardcodedText"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,12 +119,42 @@
                 android:text=" / "
                 android:textStyle="bold"
                 android:textSize="17sp"
-                />
+                tools:ignore="HardcodedText" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text=" 2000"/>
+                android:text=" 2000"
+                tools:ignore="HardcodedText"/>
+<!--SUGAR INTAKES-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="Sugar:   "
+                android:layout_marginStart="25sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="X"
+                tools:ignore="HardcodedText"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" / "
+                android:textStyle="bold"
+                android:textSize="17sp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text=" 2000"
+                tools:ignore="HardcodedText"/>
         </LinearLayout>
 
       <!-- PROTEIN CARBS FATS-->
@@ -145,12 +175,14 @@
                 android:layout_height="wrap_content"
                 android:text="Protein:   "
                 android:textColor="?android:attr/textColorPrimary"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="X"/>
+                android:text="X"
+                tools:ignore="HardcodedText"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -158,12 +190,13 @@
                 android:text=" / "
                 android:textStyle="bold"
                 android:textSize="17sp"
-                />
+                tools:ignore="HardcodedText" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text=" 200"/>
+                android:text=" 200"
+                tools:ignore="HardcodedText" />
 
 
                 <!-- CARBS -->
@@ -174,12 +207,14 @@
                 android:layout_marginStart="7sp"
                 android:text="Carbs:   "
                 android:textStyle="bold"
+                tools:ignore="HardcodedText"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="X"/>
+                android:text="X"
+                tools:ignore="HardcodedText"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -187,12 +222,13 @@
                 android:text=" / "
                 android:textStyle="bold"
                 android:textSize="17sp"
-                />
+                tools:ignore="HardcodedText"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text=" 200"/>
+                android:text=" 200"
+                tools:ignore="HardcodedText"/>
 
 
 
@@ -205,12 +241,14 @@
                 android:layout_marginStart="7sp"
                 android:text="Fats:   "
                 android:textStyle="bold"
+                tools:ignore="HardcodedText"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="X"/>
+                android:text="X"
+                tools:ignore="HardcodedText"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -218,12 +256,15 @@
                 android:text=" / "
                 android:textStyle="bold"
                 android:textSize="17sp"
+                tools:ignore="HardcodedText"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text=" 200"/>
+                android:text=" 200"
+                tools:ignore="HardcodedText"/>
+
         </LinearLayout>
 
 
@@ -241,7 +282,7 @@
             android:backgroundTint="@color/Crimson"
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold"
-
+            tools:ignore="HardcodedText"
             />
 
 

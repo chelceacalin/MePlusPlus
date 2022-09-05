@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".FoodTracking.CaloriesActivity"
     android:background="@drawable/ic_stacked_waves_haikei__3_"
+    tools:ignore="HardcodedText,RtlSymmetry"
     >
 
     <ImageView
@@ -23,38 +24,151 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="7sp"
         android:layout_marginTop="45sp"
-        android:layout_marginEnd="7sp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical">
-
-
 
 
         <EditText
             android:id="@+id/activity_calories_items_edit_text"
             android:layout_width="match_parent"
             android:layout_height="120sp"
+            android:autofillHints=""
+            android:cursorVisible="true"
             android:gravity="start"
             android:hint="Introduce food items"
+            android:paddingStart="10sp"
+            android:textColor="?android:attr/textColorPrimary"
             android:textColorHint="#1E1616"
             android:textSize="15sp"
-            android:autofillHints=""
-            android:textColor="?android:attr/textColorPrimary"
-            android:cursorVisible="true"
-            android:paddingStart="10sp" />
+            tools:ignore="HardcodedText,RtlSymmetry,TextFields" />
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
 
+            <Button
+                android:id="@+id/activity_calories_show_items_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/MediumBlue"
+                android:text="Show Items"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle,HardcodedText"
+                android:layout_marginEnd="15sp"/>
 
-        <Button
+            <Button
+                android:id="@+id/activity_calories_add_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/MediumBlue"
+                android:text="Add Items"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle,HardcodedText"
+                android:layout_marginStart="15sp"
+
+                />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/SeeItemsListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="30sp"
+            >
+        </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navy"
+        android:gravity="center_vertical"
+        android:foregroundGravity="center_vertical"
+        >
+
+        <TextView
+            android:paddingStart="5sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/MediumBlue"
             android:textColor="@color/white"
-            android:text="Show Items"
-            android:layout_gravity="center_horizontal"
-            android:textStyle="bold"/>
+            android:text="Total Calories: "
+            android:textSize="17sp"
+            android:textStyle="bold"
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOTAL"
+            android:textColor="@color/white"
+           />
+
+        <TextView
+            android:paddingStart="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="P/C/F: "
+            android:textSize="17sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:paddingStart="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            />
+        <TextView
+            android:paddingStart="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:paddingStart="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textColor="@color/white"
+            android:paddingStart="5sp"
+            android:textSize="17sp"
+            />
 
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

@@ -18,7 +18,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.example.meplusplus.Chatting.ChattingActivity;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
@@ -57,8 +56,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
 
     //CALORIE TRACKING
-    Button fragment_me_add_food_item;;
-
+    Button fragment_me_add_food_item;
 
 
     //Drawer
@@ -115,6 +113,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         fragment_me_add_food_item.setOnClickListener(view1 ->{
 
             startActivity(new Intent(getContext(), CaloriesActivity.class));
+            getActivity().overridePendingTransition(R.anim.right, R.anim.fade_out);
+            getActivity().finish();
         });
 
 
