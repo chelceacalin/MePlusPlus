@@ -78,7 +78,8 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
 
         holder.itemView.setOnClickListener(view -> {
             AlertDialog alertDialog= new AlertDialog.Builder(context).create();
-            if(comm.getPublisher().equals(user.getUid())){
+            if(comm.getPublisher().equals(user.getUid()))
+            {
                 alertDialog.setTitle("Do you want to delete?");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {

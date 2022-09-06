@@ -2,7 +2,9 @@ package com.example.meplusplus.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,8 +35,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -142,7 +148,20 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
     private void setMaxValuesCount() {
 
-        String maxCalories = getActivity().getIntent().getStringExtra("maxCalories");
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Gson gson = new Gson();
+        String json = prefs.getString("sendItemsList", null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        ArrayList<String>  items= gson.fromJson(json, type);
+
+        fragment_me_max_calories.setText(items.get(0));
+        fragment_me_max_protein.setText(items.get(1));
+        fragment_me_max_carbs.setText(items.get(2));
+        fragment_me_max_fats.setText(items.get(3));
+        frament_me_max_sugar.setText(items.get(4));
+
+      /*  String maxCalories = getActivity().getIntent().getStringExtra("maxCalories");
         fragment_me_max_calories.setText(maxCalories);
 
         String maxProtein = getActivity().getIntent().getStringExtra("maxProtein");
@@ -156,7 +175,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
 
         String maxSugar = getActivity().getIntent().getStringExtra("maxSugar");
-        frament_me_max_sugar.setText(maxSugar);
+        frament_me_max_sugar.setText(maxSugar);*/
     }
 
 

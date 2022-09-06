@@ -1,8 +1,12 @@
 package com.example.meplusplus.CalorieCalculator;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +20,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.meplusplus.FoodTracking.CaloriesActivity;
+import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.Utils.PostActivity;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -24,8 +31,10 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CalculateMetabolismActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -48,8 +57,13 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
     int apasat=0;
     int nivelactivitate=0;
     Float volumactivitate=0f;
-
-
+    //pp-protein, cc-carbs, ss-sugar , ff -fats
+    float BMR=0f;
+    float pp;
+    float cc;
+    float ss;
+    float ff;
+    List<String> senditemsList;
     PieChart pieChart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +114,56 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
 
                     showPieChart();
                 }
+            }
+        });
+
+        activity_calculate_metabolism_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog alertDialog= new AlertDialog.Builder(CalculateMetabolismActivity.this).create();
+                    alertDialog.setTitle("Do you want to delete your previous macro targets?");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> {
+
+                        dialog.dismiss();
+
+                    });
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {
+
+                        SharedPreferences prefs = getSharedPreferences("sendItemsList", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.clear();
+                        editor.commit();
+                        dialog.dismiss();
+
+                        senditemsList=new ArrayList<>();
+                        senditemsList.add(Math.round(BMR) +"");
+                        senditemsList.add(Math.round(pp)+"");
+                        senditemsList.add(Math.round(cc)+"");
+                        senditemsList.add(Math.round(ff)+"");
+                        senditemsList.add(Math.round(ss) +"");
+
+                        prefs = PreferenceManager.getDefaultSharedPreferences(CalculateMetabolismActivity.this);
+                        editor = prefs.edit();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(senditemsList);
+                        editor.putString("sendItemsList", json);
+                        editor.apply();
+
+                        // Schimbam din activitate in fragment
+                        Intent intent = new Intent(CalculateMetabolismActivity.this, MainActivity.class);
+                        intent.putExtra("MetabolismToMeFragment", true);
+                        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                        finish();
+                        startActivity(intent);
+
+                    });
+                    alertDialog.show();
+
+
+
+
+
             }
         });
     }
@@ -178,21 +242,22 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
         l.setTextColor(Color.WHITE);
         l.setDrawInside(false);
         l.setEnabled(true);
-        float BMR;
+
         if(isMale){
-            BMR=  Math.round((float)(66+(13.7*weight)+(5*height)-(6.8*age)));
+            BMR=  Math.round(((float)(66+(13.7*weight)+(5*height)-(6.8*age))*volumactivitate));
         }
         else
         {
-            BMR=  Math.round((float)(655+(9.6*weight)+(1.8*height)-(4.7*age)));
+            BMR=  Math.round((float)((655+(9.6*weight)+(1.8*height)-(4.7*age))));
+        BMR=BMR*volumactivitate;
         }
 
         ArrayList<PieEntry> entries = new ArrayList<>();
-        activity_calculate_metabolism_caloriestoconsume.setText("C: "+ (Math.round(BMR*volumactivitate)));
-        float  pp= (float) ((0.25*BMR*volumactivitate)/4);
-        float cc=(float)((0.5*BMR*volumactivitate)/4);
-        float ff=(float)((0.25*BMR*volumactivitate)/9);
-        float ss=(float)((0.13*BMR*volumactivitate)/4);
+        activity_calculate_metabolism_caloriestoconsume.setText("C: "+ BMR);
+          pp= (float) ((0.25*BMR)/4);
+         cc=(float)((0.5*BMR)/4);
+         ff=(float)((0.25*BMR)/9);
+         ss=(float)((0.13*BMR)/4);
 
         entries.add(new PieEntry(pp, "Protein"));
         entries.add(new PieEntry(cc, "Carbs"));
