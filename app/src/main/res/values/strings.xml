@@ -77,9 +77,9 @@
     <string-array name="numbers">
         <item />
             <item>Little to no exercise</item>
-        <item tools:ignore="TypographyDashes"> Light Exercise (1-2 days/week) </item>
-        <item tools:ignore="TypographyDashes"> Generally Active (3-5 days/week) </item>
-        <item tools:ignore="TypographyDashes"> Active (5-7 days/week) </item>
+        <item tools:ignore="TypographyDashes">Light Exercise (1-2 days/week)</item>
+        <item tools:ignore="TypographyDashes">Generally Active (3-5 days/week)</item>
+        <item tools:ignore="TypographyDashes">Active (5-7 days/week)</item>
 
 
     </string-array>

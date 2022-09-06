@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
     tools:context=".CalorieCalculator.CalculateMetabolismActivity"
-    tools:ignore="HardcodedText"
-    >
+    tools:ignore="HardcodedText">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15sp"
-            android:layout_marginTop="55sp"
+            android:layout_marginTop="25sp"
             android:text="Gender"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -52,8 +51,7 @@
                 android:text="Male"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
-               />
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/activity_calculate_metabolism_option_female"
@@ -72,9 +70,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60sp"
-            android:orientation="horizontal"
             android:layout_marginTop="20sp"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,10 +84,12 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/activity_calculate_metabolism_age"
                 android:layout_width="70sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48sp"
                 android:layout_marginTop="13sp"
+                android:autofillHints=""
                 android:background="@drawable/maipatratalb"
                 android:gravity="center_horizontal"
                 android:hint="20"
@@ -99,7 +98,6 @@
                 android:textColorHint="#989898"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:autofillHints=""
                 tools:ignore="TextFields" />
 
 
@@ -110,8 +108,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60sp"
-            android:orientation="horizontal"
-            android:layout_marginTop="20sp">
+            android:layout_marginTop="20sp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -124,10 +122,12 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/activity_calculate_metabolism_weight"
                 android:layout_width="70sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="13sp"
+                android:autofillHints=""
                 android:background="@drawable/maipatratalb"
                 android:gravity="center_horizontal"
                 android:hint="kg"
@@ -136,7 +136,6 @@
                 android:textColorHint="#989898"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:autofillHints=""
                 tools:ignore="TextFields" />
         </LinearLayout>
 
@@ -144,8 +143,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60sp"
-            android:orientation="horizontal"
-            android:layout_marginTop="20sp">
+            android:layout_marginTop="20sp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -158,10 +157,12 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/activity_calculate_metabolism_height"
                 android:layout_width="70sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24sp"
                 android:layout_marginTop="13sp"
+                android:autofillHints=""
                 android:background="@drawable/maipatratalb"
                 android:gravity="center_horizontal"
                 android:hint="cm"
@@ -170,7 +171,6 @@
                 android:textColorHint="#989898"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:autofillHints=""
                 tools:ignore="TextFields" />
         </LinearLayout>
 
@@ -179,8 +179,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60sp"
-            android:orientation="horizontal"
-            android:layout_marginTop="20sp">
+            android:layout_marginTop="20sp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -198,28 +198,61 @@
                 android:layout_width="240sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24sp"
-                android:layout_marginTop="13sp"
+                android:layout_marginTop="11sp"
                 android:background="@drawable/maipatratalb"
                 android:gravity="center_horizontal"
                 android:padding="5sp"
 
 
                 />
-            <!--
-            <EditText
-                android:layout_width="70sp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24sp"
-                android:layout_marginTop="13sp"
-                android:background="@drawable/maipatratalb"
-                android:gravity="center_horizontal"
-                android:hint="cm"
-                android:padding="5sp"
-                android:textColor="@color/black"
-                android:textColorHint="#989898"
-                android:textSize="18sp"
-                android:textStyle="bold" />-->
+
+
         </LinearLayout>
+
+
+        <Button
+            android:id="@+id/activity_calculate_metabolism_button_calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="13sp"
+            android:backgroundTint="@color/MediumBlue"
+            android:text="Calculate"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/activity_calculate_metabolism_caloriestoconsume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/MediumBlue"
+                android:layout_marginStart="5sp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Calories"
+                android:textColor="@color/white"
+                android:hint=" Calories "
+                android:padding="5sp"
+                android:layout_marginTop="72sp"
+                android:autofillHints=""
+                tools:ignore="TextFields" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/activity_calculate_metabolism_piechart"
+                android:layout_width="240sp"
+                android:layout_height="190sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="10sp"
+                android:visibility="gone"
+                />
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
