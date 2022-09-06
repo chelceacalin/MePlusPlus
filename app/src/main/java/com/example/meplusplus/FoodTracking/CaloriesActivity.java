@@ -73,6 +73,8 @@ public class CaloriesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //Daca stergi shared preferences aici o sa se blocheze
+
                 foodItems= new FoodApiVolley(CaloriesActivity.this);
                 sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
                 gson = new Gson();
@@ -123,7 +125,7 @@ public class CaloriesActivity extends AppCompatActivity {
                 listSums.add(sumCarbs);
                 listSums.add(sumFats);
                 listSums.add(sumSugar);
-              
+
                 for(float item:listSums){
                     listSumString.add(item+"");
                 }

@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.Utils.FeedBackActivity;
 import com.example.meplusplus.Utils.PostActivity;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -35,6 +36,8 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 public class CalculateMetabolismActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -103,7 +106,14 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
 
                 if(activity_calculate_metabolism_age.getText().toString().equals("") || activity_calculate_metabolism_weight.getText().toString().equals("")
                         ||activity_calculate_metabolism_height.getText().toString().equals("")|| apasat==0||nivelactivitate==0){
-                    Toast.makeText(CalculateMetabolismActivity.this, "You must complete all the fields", Toast.LENGTH_SHORT).show();
+                    new StyleableToast.Builder(CalculateMetabolismActivity.this)
+                            .text("You must complete all the fields")
+                            .textColor(Color.RED)
+                            .backgroundColor(getResources().getColor(R.color.WhiteSmoke))
+                            .cornerRadius(25)
+                            .iconStart(R.drawable.ic_baseline_error_outline_24)
+                            .show();
+
                 }
                 else
                 {

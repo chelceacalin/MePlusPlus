@@ -3,6 +3,7 @@ package com.example.meplusplus.FoodTracking;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
@@ -12,7 +13,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.DataSets.FoodModel;
+import com.example.meplusplus.R;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -25,6 +28,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import io.github.muddz.styleabletoast.StyleableToast;
 
 public class FoodApiVolley {
 
@@ -82,7 +87,14 @@ public class FoodApiVolley {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Too many attempts", Toast.LENGTH_SHORT).show();
+                new StyleableToast.Builder(context)
+                        .text("You must complete all the fields")
+                        .textColor(Color.RED)
+                        .backgroundColor(context.getResources().getColor(R.color.WhiteSmoke))
+                        .cornerRadius(25)
+                        .iconStart(R.drawable.ic_baseline_error_outline_24)
+                        .show();
+
             }
         })
         {
