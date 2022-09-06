@@ -18,6 +18,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.Chatting.ChattingActivity;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
@@ -214,7 +215,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 Toast.makeText(getContext(), "Workout ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.drawer_calorie_calculator:
-                Toast.makeText(getContext(), "Calorie Calculator", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), CalculateMetabolismActivity.class));
+                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
                 break;
             case R.id.drawer_drink:
                 Toast.makeText(getContext(), "Drink Water", Toast.LENGTH_SHORT).show();

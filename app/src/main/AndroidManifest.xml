@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.meplusplus">
+    package="com.example.meplusplus"
+    tools:ignore="LockedOrientationActivity"
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -21,31 +24,44 @@
         android:theme="@style/Theme.Meplusplus"
         tools:targetApi="31">
         <activity
+            android:name=".CalorieCalculator.CalculateMetabolismActivity"
+            android:exported="true"
+            android:label="CalculateMetabolismActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Meplusplus.NoActionBar"
+             />
+        <activity
             android:name=".FoodTracking.CaloriesActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_calories"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Chatting.MessageActivity"
-            android:exported="false"
+            android:exported="true"
+            android:screenOrientation="portrait"
             android:label="MessageActivity"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Chatting.ChattingActivity"
             android:exported="true"
             android:label="@string/title_activity_chatting"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Utils.FeedBackActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Utils.EditProfile"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Utils.CommentDetailActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_comment_detail"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
