@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,15 +33,15 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
     RadioGroup activity_calculate_metabolism_radiogroup;
     RadioButton activity_calculate_metabolism_option_male;
     RadioButton activity_calculate_metabolism_option_female;
-    Spinner activity_calculate_metabolism_spinner;
+        Spinner activity_calculate_metabolism_spinner;
     Button activity_calculate_metabolism_button_calculate;
-
+    Button activity_calculate_metabolism_save;
     //Metabolism Numbers
     EditText activity_calculate_metabolism_height;
     EditText activity_calculate_metabolism_weight;
     EditText activity_calculate_metabolism_age;
 
-    EditText activity_calculate_metabolism_caloriestoconsume;
+    TextView activity_calculate_metabolism_caloriestoconsume;
     Integer  height,age;
     Float weight;
     boolean isMale;
@@ -57,8 +58,8 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
         init();
 
         //Pt Spinner
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(CalculateMetabolismActivity.this,R.array.numbers, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+            ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(CalculateMetabolismActivity.this,R.array.numbers, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activity_calculate_metabolism_spinner.setAdapter(adapter);
         activity_calculate_metabolism_spinner.setOnItemSelectedListener(CalculateMetabolismActivity.this);
 
@@ -87,7 +88,7 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
             public void onClick(View view) {
 
                 if(activity_calculate_metabolism_age.getText().toString().equals("") || activity_calculate_metabolism_weight.getText().toString().equals("")
-                ||activity_calculate_metabolism_height.getText().toString().equals("")|| apasat==0||nivelactivitate==0){
+                        ||activity_calculate_metabolism_height.getText().toString().equals("")|| apasat==0||nivelactivitate==0){
                     Toast.makeText(CalculateMetabolismActivity.this, "You must complete all the fields", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -120,7 +121,7 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
         activity_calculate_metabolism_weight=findViewById(R.id.activity_calculate_metabolism_weight);
         activity_calculate_metabolism_age=findViewById(R.id.activity_calculate_metabolism_age);
         activity_calculate_metabolism_caloriestoconsume=findViewById(R.id.activity_calculate_metabolism_caloriestoconsume);
-
+        activity_calculate_metabolism_save=findViewById(R.id.activity_calculate_metabolism_save);
 
 
 
@@ -128,20 +129,23 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-       //
+        //
         String text=adapterView.getItemAtPosition(i).toString();
         switch (text) {
             case "Little to no exercise":
                 nivelactivitate = 1;
                 volumactivitate = 1.1f;
+
                 break;
             case "Light Exercise (1-2 days/week)":
                 nivelactivitate = 1;
                 volumactivitate = 1.2f;
+
                 break;
             case "Generally Active (3-5 days/week)":
                 nivelactivitate = 1;
                 volumactivitate = 1.355f;
+
                 break;
             case "Active (5-7 days/week)":
                 nivelactivitate = 1;
@@ -169,22 +173,22 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
 
         Legend l = pieChart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setTextColor(Color.WHITE);
         l.setDrawInside(false);
         l.setEnabled(true);
         float BMR;
         if(isMale){
-            BMR= (float)(66+(13.7*weight)+(5*height)-(6.8*age));
+            BMR=  Math.round((float)(66+(13.7*weight)+(5*height)-(6.8*age)));
         }
         else
         {
-            BMR= (float)(655+(9.6*weight)+(1.8*height)-(4.7*age));
+            BMR=  Math.round((float)(655+(9.6*weight)+(1.8*height)-(4.7*age)));
         }
 
         ArrayList<PieEntry> entries = new ArrayList<>();
-        activity_calculate_metabolism_caloriestoconsume.setText("C: "+(BMR*volumactivitate));
+        activity_calculate_metabolism_caloriestoconsume.setText("C: "+ (Math.round(BMR*volumactivitate)));
         float  pp= (float) ((0.25*BMR*volumactivitate)/4);
         float cc=(float)((0.5*BMR*volumactivitate)/4);
         float ff=(float)((0.25*BMR*volumactivitate)/9);

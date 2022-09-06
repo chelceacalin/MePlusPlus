@@ -83,12 +83,20 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     TextView fragment_me_fats;
     TextView fragment_me_sugar;
 
+    //Maximum values
+    TextView fragment_me_max_calories;
+    TextView fragment_me_max_protein;
+    TextView fragment_me_max_carbs;
+    TextView fragment_me_max_fats;
+    TextView frament_me_max_sugar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me, container, false);
         initView(view);
         setCalorieCount();
+        setMaxValuesCount();
         setDrawerUserDetails();
 
         fragment_me_open_drawer.setOnClickListener(view1 -> drawerLayout.openDrawer(GravityCompat.START));
@@ -132,7 +140,24 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         return view;
     }
 
+    private void setMaxValuesCount() {
 
+        String maxCalories = getActivity().getIntent().getStringExtra("maxCalories");
+        fragment_me_max_calories.setText(maxCalories);
+
+        String maxProtein = getActivity().getIntent().getStringExtra("maxProtein");
+        fragment_me_max_protein.setText(maxProtein);
+
+        String maxCarbs = getActivity().getIntent().getStringExtra("maxCarbs");
+        fragment_me_max_carbs.setText(maxCarbs);
+
+        String maxFats = getActivity().getIntent().getStringExtra("maxFats");
+        fragment_me_max_fats.setText(maxFats);
+
+
+        String maxSugar = getActivity().getIntent().getStringExtra("maxSugar");
+        frament_me_max_sugar.setText(maxSugar);
+    }
 
 
     private void initView(View view) {
@@ -150,6 +175,13 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         fragment_me_carbs = view.findViewById(R.id.fragment_me_carbs);
         fragment_me_fats = view.findViewById(R.id.fragment_me_fats);
         fragment_me_sugar = view.findViewById(R.id.fragment_me_sugar);
+
+        //max values
+        fragment_me_max_calories = view.findViewById(R.id.fragment_me_max_calories);
+        fragment_me_max_protein = view.findViewById(R.id.fragment_me_max_protein);
+        fragment_me_max_carbs = view.findViewById(R.id.fragment_me_max_carbs);
+        fragment_me_max_fats = view.findViewById(R.id.fragment_me_max_fats);
+        frament_me_max_sugar = view.findViewById(R.id.frament_me_max_sugar);
 
 
         navigationView = view.findViewById(R.id.drawerNavigationView);
@@ -216,7 +248,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 break;
             case R.id.drawer_calorie_calculator:
                 startActivity(new Intent(getContext(), CalculateMetabolismActivity.class));
-                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
             case R.id.drawer_drink:
                 Toast.makeText(getContext(), "Drink Water", Toast.LENGTH_SHORT).show();

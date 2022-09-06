@@ -195,63 +195,77 @@
 
             <Spinner
                 android:id="@+id/activity_calculate_metabolism_spinner"
-                android:layout_width="240sp"
-                android:layout_height="wrap_content"
+                android:layout_width="220sp"
+                android:layout_height="40sp"
                 android:layout_marginStart="24sp"
                 android:layout_marginTop="11sp"
-                android:background="@drawable/maipatratalb"
+                android:background="@drawable/maipatratnegru"
                 android:gravity="center_horizontal"
                 android:padding="5sp"
-
-
-                />
+                android:visibility="visible" />
 
 
         </LinearLayout>
-
-
-        <Button
-            android:id="@+id/activity_calculate_metabolism_button_calculate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="13sp"
-            android:backgroundTint="@color/MediumBlue"
-            android:text="Calculate"
-            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+        <Button
+            android:id="@+id/activity_calculate_metabolism_button_calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:layout_marginTop="13sp"
+            android:backgroundTint="@color/MediumBlue"
+            android:text="Calculate"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginEnd="5sp"/>
 
-            <EditText
+            <Button
                 android:id="@+id/activity_calculate_metabolism_caloriestoconsume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/MediumBlue"
-                android:layout_marginStart="5sp"
+                android:layout_marginTop="13sp"
+                android:backgroundTint="@color/MediumBlue"
+                android:hint="Calories"
+                android:textColorHint="#c2c2c2"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                android:text="Calories"
                 android:textColor="@color/white"
-                android:hint=" Calories "
-                android:padding="5sp"
-                android:layout_marginTop="72sp"
-                android:autofillHints=""
-                tools:ignore="TextFields" />
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/activity_calculate_metabolism_piechart"
-                android:layout_width="240sp"
-                android:layout_height="190sp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="10sp"
-                android:visibility="gone"
+                android:layout_marginStart="5sp"
+                android:layout_marginEnd="5sp"
                 />
+            <Button
+                android:id="@+id/activity_calculate_metabolism_save"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginTop="13sp"
+                android:backgroundTint="@color/MediumBlue"
+                android:text="Save"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"/>
+
+
+
 
 
         </LinearLayout>
+
+
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/activity_calculate_metabolism_piechart"
+                android:layout_width="fill_parent"
+                android:layout_height="190sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="10sp"
+                />
+
+
 
 
     </LinearLayout>
