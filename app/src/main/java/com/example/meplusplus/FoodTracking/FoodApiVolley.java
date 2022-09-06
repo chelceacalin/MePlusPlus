@@ -82,7 +82,7 @@ public class FoodApiVolley {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Too many attempts", Toast.LENGTH_SHORT).show();
             }
         })
         {

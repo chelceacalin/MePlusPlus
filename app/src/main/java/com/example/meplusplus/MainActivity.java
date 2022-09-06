@@ -5,17 +5,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import com.example.meplusplus.DataSets.FoodModel;
 import com.example.meplusplus.Fragments.AccountFragment;
 import com.example.meplusplus.Fragments.MeFragment;
 import com.example.meplusplus.Fragments.RecipesFragment;
 import com.example.meplusplus.Fragments.SearchPeopleFragment;
 import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /*
 
@@ -73,10 +83,13 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.getMenu().getItem(1).setChecked(true);
         }
         //Switch from Calories Activity to MeFragment
-        if (extras != null && extras.containsKey("MeFragmentPLS"))
+        if (extras != null && extras.containsKey("MeFragmentPLS")){
             openF2 = extras.getBoolean("MeFragmentPLS");
+
+        }
+
         if (openF2) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).addToBackStack(null).commit();
+           getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).addToBackStack(null).commit();
             bottomNavigationView.getMenu().getItem(1).setChecked(true);
         }
     }

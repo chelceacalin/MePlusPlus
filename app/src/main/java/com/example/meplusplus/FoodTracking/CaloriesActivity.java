@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CaloriesActivity extends AppCompatActivity {
@@ -50,6 +52,10 @@ public class CaloriesActivity extends AppCompatActivity {
     TextView activity_calories_fats;
     TextView activity_calories_sugar;
      float sumCalories,sumProtein,sumCarbs,sumFats,sumSugar;
+     //Sa le trimitem la activitatea principala
+    List<Float> listSums;
+    List<String> listSumString=new ArrayList<>();
+    String foodItemsSearched;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +78,13 @@ public class CaloriesActivity extends AppCompatActivity {
                 gson = new Gson();
                 json = sharedPrefs.getString("MYITEMS", "");
                 type = new TypeToken<List<FoodModel>>() {}.getType();
+                foodItemsSearched=activity_calories_items_edit_text.getText().toString();
+                if(foodItemsSearched.equals("")){
+                    Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();
+                }
+                else
                 foodItems.search(activity_calories_items_edit_text.getText().toString());
+
                 arrayList = gson.fromJson(json, type);
 
 
@@ -81,7 +93,6 @@ public class CaloriesActivity extends AppCompatActivity {
 
             }
         });
-
 
         activity_calories_show_items.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -107,6 +118,15 @@ public class CaloriesActivity extends AppCompatActivity {
                 activity_calories_fats.setText(sumFats+"");
                 activity_calories_sugar.setText(sumSugar+"");
 
+                listSums.add(sumCalories);
+                listSums.add(sumProtein);
+                listSums.add(sumCarbs);
+                listSums.add(sumFats);
+                listSums.add(sumSugar);
+              
+                for(float item:listSums){
+                    listSumString.add(item+"");
+                }
             }
         });
 
@@ -116,7 +136,12 @@ public class CaloriesActivity extends AppCompatActivity {
 
                 // Schimbam din activitate in fragment
                 Intent intent = new Intent(CaloriesActivity.this, MainActivity.class);
-                intent.putExtra("MeFragmentPLS", false);
+                intent.putExtra("MeFragmentPLS", true);
+                intent.putExtra("sumCalories",sumCalories+"");
+                intent.putExtra("sumProtein",sumProtein+"");
+                intent.putExtra("sumCarbs",sumCarbs+"");
+                intent.putExtra("sumFats",sumFats+"");
+                intent.putExtra("sumSugar",sumSugar+"");
                 overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 finish();
                 startActivity(intent);
@@ -150,6 +175,10 @@ public class CaloriesActivity extends AppCompatActivity {
         activity_calories_fats.setText("0");
         activity_calories_sugar=findViewById(R.id.activity_calories_sugar);
         activity_calories_sugar.setText("0");
+
+        sumCalories=0;sumProtein=0;sumCarbs=0;sumFats=0;sumSugar=0;
+        listSums=new ArrayList<>();
+
     }
 
 

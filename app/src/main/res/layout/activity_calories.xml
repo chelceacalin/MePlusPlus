@@ -139,14 +139,13 @@
             />
 
         <TextView
-            android:paddingStart="15sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_height="23dp"
+            android:paddingStart="15sp"
             android:text="🥩: "
+            android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/activity_calories_protein"
