@@ -14,17 +14,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.DataSets.FoodModel;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CaloriesActivity extends AppCompatActivity {
 
@@ -53,9 +61,12 @@ public class CaloriesActivity extends AppCompatActivity {
     TextView activity_calories_sugar;
      float sumCalories,sumProtein,sumCarbs,sumFats,sumSugar;
      //Sa le trimitem la activitatea principala
-    List<Float> listSums;
-    List<String> listSumString=new ArrayList<>();
     String foodItemsSearched;
+
+String user;
+    //Metoda 2
+    FirebaseDatabase database;
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +77,7 @@ public class CaloriesActivity extends AppCompatActivity {
             startActivity(new Intent(CaloriesActivity.this, MainActivity.class));
             overridePendingTransition(R.anim.left, R.anim.fade_out);
             finish();
+
 
         });
 
@@ -91,8 +103,6 @@ public class CaloriesActivity extends AppCompatActivity {
 
 
 
-
-
             }
         });
 
@@ -102,6 +112,7 @@ public class CaloriesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 activity_calories_search_items.performClick();
 
+                //PT ListView
                 arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1,arrayList );
                 SeeItemsListView.setAdapter(arrayAdapter);
 
@@ -113,6 +124,8 @@ public class CaloriesActivity extends AppCompatActivity {
                     sumFats=item.getFats();
                     sumSugar+=item.getSugar();
                 }
+                //Calculezi suma itemetelor din listview
+
 
                 activity_calories_total_calories.setText(sumCalories+"");
                 activity_calories_protein.setText(sumProtein+"");
@@ -120,15 +133,6 @@ public class CaloriesActivity extends AppCompatActivity {
                 activity_calories_fats.setText(sumFats+"");
                 activity_calories_sugar.setText(sumSugar+"");
 
-                listSums.add(sumCalories);
-                listSums.add(sumProtein);
-                listSums.add(sumCarbs);
-                listSums.add(sumFats);
-                listSums.add(sumSugar);
-
-                for(float item:listSums){
-                    listSumString.add(item+"");
-                }
             }
         });
 
@@ -136,17 +140,37 @@ public class CaloriesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                user= FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String itemID=reference.push().getKey();
+                Map<String,Object> map=new HashMap<>();
+                map.put("itemID",itemID);
+                map.put("sumCalories",sumCalories);
+                map.put("sumProtein",sumProtein);
+                map.put("sumCarbs",sumCarbs);
+                map.put("sumFats",sumFats);
+                map.put("sumSugar",sumSugar);
+
+                reference.child(user).child(itemID).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent intent = new Intent(CaloriesActivity.this, MainActivity.class);
+                        intent.putExtra("MeFragmentPLS", true);
+                        intent.putExtra("itemID",itemID);
+                        finish();
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CaloriesActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 // Schimbam din activitate in fragment
-                Intent intent = new Intent(CaloriesActivity.this, MainActivity.class);
-                intent.putExtra("MeFragmentPLS", true);
-                intent.putExtra("sumCalories",sumCalories+"");
-                intent.putExtra("sumProtein",sumProtein+"");
-                intent.putExtra("sumCarbs",sumCarbs+"");
-                intent.putExtra("sumFats",sumFats+"");
-                intent.putExtra("sumSugar",sumSugar+"");
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-                finish();
-                startActivity(intent);
+
+
+
 
             }
         });
@@ -179,7 +203,8 @@ public class CaloriesActivity extends AppCompatActivity {
         activity_calories_sugar.setText("0");
 
         sumCalories=0;sumProtein=0;sumCarbs=0;sumFats=0;sumSugar=0;
-        listSums=new ArrayList<>();
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        reference = database.getReference("foods");
 
     }
 

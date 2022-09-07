@@ -148,11 +148,4 @@ public class SplashScreen extends AppCompatActivity {
         timer.start();*/
 
 
-
-    //Cand apesi pe back cand esti pe pagina de login
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
 }

@@ -16,15 +16,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.meplusplus.FoodTracking.CaloriesActivity;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
-import com.example.meplusplus.Utils.FeedBackActivity;
-import com.example.meplusplus.Utils.PostActivity;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -128,16 +124,13 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
         });
 
         activity_calculate_metabolism_save.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ApplySharedPref")
             @Override
             public void onClick(View view) {
 
                 AlertDialog alertDialog= new AlertDialog.Builder(CalculateMetabolismActivity.this).create();
                     alertDialog.setTitle("Do you want to delete your previous macro targets?");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> {
-
-                        dialog.dismiss();
-
-                    });
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {
 
                         SharedPreferences prefs = getSharedPreferences("sendItemsList", MODE_PRIVATE);

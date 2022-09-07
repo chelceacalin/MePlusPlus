@@ -118,21 +118,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Cand minimizezi aplicatia
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
     //Cand apas butonul de back de la telefon
     @Override
     public void onBackPressed() {
         //Daca nu e MeFragment
         if (getFragmentManager().getBackStackEntryCount() <= 0)
             bottomNavigationView.getMenu().getItem(0).setChecked(true);
-            // moveTaskToBack(true);
-            //  goHome();
-            //finish();
+
 
         super.onBackPressed();
 

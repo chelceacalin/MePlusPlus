@@ -38,7 +38,7 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
 
     //Controale
     Context context;
-    List<User> list;
+    final List<User> list;
     User item;
 
     //Pt a face tranzitia mai frumoasa intre slide-uri

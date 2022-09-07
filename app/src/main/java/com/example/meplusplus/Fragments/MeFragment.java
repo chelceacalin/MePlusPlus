@@ -22,11 +22,15 @@ import androidx.fragment.app.Fragment;
 
 import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.Chatting.ChattingActivity;
+import com.example.meplusplus.DataSets.Food;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.PostActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,6 +58,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
  */
+@SuppressLint("SetTextI18n")
 public class MeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
     //Controale
@@ -64,7 +69,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
     //CALORIE TRACKING
     Button fragment_me_add_food_item;
-
+    Button fragment_me_reset_macros;
 
     //Drawer
     DrawerLayout drawerLayout;
@@ -79,6 +84,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     //Firebase -- to set drawer picture and username
     FirebaseDatabase database;
     DatabaseReference reference;
+    DatabaseReference foodsReference;
     FirebaseAuth auth;
     FirebaseUser user;
 
@@ -96,96 +102,70 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     TextView fragment_me_max_fats;
     TextView frament_me_max_sugar;
 
+
+    String usserID;
+    Float sumCalories = 0f;
+    Float sumProtein = 0f;
+    Float sumCarbs = 0f;
+    Float sumFat = 0f;
+    Float sumSugar = 0f;
+
+
+    //sumtotal
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me, container, false);
         initView(view);
-        setCalorieCount();
         setMaxValuesCount();
         setDrawerUserDetails();
+        getcaloriesForTheDay();
 
         fragment_me_open_drawer.setOnClickListener(view1 -> drawerLayout.openDrawer(GravityCompat.START));
         fragment_me_add_post.setOnClickListener(view12 -> {
             getContext().startActivity(new Intent(getContext(), PostActivity.class));
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         });
-
-
         navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
-
         header_for_drawer_button_view_profile.setOnClickListener(view14 -> {
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new AccountFragment()).commit();
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         });
-
         header_for_drawer_text_username.setOnClickListener(view13 -> {
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new AccountFragment()).commit();
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         });
-
-
         drawer_circle_image_view_profile.setOnClickListener(view1 -> {
-                    startActivity(new Intent(getContext(), EditProfile.class));
-                    getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-                }
-        );
-
+            startActivity(new Intent(getContext(), EditProfile.class));
+            getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+        });
         fragment_me_chatActivity.setOnClickListener(view1 -> {
             startActivity(new Intent(getContext(), ChattingActivity.class));
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         });
-
-
         fragment_me_add_food_item.setOnClickListener(view1 -> {
 
             startActivity(new Intent(getContext(), CaloriesActivity.class));
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             getActivity().finish();
         });
+        fragment_me_reset_macros.setOnClickListener(view1 -> resetMacros());
+
         return view;
     }
 
-    private void setMaxValuesCount() {
 
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        Gson gson = new Gson();
-        String json = prefs.getString("sendItemsList", null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        ArrayList<String>  items= gson.fromJson(json, type);
-
-        fragment_me_max_calories.setText(items.get(0));
-        fragment_me_max_protein.setText(items.get(1));
-        fragment_me_max_carbs.setText(items.get(2));
-        fragment_me_max_fats.setText(items.get(3));
-        frament_me_max_sugar.setText(items.get(4));
-
-      /*  String maxCalories = getActivity().getIntent().getStringExtra("maxCalories");
-        fragment_me_max_calories.setText(maxCalories);
-
-        String maxProtein = getActivity().getIntent().getStringExtra("maxProtein");
-        fragment_me_max_protein.setText(maxProtein);
-
-        String maxCarbs = getActivity().getIntent().getStringExtra("maxCarbs");
-        fragment_me_max_carbs.setText(maxCarbs);
-
-        String maxFats = getActivity().getIntent().getStringExtra("maxFats");
-        fragment_me_max_fats.setText(maxFats);
-
-
-        String maxSugar = getActivity().getIntent().getStringExtra("maxSugar");
-        frament_me_max_sugar.setText(maxSugar);*/
-    }
-
-
-    private void initView(View view) {
+    private void initView(@NonNull View view) {
         //Controale
         fragment_me_open_drawer = view.findViewById(R.id.fragment_me_open_drawer);
         drawerLayout = view.findViewById(R.id.drawerNavTest);
         fragment_me_chatActivity = view.findViewById(R.id.fragment_me_chatActivity);
         fragment_me_add_post = view.findViewById(R.id.fragment_me_add_post);
-
+        fragment_me_reset_macros = view.findViewById(R.id.fragment_me_reset_macros);
 
         //CALORIE TRACKING
         fragment_me_add_food_item = view.findViewById(R.id.fragment_me_add_food_item);
@@ -216,26 +196,95 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference("users");
+        foodsReference = database.getReference("foods");
     }
 
-    private void setCalorieCount() {
-        String sumCalories = getActivity().getIntent().getStringExtra("sumCalories");
-        fragment_me_calories.setText(sumCalories);
+    private void getcaloriesForTheDay() {
+        //  itemId=getActivity().getIntent().getStringExtra("itemID");
+        //Daca avem ceva
+        usserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        foodsReference.child(usserID).addValueEventListener(new ValueEventListener() {
 
-        String sumProtein = getActivity().getIntent().getStringExtra("sumProtein");
-        fragment_me_protein.setText(sumProtein);
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot item : snapshot.getChildren()) {
+                    Food food = (item.getValue(Food.class));
+                    // Toast.makeText(getContext(), food.getItemID()+"", Toast.LENGTH_SHORT).show();
+                    sumCalories += food.getSumCalories();
+                    sumProtein += food.getSumProtein();
+                    sumCarbs += food.getSumCarbs();
+                    sumFat += food.getSumFats();
+                    sumSugar += food.getSumSugar();
+                }
+                if (sumCalories != null)
+                    fragment_me_calories.setText(Math.round(sumCalories) + "");
+                else
+                    fragment_me_calories.setText("0");
 
-        String sumCarbs = getActivity().getIntent().getStringExtra("sumCarbs");
-        fragment_me_carbs.setText(sumCarbs);
 
-        String sumFats = getActivity().getIntent().getStringExtra("sumFats");
-        fragment_me_fats.setText(sumFats);
+                if(sumProtein!=null)
+                    fragment_me_protein.setText(Math.round(sumProtein)+"");
+                else
+                fragment_me_protein.setText("0");
 
 
-        String sumSugar = getActivity().getIntent().getStringExtra("sumSugar");
-        fragment_me_sugar.setText(sumSugar);
+                if(sumCarbs!=null)
+                    fragment_me_carbs.setText(Math.round(sumCarbs)+"");
+                else
+                    fragment_me_carbs.setText("0");
+
+
+                if(sumFat!=null)
+                    fragment_me_fats.setText(Math.round(sumFat)+"");
+                else
+                    fragment_me_fats.setText("0");
+
+                if(sumSugar!=null)
+                    fragment_me_sugar.setText(Math.round(sumSugar)+"");
+                else
+                    fragment_me_sugar.setText("0");
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
+
+
+    private void resetMacros() {
+        usserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        foodsReference.child(usserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                sumCalories = 0f;
+                sumProtein=0f;
+                sumCarbs=0f;
+                sumFat=0f;
+                sumSugar=0f;
+                Toast.makeText(getContext(), "Calories have been reset", Toast.LENGTH_SHORT).show();
+                fragment_me_calories.setText(sumCalories + "");
+                fragment_me_protein.setText(sumProtein+"");
+                fragment_me_carbs.setText(sumCarbs+"");
+                fragment_me_fats.setText(sumFat+"");
+                fragment_me_sugar.setText(sumSugar+"");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Err", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
 
     private void setDrawerUserDetails() {
         reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -288,5 +337,24 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 break;
         }
         return false;
+    }
+
+    private void setMaxValuesCount() {
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Gson gson = new Gson();
+        String json = prefs.getString("sendItemsList", null);
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        ArrayList<String> items = gson.fromJson(json, type);
+
+        fragment_me_max_calories.setText(items.get(0));
+        fragment_me_max_protein.setText(items.get(1));
+        fragment_me_max_carbs.setText(items.get(2));
+        fragment_me_max_fats.setText(items.get(3));
+        frament_me_max_sugar.setText(items.get(4));
+
+
     }
 }

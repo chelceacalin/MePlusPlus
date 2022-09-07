@@ -46,12 +46,6 @@ public FoodModel(){
         return Float.compare(foodModel.calories, calories) == 0 && quantity == foodModel.quantity && Float.compare(foodModel.fats, fats) == 0 && Float.compare(foodModel.carbs, carbs) == 0 && Float.compare(foodModel.protein, protein) == 0 && Objects.equals(name, foodModel.name) && Objects.equals(MeasureUnits, foodModel.MeasureUnits);
     }
 
-    @NonNull
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(name, calories, quantity, MeasureUnits, fats, carbs, protein, sugar);

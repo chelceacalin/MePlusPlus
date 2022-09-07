@@ -16,9 +16,9 @@ import java.util.List;
 
 public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewholder> {
 
-    Context context;
-    String Uname;
-    List<Message> list;
+    final Context context;
+    final String Uname;
+    final List<Message> list;
     public boolean isSender;
     Message item;
 
@@ -57,7 +57,7 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
 
 
     public  class Viewholder extends RecyclerView.ViewHolder{
-        TextView textView;
+        final TextView textView;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             if(!isSender)

@@ -5,15 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.DataSets.FoodModel;
 import com.example.meplusplus.R;
 import com.google.gson.Gson;
@@ -24,18 +21,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import io.github.muddz.styleabletoast.StyleableToast;
 
 public class FoodApiVolley {
 
-    Context context;
+    final Context context;
     String food_calorie;
-    String ApiURL="https://trackapi.nutritionix.com/v2/natural/nutrients";
+    final String ApiURL="https://trackapi.nutritionix.com/v2/natural/nutrients";
     JSONObject data;
     RequestQueue q;
     List<FoodModel> items;
