@@ -71,15 +71,24 @@
     <string name="title_activity_chatting">ChattingActivity</string>
     <string name="send">Send</string>
     <string name="title_activity_calories">CaloriesActivity</string>
-    
-    
-    
-    <string-array name="numbers" >
+
+
+    <string-array name="numbers">
         <item>Little to no exercise</item>
         <item tools:ignore="TypographyDashes">Light Exercise (1-2 days/week)</item>
         <item tools:ignore="TypographyDashes">Generally Active (3-5 days/week)</item>
         <item tools:ignore="TypographyDashes">Active (5-7 days/week)</item>
-
-
     </string-array>
+
+
+
+    <string-array name="musicplayer">
+        <item> Music </item>
+        <item tools:ignore="TypographyDashes">Play Music</item>
+        <item tools:ignore="TypographyDashes">Pause Music</item>
+        <item tools:ignore="TypographyDashes">Stop Music</item>
+    </string-array>
+
+
+    <string name="title_activity_zen_mode">ZenModeActivity</string>
 </resources>

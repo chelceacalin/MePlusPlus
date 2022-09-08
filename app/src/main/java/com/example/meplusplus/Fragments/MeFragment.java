@@ -28,6 +28,7 @@ import com.example.meplusplus.FoodTracking.CaloriesActivity;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.PostActivity;
+import com.example.meplusplus.ZenMode.ZenModeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -329,9 +330,9 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 break;
 
             case R.id.timerzenmode:
-                Toast.makeText(getContext(), "Zen Mode", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), ZenModeActivity.class));
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
-
             case R.id.drawer_signout:
                 Toast.makeText(getContext(), "Sign Out", Toast.LENGTH_SHORT).show();
                 break;

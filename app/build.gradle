@@ -73,4 +73,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     // Textview-uri stilate
     implementation 'io.github.muddz:styleabletoast:2.4.0'
+
+//Pt countdown timer
+    implementation 'com.github.anugotta:FlipTimerView:v1.5'
 }

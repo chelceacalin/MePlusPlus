@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flipTimer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_blurry_gradient_haikei__1_"
+    tools:context=".ZenMode.ZenModeActivity"
+    tools:ignore="HardcodedText"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15sp"
+            android:fontFamily="@font/bigboldfont"
+            android:text="Enter Zen Mode"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            />
+
+
+        <!-- Timer Settings -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45sp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/activity_zen_mode_15minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
+                android:backgroundTint="@color/SlateBlue"
+                android:text="15 min"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle"
+              />
+
+            <Button
+                android:id="@+id/activity_zen_mode_10minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
+                android:backgroundTint="@color/SlateBlue"
+                android:text="10 min"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle"/>
+
+            <Button
+                android:id="@+id/activity_zen_mode_5minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
+                android:backgroundTint="@color/SlateBlue"
+                android:text="5 min"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle"/>
+
+        </LinearLayout>
+
+
+        <com.asp.fliptimerviewlibrary.CountDownClock
+            android:id="@+id/timerProgramCountdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="45sp"
+            android:background="@drawable/maipatratnegru"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:padding="10sp"
+            flipTimer:almostFinishedCallbackTimeInSeconds="5"
+            flipTimer:animationDuration="850"
+            flipTimer:countdownTickInterval="1000"
+            flipTimer:digitDividerColor="#35C2C2C2"
+            flipTimer:digitPadding="2dp"
+            flipTimer:digitTextColor="@color/white"
+            flipTimer:digitTextSize="24sp"
+            flipTimer:digitWidth="28dp"
+            flipTimer:halfDigitHeight="22dp"
+            flipTimer:resetSymbol="8"
+            flipTimer:splitterPadding="0dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/activity_zen_mode_add_1_minute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10sp"
+                android:backgroundTint="@color/SlateBlue"
+                android:text="Add 1 Minute"
+                tools:ignore="ButtonStyle"
+                />
+
+            <Button
+                android:id="@+id/activity_zen_mode_remove_1_minute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10sp"
+                android:backgroundTint="@color/SlateBlue"
+                android:text="Remove 1 Minute"
+                android:textAllCaps="false"
+                tools:ignore="ButtonStyle"
+                />
+
+        </LinearLayout>
+
+
+
+        <Spinner
+            android:id="@+id/activity_zen_mode_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25sp"
+            android:background="@drawable/maipatratnegru"
+            android:gravity="center_horizontal"
+            android:padding="5sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10sp"
+        tools:ignore="UseCompoundDrawables">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25sp"
+            android:text="Press Timer To Finish Sooner"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/activity_zen_mode_clock_stop"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/ic_baseline_timer_24"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+</RelativeLayout>
