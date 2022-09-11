@@ -59,7 +59,7 @@ public class CaloriesActivity extends AppCompatActivity {
     TextView activity_calories_carbs;
     TextView activity_calories_fats;
     TextView activity_calories_sugar;
-     float sumCalories,sumProtein,sumCarbs,sumFats,sumSugar;
+    float sumCalories,sumProtein,sumCarbs,sumFats,sumSugar;
      //Sa le trimitem la activitatea principala
     String foodItemsSearched;
 
@@ -172,7 +172,6 @@ String user;
                     }
                 });
 
-                // Schimbam din activitate in fragment
 
 
 

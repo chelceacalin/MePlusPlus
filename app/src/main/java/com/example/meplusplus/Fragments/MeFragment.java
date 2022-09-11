@@ -26,8 +26,8 @@ import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.Chatting.ChattingActivity;
 import com.example.meplusplus.DataSets.Food;
 import com.example.meplusplus.DataSets.User;
-import com.example.meplusplus.DataSets.WaterModel;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
+import com.example.meplusplus.LoginActivity;
 import com.example.meplusplus.R;
 import com.example.meplusplus.ToDo.ToDoActivity;
 import com.example.meplusplus.Utils.EditProfile;
@@ -74,7 +74,9 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     ImageView fragment_me_open_drawer;
     ImageView fragment_me_chatActivity;
     ImageView fragment_me_add_post;
-
+    CircularProgressIndicator circularProgress;
+    Button activity_drink_water_add_200ml;
+    View header;
 
     //CALORIE TRACKING
     Button fragment_me_add_food_item;
@@ -114,6 +116,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     TextView fragment_me_max_water;
 
 
+    //Diverse
     String usserID;
     String waterUserID;
     Float sumCalories = 0f;
@@ -123,9 +126,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     Float sumSugar = 0f;
 
 
-    // DRINK WATER
-    CircularProgressIndicator circularProgress;
-    Button activity_drink_water_add_200ml;
+    //Diverse Water
     int waterDrank = 0;
     int wdr = 0;
     int current = 0;
@@ -146,7 +147,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         getcaloriesForTheDay();
         setWaterMaxValue();
         setMaxProgress();
-
 
         fragment_me_open_drawer.setOnClickListener(view1 -> drawerLayout.openDrawer(GravityCompat.START));
         fragment_me_add_post.setOnClickListener(view12 -> {
@@ -171,28 +171,18 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         });
         fragment_me_add_food_item.setOnClickListener(view1 -> {
-
         startActivity(new Intent(getContext(), CaloriesActivity.class));
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             getActivity().finish();
 
-
         });
         fragment_me_reset_macros.setOnClickListener(view1 -> resetMacros());
 
-
-        activity_drink_water_add_200ml.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String itemID = waterReference.push().getKey();
-                Map<String, Integer> map = new HashMap<>();
-                map.put("sumWater", 200);
-                waterReference.child(waterUserID).child(itemID).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                    }
-                });
-            }
+        activity_drink_water_add_200ml.setOnClickListener(view1 -> {
+            String itemID = waterReference.push().getKey();
+            Map<String, Integer> map = new HashMap<>();
+            map.put("sumWater", 200);
+            waterReference.child(waterUserID).child(itemID).setValue(map);
         });
 
         //Set water levels
@@ -213,10 +203,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                     circularProgress.setProgress(0, waterDrank);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -258,13 +246,14 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
         navigationView = view.findViewById(R.id.drawerNavigationView);
         //Sa putem modifica imaginea din header - S.O
-        View header = navigationView.getHeaderView(0);
-        //Drawrs items
+        header = navigationView.getHeaderView(0);
+
+        //Drawer items
         drawer_circle_image_view_profile = header.findViewById(R.id.drawer_circle_image_view_profile);
         header_for_drawer_text_username = header.findViewById(R.id.header_for_drawer_text_username);
         header_for_drawer_button_view_profile = header.findViewById(R.id.header_for_drawer_button_view_profile);
-        //drawer_circle_image_view_profile.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
 
+        //Firebase
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
@@ -276,16 +265,13 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     }
 
     private void getcaloriesForTheDay() {
-        //  itemId=getActivity().getIntent().getStringExtra("itemID");
         //Daca avem ceva
         usserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         foodsReference.child(usserID).addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()) {
                     Food food = (item.getValue(Food.class));
-                    // Toast.makeText(getContext(), food.getItemID()+"", Toast.LENGTH_SHORT).show();
                     sumCalories += food.getSumCalories();
                     sumProtein += food.getSumProtein();
                     sumCarbs += food.getSumCarbs();
@@ -297,18 +283,15 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 else
                     fragment_me_calories.setText("0");
 
-
                 if (sumProtein != null)
                     fragment_me_protein.setText(Math.round(sumProtein) + "");
                 else
                     fragment_me_protein.setText("0");
 
-
                 if (sumCarbs != null)
                     fragment_me_carbs.setText(Math.round(sumCarbs) + "");
                 else
                     fragment_me_carbs.setText("0");
-
 
                 if (sumFat != null)
                     fragment_me_fats.setText(Math.round(sumFat) + "");
@@ -320,12 +303,10 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 else
                     fragment_me_sugar.setText("0");
 
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -334,7 +315,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
     private void resetMacros() {
         usserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         foodsReference.child(usserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -360,15 +340,12 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         waterReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-
                 fragment_me_water.setText(0 + "");
                 circularProgress.setProgress(0, waterDrank);
                 circularProgress.setProgressColor(Color.BLUE);
                 circularProgress.setDotColor(Color.BLACK);
-
             }
         });
-
     }
 
 
@@ -378,14 +355,11 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue(User.class).getImageurl().equals("")) {
-
                 } else {
                     Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
-                    //   Glide.with(getContext()).load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
                     header_for_drawer_text_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -421,16 +395,16 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
             case R.id.drawer_signout:
-                Toast.makeText(getContext(), "Sign Out", Toast.LENGTH_SHORT).show();
+                auth.signOut();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
                 break;
         }
         return false;
     }
 
     private void setMaxValuesCount() {
-
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         Gson gson = new Gson();
         String json = prefs.getString("sendItemsList", null);
         Type type = new TypeToken<ArrayList<String>>() {
@@ -450,16 +424,12 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             fragment_me_max_fats.setText(0 + "");
             frament_me_max_sugar.setText(0 + "");
         }
-
-
     }
 
     private void setWaterMaxValue() {
-
-        SharedPreferences sharedpref1 = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
-        waterDrank = sharedpref1.getInt("waterDrank", 0);
+         prefs = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
+        waterDrank = prefs.getInt("waterDrank", 0);
         if (waterDrank > 0) {
-
             fragment_me_max_water.setText(waterDrank + "");
         } else {
             fragment_me_max_water.setText(0 + "");
@@ -468,8 +438,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     }
 
     private void setMaxProgress() {
-        SharedPreferences sharedpref1 = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
-        wdr = sharedpref1.getInt("waterDrank", 0);
+        prefs = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
+        wdr = prefs.getInt("waterDrank", 0);
         circularProgress.setMaxProgress(Math.max(wdr, 0));
     }
 }

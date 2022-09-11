@@ -1,9 +1,14 @@
 package com.example.meplusplus;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +20,7 @@ import com.example.meplusplus.Fragments.MeFragment;
 import com.example.meplusplus.Fragments.RecipesFragment;
 import com.example.meplusplus.Fragments.SearchPeopleFragment;
 import com.example.meplusplus.Fragments.Social_PageFragment;
+import com.example.meplusplus.WaterReminder.ReminderBroadcast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /*
@@ -35,24 +41,47 @@ public class MainActivity extends AppCompatActivity {
     //Controale
     BottomNavigationView bottomNavigationView;
     Fragment fragment;
+
     //Diverse
     int ID_fragment;
     boolean openF2;
+    boolean isDarkModeOn;
+    boolean wantReminders;
+
+    //Shared Preferences
     Bundle extras;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    boolean isDarkModeOn;
+
 
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         init();
-        loadDarkWhiteModeOnsTART();
+        loadDarkWhiteModeOnStart();
+        createNotificationChannel();
 
-        //Daca nu avem niciun fragment
+
+        sharedPreferences = getSharedPreferences("wantReminders", MODE_PRIVATE);
+        wantReminders =sharedPreferences.getBoolean("yesToReminders",false);
+
+        if(wantReminders) {
+            Intent intent=new Intent(MainActivity.this, ReminderBroadcast.class);
+            PendingIntent pendingIntent= null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,PendingIntent.FLAG_IMMUTABLE);
+            }
+            AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
+            long curr=System.currentTimeMillis();
+            long oneMinute=1000*5;
+            //long oneMinute=1000*60*60; sa fie din ora in ora
+            alarmManager.set(AlarmManager.RTC_WAKEUP, oneMinute,pendingIntent);
+        }
+
+
+            //Daca nu avem niciun fragment
         if(savedInstanceState == null) {
             getSupportFragmentManager().
                     beginTransaction().replace(R.id.main_fragment_container,new MeFragment()).commit();
@@ -79,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (openF2) {
            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).addToBackStack(null).commit();
-            bottomNavigationView.getMenu().getItem(1).setChecked(true);
+            bottomNavigationView.getMenu().getItem(0).setChecked(true);
         }
         //Switch from Calories Activity to MeFragment
         if (extras != null && extras.containsKey("MetabolismToMeFragment")){
@@ -88,9 +117,21 @@ public class MainActivity extends AppCompatActivity {
         }
         if (openF2) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).addToBackStack(null).commit();
-            bottomNavigationView.getMenu().getItem(1).setChecked(true);
+            bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        }
+
+        //Switch from Drink Water Activity to MeFragment
+        if (extras != null && extras.containsKey("MeFragmentPLS2")){
+            openF2 = extras.getBoolean("MeFragmentPLS2");
+
+        }
+        if (openF2) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).addToBackStack(null).commit();
+            bottomNavigationView.getMenu().getItem(0).setChecked(true);
         }
     }
+
+
 
     //Switch Between Fragments
     private void displayFragment(int itemId) {
@@ -124,8 +165,7 @@ public class MainActivity extends AppCompatActivity {
         //Daca nu e MeFragment
         if (getFragmentManager().getBackStackEntryCount() <= 0)
             bottomNavigationView.getMenu().getItem(0).setChecked(true);
-
-
+        goHome();
         super.onBackPressed();
 
     }
@@ -137,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void loadDarkWhiteModeOnsTART() {
+    private void loadDarkWhiteModeOnStart() {
         //Load White/Dark Mode on App Start
         sharedPreferences = this.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -148,5 +188,20 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            CharSequence name="MePlusPlus";
+            String description="Take another sip...";
+            int importance= NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel=new NotificationChannel("notifyMe",name,importance);
+            channel.setDescription(description);
+
+
+            NotificationManager notificationManager=getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
 }

@@ -124,6 +124,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Pt Notificari-->
+        <receiver android:name=".WaterReminder.ReminderBroadcast"/>
     </application>
 
 </manifest>
