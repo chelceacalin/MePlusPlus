@@ -132,18 +132,22 @@
                 android:hint=" 2000"
                 android:textColorHint="@color/white"
                 tools:ignore="HardcodedText"/>
-            <!--SUGAR INTAKES-->
+
+
+
+            <!-- Water-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="💧: "
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="🍬: "
-                android:layout_marginStart="25sp"
+                android:textSize="13sp"
                 android:textStyle="bold"
+                android:layout_marginStart="20sp"
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/fragment_me_sugar"
+                android:id="@+id/fragment_me_water"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="0"
@@ -154,18 +158,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text=" / "
+                android:text="/"
                 android:textStyle="bold"
                 android:textSize="17sp"
                 tools:ignore="HardcodedText" />
             <TextView
-                android:id="@+id/frament_me_max_sugar"
+                android:id="@+id/fragment_me_max_water"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:hint=" 75"
+                android:hint="2000"
                 android:textColorHint="@color/white"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
+
         </LinearLayout>
 
         <!-- PROTEIN CARBS FATS-->
@@ -203,7 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text=" / "
+                android:text="/"
                 android:textStyle="bold"
                 android:textSize="17sp"
                 tools:ignore="HardcodedText" />
@@ -212,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:hint=" 200"
+                android:hint="200"
                 android:textColorHint="@color/white"
                 tools:ignore="HardcodedText" />
 
@@ -239,7 +244,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text=" / "
+                android:text="/"
                 android:textStyle="bold"
                 android:textSize="17sp"
                 tools:ignore="HardcodedText"/>
@@ -278,7 +283,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text=" / "
+                android:text="/"
                 android:textStyle="bold"
                 android:textSize="17sp"
                 tools:ignore="HardcodedText"
@@ -288,10 +293,46 @@
                 android:id="@+id/fragment_me_max_fats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint=" 200"
+                android:hint="200"
                 android:textColorHint="@color/white"
                 android:textColor="?android:attr/textColorPrimary"
                 tools:ignore="HardcodedText" />
+
+
+            <!--SUGAR INTAKES-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="🍬: "
+                android:layout_marginStart="7sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/fragment_me_sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="0"
+                android:textColorHint="@color/white"
+                android:textColor="?android:attr/textColorPrimary"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="/"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/frament_me_max_sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:hint="75"
+                android:textColorHint="@color/white"
+                tools:ignore="HardcodedText"/>
 
         </LinearLayout>
 
@@ -330,8 +371,29 @@
         tools:ignore="HardcodedText"
         style="?android:attr/buttonBarButtonStyle" />
 </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+    <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
+        android:id="@+id/circular_progress"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50sp" />
 
+    <Button
+        android:id="@+id/activity_drink_water_add_200ml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40sp"
+        android:backgroundTint="@color/MediumBlue"
+        android:padding="15sp"
+        android:text="Add 200 ml" />
+
+</LinearLayout>
 
 
     </LinearLayout>

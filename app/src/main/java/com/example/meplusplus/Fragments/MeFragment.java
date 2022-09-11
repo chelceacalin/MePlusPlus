@@ -1,8 +1,10 @@
 package com.example.meplusplus.Fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -26,8 +28,10 @@ import com.example.meplusplus.DataSets.Food;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.ToDo.ToDoActivity;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.PostActivity;
+import com.example.meplusplus.WaterReminder.DrinkWater;
 import com.example.meplusplus.ZenMode.ZenModeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,6 +52,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /*
@@ -95,13 +100,14 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     TextView fragment_me_carbs;
     TextView fragment_me_fats;
     TextView fragment_me_sugar;
-
+    TextView fragment_me_water;
     //Maximum values
     TextView fragment_me_max_calories;
     TextView fragment_me_max_protein;
     TextView fragment_me_max_carbs;
     TextView fragment_me_max_fats;
     TextView frament_me_max_sugar;
+    TextView fragment_me_max_water;
 
 
     String usserID;
@@ -110,6 +116,15 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     Float sumCarbs = 0f;
     Float sumFat = 0f;
     Float sumSugar = 0f;
+
+
+
+    // DRINK WATER
+    CircularProgressIndicator circularProgress;
+    Button activity_drink_water_add_200ml;
+    int waterDrank=0;
+    int wdr=0;
+    int current = 0;
 
 
     //sumtotal
@@ -125,6 +140,9 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         setMaxValuesCount();
         setDrawerUserDetails();
         getcaloriesForTheDay();
+        setWaterMaxValue();
+        setMaxProgress();
+
 
         fragment_me_open_drawer.setOnClickListener(view1 -> drawerLayout.openDrawer(GravityCompat.START));
         fragment_me_add_post.setOnClickListener(view12 -> {
@@ -156,6 +174,20 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         });
         fragment_me_reset_macros.setOnClickListener(view1 -> resetMacros());
 
+
+        activity_drink_water_add_200ml.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                current += 200;
+                circularProgress.setCurrentProgress(current);
+
+                if(current>waterDrank){
+                    circularProgress.setProgressColor(Color.GREEN);
+                    circularProgress.setDotColor(Color.GRAY);
+                }
+            }
+        });
+
         return view;
     }
 
@@ -175,6 +207,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         fragment_me_carbs = view.findViewById(R.id.fragment_me_carbs);
         fragment_me_fats = view.findViewById(R.id.fragment_me_fats);
         fragment_me_sugar = view.findViewById(R.id.fragment_me_sugar);
+        fragment_me_water=view.findViewById(R.id.fragment_me_water);
 
         //max values
         fragment_me_max_calories = view.findViewById(R.id.fragment_me_max_calories);
@@ -182,7 +215,13 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         fragment_me_max_carbs = view.findViewById(R.id.fragment_me_max_carbs);
         fragment_me_max_fats = view.findViewById(R.id.fragment_me_max_fats);
         frament_me_max_sugar = view.findViewById(R.id.frament_me_max_sugar);
+        fragment_me_max_water=view.findViewById(R.id.fragment_me_max_water);
 
+        //Circular Progress Bar
+        circularProgress = view.findViewById(R.id.circular_progress);
+        circularProgress.setCurrentProgress(0);
+        circularProgress.setTextColor(Color.WHITE);
+        activity_drink_water_add_200ml = view.findViewById(R.id.activity_drink_water_add_200ml);
 
         navigationView = view.findViewById(R.id.drawerNavigationView);
         //Sa putem modifica imaginea din header - S.O
@@ -320,13 +359,15 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
             case R.id.drawer_drink:
-                Toast.makeText(getContext(), "Drink Water", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), DrinkWater.class));
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
             case R.id.drawer_progress:
                 Toast.makeText(getContext(), "Progress", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.todolist:
-                Toast.makeText(getContext(), "To Do List", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), ToDoActivity.class));
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
 
             case R.id.timerzenmode:
@@ -350,12 +391,44 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         }.getType();
         ArrayList<String> items = gson.fromJson(json, type);
 
-        fragment_me_max_calories.setText(items.get(0));
-        fragment_me_max_protein.setText(items.get(1));
-        fragment_me_max_carbs.setText(items.get(2));
-        fragment_me_max_fats.setText(items.get(3));
-        frament_me_max_sugar.setText(items.get(4));
+        if(items!=null){
+            fragment_me_max_calories.setText(items.get(0));
+            fragment_me_max_protein.setText(items.get(1));
+            fragment_me_max_carbs.setText(items.get(2));
+            fragment_me_max_fats.setText(items.get(3));
+            frament_me_max_sugar.setText(items.get(4));
+        }
+        else
+        {
+            fragment_me_max_calories.setText(0+"");
+            fragment_me_max_protein.setText(0+"");
+            fragment_me_max_carbs.setText(0+"");
+            fragment_me_max_fats.setText(0+"");
+            frament_me_max_sugar.setText(0+"");
+        }
 
 
+
+    }
+
+    private  void setWaterMaxValue(){
+
+        SharedPreferences sharedpref1 = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
+        waterDrank = sharedpref1.getInt("waterDrank", 0);
+        if(waterDrank>0){
+
+            fragment_me_max_water.setText(waterDrank+"");
+        }
+        else
+        {
+            fragment_me_max_water.setText(0+"");
+        }
+
+    }
+
+    private void setMaxProgress(){
+        SharedPreferences sharedpref1 =getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
+        wdr = sharedpref1.getInt("waterDrank", 0);
+        circularProgress.setMaxProgress(Math.max(wdr, 0));
     }
 }

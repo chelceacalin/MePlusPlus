@@ -5,14 +5,18 @@
     tools:ignore="LockedOrientationActivity">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -24,12 +28,20 @@
         android:theme="@style/Theme.Meplusplus"
         tools:targetApi="31">
         <activity
+            android:name=".WaterReminder.DrinkWater"
+            android:exported="true"
+            android:theme="@style/Theme.Meplusplus.NoActionBar"/>
+        <activity
+            android:name=".ToDo.ToDoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_to_do"
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity
             android:name=".ZenMode.ZenModeActivity"
             android:exported="true"
             android:label="@string/title_activity_zen_mode"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
             android:screenOrientation="portrait"
-            />
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".CalorieCalculator.CalculateMetabolismActivity"
             android:exported="true"
