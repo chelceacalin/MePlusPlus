@@ -113,25 +113,30 @@ String user;
                 activity_calories_search_items.performClick();
 
                 //PT ListView
-                arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1,arrayList );
-                SeeItemsListView.setAdapter(arrayAdapter);
+                if(arrayList!=null){
+                    arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1,arrayList );
+                    SeeItemsListView.setAdapter(arrayAdapter);
 
-                sumCalories=0;sumProtein=0;sumCarbs=0;sumFats=0;sumSugar=0;
-                for (FoodModel item:arrayList){
-                    sumCalories+=item.getCalories();
-                    sumProtein+=item.getProtein();
-                    sumCarbs+=item.getCarbs();
-                    sumFats=item.getFats();
-                    sumSugar+=item.getSugar();
+                    sumCalories=0;sumProtein=0;sumCarbs=0;sumFats=0;sumSugar=0;
+                    for (FoodModel item:arrayList){
+                        sumCalories+=item.getCalories();
+                        sumProtein+=item.getProtein();
+                        sumCarbs+=item.getCarbs();
+                        sumFats=item.getFats();
+                        sumSugar+=item.getSugar();
+                    }
+
+                    activity_calories_total_calories.setText(sumCalories+"");
+                    activity_calories_protein.setText(sumProtein+"");
+                    activity_calories_carbs.setText(sumCarbs+"");
+                    activity_calories_fats.setText(sumFats+"");
+                    activity_calories_sugar.setText(sumSugar+"");
                 }
+
+
                 //Calculezi suma itemetelor din listview
 
 
-                activity_calories_total_calories.setText(sumCalories+"");
-                activity_calories_protein.setText(sumProtein+"");
-                activity_calories_carbs.setText(sumCarbs+"");
-                activity_calories_fats.setText(sumFats+"");
-                activity_calories_sugar.setText(sumSugar+"");
 
             }
         });
