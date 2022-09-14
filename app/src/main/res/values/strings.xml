@@ -91,4 +91,6 @@
 
     <string name="title_activity_zen_mode">ZenModeActivity</string>
     <string name="title_activity_to_do">ToDoActivity</string>
+
+    <string name="done">done</string>
 </resources>

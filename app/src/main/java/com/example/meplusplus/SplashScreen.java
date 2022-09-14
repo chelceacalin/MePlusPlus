@@ -57,7 +57,6 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         init();
-
          settings = getSharedPreferences("prefs", 0);
          firstRun = settings.getBoolean("firstRun", false);
         if (!firstRun)
