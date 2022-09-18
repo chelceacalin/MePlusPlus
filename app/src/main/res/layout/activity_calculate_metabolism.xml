@@ -14,14 +14,33 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text=" Total Daily Expenditure"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/activity_calculate_metabolism_close"
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_close"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5sp"
+                android:layout_marginTop="5sp"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text=" Total Daily Expenditure"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
 
         <!-- RADIO GROUP GENDER-->
@@ -210,62 +229,58 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_horizontal"
-            >
-        <Button
-            android:id="@+id/activity_calculate_metabolism_button_calculate"
-            android:layout_width="wrap_content"
-            android:layout_height="40sp"
-            android:layout_marginTop="13sp"
-            android:backgroundTint="@color/MediumBlue"
-            android:text="Calculate"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_marginEnd="5sp"/>
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/activity_calculate_metabolism_button_calculate"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
+                android:backgroundTint="@color/MediumBlue"
+                android:text="Calculate"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/activity_calculate_metabolism_caloriestoconsume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
                 android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
                 android:backgroundTint="@color/MediumBlue"
                 android:hint="Calories"
+                android:textColor="@color/white"
                 android:textColorHint="#c2c2c2"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginStart="5sp"
-                android:layout_marginEnd="5sp"
-                />
+                tools:ignore="ButtonStyle" />
+
             <Button
                 android:id="@+id/activity_calculate_metabolism_save"
                 android:layout_width="wrap_content"
                 android:layout_height="40sp"
+                android:layout_marginStart="5sp"
                 android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
                 android:backgroundTint="@color/MediumBlue"
                 android:text="Save"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_marginEnd="5sp"
-                android:layout_marginStart="5sp"/>
-
-
-
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
 
         </LinearLayout>
 
 
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/activity_calculate_metabolism_piechart"
-                android:layout_width="fill_parent"
-                android:layout_height="190sp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="10sp"
-                />
-
-
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/activity_calculate_metabolism_piechart"
+            android:layout_width="fill_parent"
+            android:layout_height="190sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="10sp" />
 
 
     </LinearLayout>

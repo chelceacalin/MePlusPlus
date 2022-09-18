@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -44,6 +45,8 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
     Spinner activity_calculate_metabolism_spinner;
     Button activity_calculate_metabolism_button_calculate;
     Button activity_calculate_metabolism_save;
+    ImageView activity_calculate_metabolism_close;
+
     //Metabolism Numbers
     EditText activity_calculate_metabolism_height;
     EditText activity_calculate_metabolism_weight;
@@ -165,7 +168,19 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
 
             }
         });
+
+        activity_calculate_metabolism_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalculateMetabolismActivity.this, MainActivity.class);
+                intent.putExtra("MetabolismToMeFragment", true);
+                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                finish();
+                startActivity(intent);
+            }
+        });
     }
+
 
 
     private void init() {
@@ -175,7 +190,7 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
         activity_calculate_metabolism_option_female = findViewById(R.id.activity_calculate_metabolism_option_female);
         activity_calculate_metabolism_spinner = findViewById(R.id.activity_calculate_metabolism_spinner);
         activity_calculate_metabolism_button_calculate = findViewById(R.id.activity_calculate_metabolism_button_calculate);
-
+        activity_calculate_metabolism_close=findViewById(R.id.activity_calculate_metabolism_close);
         //Piechart
         pieChart = findViewById(R.id.activity_calculate_metabolism_piechart);
 

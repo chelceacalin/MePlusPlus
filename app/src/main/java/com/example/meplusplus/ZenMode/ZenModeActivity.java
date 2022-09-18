@@ -3,6 +3,7 @@ package com.example.meplusplus.ZenMode;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.ToneGenerator;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.asp.fliptimerviewlibrary.CountDownClock;
+import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
 
@@ -29,6 +31,7 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
     CountDownClock countDownClock;
     Button activity_zen_mode_5minutes, activity_zen_mode_10minutes, activity_zen_mode_15minutes;
     Button activity_zen_mode_add_1_minute, activity_zen_mode_remove_1_minute;
+    ImageView activity_zen_mode_close;
     //Music
     MediaPlayer mediaPlayer;
 
@@ -174,6 +177,14 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
         });
 
 
+        activity_zen_mode_close.setOnClickListener(view1 ->{
+            Intent intent = new Intent(ZenModeActivity.this, MainActivity.class);
+            intent.putExtra("MetabolismToMeFragment", true);
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+            finish();
+            startActivity(intent);
+        });
+
         activity_zen_mode_remove_1_minute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,8 +251,10 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
                 }
                 countDownClock.resetCountdownTimer();
                 Intent intent = new Intent(ZenModeActivity.this, MainActivity.class);
-                startActivity(intent);
+                intent.putExtra("MetabolismToMeFragment", true);
                 overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -256,6 +269,7 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
         activity_zen_mode_remove_1_minute = findViewById(R.id.activity_zen_mode_remove_1_minute);
         activity_zen_mode_spinner = findViewById(R.id.activity_zen_mode_spinner);
         activity_zen_mode_clock_stop = findViewById(R.id.activity_zen_mode_clock_stop);
+        activity_zen_mode_close=findViewById(R.id.activity_zen_mode_close);
     }
 
     private void initSpinner() {
@@ -304,5 +318,14 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ZenModeActivity.this, MainActivity.class);
+        intent.putExtra("MetabolismToMeFragment", true);
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+        finish();
+        startActivity(intent);
     }
 }

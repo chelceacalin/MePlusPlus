@@ -7,14 +7,6 @@
     tools:ignore="HardcodedText"
     android:background="@drawable/ic_blurry_gradient_haikei__1_">
 
-<ImageView
-    android:id="@+id/activity_drink_water_close"
-    android:layout_width="40sp"
-    android:layout_height="40sp"
-    android:background="@drawable/ic_baseline_close"
-    android:layout_margin="10sp"
-    tools:ignore="ContentDescription" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,15 +14,37 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15sp"
-            android:text=" Drink Water "
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+
+            <ImageView
+                android:id="@+id/activity_drink_water_close"
+                android:layout_width="40sp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginBottom="10sp"
+                android:background="@drawable/ic_baseline_close"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15sp"
+                android:gravity="center_horizontal"
+                android:text=" Drink Water "
+                android:textColor="@color/white"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/activity_drink_water_modify_your_goals"

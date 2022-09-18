@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.ToDo.ToDoActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,7 +34,6 @@ public class DrinkWater extends AppCompatActivity {
     RadioGroup activity_drink_water_radiogroup;
     RadioButton activity_drink_water_ofcourse;
     RadioButton activity_drink_water_nothankyou;
-
     //Firebase
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -138,10 +138,10 @@ public class DrinkWater extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DrinkWater.this, MainActivity.class);
-                intent.putExtra("MeFragmentPLS2", true);
+                intent.putExtra("MetabolismToMeFragment", true);
+                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 finish();
                 startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
             }
         });
 
@@ -172,10 +172,9 @@ public class DrinkWater extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(DrinkWater.this, MainActivity.class);
-        intent.putExtra("MeFragmentPLS2", true);
+        intent.putExtra("MetabolismToMeFragment", true);
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         finish();
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-        super.onBackPressed();
     }
 }

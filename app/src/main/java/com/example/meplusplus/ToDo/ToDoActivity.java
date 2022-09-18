@@ -1,6 +1,7 @@
 package com.example.meplusplus.ToDo;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
+import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,7 +32,7 @@ public class ToDoActivity extends AppCompatActivity {
     EditText actvity_to_do_edittext;
 ImageButton activity_to_do_complete_all;
 ImageButton activity_to_do_delete_all;
-
+ImageView activity_to_do_close;
 
     //Listview
     ListView activity_to_do_listview;
@@ -118,7 +122,16 @@ ImageButton activity_to_do_delete_all;
                 WriteToFileClass.write(ToDoActivity.this, items, "todolistitems.txt");
             }
         });
-
+        activity_to_do_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ToDoActivity.this, MainActivity.class);
+                intent.putExtra("MetabolismToMeFragment", true);
+                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                finish();
+                startActivity(intent);
+            }
+        });
       /*  activity_to_do_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -160,6 +173,7 @@ ImageButton activity_to_do_delete_all;
         actvity_to_do_edittext = findViewById(R.id.actvity_to_do_edittext);
         activity_to_do_complete_all=findViewById(R.id.activity_to_do_complete_all);
         activity_to_do_delete_all=findViewById(R.id.activity_to_do_delete_all);
+        activity_to_do_close=findViewById(R.id.activity_to_do_close);
     }
 
 
@@ -182,5 +196,14 @@ ImageButton activity_to_do_delete_all;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ToDoActivity.this, MainActivity.class);
+        intent.putExtra("MetabolismToMeFragment", true);
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+        finish();
+        startActivity(intent);
     }
 }

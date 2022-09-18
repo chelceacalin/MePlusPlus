@@ -8,6 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".Fragments.MeFragment"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
+    tools:openDrawer="start"
     >
     <!-- comm rand 10 pt a scapa de aia
     tools:openDrawer="start"
