@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -51,9 +52,13 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -70,10 +75,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 @SuppressLint("SetTextI18n")
 public class MeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
+
     //Controale
     ImageView fragment_me_open_drawer;
     ImageView fragment_me_chatActivity;
     ImageView fragment_me_add_post;
+    TextView fragment_me_citate;
     CircularProgressIndicator circularProgress;
     Button activity_drink_water_add_200ml;
     View header;
@@ -81,17 +88,14 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     //CALORIE TRACKING
     Button fragment_me_add_food_item;
     Button fragment_me_reset_macros;
-
     //Drawer
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
-
     //Drawer Items
     CircleImageView drawer_circle_image_view_profile;
     TextView header_for_drawer_text_username;
     Button header_for_drawer_button_view_profile;
-
     //Firebase -- to set drawer picture and username
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -99,7 +103,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     DatabaseReference waterReference;
     FirebaseAuth auth;
     FirebaseUser user;
-
     //Calories stuff
     TextView fragment_me_calories;
     TextView fragment_me_protein;
@@ -114,8 +117,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     TextView fragment_me_max_fats;
     TextView frament_me_max_sugar;
     TextView fragment_me_max_water;
-
-
     //Diverse
     String usserID;
     String waterUserID;
@@ -124,8 +125,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     Float sumCarbs = 0f;
     Float sumFat = 0f;
     Float sumSugar = 0f;
-
-
     //Diverse Water
     int waterDrank = 0;
     int wdr = 0;
@@ -135,6 +134,16 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     //sumtotal
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
+
+
+    //Timer Quotes
+    long START_TIME_IN_MILLIS = (1000 * 10);
+    CountDownTimer mCountDownTimer;
+    boolean mTimerRunning;
+    long mTimeLeftInMillis;
+    long mEndTime;
+    List<String> listQuotes = new LinkedList<>();
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -147,6 +156,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         getcaloriesForTheDay();
         setWaterMaxValue();
         setMaxProgress();
+        initListQuotes();
+        startTimer();
 
         fragment_me_open_drawer.setOnClickListener(view1 -> drawerLayout.openDrawer(GravityCompat.START));
         fragment_me_add_post.setOnClickListener(view12 -> {
@@ -171,7 +182,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         });
         fragment_me_add_food_item.setOnClickListener(view1 -> {
-        startActivity(new Intent(getContext(), CaloriesActivity.class));
+            startActivity(new Intent(getContext(), CaloriesActivity.class));
             getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             getActivity().finish();
 
@@ -203,6 +214,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                     circularProgress.setProgress(0, waterDrank);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -210,6 +222,38 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
 
         return view;
+    }
+
+    private void initListQuotes() {
+
+        listQuotes.add("“The road to success and the road to failure are almost exactly the same.“");
+        listQuotes.add("“It is better to fail in originality than to succeed in imitation.“");
+        listQuotes.add("“Success is not final; failure is not fatal: It is the courage to continue that counts.“");
+        listQuotes.add("“Success usually comes to those who are too busy looking for it.”");
+        listQuotes.add("“I never dreamed about success. I worked for it.”");
+        listQuotes.add("“Setting goals is the first step in turning the invisible into the visible.”");
+        listQuotes.add("“It’s not about better time management. It’s about better life management”");
+        listQuotes.add("“All our dreams can come true, if we have the courage to pursue them.” ");
+        listQuotes.add("“The secret of getting ahead is getting started.”");
+        listQuotes.add("“The best time to plant a tree was 20 years ago. The second best time is now.”");
+        listQuotes.add("“It’s hard to beat a person who never gives up.”");
+        listQuotes.add("“If people are doubting how far you can go, go so far that you can’t hear them anymore.”");
+
+        String[] listStr = new String[]{"“Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.”",
+                "“Everything you can imagine is real.”",
+                "“Do one thing every day that scares you.”",
+                "“It’s no use going back to yesterday, because I was a different person then.”",
+"“Smart people learn from everything and everyone, average people from their experiences, stupid people already have all the answers.” ",
+                "“Do what you feel in your heart to be right―for you’ll be criticized anyway.”",
+                "“Happiness is not something ready made. It comes from your own actions.”",
+                "“Whatever you are, be a good one.”",
+                "“You can either experience the pain of discipline or the pain of regret. The choice is yours.”",
+                "“If we have the attitude that it’s going to be a great day it usually is.” ",
+                "“Impossible is just an opinion.”",
+                "“Your passion is waiting for your courage to catch up.”",
+                "“One day or day one. You decide.”",
+        };
+        listQuotes.addAll(Arrays.asList(listStr));
     }
 
 
@@ -220,6 +264,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         fragment_me_chatActivity = view.findViewById(R.id.fragment_me_chatActivity);
         fragment_me_add_post = view.findViewById(R.id.fragment_me_add_post);
         fragment_me_reset_macros = view.findViewById(R.id.fragment_me_reset_macros);
+        fragment_me_citate = view.findViewById(R.id.fragment_me_citate);
 
         //CALORIE TRACKING
         fragment_me_add_food_item = view.findViewById(R.id.fragment_me_add_food_item);
@@ -360,6 +405,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                     header_for_drawer_text_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -404,7 +450,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     }
 
     private void setMaxValuesCount() {
-         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         Gson gson = new Gson();
         String json = prefs.getString("sendItemsList", null);
         Type type = new TypeToken<ArrayList<String>>() {
@@ -427,7 +473,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     }
 
     private void setWaterMaxValue() {
-         prefs = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
+        prefs = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
         waterDrank = prefs.getInt("waterDrank", 0);
         if (waterDrank > 0) {
             fragment_me_max_water.setText(waterDrank + "");
@@ -441,5 +487,63 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         prefs = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
         wdr = prefs.getInt("waterDrank", 0);
         circularProgress.setMaxProgress(Math.max(wdr, 0));
+    }
+
+
+    private void startTimer() {
+        mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+            }
+
+            @Override
+            public void onFinish() {
+                mTimerRunning = false;
+                mTimeLeftInMillis = START_TIME_IN_MILLIS;
+
+                String randomStr = listQuotes.get(new Random().nextInt(listQuotes.size()));
+                if (randomStr != null) {
+                    fragment_me_citate.setText(randomStr);
+                } else
+                    fragment_me_citate.setText("The greatest power comes from within.");
+                startTimer();
+            }
+        }.start();
+        mTimerRunning = true;
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        SharedPreferences prefs = getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("millisLeft", mTimeLeftInMillis);
+        editor.putBoolean("timerRunning", mTimerRunning);
+        editor.putLong("endTime", mEndTime);
+        editor.apply();
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        SharedPreferences prefs = getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        mTimeLeftInMillis = prefs.getLong("millisLeft", START_TIME_IN_MILLIS);
+        mTimerRunning = prefs.getBoolean("timerRunning", false);
+        if (mTimerRunning) {
+            mEndTime = prefs.getLong("endTime", 0);
+            mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
+            if (mTimeLeftInMillis < 0) {
+                mTimeLeftInMillis = 0;
+                mTimerRunning = false;
+            } else {
+                startTimer();
+            }
+        }
     }
 }

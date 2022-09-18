@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".Fragments.MeFragment"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
-    tools:openDrawer="start"
+
     >
     <!-- comm rand 10 pt a scapa de aia
     tools:openDrawer="start"
@@ -75,15 +75,30 @@
 
 
         <TextView
+            android:id="@+id/fragment_me_citate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35sp"
+            android:layout_marginStart="25sp"
+            android:layout_marginEnd="25sp"
             android:layout_gravity="center_horizontal"
             android:text="Un citat motivational luat din baza de date zilnic"
             android:textColor="@color/white"
             android:padding="15sp"
             android:background="@drawable/imgborder_maipatrat"
             tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_view_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="00:00"
+            android:textColor="@android:color/white"
+            android:textSize="60sp"
+            android:visibility="gone"
+            />
+
 
 
         <!-- Calories Consumed-->
