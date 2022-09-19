@@ -28,9 +28,14 @@
         android:theme="@style/Theme.Meplusplus"
         tools:targetApi="31">
         <activity
+            android:name=".ProgressTracking.ActivityProgress"
+            android:exported="true"
+            android:theme="@style/Theme.Meplusplus.NoActionBar"
+            />
+        <activity
             android:name=".WaterReminder.DrinkWater"
             android:exported="true"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"/>
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".ToDo.ToDoActivity"
             android:exported="true"
@@ -123,9 +128,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- Pt Notificari-->
-        <receiver android:name=".WaterReminder.ReminderBroadcast"/>
+        </activity> <!-- Pt Notificari -->
+        <receiver android:name=".WaterReminder.ReminderBroadcast" />
     </application>
 
 </manifest>

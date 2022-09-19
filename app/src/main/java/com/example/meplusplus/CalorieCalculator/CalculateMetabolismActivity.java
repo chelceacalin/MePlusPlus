@@ -140,14 +140,12 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
                     editor.clear();
                     editor.commit();
                     dialog.dismiss();
-
                     senditemsList = new ArrayList<>();
                     senditemsList.add(Math.round(BMR) + "");
                     senditemsList.add(Math.round(pp) + "");
                     senditemsList.add(Math.round(cc) + "");
                     senditemsList.add(Math.round(ff) + "");
                     senditemsList.add(Math.round(ss) + "");
-
                     prefs = PreferenceManager.getDefaultSharedPreferences(CalculateMetabolismActivity.this);
                     editor = prefs.edit();
                     Gson gson = new Gson();

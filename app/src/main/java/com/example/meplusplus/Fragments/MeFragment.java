@@ -29,6 +29,7 @@ import com.example.meplusplus.DataSets.Food;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
 import com.example.meplusplus.LoginActivity;
+import com.example.meplusplus.ProgressTracking.ActivityProgress;
 import com.example.meplusplus.R;
 import com.example.meplusplus.ToDo.ToDoActivity;
 import com.example.meplusplus.Utils.EditProfile;
@@ -429,7 +430,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
             case R.id.drawer_progress:
-                Toast.makeText(getContext(), "Progress", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), ActivityProgress.class));
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
             case R.id.todolist:
                 startActivity(new Intent(getContext(), ToDoActivity.class));
