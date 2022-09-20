@@ -204,7 +204,12 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 long nrChildren = snapshot.getChildrenCount();
                 if (nrChildren > 0) {
                     fragment_me_water.setText((200 * nrChildren) + "");
-                    circularProgress.setProgress((200 * nrChildren), waterDrank);
+                    if(waterDrank>0){
+                        circularProgress.setProgress((200 * nrChildren), waterDrank);
+                    }
+                    else
+                        circularProgress.setProgress((200 * nrChildren), 2000);
+
 
                     if ((200 * nrChildren) >= waterDrank) {
                         circularProgress.setProgressColor(Color.GREEN);
@@ -212,7 +217,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                     }
                 } else {
                     fragment_me_water.setText(0 + "");
-                    circularProgress.setProgress(0, waterDrank);
+                    circularProgress.setProgress(0, 0);
                 }
             }
 
@@ -479,7 +484,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         if (waterDrank > 0) {
             fragment_me_max_water.setText(waterDrank + "");
         } else {
-            fragment_me_max_water.setText(0 + "");
+            fragment_me_max_water.setText(2000+"");
         }
 
     }
