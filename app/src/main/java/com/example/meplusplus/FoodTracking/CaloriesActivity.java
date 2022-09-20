@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.DataSets.FoodModel;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
@@ -74,9 +75,12 @@ String user;
         init();
 
         activity_calories_close_button.setOnClickListener(view -> {
-            startActivity(new Intent(CaloriesActivity.this, MainActivity.class));
-            overridePendingTransition(R.anim.left, R.anim.fade_out);
+            // Schimbam din activitate in fragment
+            Intent intent = new Intent(CaloriesActivity.this, MainActivity.class);
+            intent.putExtra("MetabolismToMeFragment", true);
+            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
             finish();
+            startActivity(intent);
 
 
         });
@@ -158,12 +162,13 @@ String user;
                 reference.child(user).child(itemID).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        // Schimbam din activitate in fragment
                         Intent intent = new Intent(CaloriesActivity.this, MainActivity.class);
-                        intent.putExtra("MeFragmentPLS", true);
+                        intent.putExtra("MetabolismToMeFragment", true);
                         intent.putExtra("itemID",itemID);
+                        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                         finish();
                         startActivity(intent);
-                        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -215,10 +220,12 @@ String user;
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(CaloriesActivity.this, MainActivity.class));
-        overridePendingTransition(R.anim.left, R.anim.fade_out);
+        // Schimbam din activitate in fragment
+        Intent intent = new Intent(CaloriesActivity.this, MainActivity.class);
+        intent.putExtra("MetabolismToMeFragment", true);
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
         finish();
-        super.onBackPressed();
+        startActivity(intent);
     }
 
 

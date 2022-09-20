@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_blurry_gradient_haikei__1_"
+    android:layout_gravity="center_vertical"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:ignore="UselessParent">
+
+    <TextView
+        android:id="@+id/widget_add_food_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Food"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:layout_marginTop="5sp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+
+    <ImageView
+        android:id="@+id/widget_add_food_button"
+        android:layout_width="60sp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10sp"
+        android:layout_weight="0.05"
+        android:background="@drawable/ic_baseline_add"
+        tools:ignore="ContentDescription" />
+</LinearLayout>
+</RelativeLayout>

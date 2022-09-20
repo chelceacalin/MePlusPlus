@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/widgetaddfooditem"
+    android:minHeight="30sp"
+    android:minWidth="40sp"
+    android:minResizeWidth="40sp"
+    android:resizeMode="vertical|horizontal"
+    android:widgetCategory="home_screen"
+    >
+
+</appwidget-provider>

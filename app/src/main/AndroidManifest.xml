@@ -57,8 +57,10 @@
             android:name=".FoodTracking.CaloriesActivity"
             android:exported="true"
             android:label="@string/title_activity_calories"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
+
         <activity
             android:name=".Chatting.MessageActivity"
             android:exported="true"
@@ -110,7 +112,9 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity" >
+
+        </activity>
         <activity
             android:name="com.example.meplusplus.LoginActivity"
             android:exported="true"
@@ -128,8 +132,24 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Pt Notificari -->
+        </activity>
+
+        <!-- Pt Notificari -->
         <receiver android:name=".WaterReminder.ReminderBroadcast" />
+
+        <!-- Pt Widget -->
+        <receiver android:name=".Widgets.WidgetMain"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widgetinfo" />
+        </receiver>
+
+
+
     </application>
 
 </manifest>
