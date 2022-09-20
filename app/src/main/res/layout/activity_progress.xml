@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_marginTop="15sp"
         android:orientation="vertical"
@@ -46,7 +46,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,11 +71,11 @@
                 android:layout_marginStart="15sp"
                 android:background="@drawable/maipatratalb"
                 android:hint=" kg "
+                android:importantForAutofill="no"
                 android:paddingStart="20sp"
                 android:textColor="@color/black"
                 android:textColorHint="#c2c2c2"
                 android:textSize="15sp"
-                android:importantForAutofill="no"
                 tools:ignore="RtlSymmetry,TextFields" />
 
 
@@ -86,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="70sp"
+            android:layout_marginBottom="30sp"
             android:gravity="center_horizontal"
             >
 
@@ -122,15 +121,17 @@
         </LinearLayout>
 
 
-        <com.jjoe64.graphview.GraphView
+        <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/activity_progress_graph"
-            android:layout_width="wrap_content"
-            android:layout_height="200sp"
-            android:layout_marginStart="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="5sp"
             android:layout_marginTop="15sp"
-            android:layout_marginEnd="15sp"
+            android:layout_marginEnd="5sp"
             android:layout_marginBottom="15sp" />
-
     </LinearLayout>
+
+
 
 </RelativeLayout>

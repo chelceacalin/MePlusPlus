@@ -239,12 +239,11 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         listQuotes.add("“The best time to plant a tree was 20 years ago. The second best time is now.”");
         listQuotes.add("“It’s hard to beat a person who never gives up.”");
         listQuotes.add("“If people are doubting how far you can go, go so far that you can’t hear them anymore.”");
-
         String[] listStr = new String[]{"“Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.”",
                 "“Everything you can imagine is real.”",
                 "“Do one thing every day that scares you.”",
                 "“It’s no use going back to yesterday, because I was a different person then.”",
-"“Smart people learn from everything and everyone, average people from their experiences, stupid people already have all the answers.” ",
+                "“Smart people learn from everything and everyone, average people from their experiences, stupid people already have all the answers.” ",
                 "“Do what you feel in your heart to be right―for you’ll be criticized anyway.”",
                 "“Happiness is not something ready made. It comes from your own actions.”",
                 "“Whatever you are, be a good one.”",
