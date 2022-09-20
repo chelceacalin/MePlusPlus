@@ -292,4 +292,14 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
 
         pieChart.animateY(1400, Easing.EaseInOutQuad);
     }
+
+    @Override
+    public void onBackPressed() {
+        // Schimbam din activitate in fragment
+        Intent intent = new Intent(CalculateMetabolismActivity.this, MainActivity.class);
+        intent.putExtra("MetabolismToMeFragment", true);
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+        finish();
+        startActivity(intent);
+    }
 }
