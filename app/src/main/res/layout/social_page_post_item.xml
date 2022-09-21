@@ -68,9 +68,12 @@
                 android:layout_height="wrap_content"
                 android:minHeight="30dp"
                 android:paddingBottom="2dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10sp"
                 android:textColor="@color/AliceBlue"
                 android:background="@drawable/imgborder_maipatrat"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="RtlSymmetry" />
 
 
             <LinearLayout
