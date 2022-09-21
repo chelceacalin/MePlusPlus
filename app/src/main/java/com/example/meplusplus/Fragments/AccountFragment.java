@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -188,9 +189,11 @@ public class AccountFragment extends Fragment {
                 fragment_account_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                 fragment_account_description.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getBio());
                 if (Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl().equals("default")) {
+                    fragment_account_image_profile.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
                     Glide.with(requireContext()).load(user.getPhotoUrl()).into(fragment_account_image_profile);
                 } else {
                     Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(fragment_account_image_profile);
+                    fragment_account_image_profile.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
                 }
 
             }

@@ -23,6 +23,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.Chatting.ChattingActivity;
 import com.example.meplusplus.DataSets.Food;
@@ -406,7 +407,12 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue(User.class).getImageurl().equals("")) {
                 } else {
-                    Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
+                    if(!(snapshot.getValue(User.class).getImageurl().equals("default"))){
+                        Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
+                    }
+                    else{
+                        drawer_circle_image_view_profile.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
+                    }
                     header_for_drawer_text_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                 }
             }
