@@ -73,7 +73,9 @@
                 android:textColor="@color/AliceBlue"
                 android:background="@drawable/imgborder_maipatrat"
                 android:textSize="14sp"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                android:layout_marginBottom="5sp"
+                />
 
 
             <LinearLayout

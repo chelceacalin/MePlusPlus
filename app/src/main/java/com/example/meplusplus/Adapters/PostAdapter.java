@@ -156,11 +156,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
                 if (!imgURL.equals("default")) {
                     holder.social_page_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
 
-                    holder.social_page_username.setText(u.getUsername());
-                    holder.social_page_image_description.setText(p.getDescription());
-                    Picasso.get().load(p.getImageurl()).into(holder.social_page_image_content);
                     Picasso.get().load(u.getImageurl()).into(holder.social_page_image_profile);
-
                 } else {
                     assert firebaseUser != null;
                     if (firebaseUser.getPhotoUrl() == null) {
@@ -169,14 +165,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
                     } else {
                         Glide.with(context).load(firebaseUser.getPhotoUrl()).into(holder.social_page_image_profile);
                     }
-
-                    holder.social_page_username.setText(u.getUsername());
-                    holder.social_page_image_description.setText(p.getDescription());
-                    Picasso.get().load(p.getImageurl()).into(holder.social_page_image_content);
                     mAttacher = new PhotoViewAttacher(holder.social_page_image_content);
 
-
                 }
+                Picasso.get().load(p.getImageurl()).into(holder.social_page_image_content);
+                holder.social_page_username.setText(u.getUsername());
+                if(!(p.getDescription().equals(""))){
+                    holder.social_page_image_description.setText(p.getDescription());
+                }
+                else
+                {
+                    holder.social_page_image_description.setVisibility(View.GONE);
+                }
+
                 holder.social_page_strike.setImageResource(R.drawable.ic_baseline_bolt_24);
                 holder.social_page_like.setOnClickListener(v -> {
                     if (holder.social_page_like.getTag().equals("heart")) {

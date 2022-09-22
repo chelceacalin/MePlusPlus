@@ -197,7 +197,12 @@ public class PostActivity extends AppCompatActivity {
 
                 map.put("postid", UniqueID);
                 map.put("imageurl", imageURL);
-                map.put("description", "   " + description);
+                if(!(description.equals(""))){
+                    map.put("description",description);
+                }
+               else{
+                   map.put("description","");
+                }
                 map.put("publisher", user);
                 if(!(ingredients.equals(""))){
                     map.put("ingredients",ingredients);

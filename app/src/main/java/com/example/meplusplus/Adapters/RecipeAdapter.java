@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,8 +41,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     User u;
     FirebaseDatabase database;
     DatabaseReference reference;
-    DatabaseReference referenceHearts;
-    DatabaseReference referenceStrikes;
     String ID;
     //Zoom in
     PhotoViewAttacher mAttacher;
@@ -79,10 +78,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 String imgURL = u.getImageurl();
                 if (!imgURL.equals("default")) {
                     holder.recipepostitem_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
-                    holder.recipepostitem_username.setText(u.getUsername());
-                    holder.recipepostitem_description.setText(p.getDescription());
-                    holder.recipepostitem_ingredients.setText(p.getIngredients());
-                    Picasso.get().load(p.getImageurl()).into(holder.recipepostitem_content);
                     Picasso.get().load(u.getImageurl()).into(holder.recipepostitem_image_profile);
                 } else {
                     assert firebaseUser != null;
@@ -92,12 +87,19 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                     } else {
                         Glide.with(context).load(firebaseUser.getPhotoUrl()).into(holder.recipepostitem_image_profile);
                     }
-                    holder.recipepostitem_username.setText(u.getUsername());
-                    holder.recipepostitem_description.setText(p.getDescription());
-                    holder.recipepostitem_ingredients.setText(p.getIngredients());
-                    Picasso.get().load(p.getImageurl()).into(holder.recipepostitem_content);
                     mAttacher = new PhotoViewAttacher(holder.recipepostitem_content);
                 }
+                Picasso.get().load(p.getImageurl()).into(holder.recipepostitem_content);
+                if(!(p.getDescription().equals(""))){
+                    holder.recipepostitem_description.setText(p.getDescription());
+                }
+                else
+                {
+                    holder.recipepostitem_description.setVisibility(View.GONE);
+                }
+                holder.recipepostitem_ingredients.setText(p.getIngredients());
+                holder.recipepostitem_username.setText(u.getUsername());
+
             }
 
             @Override
@@ -111,8 +113,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         //FirebaseDatabase
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");
-        referenceHearts = database.getReference().child("hearts");
-        referenceStrikes = database.getReference().child("strikes");
     }
 
 
