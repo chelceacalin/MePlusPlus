@@ -13,19 +13,22 @@ public class PostItem {
     String imageurl;
     String postid;
     String publisher;
+    String ingredients;
 
     public PostItem() {
         this.description = "N/A";
         this.imageurl = "N/A";
         this.postid = "N/A";
         this.publisher = "N/A";
+        ingredients="";
     }
 
-    public PostItem(String description, String imageurl, String postid, String publisher) {
+    public PostItem(String description, String imageurl, String postid, String publisher,String ingredients) {
         this.description = description;
         this.imageurl = imageurl;
         this.postid = postid;
         this.publisher = publisher;
+        this.ingredients=ingredients;
     }
 
     @NonNull
@@ -37,6 +40,14 @@ public class PostItem {
                 ", postid='" + postid + '\'' +
                 ", publisher='" + publisher + '\'' +
                 '}';
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     public String getDescription() {

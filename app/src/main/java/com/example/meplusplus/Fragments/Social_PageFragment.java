@@ -80,6 +80,7 @@ public class Social_PageFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();
                 for (DataSnapshot i : snapshot.getChildren()) {
+                    if(i.getValue(PostItem.class).getIngredients().equals(""))
                     items.add(i.getValue(PostItem.class));
                 }
                 adapter.notifyDataSetChanged();
