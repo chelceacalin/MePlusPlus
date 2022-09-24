@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.Chatting.MessageActivity;
 import com.example.meplusplus.DataSets.User;
+import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,7 +63,6 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
         assert list != null;
         item = list.get(position);
         setdDetails(user, holder);
-
 
         Objects.requireNonNull(holder).itemView.setOnClickListener(view -> {
             Intent intent=new Intent(context,MessageActivity.class);

@@ -6,24 +6,47 @@
     tools:context=".Chatting.ChattingActivity"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
     >
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="UselessParent"
+        android:layout_marginTop="5sp"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables"
         android:layout_marginTop="10sp"
         >
 
+        <ImageView
+            android:id="@+id/activity_chatting_close_button"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginStart="5sp"
+            android:background="@drawable/ic_baseline_close"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center_horizontal"
+            android:text="Chat with users"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activity_chatting_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-
-
-
     </LinearLayout>
 
 

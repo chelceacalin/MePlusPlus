@@ -3,6 +3,7 @@ package com.example.meplusplus.Chatting;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.Adapters.User_Adapter_Chatting;
+import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
@@ -43,6 +45,7 @@ public class ChattingActivity extends AppCompatActivity {
     //Firebase
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+    ImageView activity_chatting_close_button;
 
     FirebaseAuth auth;
     FirebaseUser user;
@@ -50,12 +53,21 @@ public class ChattingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatting);
-
         init();
+
+        activity_chatting_close_button.setOnClickListener(view -> {
+            startActivity(new Intent(ChattingActivity.this,MainActivity.class));
+            overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+            finish();
+            super.onBackPressed();
+        });
+
         readusers();
     }
 
     private void init() {
+        //Controale
+        activity_chatting_close_button=findViewById(R.id.activity_chatting_close_button);
         recyclerView=findViewById(R.id.activity_chatting_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(ChattingActivity.this));
         list=new ArrayList<>();
