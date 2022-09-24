@@ -4,13 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.example.meplusplus.DataSets.PostItem;
 import com.example.meplusplus.R;
-import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.squareup.picasso.Picasso;
 
@@ -50,11 +51,32 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
         post = items.get(position);
         setDetails(post, holder);
 
+
+      ImagePopup imagePopup = new ImagePopup(context);
+        imagePopup.setWindowHeight(850); // Optional
+        imagePopup.setWindowWidth(850); // Optional
+        imagePopup.setBackgroundColor(context.getResources().getColor(R.color.Navy));  // Optional
+        imagePopup.setFullScreen(false); // Optional
+        imagePopup.setHideCloseIcon(false);  // Optional
+        imagePopup.setImageOnClickClose(true);  // Optional
+        imagePopup.initiatePopup(holder.imageView.getDrawable());
+        if(items.get(position).getImageurl().equals("")){}
+        else
+        {
+            imagePopup.initiatePopupWithPicasso(items.get(position).getImageurl());
+        }
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imagePopup.viewPopup();
+            }
+        });
+
     }
 
     private void setDetails(PostItem post, ViewHolder holder) {
         Picasso.get().load(post.getImageurl()).into(holder.imageView);
-        mAttacher = new PhotoViewAttacher(holder.imageView);
+       // mAttacher = new PhotoViewAttacher(holder.imageView);
 
     }
 
@@ -66,7 +88,7 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public final PhotoView imageView;
+        public final ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

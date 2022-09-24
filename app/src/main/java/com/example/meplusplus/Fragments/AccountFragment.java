@@ -117,7 +117,6 @@ public class AccountFragment extends Fragment {
             }
         });
 
-
         getposts();
 
 
