@@ -193,7 +193,6 @@ public class AccountFragment extends Fragment {
                     Glide.with(requireContext()).load(user.getPhotoUrl()).into(fragment_account_image_profile);
                 } else {
                     Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(fragment_account_image_profile);
-                    fragment_account_image_profile.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
                 }
 
             }

@@ -152,8 +152,6 @@ public class LoginActivity extends AppCompatActivity {
                     .cornerRadius(25)
                     .iconStart(R.drawable.ic_baseline_error_outline_24)
                     .show();
-
-
     }
 
 
@@ -258,9 +256,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (user != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
             finish();
+        }
+        else {
         }
 
     }

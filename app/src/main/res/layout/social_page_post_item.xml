@@ -11,12 +11,9 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
-        android:layout_marginLeft="3dp"
         android:layout_marginTop="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="3dp"
         >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,49 +41,37 @@
                     android:id="@+id/social_page_username"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
+                    android:paddingStart="10sp"
                     android:layout_marginTop="2dp"
                     android:gravity="center"
                     android:text="username"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText,RtlSymmetry" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_alignParentBottom="true"
-                android:paddingBottom="3dp"
-                android:layout_marginBottom="3dp"
-                android:background="#276AF1"
-                tools:ignore="ObsoleteLayoutParam" />
             <TextView
                 android:id="@+id/social_page_image_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="30dp"
-                android:paddingBottom="2dp"
                 android:gravity="center_vertical"
                 android:paddingStart="10sp"
                 android:textColor="@color/AliceBlue"
-                android:background="@drawable/imgborder_maipatrat"
+                android:background="#030955"
                 android:textSize="14sp"
                 tools:ignore="RtlSymmetry"
-                android:layout_marginBottom="5sp"
                 />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp">
-
+                android:layout_height="300dp"
+                >
                 <com.github.chrisbanes.photoview.PhotoView
                     android:id="@+id/social_page_image_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
             </LinearLayout>
 
@@ -95,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="5dp"
+                android:layout_marginTop="2sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="start"
                 android:orientation="horizontal">
@@ -145,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
                 android:background="@drawable/image_border"

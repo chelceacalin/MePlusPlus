@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         init();
+        //Photoview to be full scale
+        holder.recipepostitem_content.setScaleType(ImageView.ScaleType.FIT_XY);
         p = items.get(position);
         ID = p.getPostid();
         SetDetails(p, holder);

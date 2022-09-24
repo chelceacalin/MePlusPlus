@@ -83,6 +83,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         holder.social_page_place_a_comment.setOnClickListener(this);
         holder.social_page_strike.setOnClickListener(this);
 
+
+        //Photoview to be full scale
+      holder.social_page_image_content.setScaleType(ImageView.ScaleType.FIT_XY);
         // Number of hearts
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
