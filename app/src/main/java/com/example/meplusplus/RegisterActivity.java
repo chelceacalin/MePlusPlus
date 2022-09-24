@@ -188,6 +188,19 @@ public class RegisterActivity extends AppCompatActivity {
                             .show();
                 }
             });
-        }).addOnFailureListener(e -> progressDialog.dismiss());
+        }).addOnFailureListener(e -> {
+
+
+
+            new StyleableToast
+                    .Builder(RegisterActivity.this)
+                    .text("User Already Exists")
+                    .textColor(Color.RED)
+                    .backgroundColor( getResources().getColor(R.color.white))
+                    .cornerRadius(25)
+                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                    .show();
+
+            progressDialog.dismiss();});
     }
 }
