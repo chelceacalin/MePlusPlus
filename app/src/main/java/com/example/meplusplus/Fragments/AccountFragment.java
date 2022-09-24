@@ -97,6 +97,8 @@ public class AccountFragment extends Fragment {
         init(view);
         setDetails();
 
+
+
         //No Of Posts
         referencePosts.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -132,6 +134,8 @@ public class AccountFragment extends Fragment {
         fragment_account_options = view.findViewById(R.id.fragment_account_options);
         fragment_account_image_profile = view.findViewById(R.id.fragment_account_image_profile);
         fragment_account_recyclerView_posts = view.findViewById(R.id.fragment_account_recyclerView_posts);
+
+
 
         //Firebase
         auth = FirebaseAuth.getInstance();
@@ -316,5 +320,18 @@ public class AccountFragment extends Fragment {
         inflater = requireActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_options_profile, menu);
         return true;
+    }
+
+    @Override
+    public void onStart() {
+        if(fragment_account_description.getText().toString().toString().equals("")){
+            fragment_account_description.setVisibility(View.GONE);
+        }
+        else
+        {
+            fragment_account_description.setVisibility(View.VISIBLE);
+        }
+        super.onStart();
+
     }
 }

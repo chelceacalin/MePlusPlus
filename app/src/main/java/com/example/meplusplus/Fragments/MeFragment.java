@@ -405,17 +405,19 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.getValue(User.class).getImageurl().equals("")) {
-                } else {
-                    if(!(snapshot.getValue(User.class).getImageurl().equals("default"))){
-                        Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
+                if(snapshot.getValue(User.class)!=null){
+                    if (snapshot.getValue(User.class).getImageurl().equals("")) {
+                    } else {
+                        if(!(snapshot.getValue(User.class).getImageurl().equals("default"))){
+                            Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
+                        }
+                        else{
+                            drawer_circle_image_view_profile.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
+                        }
+                        header_for_drawer_text_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                     }
-                    else{
-                        drawer_circle_image_view_profile.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
-                    }
-                    header_for_drawer_text_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                 }
-            }
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

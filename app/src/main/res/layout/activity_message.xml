@@ -71,13 +71,14 @@
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
-    <LinearLayout
+   <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="#D5CCCC"
         android:gravity="start"
+       android:weightSum="1"
         >
 
         <EditText
@@ -92,21 +93,26 @@
             android:layout_gravity="center_vertical"
             android:background="?android:textColorPrimary"
             android:autofillHints=""
-            tools:ignore="HardcodedText,TextFields" />
+            tools:ignore="HardcodedText,TextFields"
 
-        <Button
-            android:id="@+id/activity_message_button"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:text="@string/send"
-            android:textColor="?android:textColorPrimary"
-            android:backgroundTint="@color/navy"
-            android:layout_marginEnd="15sp"
-            android:layout_marginStart="10sp"
-
+            android:layout_weight="0.75"
             />
 
+       <Button
+           android:id="@+id/activity_message_button"
+           android:layout_width="wrap_content"
+           android:layout_height="50sp"
+           android:text="@string/send"
+           android:textColor="?android:textColorPrimary"
+           android:backgroundTint="@color/navy"
+           android:layout_marginEnd="15sp"
+           android:layout_marginStart="10sp"
+           android:layout_weight="0.25"
+           />
+
     </LinearLayout>
+
+
 
 
 </RelativeLayout>
