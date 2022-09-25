@@ -2,19 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/ic_wave__2_"
-    android:orientation="vertical"
-    tools:context=".Registration.RegisterActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   >
+    android:background="@drawable/ic_wave__2_"
+    android:orientation="vertical"
+    tools:context=".Registration.RegisterActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="600dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical">
 
         <FrameLayout
@@ -50,9 +49,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
+                    android:inputType="textPersonName"
                     android:text="Username"
                     android:textColor="#c2c2c2"
-                    android:inputType="textPersonName"
                     android:textSize="18sp"
                     tools:ignore="HardcodedText,TextViewEdits" />
 
@@ -61,6 +60,7 @@
                     android:layout_width="290dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="5dp"
+                    android:autofillHints=""
                     android:drawableStart="@drawable/custom_username"
                     android:hint="    Introduce Username"
                     android:paddingEnd="12dp"
@@ -70,9 +70,8 @@
                     android:textColorHint="#c2c2c2"
                     android:textSize="14sp"
                     android:visibility="visible"
-                    tools:visibility="visible"
-                    android:autofillHints=""
-                    tools:ignore="HardcodedText,RtlSymmetry,TextFields" />
+                    tools:ignore="HardcodedText,RtlSymmetry,TextFields"
+                    tools:visibility="visible" />
 
 
                 <TextView
@@ -91,17 +90,17 @@
                     android:layout_marginTop="5dp"
                     android:drawableStart="@drawable/custom_face"
                     android:hint="@string/introduce_name"
-                    android:paddingEnd="12dp"
+                    android:importantForAutofill="no"
                     android:inputType="textPersonName"
+                    android:paddingEnd="12dp"
                     android:selectAllOnFocus="false"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:singleLine="true"
                     android:textSize="14sp"
                     android:visibility="visible"
-                    tools:visibility="visible"
-                    android:importantForAutofill="no"
-                    tools:ignore="RtlSymmetry" />
+                    tools:ignore="RtlSymmetry"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -117,19 +116,19 @@
                     android:layout_width="290dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="5dp"
+                    android:autofillHints=""
                     android:drawableStart="@drawable/custom_email"
                     android:hint="    Introduce Email"
-                    android:paddingEnd="12dp"
                     android:inputType="textEmailAddress"
+                    android:paddingEnd="12dp"
                     android:selectAllOnFocus="false"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
-                    android:singleLine="true"
                     android:textSize="14sp"
                     android:visibility="visible"
-                    tools:visibility="visible"
-                    android:autofillHints=""
-                    tools:ignore="HardcodedText,RtlSymmetry" />
+                    tools:ignore="HardcodedText,RtlSymmetry"
+                    tools:visibility="visible" />
 
 
                 <TextView
@@ -146,15 +145,15 @@
                     android:layout_width="289dp"
                     android:layout_height="43dp"
                     android:layout_marginTop="5dp"
+                    android:autofillHints=""
                     android:drawableStart="@drawable/custom_lock"
                     android:hint="   Introduce Password"
                     android:inputType="textPassword"
                     android:paddingEnd="12dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
                     android:textSize="14sp"
-                    android:autofillHints=""
-                    android:singleLine="true"
                     tools:ignore="HardcodedText,RtlSymmetry" />
 
                 <CheckBox
@@ -193,17 +192,18 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="8dp"
+            android:gravity="center"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

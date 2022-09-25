@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/ic_wave__2_"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="35dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical">
 
         <FrameLayout
@@ -32,8 +32,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="22dp">
+                android:layout_marginStart="22dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -57,19 +57,19 @@
                     android:layout_width="290dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="5dp"
-                    android:hint="    Introduce Email"
+                    android:autofillHints=""
                     android:drawableStart="@drawable/custom_email"
+                    android:hint="    Introduce Email"
                     android:inputType="textEmailAddress"
                     android:paddingEnd="12dp"
                     android:selectAllOnFocus="false"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
                     android:textSize="14sp"
                     android:visibility="visible"
-                    android:singleLine="true"
-                    tools:visibility="visible"
-                    android:autofillHints=""
-                    tools:ignore="HardcodedText,RtlSymmetry" />
+                    tools:ignore="HardcodedText,RtlSymmetry"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,15 +85,15 @@
                     android:layout_width="289dp"
                     android:layout_height="43dp"
                     android:layout_marginTop="5dp"
+                    android:autofillHints=""
                     android:drawableStart="@drawable/custom_lock"
                     android:hint="@string/introduce_password"
                     android:inputType="textPassword"
                     android:paddingEnd="12dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
                     android:textSize="14sp"
-                    android:singleLine="true"
-                    android:autofillHints=""
                     tools:ignore="RtlSymmetry" />
 
                 <CheckBox
@@ -101,8 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:text="@string/show_password"
-                    android:textColor="@color/black"
-                    />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/loginActivity_forgot_password"
@@ -122,19 +121,19 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="25dp"
-                    android:src="@drawable/ic_facebook"
                     android:layout_weight="1"
                     android:contentDescription="TODO"
+                    android:src="@drawable/ic_facebook"
                     tools:ignore="ContentDescription,HardcodedText" />
 
                 <ImageView
                     android:id="@+id/login_activity_btn_google_sign_up"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginTop="-10dp"
                     android:layout_marginStart="80dp"
-                    android:src="@drawable/ic_google"
+                    android:layout_marginTop="-10dp"
                     android:layout_weight="1"
+                    android:src="@drawable/ic_google"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
@@ -142,10 +141,10 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="15dp"
                     android:layout_marginTop="25dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_24"
+                    android:layout_marginEnd="15dp"
                     android:contentDescription="TODO"
+                    android:src="@drawable/ic_baseline_arrow_forward_24"
                     tools:ignore="ContentDescription,HardcodedText" />
 
 
@@ -182,14 +181,13 @@
                 android:id="@+id/loginActivity_button_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/transparent"
                 android:gravity="center_horizontal"
                 android:text="@string/sign_up"
                 android:textAllCaps="false"
                 android:textColor="#F86262"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"
-                />
+                android:textSize="15sp" />
 
         </LinearLayout>
 

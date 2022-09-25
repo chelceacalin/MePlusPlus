@@ -23,17 +23,13 @@
             android:id="@+id/main_bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:labelVisibilityMode="unlabeled"
-            app:menu="@menu/menu"
             android:background="?android:attr/windowBackground"
             app:itemIconTint="@color/itemselected"
-            />
-
-
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/menu" />
 
 
     </com.google.android.material.appbar.AppBarLayout>
-
 
 
 </RelativeLayout>

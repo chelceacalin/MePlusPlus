@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Utils.PostActivity"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
-    >
+    tools:context=".Utils.PostActivity">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -60,9 +59,9 @@
             android:id="@+id/postactivity_imageProfile"
             android:layout_width="match_parent"
             android:layout_height="250dp"
+            android:contentDescription="TODO"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_add_photo"
-            android:contentDescription="TODO"
             tools:ignore="ContentDescription,HardcodedText" />
 
         <Button
@@ -105,8 +104,7 @@
             android:textColor="?android:textColorPrimary"
             android:textColorHint="#68C2C2C2"
             android:textSize="16sp"
-            tools:ignore="HardcodedText,TextFields"
-            />
+            tools:ignore="HardcodedText,TextFields" />
 
 
     </LinearLayout>
@@ -114,14 +112,13 @@
     <Button
         android:id="@+id/postactivity_buttonpost"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/DarkBlue"
         android:text="@string/upload_post"
         android:textColor="@color/white"
-        app:cornerRadius="15dp">
-    </Button>
+        app:cornerRadius="15dp" />
 
 
 </RelativeLayout>

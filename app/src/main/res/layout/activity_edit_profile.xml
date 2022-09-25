@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Utils.EditProfile"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
-    >
+    tools:context=".Utils.EditProfile">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -21,8 +20,8 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0.1"
-            app:srcCompat="@drawable/ic_baseline_close"
             android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/ic_baseline_close"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -60,12 +59,12 @@
         <ImageView
             android:id="@+id/editprofile_photo"
             android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_height="300dp"
+            android:contentDescription="@string/todo3"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_add_photo"
-            android:contentDescription="@string/todo3"
             tools:ignore="ContentDescription" />
 
         <Button
@@ -88,11 +87,11 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="15dp"
+            android:autofillHints=""
             android:hint="@string/username"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="16sp"
-            android:autofillHints=""
             tools:ignore="TextFields" />
 
 
@@ -103,24 +102,23 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="15dp"
+            android:autofillHints=""
             android:hint="@string/bio"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="16sp"
-            android:autofillHints=""
             tools:ignore="TextFields" />
 
         <Button
             android:id="@+id/editprofile_button_save"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="50dp"
             android:layout_gravity="end"
+            android:layout_marginTop="50dp"
             android:backgroundTint="@color/DarkBlue"
             android:text="@string/update_profile"
             android:textColor="@color/white"
-            app:cornerRadius="15dp">
-        </Button>
+            app:cornerRadius="15dp" />
     </LinearLayout>
 
 

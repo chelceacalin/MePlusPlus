@@ -23,20 +23,21 @@
                 android:id="@+id/activity_to_do_close"
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_baseline_close"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5sp"
                 android:layout_marginTop="2sp"
+                android:background="@drawable/ic_baseline_close"
                 tools:ignore="ContentDescription" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:text="Plan your day"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:gravity="center_horizontal"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
@@ -46,9 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
+            android:background="@color/MidnightBlue"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:background="@color/MidnightBlue"
             tools:ignore="ExtraText">
 
             <TextView
@@ -75,9 +76,9 @@
                 android:id="@+id/activity_to_do_delete_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_baseline_close"
-                android:layout_marginEnd="7sp"
                 android:layout_marginStart="5sp"
+                android:layout_marginEnd="7sp"
+                android:background="@drawable/ic_baseline_close"
                 tools:ignore="ContentDescription" />
             >
 
@@ -104,13 +105,13 @@
         android:layout_marginStart="5sp"
         android:layout_marginEnd="45sp"
         android:layout_marginBottom="12sp"
+        android:autofillHints=""
         android:background="@drawable/maipatratnegru"
         android:paddingStart="15sp"
         android:text=""
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:autofillHints=""
         tools:ignore="LabelFor,RtlSymmetry,TextFields" />
 
 

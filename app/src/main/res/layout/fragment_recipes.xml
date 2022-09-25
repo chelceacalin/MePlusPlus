@@ -3,25 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.RecipesFragment"
     android:background="#051255"
-    >
+    tools:context=".Fragments.RecipesFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@drawable/ic_blurry_gradient_haikei"
-        >
+        android:background="@drawable/ic_blurry_gradient_haikei">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="See what's cooking"
-            android:textStyle="bold"
-            android:textSize="28sp"
             android:layout_marginStart="20dp"
+            android:text="See what's cooking"
             android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -30,14 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="58dp"
         android:layout_marginBottom="55dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_recipes_recyclerviewRecipes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

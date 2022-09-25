@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoodTracking.CaloriesActivity"
     android:background="@drawable/ic_stacked_waves_haikei__3_"
-    tools:ignore="HardcodedText,RtlSymmetry"
-    >
+    tools:context=".FoodTracking.CaloriesActivity"
+    tools:ignore="HardcodedText,RtlSymmetry">
 
     <ImageView
         android:id="@+id/activity_calories_close_button"
@@ -89,11 +88,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30sp"
         android:gravity="center_horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/activity_calories_add_items"
@@ -101,8 +99,7 @@
             android:layout_height="40sp"
             android:backgroundTint="@color/MediumBlue"
             android:text="Add Items"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
     </LinearLayout>
 
 
@@ -110,33 +107,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@color/navy"
-        android:gravity="center_vertical"
         android:foregroundGravity="center_vertical"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
-            android:paddingStart="5sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:paddingStart="5sp"
             android:text="T: "
+            android:textColor="@color/white"
             android:textSize="17sp"
-            android:textStyle="bold"
-             />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/activity_calories_total_calories"
             android:layout_width="wrap_content"
             android:layout_height="19sp"
-            android:textStyle="bold"
-            android:text=""
-            android:textColor="@color/red"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            />
+            android:text=""
+            android:textColor="@color/red"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -151,78 +145,71 @@
             android:id="@+id/activity_calories_protein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text=""
-            android:textColor="@color/red"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            />
+            android:text=""
+            android:textColor="@color/red"
+            android:textStyle="bold" />
 
         <TextView
-            android:paddingStart="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:paddingStart="15sp"
             android:text="🍞: "
+            android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/activity_calories_carbs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textStyle="bold"
-            android:textColor="@color/red"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            />
+            android:text=""
+            android:textColor="@color/red"
+            android:textStyle="bold" />
+
         <TextView
-            android:paddingStart="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:paddingStart="15sp"
             android:text=" 🧀: "
+            android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
 
         <TextView
             android:id="@+id/activity_calories_fats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textStyle="bold"
-            android:textColor="@color/red"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            />
+            android:text=""
+            android:textColor="@color/red"
+            android:textStyle="bold" />
 
         <TextView
-            android:paddingStart="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:paddingStart="15sp"
             android:text="🍬: "
+            android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/activity_calories_sugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textStyle="bold"
-            android:textColor="@color/red"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            />
+            android:text=""
+            android:textColor="@color/red"
+            android:textStyle="bold" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

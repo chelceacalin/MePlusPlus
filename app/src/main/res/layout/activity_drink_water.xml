@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_blurry_gradient_haikei__1_"
     tools:context=".WaterReminder.DrinkWater"
-    tools:ignore="HardcodedText"
-    android:background="@drawable/ic_blurry_gradient_haikei__1_">
+    tools:ignore="HardcodedText">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -147,18 +147,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
         android:layout_marginBottom="15sp"
-        >
+        android:gravity="center_horizontal">
 
         <ImageView
             android:layout_width="200sp"
             android:layout_height="200sp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/drinkwater"
-            android:scaleType="fitXY"
             android:layout_marginBottom="10sp"
+            android:background="@drawable/drinkwater"
             android:foregroundGravity="center_horizontal"
+            android:scaleType="fitXY"
             tools:ignore="ContentDescription,ObsoleteLayoutParam" />
 
     </LinearLayout>

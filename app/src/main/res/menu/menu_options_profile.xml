@@ -3,22 +3,20 @@
 
     <item
         android:id="@+id/menu_options_profile_dark_White_mode"
-        android:title="@string/dark_mode"
-        android:icon="@drawable/ic_baseline_dark_mode_24" />
-
+        android:icon="@drawable/ic_baseline_dark_mode_24"
+        android:title="@string/dark_mode" />
 
 
     <item
         android:id="@+id/menu_options_Help"
-        android:title="@string/help_give_feedback"
         android:icon="@drawable/ic_baseline_exit_to_app_24"
-        />
+        android:title="@string/help_give_feedback" />
 
 
     <item
         android:id="@+id/menu_options_profile_signout"
-        android:title="@string/sign_out"
-        android:icon="@drawable/ic_baseline_exit_to_app_24" />
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:title="@string/sign_out" />
 
 
 </menu>

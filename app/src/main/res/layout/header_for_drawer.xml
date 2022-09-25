@@ -4,18 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:background="#072439"
-  android:paddingTop="15dp"
-    android:paddingStart="15dp"
     android:orientation="vertical"
+    android:paddingStart="15dp"
+    android:paddingTop="15dp"
 
     tools:ignore="RtlSymmetry">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/drawer_circle_image_view_profile"
         android:layout_width="80sp"
         android:layout_height="80sp"
-        android:layout_marginTop="20sp"
-        android:id="@+id/drawer_circle_image_view_profile"
-        />
+        android:layout_marginTop="20sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -25,22 +24,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/welcome"
             android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            android:textColor="?android:textColorPrimary"
             android:layout_marginEnd="2sp"
-            />
+            android:text="@string/welcome"
+            android:textColor="?android:textColorPrimary"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/header_for_drawer_text_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:layout_marginTop="8dp"
-            android:textStyle="bold"
+            android:text=""
             android:textColor="@color/Coral"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
 
 
@@ -50,9 +47,9 @@
         android:layout_height="wrap_content"
         android:background="@color/fui_transparent"
         android:backgroundTint="@color/fui_transparent"
+        android:padding="2dp"
         android:text="View Profile"
         android:textColor="@color/IndianRed"
-        android:padding="2dp"
         tools:ignore="HardcodedText" />
 
 </LinearLayout>

@@ -17,8 +17,10 @@
         <item name="stSolidBackground">true</item>
         <item name="stStrokeWidth">3dp</item>
         <item name="stStrokeColor">#fff</item>
-        <item name="stLength">LONG</item> LONG or SHORT
-        <item name="stGravity">top</item> top or center
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">top</item>
+        top or center
         <item name="stRadius">5dp</item>
     </style>
 </resources>

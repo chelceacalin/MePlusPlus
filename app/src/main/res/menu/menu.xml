@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
 
     <item
         android:id="@+id/me_page"
-        android:title=""
         android:icon="@drawable/ic_baseline_home"
-        />
+        android:title="" />
 
     <item
         android:id="@+id/social_page"
-        android:title=""
-        android:icon="@drawable/ic_baseline_social" />
+        android:icon="@drawable/ic_baseline_social"
+        android:title="" />
 
     <item
         android:id="@+id/recipes"
-        android:title=""
-        android:icon="@drawable/ic_baseline_recipes" />
+        android:icon="@drawable/ic_baseline_recipes"
+        android:title="" />
 
     <item
         android:id="@+id/search_page"
-        android:title=""
-        android:icon="@drawable/ic_baseline_search" />
+        android:icon="@drawable/ic_baseline_search"
+        android:title="" />
 
     <item
         android:id="@+id/account_page"
-        android:title=""
-        android:icon="@drawable/ic_baseline_person" />
+        android:icon="@drawable/ic_baseline_person"
+        android:title="" />
 </menu>

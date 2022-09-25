@@ -9,10 +9,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
         android:layout_marginBottom="6dp"
-        >
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,9 +40,9 @@
                     android:id="@+id/social_page_username"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingStart="10sp"
                     android:layout_marginTop="2dp"
                     android:gravity="center"
+                    android:paddingStart="10sp"
                     android:text="username"
                     android:textColor="@color/white"
                     android:textSize="17sp"
@@ -54,19 +54,18 @@
                 android:id="@+id/social_page_image_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="30dp"
+                android:background="#030955"
                 android:gravity="center_vertical"
+                android:minHeight="30dp"
                 android:paddingStart="10sp"
                 android:textColor="@color/AliceBlue"
-                android:background="#030955"
                 android:textSize="14sp"
-                tools:ignore="RtlSymmetry"
-                />
+                tools:ignore="RtlSymmetry" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                >
+                android:layout_height="300dp">
+
                 <com.github.chrisbanes.photoview.PhotoView
                     android:id="@+id/social_page_image_content"
                     android:layout_width="match_parent"
@@ -77,10 +76,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="2sp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="2sp"
+                android:layout_marginBottom="5dp"
                 android:gravity="start"
                 android:orientation="horizontal">
 
@@ -132,14 +131,14 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:padding="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/image_border"
                 android:foregroundGravity="center_vertical"
                 android:gravity="center_vertical"
+                android:padding="5dp"
                 android:text="   Place a comment..."
                 android:textColor="#c2c2c2"
                 android:textSize="14sp"
-                android:layout_marginBottom="5dp"
                 tools:ignore="HardcodedText" />
 
 

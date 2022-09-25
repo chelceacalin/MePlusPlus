@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
     tools:context=".ZenMode.ZenModeActivity"
-    tools:ignore="HardcodedText"
-    >
+    tools:ignore="HardcodedText">
 
 
     <LinearLayout
@@ -163,9 +162,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10sp"
+        android:orientation="vertical"
         tools:ignore="UseCompoundDrawables">
 
 

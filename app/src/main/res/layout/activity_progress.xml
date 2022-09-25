@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="HardcodedText"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
-    tools:context=".ProgressTracking.ActivityProgress">
+    tools:context=".ProgressTracking.ActivityProgress"
+    tools:ignore="HardcodedText">
 
 
     <LinearLayout
@@ -84,10 +84,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="30sp"
             android:gravity="center_horizontal"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/activity_progress_add_weight"
@@ -96,10 +95,10 @@
                 android:layout_marginTop="20sp"
                 android:backgroundTint="@color/MediumBlue"
                 android:text="Add Weight"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textAllCaps="false"
                 tools:ignore="ButtonStyle" />
 
 
@@ -111,10 +110,10 @@
                 android:layout_marginTop="20sp"
                 android:backgroundTint="@color/MediumBlue"
                 android:text="Reset Weight"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textAllCaps="false"
                 tools:ignore="ButtonStyle" />
 
 
@@ -131,7 +130,6 @@
             android:layout_marginEnd="5sp"
             android:layout_marginBottom="15sp" />
     </LinearLayout>
-
 
 
 </RelativeLayout>
