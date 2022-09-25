@@ -196,8 +196,6 @@ public class MainActivity extends AppCompatActivity {
             int importance= NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel=new NotificationChannel("notifyMe",name,importance);
             channel.setDescription(description);
-
-
             NotificationManager notificationManager=getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }

@@ -1,4 +1,4 @@
-package com.example.meplusplus;
+package com.example.meplusplus.Registration;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import io.github.muddz.styleabletoast.StyleableToast;

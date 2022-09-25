@@ -1,4 +1,4 @@
-package com.example.meplusplus;
+package com.example.meplusplus.Registration;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.meplusplus.MainActivity;
+import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

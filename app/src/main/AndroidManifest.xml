@@ -26,15 +26,19 @@
         android:roundIcon="@drawable/icon_app_mobile"
         android:supportsRtl="true"
         android:theme="@style/Theme.Meplusplus"
-        tools:targetApi="31"
         tools:replace="android:label"
-        >
+        tools:targetApi="31">
+        <activity
+            android:name=".Workout.WorkoutActivity"
+            android:exported="true"
+            android:label="@string/title_activity_workout"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".ProgressTracking.ActivityProgress"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
-            />
+            android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".WaterReminder.DrinkWater"
             android:exported="true"
@@ -43,8 +47,8 @@
         <activity
             android:name=".ToDo.ToDoActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_to_do"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".ZenMode.ZenModeActivity"
@@ -65,7 +69,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
-
         <activity
             android:name=".Chatting.MessageActivity"
             android:exported="true"
@@ -101,13 +104,13 @@
             android:theme="@style/Theme.Meplusplus.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.example.meplusplus.ForgotPassword"
+            android:name="com.example.meplusplus.Registration.ForgotPassword"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.example.meplusplus.RegisterActivity"
+            android:name="com.example.meplusplus.Registration.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar"
@@ -117,17 +120,15 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar"
-            tools:ignore="LockedOrientationActivity" >
-
-        </activity>
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.example.meplusplus.LoginActivity"
+            android:name="com.example.meplusplus.Registration.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.example.meplusplus.SplashScreen"
+            android:name="com.example.meplusplus.Registration.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar"
@@ -137,24 +138,19 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Pt Notificari -->
-        <receiver android:name=".WaterReminder.ReminderBroadcast" />
-
-        <!-- Pt Widget -->
-        <receiver android:name=".Widgets.WidgetMain"
+        </activity> <!-- Pt Notificari -->
+        <receiver android:name=".WaterReminder.ReminderBroadcast" /> <!-- Pt Widget -->
+        <receiver
+            android:name=".Widgets.WidgetMain"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widgetinfo" />
         </receiver>
-
-
-
     </application>
 
 </manifest>

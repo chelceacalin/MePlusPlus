@@ -23,19 +23,19 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.Chatting.ChattingActivity;
 import com.example.meplusplus.DataSets.Food;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
-import com.example.meplusplus.LoginActivity;
+import com.example.meplusplus.Registration.LoginActivity;
 import com.example.meplusplus.ProgressTracking.ActivityProgress;
 import com.example.meplusplus.R;
 import com.example.meplusplus.ToDo.ToDoActivity;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.PostActivity;
 import com.example.meplusplus.WaterReminder.DrinkWater;
+import com.example.meplusplus.Workout.WorkoutActivity;
 import com.example.meplusplus.ZenMode.ZenModeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -433,7 +433,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
         switch (item.getItemId()) {
             case R.id.drawer_workout:
-                Toast.makeText(getContext(), "Workout ", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), WorkoutActivity.class));
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                 break;
             case R.id.drawer_calorie_calculator:
                 startActivity(new Intent(getContext(), CalculateMetabolismActivity.class));

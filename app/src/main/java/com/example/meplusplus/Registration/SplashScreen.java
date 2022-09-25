@@ -1,4 +1,4 @@
-package com.example.meplusplus;
+package com.example.meplusplus.Registration;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.meplusplus.R;
 
 
 /*

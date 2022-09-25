@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/ic_wave__2_"
     android:orientation="vertical"
-    tools:context=".RegisterActivity"
+    tools:context=".Registration.RegisterActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >

@@ -93,4 +93,6 @@
     <string name="title_activity_to_do">ToDoActivity</string>
 
     <string name="done">done</string>
+    <string name="title_activity_workout">WorkoutActivity</string>
+    <string name="workout_splits">Workout Splits</string>
 </resources>

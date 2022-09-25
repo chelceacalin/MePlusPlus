@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -29,7 +28,7 @@ import com.bumptech.glide.Glide;
 import com.example.meplusplus.Adapters.AccountPhotos;
 import com.example.meplusplus.DataSets.PostItem;
 import com.example.meplusplus.DataSets.User;
-import com.example.meplusplus.LoginActivity;
+import com.example.meplusplus.Registration.LoginActivity;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.FeedBackActivity;
