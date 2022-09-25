@@ -66,6 +66,7 @@
                     android:textColorHint="#c2c2c2"
                     android:textSize="14sp"
                     android:visibility="visible"
+                    android:singleLine="true"
                     tools:visibility="visible"
                     android:autofillHints=""
                     tools:ignore="HardcodedText,RtlSymmetry" />
@@ -91,6 +92,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="#c2c2c2"
                     android:textSize="14sp"
+                    android:singleLine="true"
                     android:autofillHints=""
                     tools:ignore="RtlSymmetry" />
 
