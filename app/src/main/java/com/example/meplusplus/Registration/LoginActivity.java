@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
     //Diverse
     String email_text;
     String passowrd_text;
+    Map<String, Object> map;
+    String userID;
+    //Google
+    GoogleSignInOptions gso;
     //Controale
     private EditText email, password;
     private TextView forgotpassword;
@@ -62,10 +66,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    Map<String, Object> map;
-    String userID;
-    //Google
-    GoogleSignInOptions gso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         map = new HashMap<>();
 
         //Google
-         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("432467919065-e2s07mhf5b56sf3nusdefascua25qbih.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
@@ -198,7 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                             user = auth.getCurrentUser();
                             String arr[] = user.getDisplayName().split(" ", 2);
                             String username = arr[0];
-                            userID=auth.getCurrentUser().getUid();
+                            userID = auth.getCurrentUser().getUid();
 
                             map.put("username", username.toString());
                             map.put("name", user.getDisplayName().toString());
@@ -258,11 +258,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (user != null) {
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
             finish();
-        }
-        else {
+        } else {
         }
 
     }

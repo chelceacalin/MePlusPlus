@@ -9,6 +9,16 @@ public class Message {
     String message;
     String whosentit;
 
+    public Message() {
+        this.message = "N/A";
+        this.whosentit = "N/A";
+    }
+
+    public Message(String message, String whosentit) {
+        this.message = message;
+        this.whosentit = whosentit;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -29,16 +39,6 @@ public class Message {
     @Override
     public int hashCode() {
         return Objects.hash(message, whosentit);
-    }
-
-    public Message(){
-    this.message="N/A";
-    this.whosentit="N/A";
-}
-
-    public Message(String message, String whosentit) {
-        this.message = message;
-        this.whosentit = whosentit;
     }
 
     public String getMessage() {

@@ -2,14 +2,23 @@ package com.example.meplusplus.DataSets;
 
 public class Food {
 
-String itemID;
-Float sumCalories;
-Float sumProtein;
-Float sumCarbs;
-Float sumFats;
-Float sumSugar;
+    String itemID;
+    Float sumCalories;
+    Float sumProtein;
+    Float sumCarbs;
+    Float sumFats;
+    Float sumSugar;
 
     public Food() {
+    }
+
+    public Food(String itemID, Float sumCalories, Float sumProtein, Float sumCarbs, Float sumFats, Float sumSugar) {
+        this.itemID = itemID;
+        this.sumCalories = sumCalories;
+        this.sumProtein = sumProtein;
+        this.sumCarbs = sumCarbs;
+        this.sumFats = sumFats;
+        this.sumSugar = sumSugar;
     }
 
     public String getItemID() {
@@ -57,15 +66,6 @@ Float sumSugar;
     }
 
     public void setSumSugar(Float sumSugar) {
-        this.sumSugar = sumSugar;
-    }
-
-    public Food(String itemID, Float sumCalories, Float sumProtein, Float sumCarbs, Float sumFats, Float sumSugar) {
-        this.itemID = itemID;
-        this.sumCalories = sumCalories;
-        this.sumProtein = sumProtein;
-        this.sumCarbs = sumCarbs;
-        this.sumFats = sumFats;
         this.sumSugar = sumSugar;
     }
 }

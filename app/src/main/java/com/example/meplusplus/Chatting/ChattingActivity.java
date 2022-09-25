@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.Adapters.User_Adapter_Chatting;
-import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
@@ -49,6 +48,7 @@ public class ChattingActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +56,8 @@ public class ChattingActivity extends AppCompatActivity {
         init();
 
         activity_chatting_close_button.setOnClickListener(view -> {
-            startActivity(new Intent(ChattingActivity.this,MainActivity.class));
-            overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+            startActivity(new Intent(ChattingActivity.this, MainActivity.class));
+            overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
             finish();
             super.onBackPressed();
         });
@@ -67,21 +67,20 @@ public class ChattingActivity extends AppCompatActivity {
 
     private void init() {
         //Controale
-        activity_chatting_close_button=findViewById(R.id.activity_chatting_close_button);
-        recyclerView=findViewById(R.id.activity_chatting_recyclerview);
+        activity_chatting_close_button = findViewById(R.id.activity_chatting_close_button);
+        recyclerView = findViewById(R.id.activity_chatting_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(ChattingActivity.this));
-        list=new ArrayList<>();
-        adapter=new User_Adapter_Chatting(ChattingActivity.this,list);
+        list = new ArrayList<>();
+        adapter = new User_Adapter_Chatting(ChattingActivity.this, list);
         recyclerView.setAdapter(adapter);
 
         // Firebase ( for reading the users)
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         databaseReference = database.getReference().child("users");
 
-        auth=FirebaseAuth.getInstance();
-        user=auth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
     }
-
 
 
     private void readusers() {
@@ -89,18 +88,17 @@ public class ChattingActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    list.clear();
-                    for (DataSnapshot i : dataSnapshot.getChildren()) {
-                        if(i.getValue(User.class).getId().equals(user.getUid()))
-                        {
-                            list.add(0, i.getValue(User.class));
-                            adapter.notifyItemInserted(0);
-                        }
-                        else
+                list.clear();
+                for (DataSnapshot i : dataSnapshot.getChildren()) {
+                    if (i.getValue(User.class).getId().equals(user.getUid())) {
+                        list.add(0, i.getValue(User.class));
+                        adapter.notifyItemInserted(0);
+                    } else
                         list.add(i.getValue(User.class));
                 }
                 adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -109,8 +107,8 @@ public class ChattingActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ChattingActivity.this,MainActivity.class));
-        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        startActivity(new Intent(ChattingActivity.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
         finish();
         super.onBackPressed();
     }

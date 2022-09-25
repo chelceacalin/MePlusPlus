@@ -52,7 +52,7 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
         setDetails(post, holder);
 
 
-      ImagePopup imagePopup = new ImagePopup(context);
+        ImagePopup imagePopup = new ImagePopup(context);
         imagePopup.setWindowHeight(850); // Optional
         imagePopup.setWindowWidth(850); // Optional
         imagePopup.setBackgroundColor(context.getResources().getColor(R.color.Navy));  // Optional
@@ -60,9 +60,8 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
         imagePopup.setHideCloseIcon(false);  // Optional
         imagePopup.setImageOnClickClose(true);  // Optional
         imagePopup.initiatePopup(holder.imageView.getDrawable());
-        if(items.get(position).getImageurl().equals("")){}
-        else
-        {
+        if (items.get(position).getImageurl().equals("")) {
+        } else {
             imagePopup.initiatePopupWithPicasso(items.get(position).getImageurl());
         }
         holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +75,7 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
 
     private void setDetails(PostItem post, ViewHolder holder) {
         Picasso.get().load(post.getImageurl()).into(holder.imageView);
-       // mAttacher = new PhotoViewAttacher(holder.imageView);
+        // mAttacher = new PhotoViewAttacher(holder.imageView);
 
     }
 

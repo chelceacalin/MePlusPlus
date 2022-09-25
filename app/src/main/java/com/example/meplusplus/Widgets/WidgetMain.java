@@ -22,7 +22,7 @@ public class WidgetMain extends AppWidgetProvider {
 
 
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widgetaddfooditem);
-            views.setOnClickPendingIntent(R.id.widget_add_food_text,pendingIntent);
+            views.setOnClickPendingIntent(R.id.widget_add_food_text, pendingIntent);
             views.setOnClickPendingIntent(R.id.widget_add_food_button, pendingIntent);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);

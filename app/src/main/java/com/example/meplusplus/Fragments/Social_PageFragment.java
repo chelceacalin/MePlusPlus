@@ -52,6 +52,7 @@ public class Social_PageFragment extends Fragment {
         readPosts();
         return view;
     }
+
     private void init(View view) {
 
         //Firebase
@@ -61,6 +62,7 @@ public class Social_PageFragment extends Fragment {
         social_page_recyclerviewPosts = view.findViewById(R.id.social_page_recyclerviewPosts);
 
     }
+
     private void initRecycler() {
         manager = new LinearLayoutManager(getContext());
         manager.setReverseLayout(true);
@@ -80,8 +82,8 @@ public class Social_PageFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();
                 for (DataSnapshot i : snapshot.getChildren()) {
-                    if(i.getValue(PostItem.class).getIngredients().equals(""))
-                    items.add(i.getValue(PostItem.class));
+                    if (i.getValue(PostItem.class).getIngredients().equals(""))
+                        items.add(i.getValue(PostItem.class));
                 }
                 adapter.notifyDataSetChanged();
             }

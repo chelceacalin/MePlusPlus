@@ -20,15 +20,15 @@ public class PostItem {
         this.imageurl = "N/A";
         this.postid = "N/A";
         this.publisher = "N/A";
-        ingredients="";
+        ingredients = "";
     }
 
-    public PostItem(String description, String imageurl, String postid, String publisher,String ingredients) {
+    public PostItem(String description, String imageurl, String postid, String publisher, String ingredients) {
         this.description = description;
         this.imageurl = imageurl;
         this.postid = postid;
         this.publisher = publisher;
-        this.ingredients=ingredients;
+        this.ingredients = ingredients;
     }
 
     @NonNull

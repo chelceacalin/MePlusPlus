@@ -65,26 +65,26 @@ public class MainActivity extends AppCompatActivity {
 
 
         sharedPreferences = getSharedPreferences("wantReminders", MODE_PRIVATE);
-        wantReminders =sharedPreferences.getBoolean("yesToReminders",false);
+        wantReminders = sharedPreferences.getBoolean("yesToReminders", false);
 
-        if(wantReminders) {
-            Intent intent=new Intent(MainActivity.this, ReminderBroadcast.class);
-            PendingIntent pendingIntent= null;
+        if (wantReminders) {
+            Intent intent = new Intent(MainActivity.this, ReminderBroadcast.class);
+            PendingIntent pendingIntent = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,PendingIntent.FLAG_IMMUTABLE);
+                pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
             }
-            AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
-            long curr=System.currentTimeMillis();
-            long oneMinute=1000*5;
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            long curr = System.currentTimeMillis();
+            long oneMinute = 1000 * 5;
             //long oneMinute=1000*60*60; sa fie din ora in ora
-            alarmManager.set(AlarmManager.RTC_WAKEUP, oneMinute,pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, oneMinute, pendingIntent);
         }
 
 
-            //Daca nu avem niciun fragment
-        if(savedInstanceState == null) {
+        //Daca nu avem niciun fragment
+        if (savedInstanceState == null) {
             getSupportFragmentManager().
-                    beginTransaction().replace(R.id.main_fragment_container,new MeFragment()).commit();
+                    beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).commit();
         }
 
         bottomNavigationView.setOnItemSelectedListener((BottomNavigationView.OnNavigationItemSelectedListener) item -> {
@@ -102,16 +102,16 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.getMenu().getItem(1).setChecked(true);
         }
         //Switch from Calories Activity to MeFragment
-        if (extras != null && extras.containsKey("MeFragmentPLS")){
+        if (extras != null && extras.containsKey("MeFragmentPLS")) {
             openF2 = extras.getBoolean("MeFragmentPLS");
 
         }
         if (openF2) {
-           getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new MeFragment()).addToBackStack(null).commit();
             bottomNavigationView.getMenu().getItem(0).setChecked(true);
         }
         //Switch from Calories Activity to MeFragment
-        if (extras != null && extras.containsKey("MetabolismToMeFragment")){
+        if (extras != null && extras.containsKey("MetabolismToMeFragment")) {
             openF2 = extras.getBoolean("MetabolismToMeFragment");
 
         }
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Switch from Drink Water Activity to MeFragment
-        if (extras != null && extras.containsKey("MeFragmentPLS2")){
+        if (extras != null && extras.containsKey("MeFragmentPLS2")) {
             openF2 = extras.getBoolean("MeFragmentPLS2");
 
         }
@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.getMenu().getItem(0).setChecked(true);
         }
     }
-
 
 
     //Switch Between Fragments
@@ -148,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
             fragment = new AccountFragment();
             ID_fragment = 4;
         } else if (R.id.recipes == itemId) {
-            fragment=new RecipesFragment();
-            ID_fragment=5;
+            fragment = new RecipesFragment();
+            ID_fragment = 5;
         }
     }
 
@@ -189,14 +188,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void createNotificationChannel(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            CharSequence name="MePlusPlus";
-            String description="Take another sip...";
-            int importance= NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel=new NotificationChannel("notifyMe",name,importance);
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "MePlusPlus";
+            String description = "Take another sip...";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyMe", name, importance);
             channel.setDescription(description);
-            NotificationManager notificationManager=getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }

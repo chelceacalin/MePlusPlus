@@ -45,16 +45,15 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
     //Controale
     final Context context;
     final List<Comm> list;
+    final FirebaseUser user;
+    final FirebaseAuth auth;
+    final String ID;
     Comm comm;
     User u;
-
     //Firebase
     FirebaseDatabase database;
     DatabaseReference reference;
-    final FirebaseUser user;
-    final FirebaseAuth auth;
     DatabaseReference reference1;
-    final String ID;
 
     public Comment_Adapter(Context context, String ID, List<Comm> list) {
         this.context = context;
@@ -77,9 +76,8 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
         SeeDetails(comm, holder);
 
         holder.itemView.setOnClickListener(view -> {
-            AlertDialog alertDialog= new AlertDialog.Builder(context).create();
-            if(comm.getPublisher().equals(user.getUid()))
-            {
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            if (comm.getPublisher().equals(user.getUid())) {
                 alertDialog.setTitle("Do you want to delete?");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {
@@ -124,6 +122,14 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
         return list.size();
     }
 
+    private void init() {
+        //FirebaseDatabase
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        reference = database.getReference().child("users");
+
+
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final CircleImageView comment_card_item_people_profile_image;
         final TextView comment_card_item_people_username;
@@ -135,13 +141,5 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
             comment_card_item_people_username = itemView.findViewById(R.id.comment_card_item_people_username);
             comment_card_item_comment_text = itemView.findViewById(R.id.comment_card_item_comment_text);
         }
-    }
-
-    private void init() {
-        //FirebaseDatabase
-        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference().child("users");
-
-
     }
 }

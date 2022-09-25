@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
-import com.example.meplusplus.ToDo.ToDoActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -137,8 +136,8 @@ public class DrinkWater extends AppCompatActivity {
         activity_drink_water_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DrinkWater.this,MainActivity.class));
-                overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+                startActivity(new Intent(DrinkWater.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
                 finish();
             }
         });
@@ -169,8 +168,8 @@ public class DrinkWater extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(DrinkWater.this,MainActivity.class));
-        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        startActivity(new Intent(DrinkWater.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
         finish();
         super.onBackPressed();
     }

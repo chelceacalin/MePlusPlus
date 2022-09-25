@@ -7,7 +7,7 @@ import java.util.Objects;
 public class FoodModel {
     String name;
     String MeasureUnits;
-    float   sugar;
+    float sugar;
     float calories;
     int quantity;
     float fats;
@@ -15,19 +15,19 @@ public class FoodModel {
     float protein;
 
 
-public FoodModel(){
-    this.name="N/A";
-    quantity=0;
-    MeasureUnits ="N/A";
-    calories=0;
-    fats=0;
-    carbs=0;
-    protein=0;
-    sugar=0;
-}
+    public FoodModel() {
+        this.name = "N/A";
+        quantity = 0;
+        MeasureUnits = "N/A";
+        calories = 0;
+        fats = 0;
+        carbs = 0;
+        protein = 0;
+        sugar = 0;
+    }
 
 
-    public FoodModel(String name, float calories, int quantity, String MeasureUnits, float fats, float carbs, float protein, float  sugar) {
+    public FoodModel(String name, float calories, int quantity, String MeasureUnits, float fats, float carbs, float protein, float sugar) {
         this.name = name;
         this.calories = calories;
         this.quantity = quantity;
@@ -107,7 +107,7 @@ public FoodModel(){
         this.protein = protein;
     }
 
-    public float  getSugar() {
+    public float getSugar() {
         return sugar;
     }
 
@@ -120,12 +120,12 @@ public FoodModel(){
     public String toString() {
         return
                 "Name: " + name + "\n" +
-                        "Quantity: " + quantity + "\n"+
-                        "Calories: " + calories + "\n"+
-                "UnitOfMeasure: '" + MeasureUnits +  "\n"+
-                "Fats: " + fats + "\n"+
-                "Carbs: " + carbs + "\n"+
-                "Protein: " + protein + "\n"+
-                "Sugar: " + sugar + "\n";
+                        "Quantity: " + quantity + "\n" +
+                        "Calories: " + calories + "\n" +
+                        "UnitOfMeasure: '" + MeasureUnits + "\n" +
+                        "Fats: " + fats + "\n" +
+                        "Carbs: " + carbs + "\n" +
+                        "Protein: " + protein + "\n" +
+                        "Sugar: " + sugar + "\n";
     }
 }

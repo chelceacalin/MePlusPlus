@@ -14,13 +14,13 @@ public class WriteToFileClass {
 
     public static void write(Context context, ArrayList<String> list, String numefisier) {
         ObjectOutputStream outputStream;
-       try (FileOutputStream fileOutputStream = context.openFileOutput(numefisier, Context.MODE_PRIVATE)) {
-           outputStream  = new ObjectOutputStream(fileOutputStream);
+        try (FileOutputStream fileOutputStream = context.openFileOutput(numefisier, Context.MODE_PRIVATE)) {
+            outputStream = new ObjectOutputStream(fileOutputStream);
 
             for (String item : list) {
                 outputStream.writeUTF(item);
             }
-           outputStream.close();
+            outputStream.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -29,7 +29,7 @@ public class WriteToFileClass {
     }
 
 
-    public  static ArrayList<String> read(Context context, String numefisier) {
+    public static ArrayList<String> read(Context context, String numefisier) {
         ArrayList<String> list = new ArrayList<>();
 
         try (FileInputStream fileInputStream = context.openFileInput(numefisier)) {

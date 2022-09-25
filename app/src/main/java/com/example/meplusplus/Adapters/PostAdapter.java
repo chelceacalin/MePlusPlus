@@ -43,7 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
        UPDATED DATE: 9/01/2022
        Notes: Added zoom in feature on pictures
  */
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     final Context context;
     final List<PostItem> items;
@@ -81,7 +81,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
         ID = p.getPostid();
         SetDetails(p, holder);
         //Photoview to be full scale
-      holder.social_page_image_content.setScaleType(ImageView.ScaleType.FIT_XY);
+        holder.social_page_image_content.setScaleType(ImageView.ScaleType.FIT_XY);
 
         // Number of hearts
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
@@ -195,11 +195,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
                 }
                 Picasso.get().load(p.getImageurl()).into(holder.social_page_image_content);
                 holder.social_page_username.setText(u.getUsername());
-                if(!(p.getDescription().equals(""))){
+                if (!(p.getDescription().equals(""))) {
                     holder.social_page_image_description.setText(p.getDescription());
-                }
-                else
-                {
+                } else {
                     holder.social_page_image_description.setVisibility(View.GONE);
                 }
 
@@ -226,7 +224,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
     public int getItemCount() {
         return items.size();
     }
-
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

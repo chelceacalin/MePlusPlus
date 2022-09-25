@@ -79,7 +79,7 @@ public class ForgotPassword extends AppCompatActivity {
                         .cornerRadius(25)
                         .iconStart(R.drawable.ic_baseline_error_outline_24)
                         .show()
-                );
+        );
     }
 
     //Cand apas butonul de back de la telefon

@@ -6,11 +6,11 @@ public class WaterModel {
 
     int sumWater;
 
-    public WaterModel(){
-        this.sumWater=0;
+    public WaterModel() {
+        this.sumWater = 0;
     }
 
-    public WaterModel( int sumWater) {
+    public WaterModel(int sumWater) {
         this.sumWater = sumWater;
     }
 

@@ -9,11 +9,18 @@ public class ToDoModel {
     String date;
 
     public ToDoModel() {
-        this.taskID="N/A";
-        this.description="N/A";
-        this.task="N/A";
-        this.date="N/A";
+        this.taskID = "N/A";
+        this.description = "N/A";
+        this.task = "N/A";
+        this.date = "N/A";
 
+    }
+
+    public ToDoModel(String taskID, String description, String task, String date) {
+        this.taskID = taskID;
+        this.description = description;
+        this.task = task;
+        this.date = date;
     }
 
     public String getTaskID() {
@@ -57,12 +64,5 @@ public class ToDoModel {
                 ", task='" + task + '\'' +
                 ", date='" + date + '\'' +
                 '}';
-    }
-
-    public ToDoModel(String taskID, String description, String task, String date) {
-        this.taskID = taskID;
-        this.description = description;
-        this.task = task;
-        this.date = date;
     }
 }

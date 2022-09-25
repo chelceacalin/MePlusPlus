@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.DataSets.FoodModel;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
@@ -60,14 +59,15 @@ public class CaloriesActivity extends AppCompatActivity {
     TextView activity_calories_carbs;
     TextView activity_calories_fats;
     TextView activity_calories_sugar;
-    float sumCalories,sumProtein,sumCarbs,sumFats,sumSugar;
-     //Sa le trimitem la activitatea principala
+    float sumCalories, sumProtein, sumCarbs, sumFats, sumSugar;
+    //Sa le trimitem la activitatea principala
     String foodItemsSearched;
 
-String user;
+    String user;
     //Metoda 2
     FirebaseDatabase database;
     DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,20 +91,19 @@ String user;
 
                 //Daca stergi shared preferences aici o sa se blocheze
 
-                foodItems= new FoodApiVolley(CaloriesActivity.this);
+                foodItems = new FoodApiVolley(CaloriesActivity.this);
                 sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
                 gson = new Gson();
                 json = sharedPrefs.getString("MYITEMS", "");
-                type = new TypeToken<List<FoodModel>>() {}.getType();
-                foodItemsSearched=activity_calories_items_edit_text.getText().toString();
-                if(foodItemsSearched.equals("")){
+                type = new TypeToken<List<FoodModel>>() {
+                }.getType();
+                foodItemsSearched = activity_calories_items_edit_text.getText().toString();
+                if (foodItemsSearched.equals("")) {
                     Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();
-                }
-                else
-                foodItems.search(activity_calories_items_edit_text.getText().toString());
+                } else
+                    foodItems.search(activity_calories_items_edit_text.getText().toString());
 
                 arrayList = gson.fromJson(json, type);
-
 
 
             }
@@ -117,29 +116,32 @@ String user;
                 activity_calories_search_items.performClick();
 
                 //PT ListView
-                if(arrayList!=null){
-                    arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1,arrayList );
+                if (arrayList != null) {
+                    arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1, arrayList);
                     SeeItemsListView.setAdapter(arrayAdapter);
 
-                    sumCalories=0;sumProtein=0;sumCarbs=0;sumFats=0;sumSugar=0;
-                    for (FoodModel item:arrayList){
-                        sumCalories+=item.getCalories();
-                        sumProtein+=item.getProtein();
-                        sumCarbs+=item.getCarbs();
-                        sumFats=item.getFats();
-                        sumSugar+=item.getSugar();
+                    sumCalories = 0;
+                    sumProtein = 0;
+                    sumCarbs = 0;
+                    sumFats = 0;
+                    sumSugar = 0;
+                    for (FoodModel item : arrayList) {
+                        sumCalories += item.getCalories();
+                        sumProtein += item.getProtein();
+                        sumCarbs += item.getCarbs();
+                        sumFats = item.getFats();
+                        sumSugar += item.getSugar();
                     }
 
-                    activity_calories_total_calories.setText(sumCalories+"");
-                    activity_calories_protein.setText(sumProtein+"");
-                    activity_calories_carbs.setText(sumCarbs+"");
-                    activity_calories_fats.setText(sumFats+"");
-                    activity_calories_sugar.setText(sumSugar+"");
+                    activity_calories_total_calories.setText(sumCalories + "");
+                    activity_calories_protein.setText(sumProtein + "");
+                    activity_calories_carbs.setText(sumCarbs + "");
+                    activity_calories_fats.setText(sumFats + "");
+                    activity_calories_sugar.setText(sumSugar + "");
                 }
 
 
                 //Calculezi suma itemetelor din listview
-
 
 
             }
@@ -149,15 +151,15 @@ String user;
             @Override
             public void onClick(View view) {
 
-                user= FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String itemID=reference.push().getKey();
-                Map<String,Object> map=new HashMap<>();
-                map.put("itemID",itemID);
-                map.put("sumCalories",sumCalories);
-                map.put("sumProtein",sumProtein);
-                map.put("sumCarbs",sumCarbs);
-                map.put("sumFats",sumFats);
-                map.put("sumSugar",sumSugar);
+                user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String itemID = reference.push().getKey();
+                Map<String, Object> map = new HashMap<>();
+                map.put("itemID", itemID);
+                map.put("sumCalories", sumCalories);
+                map.put("sumProtein", sumProtein);
+                map.put("sumCarbs", sumCarbs);
+                map.put("sumFats", sumFats);
+                map.put("sumSugar", sumSugar);
 
                 reference.child(user).child(itemID).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -165,7 +167,7 @@ String user;
                         // Schimbam din activitate in fragment
                         Intent intent = new Intent(CaloriesActivity.this, MainActivity.class);
                         intent.putExtra("MetabolismToMeFragment", true);
-                        intent.putExtra("itemID",itemID);
+                        intent.putExtra("itemID", itemID);
                         overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
                         finish();
                         startActivity(intent);
@@ -178,40 +180,40 @@ String user;
                 });
 
 
-
-
-
             }
         });
-
 
 
     }
 
 
-    private void init(){
+    private void init() {
         //Controale
-        activity_calories_close_button=findViewById(R.id.activity_calories_close_button);
-        activity_calories_items_edit_text=findViewById(R.id.activity_calories_items_edit_text);
-        activity_calories_search_items=findViewById(R.id.activity_calories_search_items);
-        activity_calories_add_items=findViewById(R.id.activity_calories_add_items);
-        activity_calories_show_items=findViewById(R.id.activity_calories_show_items);
-        SeeItemsListView= findViewById(R.id.SeeItemsListView);
+        activity_calories_close_button = findViewById(R.id.activity_calories_close_button);
+        activity_calories_items_edit_text = findViewById(R.id.activity_calories_items_edit_text);
+        activity_calories_search_items = findViewById(R.id.activity_calories_search_items);
+        activity_calories_add_items = findViewById(R.id.activity_calories_add_items);
+        activity_calories_show_items = findViewById(R.id.activity_calories_show_items);
+        SeeItemsListView = findViewById(R.id.SeeItemsListView);
 
 
         //Calories related
-        activity_calories_total_calories=findViewById(R.id.activity_calories_total_calories);
+        activity_calories_total_calories = findViewById(R.id.activity_calories_total_calories);
         activity_calories_total_calories.setText("0");
-        activity_calories_protein=findViewById(R.id.activity_calories_protein);
+        activity_calories_protein = findViewById(R.id.activity_calories_protein);
         activity_calories_protein.setText("0");
-        activity_calories_carbs=findViewById(R.id.activity_calories_carbs);
+        activity_calories_carbs = findViewById(R.id.activity_calories_carbs);
         activity_calories_carbs.setText("0");
-        activity_calories_fats=findViewById(R.id.activity_calories_fats);
+        activity_calories_fats = findViewById(R.id.activity_calories_fats);
         activity_calories_fats.setText("0");
-        activity_calories_sugar=findViewById(R.id.activity_calories_sugar);
+        activity_calories_sugar = findViewById(R.id.activity_calories_sugar);
         activity_calories_sugar.setText("0");
 
-        sumCalories=0;sumProtein=0;sumCarbs=0;sumFats=0;sumSugar=0;
+        sumCalories = 0;
+        sumProtein = 0;
+        sumCarbs = 0;
+        sumFats = 0;
+        sumSugar = 0;
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference("foods");
 

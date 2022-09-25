@@ -5,8 +5,8 @@ public class Workout_Split {
     String muscles_worked;
 
     public Workout_Split() {
-        this.split_name="N/A";
-        this.muscles_worked="N/A";
+        this.split_name = "N/A";
+        this.muscles_worked = "N/A";
     }
 
     public Workout_Split(String split_name, String muscles_worked) {

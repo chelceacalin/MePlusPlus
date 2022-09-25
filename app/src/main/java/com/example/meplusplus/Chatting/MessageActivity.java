@@ -57,20 +57,18 @@ public class MessageActivity extends AppCompatActivity {
     LinearLayoutManager manager;
     List<Message> list;
     Message_Adapter adapter;
-    Map<String,Object> map;
-
-    //Firebase
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
+    Map<String, Object> map;
     FirebaseAuth auth;
     FirebaseUser user;
-
     // Messages
     String sender;
     String sendToTargetID;
     String imageurl;
     String message;
     String messageID;
+    //Firebase
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,69 +80,66 @@ public class MessageActivity extends AppCompatActivity {
 
 
         activity_message_close.setOnClickListener(view -> {
-          startActivity(new Intent(MessageActivity.this,ChattingActivity.class));
-            overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+            startActivity(new Intent(MessageActivity.this, ChattingActivity.class));
+            overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
             finish();
         });
 
         activity_message_button.setOnClickListener(view -> {
-            message=activity_message_edit_text.getText().toString().trim();
-            if(!message.equals("")){
-                        send(message);
-             }
-            else
-            {
+            message = activity_message_edit_text.getText().toString().trim();
+            if (!message.equals("")) {
+                send(message);
+            } else {
                 new StyleableToast.Builder(MessageActivity.this)
                         .text("No message to send")
                         .textColor(Color.RED)
                         .backgroundColor(getResources().getColor(R.color.white))
                         .cornerRadius(25)
                         .iconStart(R.drawable.ic_baseline_error_outline_24)
-                        .show();}
-            });
+                        .show();
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(MessageActivity.this,ChattingActivity.class));
-        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        startActivity(new Intent(MessageActivity.this, ChattingActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
         finish();
         super.onBackPressed();
     }
 
-    private void init(){
+    private void init() {
         //Controale
-        activity_message_close=findViewById(R.id.activity_message_close);
-        activity_message_profile_pic=findViewById(R.id.activity_message_profile_pic);
-        activity_message_username=findViewById(R.id.activity_message_username);
-        activity_message_edit_text=findViewById(R.id.activity_message_edit_text);
-        activity_message_button=findViewById(R.id.activity_message_button);
+        activity_message_close = findViewById(R.id.activity_message_close);
+        activity_message_profile_pic = findViewById(R.id.activity_message_profile_pic);
+        activity_message_username = findViewById(R.id.activity_message_username);
+        activity_message_edit_text = findViewById(R.id.activity_message_edit_text);
+        activity_message_button = findViewById(R.id.activity_message_button);
 
         //Diverse
-        map=new HashMap<>();
+        map = new HashMap<>();
 
 
         //Firebase
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("messages");
-        auth=FirebaseAuth.getInstance();
-        user=auth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
 
-
-        activity_message_recyclerView=findViewById(R.id.activity_message_recyclerView);
-        manager=new LinearLayoutManager(this);
+        activity_message_recyclerView = findViewById(R.id.activity_message_recyclerView);
+        manager = new LinearLayoutManager(this);
         activity_message_recyclerView.setLayoutManager(manager);
 
-        list=new ArrayList<>();
-        adapter=new Message_Adapter(MessageActivity.this,user.getUid(),list);
+        list = new ArrayList<>();
+        adapter = new Message_Adapter(MessageActivity.this, user.getUid(), list);
         //activity_message_recyclerView.setAdapter(adapter);
 
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private void readMessages()
-    {
+    private void readMessages() {
         reference.child(user.getUid()).child(sendToTargetID).addChildEventListener(new ChildEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -178,14 +173,14 @@ public class MessageActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         activity_message_recyclerView.setAdapter(adapter);
     }
+
     private void setdetails() {
-        sender=getIntent().getStringExtra("userTarget");
-        imageurl=getIntent().getStringExtra("userImgUrl");
-        sendToTargetID=getIntent().getStringExtra("userTargetID");
-        if(!imageurl.equals("")){
+        sender = getIntent().getStringExtra("userTarget");
+        imageurl = getIntent().getStringExtra("userImgUrl");
+        sendToTargetID = getIntent().getStringExtra("userTargetID");
+        if (!imageurl.equals("")) {
             Glide.with(MessageActivity.this).load(imageurl).into(activity_message_profile_pic);
-        }
-        else{
+        } else {
             activity_message_profile_pic.setImageResource(R.drawable.ic_baseline_person_pin_24);
         }
 
@@ -194,9 +189,9 @@ public class MessageActivity extends AppCompatActivity {
 
 
     private void send(String message) {
-   messageID=reference.child(user.getUid()).child(sendToTargetID).push().getKey();
-        map.put("message",message);
-        map.put("whosentit",user.getUid());
+        messageID = reference.child(user.getUid()).child(sendToTargetID).push().getKey();
+        map.put("message", message);
+        map.put("whosentit", user.getUid());
         reference.child(user.getUid()).child(sendToTargetID).child(messageID).setValue(map);
         reference.child(sendToTargetID).child(user.getUid()).child(messageID).setValue(map);
         activity_message_edit_text.setText("");

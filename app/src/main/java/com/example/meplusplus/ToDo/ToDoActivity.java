@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,9 +29,9 @@ public class ToDoActivity extends AppCompatActivity {
     //controale
     FloatingActionButton activity_to_do_fab;
     EditText actvity_to_do_edittext;
-ImageButton activity_to_do_complete_all;
-ImageButton activity_to_do_delete_all;
-ImageView activity_to_do_close;
+    ImageButton activity_to_do_complete_all;
+    ImageButton activity_to_do_delete_all;
+    ImageView activity_to_do_close;
 
     //Listview
     ListView activity_to_do_listview;
@@ -108,8 +107,8 @@ ImageView activity_to_do_close;
             @Override
             public void onClick(View view) {
 
-                for(int i=0;i<activity_to_do_listview.getCount();i++){
-                    activity_to_do_listview.setItemChecked(i,true);
+                for (int i = 0; i < activity_to_do_listview.getCount(); i++) {
+                    activity_to_do_listview.setItemChecked(i, true);
                 }
             }
         });
@@ -125,8 +124,8 @@ ImageView activity_to_do_close;
         activity_to_do_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ToDoActivity.this,MainActivity.class));
-                overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+                startActivity(new Intent(ToDoActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
                 finish();
             }
         });
@@ -145,7 +144,7 @@ ImageView activity_to_do_close;
                      *//*   items.remove(position);
                         adapter.notifyDataSetChanged();
                         FileHelper.writeData(items, MainActivity.this, "fisierText.txt");*//*
-                      *//*  items.add(position,"ceva");
+         *//*  items.add(position,"ceva");
                         adapter.notifyDataSetChanged();*//*
 
                     }
@@ -169,25 +168,25 @@ ImageView activity_to_do_close;
         activity_to_do_listview = findViewById(R.id.activity_to_do_listview);
         activity_to_do_fab = findViewById(R.id.activity_to_do_fab);
         actvity_to_do_edittext = findViewById(R.id.actvity_to_do_edittext);
-        activity_to_do_complete_all=findViewById(R.id.activity_to_do_complete_all);
-        activity_to_do_delete_all=findViewById(R.id.activity_to_do_delete_all);
-        activity_to_do_close=findViewById(R.id.activity_to_do_close);
+        activity_to_do_complete_all = findViewById(R.id.activity_to_do_complete_all);
+        activity_to_do_delete_all = findViewById(R.id.activity_to_do_delete_all);
+        activity_to_do_close = findViewById(R.id.activity_to_do_close);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.listview_tasks,menu);
+        getMenuInflater().inflate(R.menu.listview_tasks, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id=item.getItemId();
-        if(id==R.id.item_finished){
-            StringBuilder sel= new StringBuilder("Selected Items");
-            for(int i=0;i<activity_to_do_listview.getCount();i++){
-                if(activity_to_do_listview.isItemChecked(i)){
+        int id = item.getItemId();
+        if (id == R.id.item_finished) {
+            StringBuilder sel = new StringBuilder("Selected Items");
+            for (int i = 0; i < activity_to_do_listview.getCount(); i++) {
+                if (activity_to_do_listview.isItemChecked(i)) {
                     sel.append(activity_to_do_listview.getItemAtPosition(i)).append("\n");
                 }
             }
@@ -198,8 +197,8 @@ ImageView activity_to_do_close;
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ToDoActivity.this,MainActivity.class));
-        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        startActivity(new Intent(ToDoActivity.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
         finish();
         super.onBackPressed();
     }

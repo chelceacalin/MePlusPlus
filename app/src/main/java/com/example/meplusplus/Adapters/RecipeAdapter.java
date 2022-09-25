@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,7 +55,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      return new RecipeAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.recipepostitem, parent, false));
+        return new RecipeAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.recipepostitem, parent, false));
 
     }
 
@@ -69,7 +68,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         ID = p.getPostid();
         SetDetails(p, holder);
     }
-
 
 
     private void SetDetails(PostItem p, @NonNull RecipeAdapter.ViewHolder holder) {
@@ -93,11 +91,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                     mAttacher = new PhotoViewAttacher(holder.recipepostitem_content);
                 }
                 Picasso.get().load(p.getImageurl()).into(holder.recipepostitem_content);
-                if(!(p.getDescription().equals(""))){
+                if (!(p.getDescription().equals(""))) {
                     holder.recipepostitem_description.setText(p.getDescription());
-                }
-                else
-                {
+                } else {
                     holder.recipepostitem_description.setVisibility(View.GONE);
                 }
                 holder.recipepostitem_ingredients.setText(p.getIngredients());
@@ -125,21 +121,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-         CircleImageView recipepostitem_image_profile;
-         TextView recipepostitem_username;
-         TextView recipepostitem_description;
-         PhotoView recipepostitem_content;
-         TextView recipepostitem_ingredients;
+        CircleImageView recipepostitem_image_profile;
+        TextView recipepostitem_username;
+        TextView recipepostitem_description;
+        PhotoView recipepostitem_content;
+        TextView recipepostitem_ingredients;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            recipepostitem_image_profile=itemView.findViewById(R.id.recipepostitem_image_profile);
-            recipepostitem_username=itemView.findViewById(R.id.recipepostitem_username);
-            recipepostitem_description=itemView.findViewById(R.id.recipepostitem_image_description);
-            recipepostitem_content=itemView.findViewById(R.id.recipepostitem_image_content);
-            recipepostitem_ingredients=itemView.findViewById(R.id.recipepostitem_ingredients);
+            recipepostitem_image_profile = itemView.findViewById(R.id.recipepostitem_image_profile);
+            recipepostitem_username = itemView.findViewById(R.id.recipepostitem_username);
+            recipepostitem_description = itemView.findViewById(R.id.recipepostitem_image_description);
+            recipepostitem_content = itemView.findViewById(R.id.recipepostitem_image_content);
+            recipepostitem_ingredients = itemView.findViewById(R.id.recipepostitem_ingredients);
         }
     }
 

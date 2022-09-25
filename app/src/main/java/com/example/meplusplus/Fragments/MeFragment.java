@@ -28,9 +28,9 @@ import com.example.meplusplus.Chatting.ChattingActivity;
 import com.example.meplusplus.DataSets.Food;
 import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
-import com.example.meplusplus.Registration.LoginActivity;
 import com.example.meplusplus.ProgressTracking.ActivityProgress;
 import com.example.meplusplus.R;
+import com.example.meplusplus.Registration.LoginActivity;
 import com.example.meplusplus.ToDo.ToDoActivity;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.PostActivity;
@@ -205,10 +205,9 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 long nrChildren = snapshot.getChildrenCount();
                 if (nrChildren > 0) {
                     fragment_me_water.setText((200 * nrChildren) + "");
-                    if(waterDrank>0){
+                    if (waterDrank > 0) {
                         circularProgress.setProgress((200 * nrChildren), waterDrank);
-                    }
-                    else
+                    } else
                         circularProgress.setProgress((200 * nrChildren), 2000);
 
 
@@ -405,26 +404,24 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(User.class)!=null){
+                if (snapshot.getValue(User.class) != null) {
                     if (snapshot.getValue(User.class).getImageurl().equals("")) {
                     } else {
-                        if(!(snapshot.getValue(User.class).getImageurl().equals("default"))){
+                        if (!(snapshot.getValue(User.class).getImageurl().equals("default"))) {
                             Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);
-                        }
-                        else{
+                        } else {
                             drawer_circle_image_view_profile.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
                         }
                         header_for_drawer_text_username.setText(Objects.requireNonNull(snapshot.getValue(User.class)).getUsername());
                     }
                 }
-                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
-
 
 
     @SuppressLint("NonConstantResourceId")
@@ -495,7 +492,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         if (waterDrank > 0) {
             fragment_me_max_water.setText(waterDrank + "");
         } else {
-            fragment_me_max_water.setText(2000+"");
+            fragment_me_max_water.setText(2000 + "");
         }
 
     }

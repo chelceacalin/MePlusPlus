@@ -1,7 +1,5 @@
 package com.example.meplusplus.Utils;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.R;
 
@@ -22,6 +22,7 @@ public class FeedBackActivity extends AppCompatActivity {
 
     String subject;
     String message;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +30,12 @@ public class FeedBackActivity extends AppCompatActivity {
         init();
 
 
-
         feedbackactivity_send_mail.setOnClickListener(view -> {
-            subject=feedbackactivity_subject.getText().toString();
-            message=feedbackactivity_message.getText().toString();
-            if(!subject.equals("")&&!message.equals("")){
-                sendEmail(subject,message);
-            }
-            else
-            {
+            subject = feedbackactivity_subject.getText().toString();
+            message = feedbackactivity_message.getText().toString();
+            if (!subject.equals("") && !message.equals("")) {
+                sendEmail(subject, message);
+            } else {
                 new StyleableToast.Builder(FeedBackActivity.this)
                         .text("Make sure subject and message fields are not empty")
                         .textColor(Color.RED)
@@ -52,16 +50,17 @@ public class FeedBackActivity extends AppCompatActivity {
 
     }
 
-private void init(){
-    feedbackactivity_subject=findViewById(R.id.feedbackactivity_subject);
-    feedbackactivity_message=findViewById(R.id.feedbackactivity_message);
-    feedbackactivity_send_mail=findViewById(R.id.feedbackactivity_send_mail);
+    private void init() {
+        feedbackactivity_subject = findViewById(R.id.feedbackactivity_subject);
+        feedbackactivity_message = findViewById(R.id.feedbackactivity_message);
+        feedbackactivity_send_mail = findViewById(R.id.feedbackactivity_send_mail);
 
-}
+    }
+
     @SuppressLint("IntentReset")
     protected void sendEmail(String subject, String message) {
 
-        Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("mailto:"+"chelcea.calin@yahoo.com"));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "chelcea.calin@yahoo.com"));
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
         startActivity(intent);

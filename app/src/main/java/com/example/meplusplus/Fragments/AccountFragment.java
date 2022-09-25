@@ -28,8 +28,8 @@ import com.bumptech.glide.Glide;
 import com.example.meplusplus.Adapters.AccountPhotos;
 import com.example.meplusplus.DataSets.PostItem;
 import com.example.meplusplus.DataSets.User;
-import com.example.meplusplus.Registration.LoginActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.Registration.LoginActivity;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.FeedBackActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -97,7 +97,6 @@ public class AccountFragment extends Fragment {
         setDetails();
 
 
-
         //No Of Posts
         referencePosts.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -132,7 +131,6 @@ public class AccountFragment extends Fragment {
         fragment_account_options = view.findViewById(R.id.fragment_account_options);
         fragment_account_image_profile = view.findViewById(R.id.fragment_account_image_profile);
         fragment_account_recyclerView_posts = view.findViewById(R.id.fragment_account_recyclerView_posts);
-
 
 
         //Firebase
@@ -279,7 +277,7 @@ public class AccountFragment extends Fragment {
                     }
 
 
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO   );
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 } else if (menuItem.getTitle().equals("Help / Give FeedbacK")) {
                     Intent i = new Intent(getActivity(), FeedBackActivity.class);
                     startActivity(i);
@@ -322,11 +320,9 @@ public class AccountFragment extends Fragment {
 
     @Override
     public void onStart() {
-        if(fragment_account_description.getText().toString().toString().equals("")){
+        if (fragment_account_description.getText().toString().toString().equals("")) {
             fragment_account_description.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             fragment_account_description.setVisibility(View.VISIBLE);
         }
         super.onStart();

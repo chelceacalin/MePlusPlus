@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
-import com.example.meplusplus.ZenMode.ZenModeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -97,8 +96,8 @@ public class PostActivity extends AppCompatActivity {
 
         });
         postactivity_closeImg.setOnClickListener(view -> {
-            startActivity(new Intent(PostActivity.this,MainActivity.class));
-            overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+            startActivity(new Intent(PostActivity.this, MainActivity.class));
+            overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
             finish();
         });
 
@@ -139,7 +138,7 @@ public class PostActivity extends AppCompatActivity {
         postactivity_rotate_image = findViewById(R.id.postactivity_rotate_image);
         postactivity_buttonpost = findViewById(R.id.postactivity_buttonpost);
         selectimage = findViewById(R.id.postactivity_selectimage);
-        postactivity_ingredients=findViewById(R.id.postactivity_ingredients);
+        postactivity_ingredients = findViewById(R.id.postactivity_ingredients);
         progressDialog = new ProgressDialog(this);
 
         //Firebase
@@ -152,8 +151,8 @@ public class PostActivity extends AppCompatActivity {
         //Diverse
         REQUEST_CODE = 69;
         rotationInit = 0;
-        description="";
-        ingredients="";
+        description = "";
+        ingredients = "";
         map = new HashMap<>();
     }
 
@@ -193,23 +192,21 @@ public class PostActivity extends AppCompatActivity {
                 imageURL = downloadUri.toString();
                 UniqueID = databaseReference.push().getKey(); // un id unic
                 description = postactivity_description.getText().toString().trim();
-                ingredients=postactivity_ingredients.getText().toString().toString();
+                ingredients = postactivity_ingredients.getText().toString().toString();
                 user = auth.getCurrentUser().getUid();
 
                 map.put("postid", UniqueID);
                 map.put("imageurl", imageURL);
-                if(!(description.equals(""))){
-                    map.put("description",description);
-                }
-               else{
-                   map.put("description","");
+                if (!(description.equals(""))) {
+                    map.put("description", description);
+                } else {
+                    map.put("description", "");
                 }
                 map.put("publisher", user);
-                if(!(ingredients.equals(""))){
-                    map.put("ingredients",ingredients);
-                }
-                else
-                    map.put("ingredients","");
+                if (!(ingredients.equals(""))) {
+                    map.put("ingredients", ingredients);
+                } else
+                    map.put("ingredients", "");
 
                 assert UniqueID != null;
                 databaseReference.child(UniqueID).setValue(map);
@@ -243,8 +240,8 @@ public class PostActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(PostActivity.this,MainActivity.class));
-        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        startActivity(new Intent(PostActivity.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
         finish();
         super.onBackPressed();
     }

@@ -2,15 +2,14 @@ package com.example.meplusplus.Fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.meplusplus.Adapters.RecipeAdapter;
 import com.example.meplusplus.DataSets.PostItem;
@@ -76,8 +75,8 @@ public class RecipesFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();
                 for (DataSnapshot i : snapshot.getChildren()) {
-                    if(!(i.getValue(PostItem.class).getIngredients().equals("")))
-                    items.add(i.getValue(PostItem.class));
+                    if (!(i.getValue(PostItem.class).getIngredients().equals("")))
+                        items.add(i.getValue(PostItem.class));
                 }
                 adapter.notifyDataSetChanged();
             }

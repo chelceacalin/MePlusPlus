@@ -93,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
     //Initializare controale
     public void init() {
         //Butoane
@@ -112,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference();
-        map= new HashMap<>();
+        map = new HashMap<>();
 
 
     }
@@ -169,7 +170,7 @@ public class RegisterActivity extends AppCompatActivity {
             map.put("username", username);
             map.put("name", name);
             map.put("email", email);
-            userID=auth.getCurrentUser().getUid();
+            userID = auth.getCurrentUser().getUid();
             map.put("id", Objects.requireNonNull(userID));
             map.put("bio", "");
             map.put("imageurl", "default");
@@ -184,7 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
                             .Builder(RegisterActivity.this)
                             .text("Registration Completed")
                             .textColor(Color.GREEN)
-                            .backgroundColor( getResources().getColor(R.color.white))
+                            .backgroundColor(getResources().getColor(R.color.white))
                             .cornerRadius(25)
                             .iconStart(R.drawable.ic_baseline_check_circle_24)
                             .show();
@@ -193,16 +194,16 @@ public class RegisterActivity extends AppCompatActivity {
         }).addOnFailureListener(e -> {
 
 
-
             new StyleableToast
                     .Builder(RegisterActivity.this)
                     .text("User Already Exists")
                     .textColor(Color.RED)
-                    .backgroundColor( getResources().getColor(R.color.white))
+                    .backgroundColor(getResources().getColor(R.color.white))
                     .cornerRadius(25)
                     .iconStart(R.drawable.ic_baseline_error_outline_24)
                     .show();
 
-            progressDialog.dismiss();});
+            progressDialog.dismiss();
+        });
     }
 }

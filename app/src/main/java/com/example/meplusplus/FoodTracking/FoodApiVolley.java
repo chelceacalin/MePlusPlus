@@ -29,20 +29,20 @@ import io.github.muddz.styleabletoast.StyleableToast;
 public class FoodApiVolley {
 
     final Context context;
+    final String ApiURL = "https://trackapi.nutritionix.com/v2/natural/nutrients";
     String food_calorie;
-    final String ApiURL="https://trackapi.nutritionix.com/v2/natural/nutrients";
     JSONObject data;
     RequestQueue q;
     List<FoodModel> items;
     JsonObjectRequest req;
     JSONArray foodItems;
     FoodModel fooditem;
+
     public FoodApiVolley(Context context) {
         this.context = context;
     }
 
-    public void search(String name)
-    {
+    public void search(String name) {
         q = VolleyMySingleton.getInstance(context).getRequestQueue();
         data = new JSONObject();
         try {
@@ -52,7 +52,7 @@ public class FoodApiVolley {
         }
         items = new ArrayList<>();
 
-         req = new JsonObjectRequest(Request.Method.POST, ApiURL, data, new Response.Listener<JSONObject>() {
+        req = new JsonObjectRequest(Request.Method.POST, ApiURL, data, new Response.Listener<JSONObject>() {
 
             @SuppressLint("ApplySharedPref")
             @Override
@@ -60,10 +60,10 @@ public class FoodApiVolley {
                 try {
                     foodItems = response.getJSONArray("foods");
                     for (int i = 0; i < foodItems.length(); i++) {
-                         fooditem=new FoodModel( ((JSONObject) foodItems.get(i)).getString("food_name"), ((JSONObject) foodItems.get(i)).getLong("nf_calories"), ((JSONObject) foodItems.get(i)).getInt("serving_qty"),
-                                 ((JSONObject) foodItems.get(i)).getString("serving_unit"), ((JSONObject) foodItems.get(i)).getLong("nf_total_fat"), ((JSONObject) foodItems.get(i)).getLong("nf_total_carbohydrate"), ((JSONObject) foodItems.get(i)).getLong("nf_protein"),
-                                 ((JSONObject) foodItems.get(i)).getLong("nf_sugars"));
-                            items.add(fooditem);
+                        fooditem = new FoodModel(((JSONObject) foodItems.get(i)).getString("food_name"), ((JSONObject) foodItems.get(i)).getLong("nf_calories"), ((JSONObject) foodItems.get(i)).getInt("serving_qty"),
+                                ((JSONObject) foodItems.get(i)).getString("serving_unit"), ((JSONObject) foodItems.get(i)).getLong("nf_total_fat"), ((JSONObject) foodItems.get(i)).getLong("nf_total_carbohydrate"), ((JSONObject) foodItems.get(i)).getLong("nf_protein"),
+                                ((JSONObject) foodItems.get(i)).getLong("nf_sugars"));
+                        items.add(fooditem);
                     }
 
                     SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -72,7 +72,6 @@ public class FoodApiVolley {
                     String json = gson.toJson(items);
                     editor.putString("MYITEMS", json);
                     editor.commit();
-
 
 
                 } catch (JSONException e) {
@@ -91,8 +90,7 @@ public class FoodApiVolley {
                         .show();
 
             }
-        })
-        {
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<>();

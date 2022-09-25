@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
-import com.example.meplusplus.Workout.WorkoutActivity;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -171,14 +170,13 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
         activity_calculate_metabolism_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CalculateMetabolismActivity.this,MainActivity.class));
-                overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+                startActivity(new Intent(CalculateMetabolismActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
                 finish();
 
             }
         });
     }
-
 
 
     private void init() {
@@ -188,7 +186,7 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
         activity_calculate_metabolism_option_female = findViewById(R.id.activity_calculate_metabolism_option_female);
         activity_calculate_metabolism_spinner = findViewById(R.id.activity_calculate_metabolism_spinner);
         activity_calculate_metabolism_button_calculate = findViewById(R.id.activity_calculate_metabolism_button_calculate);
-        activity_calculate_metabolism_close=findViewById(R.id.activity_calculate_metabolism_close);
+        activity_calculate_metabolism_close = findViewById(R.id.activity_calculate_metabolism_close);
         //Piechart
         pieChart = findViewById(R.id.activity_calculate_metabolism_piechart);
 
@@ -295,8 +293,8 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(CalculateMetabolismActivity.this,MainActivity.class));
-        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        startActivity(new Intent(CalculateMetabolismActivity.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
         finish();
         super.onBackPressed();
 

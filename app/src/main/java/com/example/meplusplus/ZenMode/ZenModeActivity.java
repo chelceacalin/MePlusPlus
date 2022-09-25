@@ -3,7 +3,6 @@ package com.example.meplusplus.ZenMode;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.ToneGenerator;
 import android.os.Bundle;
@@ -13,12 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.asp.fliptimerviewlibrary.CountDownClock;
-import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
 
@@ -177,9 +174,9 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
         });
 
 
-        activity_zen_mode_close.setOnClickListener(view1 ->{
-            startActivity(new Intent(ZenModeActivity.this,MainActivity.class));
-            overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        activity_zen_mode_close.setOnClickListener(view1 -> {
+            startActivity(new Intent(ZenModeActivity.this, MainActivity.class));
+            overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
             finish();
         });
 
@@ -187,7 +184,7 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
             @Override
             public void onClick(View view) {
 
-                if(COUNTDOWNTIME>1000){
+                if (COUNTDOWNTIME > 1000) {
                     COUNTDOWNTIME -= 1000;
                     countDownClock.startCountDown(COUNTDOWNTIME * 60L);
                     countDownClock.setCountdownListener(new CountDownClock.CountdownCallBack() {
@@ -214,8 +211,7 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
                             }
                         }
                     });
-                }
-                else {
+                } else {
 
                     new StyleableToast
                             .Builder(ZenModeActivity.this)
@@ -248,8 +244,8 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
                     mediaPlayer = null;
                 }
                 countDownClock.resetCountdownTimer();
-                startActivity(new Intent(ZenModeActivity.this,MainActivity.class));
-                overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+                startActivity(new Intent(ZenModeActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
                 finish();
             }
         });
@@ -265,7 +261,7 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
         activity_zen_mode_remove_1_minute = findViewById(R.id.activity_zen_mode_remove_1_minute);
         activity_zen_mode_spinner = findViewById(R.id.activity_zen_mode_spinner);
         activity_zen_mode_clock_stop = findViewById(R.id.activity_zen_mode_clock_stop);
-        activity_zen_mode_close=findViewById(R.id.activity_zen_mode_close);
+        activity_zen_mode_close = findViewById(R.id.activity_zen_mode_close);
     }
 
     private void initSpinner() {
@@ -318,8 +314,8 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ZenModeActivity.this,MainActivity.class));
-        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        startActivity(new Intent(ZenModeActivity.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
         finish();
         super.onBackPressed();
     }

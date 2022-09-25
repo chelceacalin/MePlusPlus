@@ -77,6 +77,7 @@ public class SearchPeopleFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 searchUser(charSequence.toString().toLowerCase().trim());
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -84,7 +85,6 @@ public class SearchPeopleFragment extends Fragment {
         });
         return view;
     }
-
 
 
     private void initRecycler(View view) {
@@ -103,8 +103,8 @@ public class SearchPeopleFragment extends Fragment {
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         databaseReference = database.getReference().child("users");
 
-        auth=FirebaseAuth.getInstance();
-        user=auth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
     }
 
 
@@ -113,16 +113,17 @@ public class SearchPeopleFragment extends Fragment {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 stringText = searchPeopleEditText.getText().toString();
+                stringText = searchPeopleEditText.getText().toString();
                 if (stringText.equals("")) {
                     users.clear();
                     for (DataSnapshot i : dataSnapshot.getChildren()) {
-                        if(!i.getValue(User.class).getId().equals(user.getUid()))
+                        if (!i.getValue(User.class).getId().equals(user.getUid()))
                             users.add(i.getValue(User.class));
                     }
                     user_adapter.notifyDataSetChanged();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -138,7 +139,7 @@ public class SearchPeopleFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 users.clear();
                 for (DataSnapshot i : snapshot.getChildren()) {
-                        users.add(i.getValue(User.class));
+                    users.add(i.getValue(User.class));
                 }
                 user_adapter.notifyDataSetChanged();
             }

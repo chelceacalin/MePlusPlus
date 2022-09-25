@@ -42,6 +42,10 @@ public class SplashScreen extends AppCompatActivity {
     public int total;
     //Animatie
     Animation animFadeIn;
+    // Sa porneasca splash screen doar odata
+    SharedPreferences settings;
+    boolean firstRun;
+    SharedPreferences.Editor editor;
     //Declarare
     private ImageView imageView;
     private CountDownTimer timer;
@@ -50,19 +54,14 @@ public class SplashScreen extends AppCompatActivity {
     private ProgressBar circularProgressBar;
     private ProgressBar horiontalProgressBar;
 
-    // Sa porneasca splash screen doar odata
-    SharedPreferences settings;
-    boolean firstRun;
-    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         init();
-         settings = getSharedPreferences("prefs", 0);
-         firstRun = settings.getBoolean("firstRun", false);
-        if (!firstRun)
-        {
+        settings = getSharedPreferences("prefs", 0);
+        firstRun = settings.getBoolean("firstRun", false);
+        if (!firstRun) {
             editor = settings.edit();
             editor.putBoolean("firstRun", true);
             editor.commit();
@@ -77,14 +76,14 @@ public class SplashScreen extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     startActivity(new Intent(SplashScreen.this, LoginActivity.class));
-               overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.fade_out);
+                    overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.fade_out);
                     finish();
                 }
             };
             timer.start();
         } else {
             startActivity(new Intent(SplashScreen.this, LoginActivity.class));
-           overridePendingTransition(R.anim.slide_right_to_left_transition,R.anim.slide_left_to_right_transition);
+            overridePendingTransition(R.anim.slide_right_to_left_transition, R.anim.slide_left_to_right_transition);
             finish();
         }
     }

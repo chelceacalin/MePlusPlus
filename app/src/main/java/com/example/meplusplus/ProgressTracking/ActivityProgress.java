@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.meplusplus.DataSets.Weight;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
-import com.example.meplusplus.WaterReminder.DrinkWater;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -69,8 +68,8 @@ public class ActivityProgress extends AppCompatActivity {
         activity_progress_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ActivityProgress.this,MainActivity.class));
-                overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+                startActivity(new Intent(ActivityProgress.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
                 finish();
             }
         });
@@ -183,8 +182,8 @@ public class ActivityProgress extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ActivityProgress.this,MainActivity.class));
-        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        startActivity(new Intent(ActivityProgress.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
         finish();
         super.onBackPressed();
     }

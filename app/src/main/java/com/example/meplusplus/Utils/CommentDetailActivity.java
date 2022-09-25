@@ -60,7 +60,7 @@ public class CommentDetailActivity extends AppCompatActivity {
     String postID;
 
     //Diverse
-    String comment="";
+    String comment = "";
     String id;
 
     @Override
@@ -71,7 +71,7 @@ public class CommentDetailActivity extends AppCompatActivity {
         setProfileImage();
 
         activity_comment_detail_button_post.setOnClickListener(view -> {
-             comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
+            comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
             if (comment.equals("")) {
                 new StyleableToast.Builder(CommentDetailActivity.this)
                         .text("Comment cannot be empty!")
@@ -82,8 +82,8 @@ public class CommentDetailActivity extends AppCompatActivity {
                         .show();
             } else {
                 strikes.child(postID);
-                id= strikes.child(postID).push().getKey();
-                map.put("id",id);
+                id = strikes.child(postID).push().getKey();
+                map.put("id", id);
                 map.put("publisher", user.getUid());
                 map.put("strike", comment);
                 assert id != null;
@@ -91,7 +91,7 @@ public class CommentDetailActivity extends AppCompatActivity {
                 activity_comment_detail_edit_Text_comment.setText("");
             }
         });
-     readStrikes();
+        readStrikes();
     }
 
     private void setProfileImage() {
@@ -104,6 +104,7 @@ public class CommentDetailActivity extends AppCompatActivity {
                 } else
                     activity_comment_detail_img.setImageResource(R.drawable.ic_baseline_face_24);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -147,7 +148,7 @@ public class CommentDetailActivity extends AppCompatActivity {
         manager = new LinearLayoutManager(this);
         activity_comment_detail_recyclerview.setLayoutManager(manager);
         list = new ArrayList<>();
-        adapter = new Comment_Adapter(this, postID,list);
+        adapter = new Comment_Adapter(this, postID, list);
         activity_comment_detail_recyclerview.setAdapter(adapter);
 
         //Firebase
@@ -155,7 +156,7 @@ public class CommentDetailActivity extends AppCompatActivity {
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");
-        strikes=database.getReference().child("strikes");
+        strikes = database.getReference().child("strikes");
 
         //Diverse
         map = new HashMap<>();

@@ -6,16 +6,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.Chatting.MessageActivity;
 import com.example.meplusplus.DataSets.User;
-import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,13 +32,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Chatting.ViewHolder> {
 
+    final List<User> list;
     //Firebase
     FirebaseAuth auth;
     FirebaseUser user;
-
     //Controale
     Context context;
-    final List<User> list;
     User item;
 
     //Pt a face tranzitia mai frumoasa intre slide-uri
@@ -49,6 +45,11 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
 
     public User_Adapter_Chatting() {
         this.list = null;
+    }
+
+    public User_Adapter_Chatting(Context context, List<User> list) {
+        this.context = context;
+        this.list = list;
     }
 
     @NonNull
@@ -65,19 +66,18 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
         setdDetails(user, holder);
 
         Objects.requireNonNull(holder).itemView.setOnClickListener(view -> {
-            Intent intent=new Intent(context,MessageActivity.class);
-            intent.putExtra("userTargetID",list.get(position).getId());
-            intent.putExtra("userTarget",list.get(position).getUsername());
-            intent.putExtra("userImgUrl",list.get(position).getImageurl());
-            context.startActivity(intent);
-            activity = (Activity) context;
-            activity.overridePendingTransition(R.anim.fade_in,R.anim.slide_out);
-            activity.finish();
-            }
+                    Intent intent = new Intent(context, MessageActivity.class);
+                    intent.putExtra("userTargetID", list.get(position).getId());
+                    intent.putExtra("userTarget", list.get(position).getUsername());
+                    intent.putExtra("userImgUrl", list.get(position).getImageurl());
+                    context.startActivity(intent);
+                    activity = (Activity) context;
+                    activity.overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                    activity.finish();
+                }
         );
 
     }
-
 
     private void setdDetails(FirebaseUser user, User_Adapter_Chatting.ViewHolder holder) {
         String imageURL = item.getImageurl();
@@ -95,10 +95,6 @@ public class User_Adapter_Chatting extends RecyclerView.Adapter<User_Adapter_Cha
         return list.size();
     }
 
-    public User_Adapter_Chatting(Context context, List<User> list) {
-        this.context = context;
-        this.list = list;
-    }
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final CircleImageView circleImageView;

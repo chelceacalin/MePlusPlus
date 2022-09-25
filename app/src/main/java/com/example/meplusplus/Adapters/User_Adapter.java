@@ -26,7 +26,6 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-
 /*
        Status: RFP
        CREATED DATE: 8/22/2022
@@ -37,16 +36,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
          Notes: When you click on someone it redirects you to their page
 
  */
-public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder>  {
+public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> {
 
+    final List<User> list;
+    final boolean eF;
     //Firebase
     FirebaseAuth auth;
     FirebaseUser user;
-
     //Controale
     Context context;
-    final List<User> list;
-    final boolean eF;
     User item;
 
     public User_Adapter() {
@@ -73,19 +71,19 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
         item = list.get(position);
         setdDetails(user, holder);
 
-        holder.sayhiButton.setOnClickListener(view ->{
-            Intent intent=new Intent(context, MessageActivity.class);
-            intent.putExtra("userTargetID",list.get(position).getId());
-            intent.putExtra("userTarget",list.get(position).getUsername());
-            intent.putExtra("userImgUrl",list.get(position).getImageurl());
+        holder.sayhiButton.setOnClickListener(view -> {
+            Intent intent = new Intent(context, MessageActivity.class);
+            intent.putExtra("userTargetID", list.get(position).getId());
+            intent.putExtra("userTarget", list.get(position).getUsername());
+            intent.putExtra("userImgUrl", list.get(position).getImageurl());
             context.startActivity(intent);
-        } );
+        });
 
         holder.itemView.setOnClickListener(view -> {
-                    context.getSharedPreferences("PID", Context.MODE_PRIVATE)
-                            .edit().putString("profileId", list.get(position).getId()).apply();
-                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_fragment_container, new AccountFragment()).commit();
+            context.getSharedPreferences("PID", Context.MODE_PRIVATE)
+                    .edit().putString("profileId", list.get(position).getId()).apply();
+            ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_fragment_container, new AccountFragment()).commit();
         });
     }
 
@@ -105,8 +103,6 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> 
         assert list != null;
         return list.size();
     }
-
-
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
