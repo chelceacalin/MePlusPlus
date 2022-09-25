@@ -43,7 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
        UPDATED DATE: 9/01/2022
        Notes: Added zoom in feature on pictures
  */
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements View.OnClickListener {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
     final Context context;
     final List<PostItem> items;
@@ -80,12 +80,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         p = items.get(position);
         ID = p.getPostid();
         SetDetails(p, holder);
-        holder.social_page_place_a_comment.setOnClickListener(this);
-        holder.social_page_strike.setOnClickListener(this);
-
-
         //Photoview to be full scale
       holder.social_page_image_content.setScaleType(ImageView.ScaleType.FIT_XY);
+
         // Number of hearts
         referenceHearts.child(ID).addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -125,6 +122,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
             }
         });
 
+        holder.social_page_strike.setOnClickListener(view -> {
+
+            Intent intent = new Intent(context, CommentDetailActivity.class);
+            intent.putExtra("postid", items.get(position).getPostid());
+            context.startActivity(intent);
+        });
+
+        holder.social_page_place_a_comment.setOnClickListener(view -> {
+
+            Intent intent = new Intent(context, CommentDetailActivity.class);
+            intent.putExtra("postid", items.get(position).getPostid());
+            context.startActivity(intent);
+        });
+
+        holder.social_page_like.setOnClickListener(v -> {
+            if (holder.social_page_like.getTag().equals("heart")) {
+                assert firebaseUser != null;
+                referenceHearts
+                        .child(items.get(position).getPostid()).child(firebaseUser.getUid()).setValue(true);
+            } else {
+                assert firebaseUser != null;
+                referenceHearts
+                        .child(items.get(position).getPostid()).child(firebaseUser.getUid()).removeValue();
+            }
+        });
 
     }
 
@@ -182,17 +204,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
                 }
 
                 holder.social_page_strike.setImageResource(R.drawable.ic_baseline_bolt_24);
-                holder.social_page_like.setOnClickListener(v -> {
-                    if (holder.social_page_like.getTag().equals("heart")) {
-                        assert firebaseUser != null;
-                        referenceHearts
-                                .child(p.getPostid()).child(firebaseUser.getUid()).setValue(true);
-                    } else {
-                        assert firebaseUser != null;
-                        referenceHearts
-                                .child(p.getPostid()).child(firebaseUser.getUid()).removeValue();
-                    }
-                });
+
             }
 
             @Override
@@ -215,18 +227,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         return items.size();
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.social_page_place_a_comment:
-            case R.id.social_page_strike:
-                Intent intent = new Intent(context, CommentDetailActivity.class);
-                intent.putExtra("postid", ID);
-                context.startActivity(intent);
-                break;
-        }
-    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
