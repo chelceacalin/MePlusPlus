@@ -45,13 +45,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    //Glide pt imagini
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
-    // Imagini rotunde
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    //Picasso - upload imagini
-    implementation 'com.squareup.picasso:picasso:2.71828'
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:30.3.2')
     implementation 'com.google.firebase:firebase-analytics'
@@ -62,6 +55,15 @@ dependencies {
     // Also declare the dependency for the Google Play services library and specify its version
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
 
+
+    //Glide pt imagini
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+    // Imagini rotunde
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //Picasso - upload imagini
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     //PIECHART
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 
@@ -71,8 +73,8 @@ dependencies {
     //Pop up image
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
 
-    //Zoom in on touch -- DO NOT CHANGE IT TO never version ( BROKEN )
-    //noinspection GradleDependency
+
+    // Pt a putea da zoom in pe imagini
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     // Textview-uri stilate
     implementation 'io.github.muddz:styleabletoast:2.4.0'

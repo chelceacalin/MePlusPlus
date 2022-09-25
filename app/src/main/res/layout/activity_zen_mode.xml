@@ -104,7 +104,7 @@
             android:clipToPadding="false"
             android:padding="10sp"
             flipTimer:almostFinishedCallbackTimeInSeconds="5"
-            flipTimer:animationDuration="850"
+            flipTimer:animationDuration="250"
             flipTimer:countdownTickInterval="1000"
             flipTimer:digitDividerColor="#35C2C2C2"
             flipTimer:digitPadding="2dp"

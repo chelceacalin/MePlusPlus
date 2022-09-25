@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:flipTimer="http://schemas.android.com/apk/res-auto"
+    tools:context=".Workout.WorkoutStarted"
+    android:background="@drawable/ic_blurry_gradient_haikei__1_">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/activity_workout_started_close"
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:background="@drawable/ic_baseline_close"
+                tools:ignore="ContentDescription"
+                android:layout_weight="0.2"
+                />
+
+            <com.asp.fliptimerviewlibrary.CountDownClock
+                android:id="@+id/workout_started_countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15sp"
+                android:layout_weight="0.6"
+                android:background="@drawable/maipatratnegru"
+                android:padding="10sp"
+                flipTimer:almostFinishedCallbackTimeInSeconds="5"
+                flipTimer:animationDuration="150"
+                flipTimer:countdownTickInterval="1000"
+                flipTimer:digitDividerColor="#35C2C2C2"
+                flipTimer:digitPadding="2dp"
+                flipTimer:digitTextColor="@color/white"
+                flipTimer:digitTextSize="24sp"
+                flipTimer:digitWidth="28dp"
+                flipTimer:halfDigitHeight="22dp"
+                flipTimer:resetSymbol="0"
+                flipTimer:splitterPadding="0dp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            >
+
+            <Button
+                android:id="@+id/activity_workout_started_start_button"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
+                android:backgroundTint="@color/Indigo"
+                android:text="Start"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle,HardcodedText"
+                android:layout_weight="0.33"
+                />
+
+            <Button
+                android:id="@+id/activity_workout_started_add_15_seconds"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
+                android:backgroundTint="@color/Indigo"
+                android:text="Add 15 seconds"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle,HardcodedText"
+                android:layout_weight="0.33"
+                />
+
+            <Button
+                android:id="@+id/activity_workout_started_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginTop="13sp"
+                android:layout_marginEnd="5sp"
+                android:backgroundTint="@color/Indigo"
+                android:text="Reset"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle,HardcodedText"
+                android:layout_weight="0.33"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

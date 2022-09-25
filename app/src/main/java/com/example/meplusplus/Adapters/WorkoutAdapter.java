@@ -1,7 +1,9 @@
 package com.example.meplusplus.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -18,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.DataSets.Workout_Split;
 import com.example.meplusplus.R;
+import com.example.meplusplus.Workout.WorkoutActivity;
+import com.example.meplusplus.Workout.WorkoutStarted;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,7 +32,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     //Controale
     Context context;
     List<Workout_Split> list;
-
     //Firebase
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -69,7 +72,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             if (list.get(position).getMuscles_worked().equals("")) {
                 holder.workout_split_split_name.setPadding(15, 15, 15, 15);
             } else {
-                holder.workout_split_split_name.setPadding(10, 30, 10, 30);
+                holder.workout_split_split_name.setPadding(10, 30, 10, 50);
             }
 
 
@@ -80,7 +83,15 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 if (list.get(position).getMuscles_worked().equals("")) {
-                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                if(list.get(position).getSplit_name().equals("Push")){
+                    Intent intent=new Intent(context, WorkoutStarted.class);
+                    intent.putExtra("Push", "Push");
+                    context.startActivity(intent);
+
+                }
                 }
             }
         });
