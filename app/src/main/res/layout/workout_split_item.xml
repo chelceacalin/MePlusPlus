@@ -4,18 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="5sp"
+    android:padding="2sp"
     >
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/workout_split_item_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
         app:cardElevation="10dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="2dp"
         >
     <LinearLayout
+        android:id="@+id/workout_split_item_layoutbackgroundcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -28,16 +30,16 @@
             android:orientation="horizontal"
             android:weightSum="1"
             tools:ignore="UselessParent">
+
             <TextView
                 android:id="@+id/workout_split_split_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:padding="20sp"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text=" Auto"
-                android:padding="20sp"
-                android:layout_weight="0.9"
                 tools:ignore="HardcodedText" />
 
             <LinearLayout
@@ -47,9 +49,11 @@
                 >
 
                 <TextView
+                    android:id="@+id/workout_split_item_textview_muscles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:layout_marginTop="5sp"
                     android:textStyle="bold"
                     android:textColor="@color/Coral"
                     android:text=" Muscles Worked"
@@ -63,7 +67,8 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:layout_marginTop="10sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_gravity="center_horizontal"
                     android:text=" Chest Triceps Shoulders"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
