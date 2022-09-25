@@ -47,6 +47,7 @@ public class WorkoutActivity extends AppCompatActivity {
     //Shared Preferences pt padding
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +61,8 @@ public class WorkoutActivity extends AppCompatActivity {
             super.onBackPressed();
 
         });
-        SharedPreferences switchButton=getSharedPreferences("wantPadding",MODE_PRIVATE);
-        boolean switchStatus=switchButton.getBoolean("yes",false);
+        SharedPreferences switchButton = getSharedPreferences("wantPadding", MODE_PRIVATE);
+        boolean switchStatus = switchButton.getBoolean("yes", false);
         activity_workout_switch_compact_mode.setChecked(switchStatus);
 
 
@@ -70,13 +71,13 @@ public class WorkoutActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean istoggled) {
                 if (istoggled) {
-                   editor=getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
-                   editor.clear();
-                   editor.putBoolean("yes", true);
-                   editor.apply();
+                    editor = getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.putBoolean("yes", true);
+                    editor.apply();
                     adapter.notifyDataSetChanged();
                 } else {
-                    editor=getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
+                    editor = getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
                     editor.clear();
                     editor.putBoolean("no", true);
                     editor.apply();
@@ -111,7 +112,7 @@ public class WorkoutActivity extends AppCompatActivity {
     private void init() {
         //Controale
         activity_workout_close = findViewById(R.id.activity_workout_close);
-        activity_workout_switch_compact_mode=findViewById(R.id.activity_workout_switch_compact_mode);
+        activity_workout_switch_compact_mode = findViewById(R.id.activity_workout_switch_compact_mode);
 
 
         //Firebase

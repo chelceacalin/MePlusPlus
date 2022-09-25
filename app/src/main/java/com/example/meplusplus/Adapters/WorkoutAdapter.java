@@ -54,26 +54,21 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         init();
         setDetails(holder, position);
         sharedPreferences = context.getSharedPreferences("wantPadding", Context.MODE_PRIVATE);
-
         wanted = sharedPreferences.getBoolean("yes", false);
-
-
-
-
-        if(list.get(position).getSplit_name().equals("Pull")){
+//Nu stiu de ce, asa ca am facut manual sa nu mai il modifice sa arate ca un Titlu de Workout
+        if (list.get(position).getSplit_name().equals("Pull")) {
             holder.workout_split_split_name.setGravity(Gravity.START);
             holder.workout_split_split_name.setTextColor(Color.WHITE);
         }
 
         if (wanted) { // Daca vor sa fie compact
-           holder.workout_split_split_name.setPadding(15, 8, 7, 10);
-           holder.workout_split_item_textview_muscles.setVisibility(View.GONE);
+            holder.workout_split_split_name.setPadding(15, 8, 7, 10);
+            holder.workout_split_item_textview_muscles.setVisibility(View.GONE);
         } else {
 
             if (list.get(position).getMuscles_worked().equals("")) {
-                holder.workout_split_split_name.setPadding(15,15,15,15);
-            }
-            else{
+                holder.workout_split_split_name.setPadding(15, 15, 15, 15);
+            } else {
                 holder.workout_split_split_name.setPadding(10, 30, 10, 30);
             }
 
