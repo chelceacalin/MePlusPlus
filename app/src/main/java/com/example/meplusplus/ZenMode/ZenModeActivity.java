@@ -178,11 +178,9 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
 
 
         activity_zen_mode_close.setOnClickListener(view1 ->{
-            Intent intent = new Intent(ZenModeActivity.this, MainActivity.class);
-            intent.putExtra("MetabolismToMeFragment", true);
-            overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+            startActivity(new Intent(ZenModeActivity.this,MainActivity.class));
+            overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
             finish();
-            startActivity(intent);
         });
 
         activity_zen_mode_remove_1_minute.setOnClickListener(new View.OnClickListener() {
@@ -250,11 +248,9 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
                     mediaPlayer = null;
                 }
                 countDownClock.resetCountdownTimer();
-                Intent intent = new Intent(ZenModeActivity.this, MainActivity.class);
-                intent.putExtra("MetabolismToMeFragment", true);
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                startActivity(new Intent(ZenModeActivity.this,MainActivity.class));
+                overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
                 finish();
-                startActivity(intent);
             }
         });
     }
@@ -322,10 +318,9 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ZenModeActivity.this, MainActivity.class);
-        intent.putExtra("MetabolismToMeFragment", true);
-        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+        startActivity(new Intent(ZenModeActivity.this,MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
         finish();
-        startActivity(intent);
+        super.onBackPressed();
     }
 }

@@ -137,11 +137,9 @@ public class DrinkWater extends AppCompatActivity {
         activity_drink_water_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DrinkWater.this, MainActivity.class);
-                intent.putExtra("MetabolismToMeFragment", true);
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                startActivity(new Intent(DrinkWater.this,MainActivity.class));
+                overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
                 finish();
-                startActivity(intent);
             }
         });
 
@@ -171,10 +169,9 @@ public class DrinkWater extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(DrinkWater.this, MainActivity.class);
-        intent.putExtra("MetabolismToMeFragment", true);
-        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+        startActivity(new Intent(DrinkWater.this,MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
         finish();
-        startActivity(intent);
+        super.onBackPressed();
     }
 }

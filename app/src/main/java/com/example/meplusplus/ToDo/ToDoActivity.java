@@ -125,11 +125,9 @@ ImageView activity_to_do_close;
         activity_to_do_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ToDoActivity.this, MainActivity.class);
-                intent.putExtra("MetabolismToMeFragment", true);
-                overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                startActivity(new Intent(ToDoActivity.this,MainActivity.class));
+                overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
                 finish();
-                startActivity(intent);
             }
         });
       /*  activity_to_do_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -200,10 +198,9 @@ ImageView activity_to_do_close;
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ToDoActivity.this, MainActivity.class);
-        intent.putExtra("MetabolismToMeFragment", true);
-        overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+        startActivity(new Intent(ToDoActivity.this,MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
         finish();
-        startActivity(intent);
+        super.onBackPressed();
     }
 }

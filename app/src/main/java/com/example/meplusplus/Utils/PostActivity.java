@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.ZenMode.ZenModeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -96,8 +97,8 @@ public class PostActivity extends AppCompatActivity {
 
         });
         postactivity_closeImg.setOnClickListener(view -> {
-            startActivity(new Intent(PostActivity.this, MainActivity.class));
-            overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
+            startActivity(new Intent(PostActivity.this,MainActivity.class));
+            overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
             finish();
         });
 
@@ -238,5 +239,13 @@ public class PostActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select image ..."), REQUEST_CODE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(PostActivity.this,MainActivity.class));
+        overridePendingTransition(R.anim.slide_left_to_right_transition,R.anim.slide_right_to_left_transition);
+        finish();
+        super.onBackPressed();
     }
 }
