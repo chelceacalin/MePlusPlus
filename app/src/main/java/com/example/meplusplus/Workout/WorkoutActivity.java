@@ -2,8 +2,11 @@ package com.example.meplusplus.Workout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +30,8 @@ public class WorkoutActivity extends AppCompatActivity {
 
     //Controale
     ImageView activity_workout_close;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    Switch activity_workout_switch_compact_mode;
     RecyclerView activity_workout_recycler_view;
     LinearLayoutManager manager;
 
@@ -38,6 +43,10 @@ public class WorkoutActivity extends AppCompatActivity {
     WorkoutAdapter adapter;
     List<Workout_Split> list;
 
+
+    //Shared Preferences pt padding
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +60,31 @@ public class WorkoutActivity extends AppCompatActivity {
             super.onBackPressed();
 
         });
+        SharedPreferences switchButton=getSharedPreferences("wantPadding",MODE_PRIVATE);
+        boolean switchStatus=switchButton.getBoolean("yes",false);
+        activity_workout_switch_compact_mode.setChecked(switchStatus);
+
+
+        activity_workout_switch_compact_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean istoggled) {
+                if (istoggled) {
+                   editor=getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
+                   editor.clear();
+                   editor.putBoolean("yes", true);
+                   editor.apply();
+                    adapter.notifyDataSetChanged();
+                } else {
+                    editor=getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.putBoolean("no", true);
+                    editor.apply();
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
 
         readWorkouts();
     }
@@ -77,6 +111,7 @@ public class WorkoutActivity extends AppCompatActivity {
     private void init() {
         //Controale
         activity_workout_close = findViewById(R.id.activity_workout_close);
+        activity_workout_switch_compact_mode=findViewById(R.id.activity_workout_switch_compact_mode);
 
 
         //Firebase

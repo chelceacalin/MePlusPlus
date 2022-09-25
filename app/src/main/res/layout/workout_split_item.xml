@@ -35,6 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:padding="20sp"
+                    android:layout_marginStart="5sp"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"

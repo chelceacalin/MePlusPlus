@@ -2,6 +2,8 @@ package com.example.meplusplus.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +28,15 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     //Controale
     Context context;
     List<Workout_Split> list;
+
     //Firebase
     FirebaseDatabase database;
     DatabaseReference reference;
+
+
+    //Shared Preferences pt padding
+    SharedPreferences sharedPreferences;
+    boolean wanted;
 
     public WorkoutAdapter(Context context, List<Workout_Split> list) {
         this.context = context;
@@ -45,6 +53,33 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         init();
         setDetails(holder, position);
+        sharedPreferences = context.getSharedPreferences("wantPadding", Context.MODE_PRIVATE);
+
+        wanted = sharedPreferences.getBoolean("yes", false);
+
+
+
+
+        if(list.get(position).getSplit_name().equals("Pull")){
+            holder.workout_split_split_name.setGravity(Gravity.START);
+            holder.workout_split_split_name.setTextColor(Color.WHITE);
+        }
+
+        if (wanted) { // Daca vor sa fie compact
+           holder.workout_split_split_name.setPadding(15, 8, 7, 10);
+           holder.workout_split_item_textview_muscles.setVisibility(View.GONE);
+        } else {
+
+            if (list.get(position).getMuscles_worked().equals("")) {
+                holder.workout_split_split_name.setPadding(15,15,15,15);
+            }
+            else{
+                holder.workout_split_split_name.setPadding(10, 30, 10, 30);
+            }
+
+
+        }
+
 
         holder.workout_split_item_cardview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,32 +89,37 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
                 }
             }
         });
+
+
     }
 
     private void setDetails(ViewHolder holder, int position) {
 
 
         if (list.get(position).getMuscles_worked().equals("")) {
+
             holder.workout_split_item_layoutbackgroundcolor.setBackgroundColor(context.getResources().getColor(R.color.DimGray));
             holder.workout_split_split_muscles_worked.setVisibility(View.GONE);
             holder.workout_split_item_textview_muscles.setVisibility(View.GONE);
-            holder.workout_split_split_name.setGravity(Gravity.CENTER_HORIZONTAL);
             holder.workout_split_split_name.setTextColor(context.getResources().getColor(R.color.DarkOrange));
-            holder.workout_split_split_name.setText(list.get(position).getSplit_name());
-            holder.workout_split_split_name.setPadding(10, 10, 10, 10);
+            holder.workout_split_split_name.setGravity(Gravity.CENTER_HORIZONTAL);
+
         } else {
             holder.workout_split_item_layoutbackgroundcolor.setBackgroundColor(context.getResources().getColor(R.color.black));
-
             holder.workout_split_split_muscles_worked.setVisibility(View.VISIBLE);
             holder.workout_split_item_textview_muscles.setVisibility(View.VISIBLE);
             holder.workout_split_split_muscles_worked.setText(list.get(position).getMuscles_worked());
-            holder.workout_split_split_name.setText(list.get(position).getSplit_name());
         }
+        holder.workout_split_split_name.setText(list.get(position).getSplit_name());
     }
 
     private void init() {
+        //Firebase
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference("workout");
+
+        //Diverse
+        wanted = false;
     }
 
     @Override
