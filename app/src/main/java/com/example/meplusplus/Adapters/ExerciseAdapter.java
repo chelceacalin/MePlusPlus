@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.DataSets.Exercise;
@@ -33,7 +35,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
 
     //Shared preferences
     SharedPreferences.Editor editor;
-    boolean isLongClicked=false;
 
     public ExerciseAdapter(Context context, List<Exercise> list) {
         this.context = context;
@@ -59,11 +60,9 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
 
         holder.workout_exercise_cardview.setOnLongClickListener(view -> {
             holder.workout_exercie_background.setBackgroundColor(Color.DKGRAY);
-            isLongClicked=!isLongClicked;
-            editor=context.getSharedPreferences("longclickview",Context.MODE_PRIVATE).edit();
-            editor.putString("schimba","startAgain");
-            editor.apply();
-
+            Intent intent = new Intent("custom-message");
+            intent.putExtra("schimba","startAgain");
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             return true;
         });
 

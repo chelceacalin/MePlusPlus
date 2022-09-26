@@ -1,15 +1,20 @@
 package com.example.meplusplus.Workout;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +53,7 @@ public class WorkoutActivity extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,7 @@ public class WorkoutActivity extends AppCompatActivity {
         SharedPreferences switchButton = getSharedPreferences("wantPadding", MODE_PRIVATE);
         boolean switchStatus = switchButton.getBoolean("yes", false);
         activity_workout_switch_compact_mode.setChecked(switchStatus);
+
 
 
         activity_workout_switch_compact_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -110,6 +117,7 @@ public class WorkoutActivity extends AppCompatActivity {
     }
 
     private void init() {
+
         //Controale
         activity_workout_close = findViewById(R.id.activity_workout_close);
         activity_workout_switch_compact_mode = findViewById(R.id.activity_workout_switch_compact_mode);
@@ -127,6 +135,8 @@ public class WorkoutActivity extends AppCompatActivity {
         adapter = new WorkoutAdapter(WorkoutActivity.this, list);
         activity_workout_recycler_view.setAdapter(adapter);
     }
+
+
 
     @Override
     public void onBackPressed() {

@@ -1,7 +1,10 @@
 package com.example.meplusplus.Workout;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -9,9 +12,11 @@ import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +61,10 @@ public class WorkoutStarted extends AppCompatActivity {
     //Shared Preferences ca sa resetam cand dam long click
     SharedPreferences preferences;
 
+    //Diverse
+    String ItemName;
+    String isValid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +76,20 @@ public class WorkoutStarted extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_left_to_right_transition, R.anim.slide_right_to_left_transition);
             finish();
         });
+
+
+        preferences=getSharedPreferences("longclickview",MODE_PRIVATE);
+
+        activity_workout_started_reset.setOnClickListener(view -> {
+            COUNTDOWNTIME=0;
+            workout_started_countdown.resetCountdownTimer();
+        });
+
+
+    /*    String reset=preferences.getString("schimba","nuschimba");
+        if(reset.equals("schimba")){
+            activity_workout_started_reset.performClick();
+        }*/
 
 
         activity_workout_started_start_button.setOnClickListener(view -> {
@@ -123,10 +146,7 @@ public class WorkoutStarted extends AppCompatActivity {
             });
         });
 
-        activity_workout_started_reset.setOnClickListener(view -> {
-            COUNTDOWNTIME=0;
-            workout_started_countdown.resetCountdownTimer();
-        });
+
 
 
 
@@ -134,7 +154,15 @@ public class WorkoutStarted extends AppCompatActivity {
         readExercises();
     }
 
+
+
     private void init() {
+        // Register to receive messages.
+        // We are registering an observer (mMessageReceiver) to receive Intents
+        // with actions named "custom-message".
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("custom-message"));
+
         //Controale
         activity_workout_started_close = findViewById(R.id.activity_workout_started_close);
         workout_started_countdown = findViewById(R.id.workout_started_countdown);
@@ -185,5 +213,19 @@ public class WorkoutStarted extends AppCompatActivity {
         });
 
     }
+
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            ItemName = intent.getStringExtra("schimba");
+            if(ItemName!=null){
+                if(ItemName.equals("startAgain")){
+                    activity_workout_started_start_button.performClick();
+                }
+            }
+
+        }
+    };
 
 }
