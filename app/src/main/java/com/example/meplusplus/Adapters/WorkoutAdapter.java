@@ -1,7 +1,6 @@
 package com.example.meplusplus.Adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.DataSets.Workout_Split;
 import com.example.meplusplus.R;
-import com.example.meplusplus.Workout.WorkoutActivity;
 import com.example.meplusplus.Workout.WorkoutStarted;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -86,11 +83,50 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
 
                 }
                 else{
-                if(list.get(position).getSplit_name().equals("Push")){
-                    Intent intent=new Intent(context, WorkoutStarted.class);
-                    context.startActivity(intent);
-
-                }
+                    switch (list.get(position).getSplit_name()) {
+                        case "Push": {
+                            Intent intent = new Intent(context, WorkoutStarted.class);
+                            intent.putExtra("Push", "Push");
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case "Pull": {
+                            Intent intent = new Intent(context, WorkoutStarted.class);
+                            intent.putExtra("Pull", "Pull");
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case "Legs": {
+                            Intent intent = new Intent(context, WorkoutStarted.class);
+                            intent.putExtra("Legs", "Legs");
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case "Upper": {
+                            Intent intent = new Intent(context, WorkoutStarted.class);
+                            intent.putExtra("Upper", "Upper");
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case "Lower": {
+                            Intent intent = new Intent(context, WorkoutStarted.class);
+                            intent.putExtra("Lower", "Lower");
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case "Full Body A": {
+                            Intent intent = new Intent(context, WorkoutStarted.class);
+                            intent.putExtra("Full Body A", "Full Body A");
+                            context.startActivity(intent);
+                            break;
+                        }
+                        case "Full Body B": {
+                            Intent intent = new Intent(context, WorkoutStarted.class);
+                            intent.putExtra("Full Body B", "Full Body B");
+                            context.startActivity(intent);
+                            break;
+                        }
+                    }
                 }
             }
         });

@@ -12,7 +12,6 @@ import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,7 +62,24 @@ public class WorkoutStarted extends AppCompatActivity {
 
     //Diverse
     String ItemName;
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            ItemName = intent.getStringExtra("schimba");
+            if (ItemName != null) {
+                if (ItemName.equals("startAgain")) {
+                    activity_workout_started_start_button.performClick();
+                }
+            }
+
+        }
+    };
     String isValid;
+    //Sa fol acelasi recyclerview pt toate
+    Bundle extras;
+    String workoutName;
+    String tempWorkoutName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,18 +94,12 @@ public class WorkoutStarted extends AppCompatActivity {
         });
 
 
-        preferences=getSharedPreferences("longclickview",MODE_PRIVATE);
+        preferences = getSharedPreferences("longclickview", MODE_PRIVATE);
 
         activity_workout_started_reset.setOnClickListener(view -> {
-            COUNTDOWNTIME=0;
+            COUNTDOWNTIME = 0;
             workout_started_countdown.resetCountdownTimer();
         });
-
-
-    /*    String reset=preferences.getString("schimba","nuschimba");
-        if(reset.equals("schimba")){
-            activity_workout_started_reset.performClick();
-        }*/
 
 
         activity_workout_started_start_button.setOnClickListener(view -> {
@@ -138,8 +148,8 @@ public class WorkoutStarted extends AppCompatActivity {
                             .cornerRadius(25)
                             .iconStart(R.drawable.ic_baseline_check_circle_24)
                             .show();
-                        ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                        toneGenerator.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
+                    ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+                    toneGenerator.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
 
                 }
 
@@ -147,14 +157,8 @@ public class WorkoutStarted extends AppCompatActivity {
         });
 
 
-
-
-
-
         readExercises();
     }
-
-
 
     private void init() {
         // Register to receive messages.
@@ -171,11 +175,11 @@ public class WorkoutStarted extends AppCompatActivity {
         activity_workout_started_reset = findViewById(R.id.activity_workout_started_reset);
 
         //Recyclerview
-        activity_workout_started_recyclerview=findViewById(R.id.activity_workout_started_recyclerview);
-        manager=new LinearLayoutManager(WorkoutStarted.this);
+        activity_workout_started_recyclerview = findViewById(R.id.activity_workout_started_recyclerview);
+        manager = new LinearLayoutManager(WorkoutStarted.this);
         activity_workout_started_recyclerview.setLayoutManager(manager);
-        list=new ArrayList<>();
-        adapter=new ExerciseAdapter(WorkoutStarted.this, list);
+        list = new ArrayList<>();
+        adapter = new ExerciseAdapter(WorkoutStarted.this, list);
 
         activity_workout_started_recyclerview.setAdapter(adapter);
 
@@ -194,14 +198,57 @@ public class WorkoutStarted extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void readExercises(){
+    private void readExercises() {
+        extras = getIntent().getExtras();
+        if (extras != null) {
+            workoutName = extras.getString("Push");
+            if (workoutName != null) {
+                tempWorkoutName = workoutName;
+            } else {
+                workoutName = extras.getString("Pull");
+                if (workoutName != null) {
+                    tempWorkoutName = workoutName;
+                } else {
+                    workoutName = extras.getString("Legs");
+                    if (workoutName != null) {
+                        tempWorkoutName = workoutName;
+                    } else {
+                        workoutName = extras.getString("Upper");
+                        if (workoutName != null) {
+                            tempWorkoutName = workoutName;
+                        } else {
+                            workoutName = extras.getString("Lower");
+                            if (workoutName != null) {
+                                tempWorkoutName = workoutName;
+                            } else {
+                                workoutName = extras.getString("Full Body A");
+                                if (workoutName != null) {
+                                    tempWorkoutName = workoutName;
+                                } else {
+                                    workoutName = extras.getString("Full Body B");
+                                    if (workoutName != null) {
+                                        tempWorkoutName = workoutName;
+                                    } else {
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
         reference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                for(DataSnapshot sn:snapshot.getChildren()){
-                    list.add(sn.getValue(Exercise.class));
+                for (DataSnapshot sn : snapshot.getChildren()) {
+                    if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName))
+                        list.add(sn.getValue(Exercise.class));
+
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -213,19 +260,5 @@ public class WorkoutStarted extends AppCompatActivity {
         });
 
     }
-
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Get extra data included in the Intent
-            ItemName = intent.getStringExtra("schimba");
-            if(ItemName!=null){
-                if(ItemName.equals("startAgain")){
-                    activity_workout_started_start_button.performClick();
-                }
-            }
-
-        }
-    };
 
 }
