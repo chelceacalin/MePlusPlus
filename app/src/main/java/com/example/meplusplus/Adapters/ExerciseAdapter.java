@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -36,6 +35,11 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
     //Shared preferences
     SharedPreferences.Editor editor;
 
+
+
+    //Shared Preferences pt padding
+    SharedPreferences sharedPreferences;
+    boolean wanted;
     public ExerciseAdapter(Context context, List<Exercise> list) {
         this.context = context;
         this.list = list;
@@ -52,6 +56,23 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
         init();
         setDetails(holder,position);
 
+        sharedPreferences = context.getSharedPreferences("wantPadding", Context.MODE_PRIVATE);
+        wanted = sharedPreferences.getBoolean("yes", false);
+        if (wanted) { // Daca vor sa fie compact
+            holder.workout_exercixe_split_name.setPadding(15, 8, 7, 10);
+            holder.workout_exercise_item_textview_muscles.setVisibility(View.GONE);
+            holder.workout_exercixe_split_muscles_worked.setTextColor(Color.CYAN);
+
+        } else {
+
+            if (list.get(position).getMuscles_worked().equals("")) {
+                holder.workout_exercixe_split_name.setPadding(15, 15, 15, 15);
+            } else {
+                holder.workout_exercixe_split_name.setPadding(10, 30, 10, 50);
+            }
+
+
+        }
 
         holder.workout_exercise_cardview.setOnClickListener(view -> {
             Intent intent=new Intent("android.intent.action.VIEW", Uri.parse(list.get(position).getExercise_link()));
@@ -92,6 +113,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
 
         TextView workout_exercixe_split_name;
         TextView workout_exercixe_split_muscles_worked;
+        TextView workout_exercise_item_textview_muscles;
         CardView workout_exercise_cardview;
         LinearLayout workout_exercie_background;
 
@@ -101,7 +123,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
             workout_exercixe_split_muscles_worked = itemView.findViewById(R.id.workout_exercixe_split_muscles_worked);
             workout_exercise_cardview = itemView.findViewById(R.id.workout_exercise_cardview);
             workout_exercie_background=itemView.findViewById(R.id.workout_exercie_background);
-
+            workout_exercise_item_textview_muscles=itemView.findViewById(R.id.workout_exercise_item_textview_muscles);
         }
     }
 }
