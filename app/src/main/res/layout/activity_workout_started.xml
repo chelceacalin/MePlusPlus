@@ -110,6 +110,15 @@
 
         </LinearLayout>
 
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_workout_started_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15sp"
+            android:layout_height="wrap_content"
+
+            />
+
     </LinearLayout>
 
 

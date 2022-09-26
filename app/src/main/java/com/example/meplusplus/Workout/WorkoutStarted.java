@@ -1,20 +1,33 @@
 package com.example.meplusplus.Workout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.asp.fliptimerviewlibrary.CountDownClock;
+import com.example.meplusplus.Adapters.ExerciseAdapter;
+import com.example.meplusplus.DataSets.Exercise;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
-import com.example.meplusplus.ZenMode.ZenModeActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.github.muddz.styleabletoast.StyleableToast;
 
@@ -26,10 +39,22 @@ public class WorkoutStarted extends AppCompatActivity {
     Button activity_workout_started_add_15_seconds;
     Button activity_workout_started_reset;
 
+    //Recyclerview
+    RecyclerView activity_workout_started_recyclerview;
+    LinearLayoutManager manager;
+    ExerciseAdapter adapter;
+    List<Exercise> list;
+
+    //Firebase
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     // Rest Timer
     CountDownClock workout_started_countdown;
     long COUNTDOWNTIME = 0;
+
+    //Shared Preferences ca sa resetam cand dam long click
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +97,6 @@ public class WorkoutStarted extends AppCompatActivity {
 
         });
 
-
         activity_workout_started_add_15_seconds.setOnClickListener(view -> {
             COUNTDOWNTIME += 250;
             workout_started_countdown.startCountDown(COUNTDOWNTIME * 60);
@@ -103,6 +127,11 @@ public class WorkoutStarted extends AppCompatActivity {
             COUNTDOWNTIME=0;
             workout_started_countdown.resetCountdownTimer();
         });
+
+
+
+
+        readExercises();
     }
 
     private void init() {
@@ -112,6 +141,20 @@ public class WorkoutStarted extends AppCompatActivity {
         activity_workout_started_start_button = findViewById(R.id.activity_workout_started_start_button);
         activity_workout_started_add_15_seconds = findViewById(R.id.activity_workout_started_add_15_seconds);
         activity_workout_started_reset = findViewById(R.id.activity_workout_started_reset);
+
+        //Recyclerview
+        activity_workout_started_recyclerview=findViewById(R.id.activity_workout_started_recyclerview);
+        manager=new LinearLayoutManager(WorkoutStarted.this);
+        activity_workout_started_recyclerview.setLayoutManager(manager);
+        list=new ArrayList<>();
+        adapter=new ExerciseAdapter(WorkoutStarted.this, list);
+
+        activity_workout_started_recyclerview.setAdapter(adapter);
+
+
+        //Firebase
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        reference = database.getReference("exercise");
 
     }
 
@@ -123,5 +166,24 @@ public class WorkoutStarted extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    private void readExercises(){
+        reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for(DataSnapshot sn:snapshot.getChildren()){
+                    list.add(sn.getValue(Exercise.class));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
 
 }

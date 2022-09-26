@@ -88,7 +88,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
                 else{
                 if(list.get(position).getSplit_name().equals("Push")){
                     Intent intent=new Intent(context, WorkoutStarted.class);
-                    intent.putExtra("Push", "Push");
                     context.startActivity(intent);
 
                 }

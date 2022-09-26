@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2sp">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/workout_exercise_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="3sp"
+        android:layout_marginRight="3sp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:id="@+id/workout_exercie_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Black"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/workout_exercixe_split_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.98"
+                    android:padding="20sp"
+                    android:text="Name"
+                    android:layout_marginStart="5sp"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8sp"
+                    android:layout_marginTop="2sp"
+                    >
+
+                    <TextView
+                        android:id="@+id/workout_exercise_item_textview_muscles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="5sp"
+                        android:text=" Muscles Worked"
+                        android:textColor="@color/DarkOrange"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/workout_exercixe_split_muscles_worked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:text=" Chest Triceps Shoulders"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
