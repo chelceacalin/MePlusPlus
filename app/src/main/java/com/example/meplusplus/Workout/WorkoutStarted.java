@@ -246,8 +246,9 @@ public class WorkoutStarted extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot sn : snapshot.getChildren()) {
-                    if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName))
-                        list.add(sn.getValue(Exercise.class));
+                    if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName)){
+                            list.add(sn.getValue(Exercise.class));
+                    }
 
                 }
                 adapter.notifyDataSetChanged();
