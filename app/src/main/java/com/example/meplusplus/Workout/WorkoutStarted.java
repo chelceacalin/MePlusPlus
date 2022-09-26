@@ -75,11 +75,12 @@ public class WorkoutStarted extends AppCompatActivity {
 
         }
     };
-    String isValid;
     //Sa fol acelasi recyclerview pt toate
     Bundle extras;
     String workoutName;
     String tempWorkoutName = "";
+    int contor=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,9 +246,37 @@ public class WorkoutStarted extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
+                contor=0;
                 for (DataSnapshot sn : snapshot.getChildren()) {
-                    if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName)){
+                    contor++;
+
+                    if (tempWorkoutName.equals("Upper")) {
+                        if (sn.getValue(Exercise.class).getMainSplit().equals("Push")
+                                || sn.getValue(Exercise.class).getExercise_name().equals("Dumbbell Hammer Curl") ||
+                                sn.getValue(Exercise.class).getExercise_name().equals("Dumbbell Curl") ||
+                                sn.getValue(Exercise.class).getExercise_name().equals("Cable Curl")) {
                             list.add(sn.getValue(Exercise.class));
+                        }
+
+                    } else if (tempWorkoutName.equals("Lower")) {
+                        if (sn.getValue(Exercise.class).getMainSplit().equals("Legs") || sn.getValue(Exercise.class).getMainSplit().equals("Core")) {
+                            list.add(sn.getValue(Exercise.class));
+                        }
+                    }
+                    else if (tempWorkoutName.equals("Full Body B")) {
+                        if(contor%3==0)
+                            list.add(sn.getValue(Exercise.class));
+                    }
+                    else if (tempWorkoutName.equals("Full Body A")) {
+                       if(contor%2==0&&contor<=16)
+                            list.add(sn.getValue(Exercise.class));
+                    }
+                    else if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName)
+                            && !(tempWorkoutName.equals("Upper"))
+                            && !(tempWorkoutName.equals("Lower"))
+                            && !(tempWorkoutName.equals("Full Body A"))
+                            && !(tempWorkoutName.equals("Full Body B"))) {
+                        list.add(sn.getValue(Exercise.class));
                     }
 
                 }
