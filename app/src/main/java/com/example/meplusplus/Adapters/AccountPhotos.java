@@ -1,10 +1,13 @@
 package com.example.meplusplus.Adapters;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +16,10 @@ import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.example.meplusplus.DataSets.PostItem;
 import com.example.meplusplus.R;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,10 +41,16 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     PostItem post;
 
     PhotoViewAttacher mAttacher;
+    FirebaseUser user;
+    FirebaseAuth auth;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
 
     public AccountPhotos(Context mContext, List<PostItem> mPosts) {
         this.context = mContext;
         this.items = mPosts;
+        auth=FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -47,8 +60,9 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         post = items.get(position);
+        init();
         setDetails(post, holder);
 
 
@@ -67,12 +81,40 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imagePopup.viewPopup();
+               imagePopup.viewPopup();
             }
         });
 
+
+
+    holder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View view) {
+
+
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("Do you want to delete the post? ");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {
+                    user=auth.getCurrentUser();
+                reference.child(items.get(position).getPostid()).removeValue();
+
+                Toast.makeText(context, "The Post Has Been Deleted", Toast.LENGTH_SHORT).show();
+
+            });
+            alertDialog.show();
+
+
+            return false;
+        }
+    });
     }
 
+
+    private void init(){
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        reference = database.getReference("posts");
+    }
     private void setDetails(PostItem post, ViewHolder holder) {
         Picasso.get().load(post.getImageurl()).into(holder.imageView);
         // mAttacher = new PhotoViewAttacher(holder.imageView);
