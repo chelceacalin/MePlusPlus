@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Utils.FeedBackActivity">
+    tools:context=".Utils.FeedBackActivity"
+    android:weightSum="1"
+    android:background="@drawable/maipatratnegru"
+
+    >
 
 
     <LinearLayout
@@ -13,93 +17,99 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_marginTop="15sp"
         android:orientation="vertical"
-        tools:ignore="UselessParent">
+        tools:ignore="InefficientWeight,UselessParent"
+        android:layout_weight="0.7"
+        >
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="700dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="605dp"
-                android:layout_marginTop="80dp"
-                android:background="@drawable/login_form_picture"
+                android:layout_height="wrap_content"
                 android:contentDescription="TODO"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                >
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginRight="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
                     android:src="@drawable/ic_baseline_help_outline_24"
                     tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
                     android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
                     android:text="@string/tell_us_something"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/feedbackactivity_subject"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40sp"
                     android:layout_marginTop="55dp"
                     android:autofillHints=""
-                    android:hint="@string/subject"
+                    android:hint="   Subject"
                     android:paddingEnd="12dp"
                     android:selectAllOnFocus="false"
-                    android:textColor="@color/black"
-                    android:textColorHint="#c2c2c2"
+                    android:textColor="@color/white"
+                    android:textColorHint="#504F4F"
+                    android:background="@drawable/maipatratalb"
                     android:textSize="14sp"
                     android:visibility="visible"
-                    tools:ignore="RtlSymmetry,TextFields"
+                    tools:ignore="HardcodedText,RtlSymmetry,TextFields"
                     tools:visibility="visible" />
 
                 <EditText
                     android:id="@+id/feedbackactivity_message"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40sp"
                     android:layout_marginTop="25dp"
                     android:autofillHints=""
-                    android:hint="@string/your_message"
+                    android:hint="    Your Message"
                     android:minHeight="100dp"
+                    android:singleLine="false"
                     android:paddingEnd="12dp"
                     android:selectAllOnFocus="false"
                     android:textColor="@color/black"
-                    android:textColorHint="#c2c2c2"
+                    android:textColorHint="#555353"
                     android:textSize="14sp"
+                    android:background="@drawable/maipatratalb"
                     android:visibility="visible"
-                    tools:ignore="RtlSymmetry,TextFields"
+                    tools:ignore="HardcodedText,RtlSymmetry,TextFields"
                     tools:visibility="visible" />
 
 
                 <Button
                     android:id="@+id/feedbackactivity_send_mail"
                     android:layout_width="wrap_content"
-                    android:layout_height="43dp"
+                    android:layout_height="50sp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="75sp"
-                    android:backgroundTint="@color/Black"
+                    android:layout_marginTop="15sp"
+                    android:backgroundTint="@color/DarkBlue"
                     android:hint="@string/send_email"
                     android:paddingEnd="12dp"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textColorHint="#c2c2c2"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:cornerRadius="20dp"
@@ -114,4 +124,4 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>
