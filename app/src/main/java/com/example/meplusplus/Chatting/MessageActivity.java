@@ -66,7 +66,9 @@ public class MessageActivity extends AppCompatActivity {
     Map<String, Object> map;
     FirebaseAuth auth;
     FirebaseUser user;
-  public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+
+
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String messageID = intent.getStringExtra("refreshPLS");
@@ -75,18 +77,17 @@ public class MessageActivity extends AppCompatActivity {
             Integer pozitie=intent.getIntExtra("pozitie",0);
             if(messageID!=null&&sender!=null&&receiver!=null&&pozitie!=null){
                // Toast.makeText(context, ""+pozitie, Toast.LENGTH_SHORT).show();
-
                 list.remove(pozitie);
                 reference.child(sender).child(receiver).child(messageID).removeValue();
                 reference.child(receiver).child(sender).child(messageID).removeValue();
                 list.clear();
                 readMessagesAfterDelete();
-
             }
             else
             {
                 Toast.makeText(context, "Pozitie nula", Toast.LENGTH_SHORT).show();
             }
+
 
         }
     };
@@ -180,6 +181,7 @@ public class MessageActivity extends AppCompatActivity {
         reference.child(user.getUid());
         reference.child(sendToTargetID);
         reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
