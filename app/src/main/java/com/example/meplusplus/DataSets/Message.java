@@ -6,17 +6,23 @@ import java.util.Objects;
 
 public class Message {
 
+    String messageID;
     String message;
     String whosentit;
+    String toWhom;
 
     public Message() {
+        this.messageID="N/A";
         this.message = "N/A";
         this.whosentit = "N/A";
+        this.toWhom="N/A";
     }
 
-    public Message(String message, String whosentit) {
+    public Message(String messageID,String message, String whosentit,String toWhom) {
+        this.messageID=messageID;
         this.message = message;
         this.whosentit = whosentit;
+        this.toWhom=toWhom;
     }
 
     @NonNull
@@ -34,6 +40,22 @@ public class Message {
         if (o == null || getClass() != o.getClass()) return false;
         Message message1 = (Message) o;
         return Objects.equals(message, message1.message) && Objects.equals(whosentit, message1.whosentit);
+    }
+
+    public String getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(String messageID) {
+        this.messageID = messageID;
+    }
+
+    public String getToWhom() {
+        return toWhom;
+    }
+
+    public void setToWhom(String toWhom) {
+        this.toWhom = toWhom;
     }
 
     @Override

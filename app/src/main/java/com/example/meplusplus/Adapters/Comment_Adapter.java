@@ -80,7 +80,8 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
             if (comm.getPublisher().equals(user.getUid())) {
                 alertDialog.setTitle("Do you want to delete?");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) ->
+                {
 
                     database.getReference().child("strikes")
                             .child(ID).child(comm.getId()).removeValue().addOnCompleteListener(task -> {

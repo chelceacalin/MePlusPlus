@@ -1,17 +1,23 @@
 package com.example.meplusplus.Adapters;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.DataSets.Message;
 import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,19 +32,22 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     public boolean isSender;
     Message item;
 
+    Message mesaj;
 
     //Firebase
     FirebaseDatabase database;
     DatabaseReference reference;
     FirebaseAuth auth;
+    FirebaseUser user;
 
-
+    int pozitie;
     public Message_Adapter(Context context, String uname, List<Message> list) {
         Uname = uname;
         this.context = context;
         this.list = list;
         isSender = false;
         auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
     }
 
     @NonNull
@@ -54,15 +63,54 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull Viewholder holder, @SuppressLint("RecyclerView") int position) {
         item = list.get(position);
         holder.textView.setText(item.getMessage());
         init();
 
 
+        holder.textView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+
+            public boolean onLongClick(View view) {
+
+
+                if (list.get(position).getWhosentit().equals(user.getUid())) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+
+                    alertDialog.setTitle("Do you want to delete?");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) ->
+                    {
+
+                        pozitie=position;
+                        Intent intent = new Intent("refresh_adapter");
+                        intent.putExtra("pozitie",pozitie);
+                        intent.putExtra("messageHolder",user.getUid());
+                        intent.putExtra("messageReceiver",list.get(position).getToWhom());
+                        intent.putExtra("refreshPLS",list.get(position).getMessageID());
+                        Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+                        alertDialog.dismiss();
+                    });
+
+
+                    alertDialog.show();
+                }
+
+                return true;
+            }
+        });
+
+
     }
 
     private void init() {
+        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        reference = database.getReference().child("messages");
+
+
     }
 
     @Override

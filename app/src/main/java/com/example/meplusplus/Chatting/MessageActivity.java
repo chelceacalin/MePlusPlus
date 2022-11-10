@@ -1,17 +1,22 @@
 package com.example.meplusplus.Chatting;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +66,30 @@ public class MessageActivity extends AppCompatActivity {
     Map<String, Object> map;
     FirebaseAuth auth;
     FirebaseUser user;
+  public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String messageID = intent.getStringExtra("refreshPLS");
+            String sender=intent.getStringExtra("messageHolder");
+            String receiver=intent.getStringExtra("messageReceiver");
+            Integer pozitie=intent.getIntExtra("pozitie",0);
+            if(messageID!=null&&sender!=null&&receiver!=null&&pozitie!=null){
+               // Toast.makeText(context, ""+pozitie, Toast.LENGTH_SHORT).show();
+
+                list.remove(pozitie);
+                reference.child(sender).child(receiver).child(messageID).removeValue();
+                reference.child(receiver).child(sender).child(messageID).removeValue();
+                list.clear();
+                readMessagesAfterDelete();
+
+            }
+            else
+            {
+                Toast.makeText(context, "Pozitie nula", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    };
     // Messages
     String sender;
     String sendToTargetID;
@@ -76,8 +106,8 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         init();
         setdetails();
-        readMessages();
-
+      //  readMessages();
+        readMessagesAfterDelete();
 
         activity_message_close.setOnClickListener(view -> {
             startActivity(new Intent(MessageActivity.this, ChattingActivity.class));
@@ -99,6 +129,8 @@ public class MessageActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+
     }
 
     @Override
@@ -119,8 +151,6 @@ public class MessageActivity extends AppCompatActivity {
 
         //Diverse
         map = new HashMap<>();
-
-
         //Firebase
         database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("messages");
@@ -135,11 +165,41 @@ public class MessageActivity extends AppCompatActivity {
         list = new ArrayList<>();
         adapter = new Message_Adapter(MessageActivity.this, user.getUid(), list);
         //activity_message_recyclerView.setAdapter(adapter);
+        activity_message_recyclerView.setAdapter(adapter);
+
+      //BROADCAST CA SA DAM REFRESH LA ADAPTER
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("refresh_adapter"));
+
 
     }
 
+
+    private void readMessagesAfterDelete() {
+
+        reference.child(user.getUid());
+        reference.child(sendToTargetID);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    list.add(ds.getValue(Message.class));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
     @SuppressLint("NotifyDataSetChanged")
     private void readMessages() {
+        list.clear();
         reference.child(user.getUid()).child(sendToTargetID).addChildEventListener(new ChildEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -147,6 +207,10 @@ public class MessageActivity extends AppCompatActivity {
                 list.add(snapshot.getValue(Message.class));
                 adapter.notifyDataSetChanged();
                 activity_message_recyclerView.scrollToPosition(list.size() - 1);
+                int i=0;
+                for(Message message:list){
+             //       Toast.makeText(MessageActivity.this, "Added:"+" "+(++i)+" - "+message.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -156,7 +220,10 @@ public class MessageActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+             int i=0;
+             for(Message message:list){
+                 Toast.makeText(MessageActivity.this, "Removed :"+(++i)+" - "+message.getMessage(), Toast.LENGTH_SHORT).show();
+             }
             }
 
             @Override
@@ -172,6 +239,7 @@ public class MessageActivity extends AppCompatActivity {
         });
         adapter.notifyDataSetChanged();
         activity_message_recyclerView.setAdapter(adapter);
+
     }
 
     private void setdetails() {
@@ -190,8 +258,10 @@ public class MessageActivity extends AppCompatActivity {
 
     private void send(String message) {
         messageID = reference.child(user.getUid()).child(sendToTargetID).push().getKey();
+        map.put("messageID", messageID);
         map.put("message", message);
         map.put("whosentit", user.getUid());
+        map.put("toWhom", sendToTargetID);
         reference.child(user.getUid()).child(sendToTargetID).child(messageID).setValue(map);
         reference.child(sendToTargetID).child(user.getUid()).child(messageID).setValue(map);
         activity_message_edit_text.setText("");
