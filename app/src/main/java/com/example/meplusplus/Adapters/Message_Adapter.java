@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -89,7 +88,6 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
                         intent.putExtra("messageHolder",user.getUid());
                         intent.putExtra("messageReceiver",list.get(position).getToWhom());
                         intent.putExtra("refreshPLS",list.get(position).getMessageID());
-                        Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                         alertDialog.dismiss();

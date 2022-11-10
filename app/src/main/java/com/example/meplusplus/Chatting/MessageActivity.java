@@ -76,7 +76,6 @@ public class MessageActivity extends AppCompatActivity {
             String receiver=intent.getStringExtra("messageReceiver");
             Integer pozitie=intent.getIntExtra("pozitie",0);
             if(messageID!=null&&sender!=null&&receiver!=null&&pozitie!=null){
-               // Toast.makeText(context, ""+pozitie, Toast.LENGTH_SHORT).show();
                 list.remove(pozitie);
                 reference.child(sender).child(receiver).child(messageID).removeValue();
                 reference.child(receiver).child(sender).child(messageID).removeValue();
@@ -178,9 +177,8 @@ public class MessageActivity extends AppCompatActivity {
 
     private void readMessagesAfterDelete() {
 
-        reference.child(user.getUid());
-        reference.child(sendToTargetID);
-        reference.addValueEventListener(new ValueEventListener() {
+
+        reference.child(user.getUid()).child(sendToTargetID).addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
