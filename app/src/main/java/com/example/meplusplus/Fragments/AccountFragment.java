@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -79,10 +80,10 @@ public class AccountFragment extends Fragment {
     //Diverse
     String pID;
     int contor;
+    boolean wantadsOn;
 
     //Redirect
     String received;
-
     //Pop up menu
     PopupMenu popup;
     Menu menu;
@@ -95,7 +96,6 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         init(view);
         setDetails();
-
 
         //No Of Posts
         referencePosts.addValueEventListener(new ValueEventListener() {
@@ -203,27 +203,25 @@ public class AccountFragment extends Fragment {
         });
 
 
-        SharedPreferences sharedPreferences
-                = getContext().getSharedPreferences(
-                "sharedPrefs", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor
-                = sharedPreferences.edit();
-        final boolean isDarkModeOn
-                = sharedPreferences
-                .getBoolean(
-                        "isDarkModeOn", false);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
         if (isDarkModeOn) {
-            AppCompatDelegate
-                    .setDefaultNightMode(
-                            AppCompatDelegate
-                                    .MODE_NIGHT_YES);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
-            AppCompatDelegate
-                    .setDefaultNightMode(
-                            AppCompatDelegate
-                                    .MODE_NIGHT_NO);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+
+        SharedPreferences S = getContext().getSharedPreferences("pleaseADS", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor E = S.edit();
+          wantadsOn = S.getBoolean("isWantadsOn", false);
+
+//        if (wantadsOn) {
+//            Toast.makeText(getContext(), "da", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(getContext(), "nu", Toast.LENGTH_SHORT).show();
+//        }
 
 
         // Pop up menu
@@ -282,6 +280,21 @@ public class AccountFragment extends Fragment {
                     Intent i = new Intent(getActivity(), FeedBackActivity.class);
                     startActivity(i);
                     ((Activity) getActivity()).overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
+                }
+                else if(menuItem.getTitle().equals("Support the developer")){
+
+                    if (wantadsOn==true) {
+                        wantadsOn=!wantadsOn;
+                        E.putBoolean("isWantadsOn", wantadsOn);
+                        E.apply();
+                       // Toast.makeText(getContext(), "false", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Stopped Supporting the Creator", Toast.LENGTH_SHORT).show();
+                    } else {
+                        wantadsOn=!wantadsOn;
+                        E.putBoolean("isWantadsOn", wantadsOn);
+                        E.apply();
+                        Toast.makeText(getContext(), "Started Supporting the Creator", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 return true;
             });

@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         init();
         loadDarkWhiteModeOnStart();
         createNotificationChannel();
-
+        loadAdsOnStart();
 
         sharedPreferences = getSharedPreferences("wantReminders", MODE_PRIVATE);
         wantReminders = sharedPreferences.getBoolean("yesToReminders", false);
@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     //Switch Between Fragments
     private void displayFragment(int itemId) {
         if (R.id.me_page == itemId) {
@@ -175,6 +176,20 @@ public class MainActivity extends AppCompatActivity {
         i.addCategory(Intent.CATEGORY_HOME);
         startActivity(i);
     }
+
+    private void loadAdsOnStart() {
+
+        SharedPreferences S =getSharedPreferences("pleaseADS", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor E = S.edit();
+        final boolean wantadsOn = S.getBoolean("isWantadsOn", false);
+
+        if (wantadsOn) {
+           // Toast.makeText(getApplicationContext(), "da", Toast.LENGTH_SHORT).show();
+        } else {
+          //  Toast.makeText(getApplicationContext(), "nu", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private void loadDarkWhiteModeOnStart() {
         //Load White/Dark Mode on App Start

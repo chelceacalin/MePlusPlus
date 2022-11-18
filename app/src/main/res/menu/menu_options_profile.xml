@@ -12,6 +12,10 @@
         android:icon="@drawable/ic_baseline_exit_to_app_24"
         android:title="@string/help_give_feedback" />
 
+    <item
+        android:id="@+id/menu_options_want_adds"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:title="@string/support_the_developer" />
 
     <item
         android:id="@+id/menu_options_profile_signout"

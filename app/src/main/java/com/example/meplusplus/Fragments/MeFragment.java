@@ -230,36 +230,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         return view;
     }
 
-    private void initListQuotes() {
-
-        listQuotes.add("“The road to success and the road to failure are almost exactly the same.“");
-        listQuotes.add("“It is better to fail in originality than to succeed in imitation.“");
-        listQuotes.add("“Success is not final; failure is not fatal: It is the courage to continue that counts.“");
-        listQuotes.add("“Success usually comes to those who are too busy looking for it.”");
-        listQuotes.add("“I never dreamed about success. I worked for it.”");
-        listQuotes.add("“Setting goals is the first step in turning the invisible into the visible.”");
-        listQuotes.add("“It’s not about better time management. It’s about better life management”");
-        listQuotes.add("“All our dreams can come true, if we have the courage to pursue them.” ");
-        listQuotes.add("“The secret of getting ahead is getting started.”");
-        listQuotes.add("“The best time to plant a tree was 20 years ago. The second best time is now.”");
-        listQuotes.add("“It’s hard to beat a person who never gives up.”");
-        listQuotes.add("“If people are doubting how far you can go, go so far that you can’t hear them anymore.”");
-        String[] listStr = new String[]{"“Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.”",
-                "“Everything you can imagine is real.”",
-                "“Do one thing every day that scares you.”",
-                "“It’s no use going back to yesterday, because I was a different person then.”",
-                "“Smart people learn from everything and everyone, average people from their experiences, stupid people already have all the answers.” ",
-                "“Do what you feel in your heart to be right―for you’ll be criticized anyway.”",
-                "“Happiness is not something ready made. It comes from your own actions.”",
-                "“Whatever you are, be a good one.”",
-                "“You can either experience the pain of discipline or the pain of regret. The choice is yours.”",
-                "“If we have the attitude that it’s going to be a great day it usually is.” ",
-                "“Impossible is just an opinion.”",
-                "“Your passion is waiting for your courage to catch up.”",
-                "“One day or day one. You decide.”",
-        };
-        listQuotes.addAll(Arrays.asList(listStr));
-    }
 
 
     private void initView(@NonNull View view) {
@@ -560,4 +530,37 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             }
         }
     }
+
+
+
+    private void initListQuotes() {
+        String[] listStr = new String[]{"“Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.”",
+                "“Everything you can imagine is real.”",
+                "“Do one thing every day that scares you.”",
+                "“It’s no use going back to yesterday, because I was a different person then.”",
+                "“Smart people learn from everything and everyone, average people from their experiences, stupid people already have all the answers.” ",
+                "“Do what you feel in your heart to be right―for you’ll be criticized anyway.”",
+                "“Happiness is not something ready made. It comes from your own actions.”",
+                "“Whatever you are, be a good one.”",
+                "“You can either experience the pain of discipline or the pain of regret. The choice is yours.”",
+                "“If we have the attitude that it’s going to be a great day it usually is.” ",
+                "“Impossible is just an opinion.”",
+                "“Your passion is waiting for your courage to catch up.”",
+                "“One day or day one. You decide.”",
+                "“If people are doubting how far you can go, go so far that you can’t hear them anymore.”",
+                "“It’s hard to beat a person who never gives up.”",
+                "“The best time to plant a tree was 20 years ago. The second best time is now.”",
+                "“The secret of getting ahead is getting started.”",
+                "“All our dreams can come true, if we have the courage to pursue them.” ",
+                "“It’s not about better time management. It’s about better life management”",
+                "“Setting goals is the first step in turning the invisible into the visible.”",
+                "“I never dreamed about success. I worked for it.”",
+                "“Success usually comes to those who are too busy looking for it.”",
+                "“Success is not final; failure is not fatal: It is the courage to continue that counts.“",
+                "“It is better to fail in originality than to succeed in imitation.“",
+                "“The road to success and the road to failure are almost exactly the same.“"
+        };
+        listQuotes.addAll(Arrays.asList(listStr));
+    }
+
 }
