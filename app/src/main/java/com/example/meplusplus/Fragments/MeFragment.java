@@ -374,11 +374,11 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                 sumFat = 0f;
                 sumSugar = 0f;
                 Toast.makeText(getContext(), "Calories have been reset", Toast.LENGTH_SHORT).show();
-                fragment_me_calories.setText(sumCalories + "");
-                fragment_me_protein.setText(sumProtein + "");
-                fragment_me_carbs.setText(sumCarbs + "");
-                fragment_me_fats.setText(sumFat + "");
-                fragment_me_sugar.setText(sumSugar + "");
+                fragment_me_calories.setText(Math.round(sumCalories) + "");
+                fragment_me_protein.setText(Math.round(sumProtein) + "");
+                fragment_me_carbs.setText(Math.round(sumCarbs) + "");
+                fragment_me_fats.setText(Math.round(sumFat) + "");
+                fragment_me_sugar.setText(Math.round(sumSugar) + "");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

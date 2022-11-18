@@ -119,6 +119,7 @@
                 android:textColorHint="#989898"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:inputType="number"
                 tools:ignore="TextFields" />
 
 
@@ -151,6 +152,7 @@
                 android:autofillHints=""
                 android:background="@drawable/maipatratalb"
                 android:gravity="center_horizontal"
+                android:inputType="number"
                 android:hint="kg"
                 android:padding="5sp"
                 android:textColor="@color/black"
@@ -187,6 +189,7 @@
                 android:background="@drawable/maipatratalb"
                 android:gravity="center_horizontal"
                 android:hint="cm"
+                android:inputType="number"
                 android:padding="5sp"
                 android:textColor="@color/black"
                 android:textColorHint="#989898"
