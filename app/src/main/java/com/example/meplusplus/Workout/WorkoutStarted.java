@@ -12,7 +12,6 @@ import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -82,8 +80,8 @@ public class WorkoutStarted extends AppCompatActivity {
     Bundle extras;
     String workoutName;
     String tempWorkoutName = "";
-    int contor = 0;
-    int contorRandoms = 0;
+    int contor=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,6 +202,7 @@ public class WorkoutStarted extends AppCompatActivity {
 
     private void readExercises() {
         extras = getIntent().getExtras();
+
         if (extras != null) {
             workoutName = extras.getString("Push");
             if (workoutName != null) {
@@ -233,10 +232,11 @@ public class WorkoutStarted extends AppCompatActivity {
                                     if (workoutName != null) {
                                         tempWorkoutName = workoutName;
                                     } else {
-                                        workoutName = extras.getString("Fun Workout");
-                                        if (workoutName != null) {
-                                            tempWorkoutName = workoutName;
-                                        } else {
+                                        workoutName = extras.getString("Random Workout");
+                                        if(workoutName!=null){
+                                            tempWorkoutName=workoutName;
+                                        }
+                                        else{
 
                                         }
                                     }
@@ -254,7 +254,8 @@ public class WorkoutStarted extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                contor = 0;
+                contor=0;
+                int randomContor=0;
                 for (DataSnapshot sn : snapshot.getChildren()) {
                     contor++;
 
@@ -270,43 +271,33 @@ public class WorkoutStarted extends AppCompatActivity {
                         if (sn.getValue(Exercise.class).getMainSplit().equals("Legs") || sn.getValue(Exercise.class).getMainSplit().equals("Core")) {
                             list.add(sn.getValue(Exercise.class));
                         }
-                    } else if (tempWorkoutName.equals("Full Body B")) {
-                        if (contor % 3 == 0)
+                    }
+                    else if (tempWorkoutName.equals("Full Body B")) {
+                        if(contor%3==0)
                             list.add(sn.getValue(Exercise.class));
-                    } else if (tempWorkoutName.equals("Full Body A")) {
-                        if (contor % 2 == 0 && contor <= 16)
+                    }
+                    else if (tempWorkoutName.equals("Full Body A")) {
+                        if(contor%2==0&&contor<=16)
                             list.add(sn.getValue(Exercise.class));
-                    } else if (tempWorkoutName.equals("Random Workout")) {
-                        Random random = new Random();
-                        Toast.makeText(WorkoutStarted.this, "ramdo, sa foie", Toast.LENGTH_SHORT).show();
-                        if (contorRandoms <= 8) {
+                    }
+                    else if (tempWorkoutName.equals("Random Workout")) {
 
-                            boolean wanted = random.nextBoolean();
-                            if (wanted) {
-                                contorRandoms++;
+                        Random random=new Random();
+                        boolean maybe=random.nextBoolean();
+                        if(maybe==true){
+                            if(randomContor<=7){
+                                randomContor++;
                                 list.add(sn.getValue(Exercise.class));
                             }
                         }
-                    } else if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName)
+
+                    }
+                    else if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName)
                             && !(tempWorkoutName.equals("Upper"))
                             && !(tempWorkoutName.equals("Lower"))
                             && !(tempWorkoutName.equals("Full Body A"))
                             && !(tempWorkoutName.equals("Full Body B"))) {
                         list.add(sn.getValue(Exercise.class));
-                    }
-                    else
-                    {
-                        Collections.shuffle(list)   ;
-                        //RANDOM WORKOUT
-                        Random random = new Random();
-                        if (contorRandoms <= 8) {
-
-                            boolean wanted = random.nextBoolean();
-                            if (wanted) {
-                                contorRandoms++;
-                                list.add(sn.getValue(Exercise.class));
-                            }
-                        }
                     }
 
                 }
