@@ -124,7 +124,9 @@
                     android:layout_weight="1"
                     android:contentDescription="TODO"
                     android:src="@drawable/ic_facebook"
-                    tools:ignore="ContentDescription,HardcodedText" />
+                    tools:ignore="ContentDescription,HardcodedText"
+                    android:visibility="invisible"
+                    />
 
                 <ImageView
                     android:id="@+id/login_activity_btn_google_sign_up"
@@ -133,6 +135,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_marginTop="-10dp"
                     android:layout_weight="1"
+                    android:visibility="invisible"
                     android:src="@drawable/ic_google"
                     tools:ignore="ContentDescription" />
 

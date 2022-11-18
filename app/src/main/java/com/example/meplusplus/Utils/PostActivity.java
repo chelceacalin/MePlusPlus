@@ -144,7 +144,7 @@ public class PostActivity extends AppCompatActivity {
         //Firebase
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference("posts");
-        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         databaseReference = database.getReference("posts");
         auth = FirebaseAuth.getInstance();
 

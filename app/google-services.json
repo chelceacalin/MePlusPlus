@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "432467919065",
-    "firebase_url": "https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "meplusplus-d17e9",
-    "storage_bucket": "meplusplus-d17e9.appspot.com"
+    "project_number": "636383616502",
+    "firebase_url": "https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "applicenta-8582b",
+    "storage_bucket": "applicenta-8582b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:432467919065:android:22e7690ba1acba9d093ec8",
+        "mobilesdk_app_id": "1:636383616502:android:e0cd754e9e649849a9bbd7",
         "android_client_info": {
           "package_name": "com.example.meplusplus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "432467919065-u9pnf8gvi0bkm59h8m5k5pu3bv06ijh8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.meplusplus",
-            "certificate_hash": "488bfcfc747f5c2d0110b7453a2002d67ad6d4f7"
-          }
-        },
-        {
-          "client_id": "432467919065-e2s07mhf5b56sf3nusdefascua25qbih.apps.googleusercontent.com",
+          "client_id": "636383616502-p6jufrendeotds8j9akgihvsg1mpr761.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB-4U_lHHwBY9mweb4xLO06ZsFPfGWd6go"
+          "current_key": "AIzaSyDUwLMumKKMQ5Hh4EtBPDKNElKJF_B7Bjo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "432467919065-e2s07mhf5b56sf3nusdefascua25qbih.apps.googleusercontent.com",
+              "client_id": "636383616502-p6jufrendeotds8j9akgihvsg1mpr761.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

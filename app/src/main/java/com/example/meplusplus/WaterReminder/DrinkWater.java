@@ -162,7 +162,7 @@ public class DrinkWater extends AppCompatActivity {
 
         //Firebase
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference();
     }
 

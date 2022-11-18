@@ -100,7 +100,7 @@ public class SearchPeopleFragment extends Fragment {
         user_adapter = new User_Adapter(getContext(), users, true);
 
         // Firebase ( for reading the users)
-        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         databaseReference = database.getReference().child("users");
 
         auth = FirebaseAuth.getInstance();

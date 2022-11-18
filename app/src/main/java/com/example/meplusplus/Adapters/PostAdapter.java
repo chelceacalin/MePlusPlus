@@ -214,7 +214,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private void init() {
 
         //FirebaseDatabase
-        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");
         referenceHearts = database.getReference().child("hearts");
         referenceStrikes = database.getReference().child("strikes");

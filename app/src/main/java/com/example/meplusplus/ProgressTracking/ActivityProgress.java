@@ -164,7 +164,7 @@ public class ActivityProgress extends AppCompatActivity {
         activity_progress_reset_weight = findViewById(R.id.activity_progress_reset_weight);
         lineChart = findViewById(R.id.activity_progress_graph);
         //Firebase
-        database = FirebaseDatabase.getInstance("https://meplusplus-d17e9-default-rtdb.europe-west1.firebasedatabase.app");
+        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference("progress");
         auth = FirebaseAuth.getInstance();
 
