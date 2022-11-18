@@ -80,7 +80,7 @@ public class AccountFragment extends Fragment {
     //Diverse
     String pID;
     int contor;
-    boolean wantadsOn;
+    boolean wantadsOn=false ;
 
     //Redirect
     String received;

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerNavTest"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_blurry_gradient_haikei__1_"
@@ -86,6 +87,17 @@
             android:text="Un citat motivational luat din baza de date zilnic"
             android:textColor="@color/white"
             tools:ignore="HardcodedText" />
+
+        <com.google.android.gms.ads.AdView
+            android:layout_marginTop="5sp"
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
 
         <TextView
             android:id="@+id/text_view_countdown"
@@ -415,6 +427,7 @@
                 android:text="Add 200 ml"
                 android:textColor="@color/white"
                 tools:ignore="HardcodedText" />
+
 
         </LinearLayout>
 

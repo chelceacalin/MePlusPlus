@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,10 @@ import com.example.meplusplus.Fragments.RecipesFragment;
 import com.example.meplusplus.Fragments.SearchPeopleFragment;
 import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.WaterReminder.ReminderBroadcast;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /*
@@ -62,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         init();
         loadDarkWhiteModeOnStart();
         createNotificationChannel();
-        loadAdsOnStart();
 
         sharedPreferences = getSharedPreferences("wantReminders", MODE_PRIVATE);
         wantReminders = sharedPreferences.getBoolean("yesToReminders", false);
@@ -177,18 +181,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void loadAdsOnStart() {
 
-        SharedPreferences S =getSharedPreferences("pleaseADS", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor E = S.edit();
-        final boolean wantadsOn = S.getBoolean("isWantadsOn", false);
-
-        if (wantadsOn) {
-           // Toast.makeText(getApplicationContext(), "da", Toast.LENGTH_SHORT).show();
-        } else {
-          //  Toast.makeText(getApplicationContext(), "nu", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
     private void loadDarkWhiteModeOnStart() {

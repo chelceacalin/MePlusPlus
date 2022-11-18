@@ -37,6 +37,11 @@ import com.example.meplusplus.Utils.PostActivity;
 import com.example.meplusplus.WaterReminder.DrinkWater;
 import com.example.meplusplus.Workout.WorkoutActivity;
 import com.example.meplusplus.ZenMode.ZenModeActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -146,7 +151,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     long mEndTime;
     List<String> listQuotes = new LinkedList<>();
 
-
+    //ADDS
+    AdView adView;
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -160,6 +166,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         setMaxProgress();
         initListQuotes();
         startTimer();
+        loadAdsOnStart(view);
 
         fragment_me_open_drawer.setOnClickListener(view1 -> drawerLayout.openDrawer(GravityCompat.START));
         fragment_me_add_post.setOnClickListener(view12 -> {
@@ -281,6 +288,10 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         foodsReference = database.getReference("foods");
         waterReference = database.getReference("water");
         waterUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        //ADDS
+        adView=view.findViewById(R.id.adView);
+
 
     }
 
@@ -534,11 +545,10 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
 
     private void initListQuotes() {
-        String[] listStr = new String[]{"“Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.”",
+        String[] listStr = new String[]{
                 "“Everything you can imagine is real.”",
                 "“Do one thing every day that scares you.”",
                 "“It’s no use going back to yesterday, because I was a different person then.”",
-                "“Smart people learn from everything and everyone, average people from their experiences, stupid people already have all the answers.” ",
                 "“Do what you feel in your heart to be right―for you’ll be criticized anyway.”",
                 "“Happiness is not something ready made. It comes from your own actions.”",
                 "“Whatever you are, be a good one.”",
@@ -563,4 +573,26 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         listQuotes.addAll(Arrays.asList(listStr));
     }
 
+    private void loadAdsOnStart(View view) {
+
+        SharedPreferences S = getContext().getSharedPreferences("pleaseADS", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor E = S.edit();
+        final boolean wantadsOn = S.getBoolean("isWantadsOn", false);
+
+        if (wantadsOn) {
+            MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+
+                }
+            });
+            AdRequest adRequest=new AdRequest.Builder().build();
+            adView.loadAd(adRequest);
+            circularProgress.getLayoutParams().height=350;
+       //  Toast.makeText(getContext(), "da", Toast.LENGTH_SHORT).show();
+        } else {
+            adView.getLayoutParams().height=0;
+            //Toast.makeText(getContext(), "nu", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
