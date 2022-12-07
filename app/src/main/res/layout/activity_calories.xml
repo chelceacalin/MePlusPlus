@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_stacked_waves_haikei__3_"
     tools:context=".FoodTracking.CaloriesActivity"
-    tools:ignore="HardcodedText,RtlSymmetry">
+    tools:ignore="HardcodedText,RtlSymmetry"
+    android:background="#0A0A50"
+
+    >
 
     <ImageView
         android:id="@+id/activity_calories_close_button"
@@ -34,11 +36,12 @@
             android:autofillHints=""
             android:cursorVisible="true"
             android:gravity="start"
-            android:hint="Introduce food items"
+            android:hint="Introduce food items..."
             android:paddingStart="10sp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textColorHint="#1E1616"
-            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/WhiteSmoke"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_bold"
             tools:ignore="HardcodedText,RtlSymmetry,TextFields" />
 
 
@@ -54,17 +57,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginEnd="15sp"
-                android:backgroundTint="@color/MediumBlue"
+                android:backgroundTint="@color/black"
                 android:text="Search"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                tools:ignore="ButtonStyle,HardcodedText" />
+                tools:ignore="ButtonStyle,HardcodedText"
+                android:visibility="gone"
+                />
 
             <Button
                 android:id="@+id/activity_calories_show_items"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15sp"
                 android:backgroundTint="@color/MediumBlue"
                 android:text="Show Items"
                 android:textColor="@color/white"

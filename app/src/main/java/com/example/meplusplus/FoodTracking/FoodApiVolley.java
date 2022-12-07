@@ -62,6 +62,7 @@ public class FoodApiVolley {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+
                     foodItems = response.getJSONArray("foods");
                     for (int i = 0; i < foodItems.length(); i++) {
                         fooditem = new FoodModel(((JSONObject) foodItems.get(i)).getString("food_name"), ((JSONObject) foodItems.get(i)).getLong("nf_calories"), ((JSONObject) foodItems.get(i)).getInt("serving_qty"),
@@ -72,7 +73,6 @@ public class FoodApiVolley {
 
                     SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
                     SharedPreferences.Editor editor = sharedPrefs.edit();
-
                     Gson gson = new Gson();
                     String json = gson.toJson(items);
                     editor.putString("MYITEMS", json);
@@ -99,19 +99,8 @@ public class FoodApiVolley {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<>();
-                String APP_KEY = "null";
-                String APP_ID="null";
-                try {
-                    ApplicationInfo info = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-
-                    Bundle value=info.metaData;
-                    APP_KEY= (String) value.get("com.google.android.geo.API_KEY");
-                    APP_ID= (String) value.get("com.google.android.geo.API_ID");
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
-                params.put("x-app-id", APP_KEY);
-                params.put("x-app-key", APP_ID);
+                params.put("x-app-id", "761545d2");
+                params.put("x-app-key", "9c446a74a908b605a2767a15e244cca3");
                 params.put("x-remote-user-id", "0");
                 return params;
             }

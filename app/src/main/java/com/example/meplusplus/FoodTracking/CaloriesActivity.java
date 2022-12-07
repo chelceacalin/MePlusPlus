@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,71 +86,6 @@ public class CaloriesActivity extends AppCompatActivity {
 
 
         });
-
-        activity_calories_search_items.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Daca stergi shared preferences aici o sa se blocheze
-
-                foodItems = new FoodApiVolley(CaloriesActivity.this);
-                sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
-
-                gson = new Gson();
-                json = sharedPrefs.getString("MYITEMS", "");
-                type = new TypeToken<List<FoodModel>>() {
-                }.getType();
-
-                foodItemsSearched = activity_calories_items_edit_text.getText().toString();
-                if (foodItemsSearched.equals("")) {
-                    Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();
-                } else
-                    foodItems.search(activity_calories_items_edit_text.getText().toString());
-
-                arrayList = gson.fromJson(json, type);
-
-
-            }
-        });
-
-        activity_calories_show_items.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View view) {
-                activity_calories_search_items.performClick();
-
-                //PT ListView
-                if (arrayList != null) {
-                    arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1, arrayList);
-                    SeeItemsListView.setAdapter(arrayAdapter);
-
-                    sumCalories = 0;
-                    sumProtein = 0;
-                    sumCarbs = 0;
-                    sumFats = 0;
-                    sumSugar = 0;
-                    for (FoodModel item : arrayList) {
-                        sumCalories += item.getCalories();
-                        sumProtein += item.getProtein();
-                        sumCarbs += item.getCarbs();
-                        sumFats = item.getFats();
-                        sumSugar += item.getSugar();
-                    }
-
-                    activity_calories_total_calories.setText(sumCalories + "");
-                    activity_calories_protein.setText(sumProtein + "");
-                    activity_calories_carbs.setText(sumCarbs + "");
-                    activity_calories_fats.setText(sumFats + "");
-                    activity_calories_sugar.setText(sumSugar + "");
-                }
-
-
-                //Calculezi suma itemetelor din listview
-
-
-            }
-        });
-
         activity_calories_add_items.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,6 +117,87 @@ public class CaloriesActivity extends AppCompatActivity {
                         Toast.makeText(CaloriesActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
+            }
+        });
+
+        activity_calories_search_items.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
+
+        activity_calories_show_items.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Daca stergi shared preferences aici o sa se blocheze
+
+                        foodItems = new FoodApiVolley(CaloriesActivity.this);
+                        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
+
+                        gson = new Gson();
+                        json = sharedPrefs.getString("MYITEMS", "");
+                        type = new TypeToken<List<FoodModel>>() {
+                        }.getType();
+
+                        foodItemsSearched = activity_calories_items_edit_text.getText().toString();
+                        if (foodItemsSearched.equals("")) {
+                            Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();
+                        } else
+                            foodItems.search(activity_calories_items_edit_text.getText().toString());
+
+                        arrayList = gson.fromJson(json, type);
+                        Looper.prepare();
+
+                      for(FoodModel item:arrayList){
+                          Toast.makeText(CaloriesActivity.this, ""+item.toString(), Toast.LENGTH_SHORT).show();
+                      }
+
+                          runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //PT ListView
+                                if (arrayList != null) {
+                                    arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1, arrayList);
+                                    SeeItemsListView.setAdapter(arrayAdapter);
+
+                                    sumCalories = 0;
+                                    sumProtein = 0;
+                                    sumCarbs = 0;
+                                    sumFats = 0;
+                                    sumSugar = 0;
+                                    for (FoodModel item : arrayList) {
+                                        sumCalories += item.getCalories();
+                                        sumProtein += item.getProtein();
+                                        sumCarbs += item.getCarbs();
+                                        sumFats = item.getFats();
+                                        sumSugar += item.getSugar();
+                                    }
+
+                                    activity_calories_total_calories.setText(sumCalories + "");
+                                    activity_calories_protein.setText(sumProtein + "");
+                                    activity_calories_carbs.setText(sumCarbs + "");
+                                    activity_calories_fats.setText(sumFats + "");
+                                    activity_calories_sugar.setText(sumSugar + "");
+                                }
+
+                            }
+                        });
+
+                    }
+                });
+
+thread.start();
+
+                //Calculezi suma itemetelor din listview
 
 
             }

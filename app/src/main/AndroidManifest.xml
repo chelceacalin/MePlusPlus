@@ -164,14 +164,7 @@
 
 
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${APP_KEY}" />
 
-
-        <meta-data
-            android:name="com.google.android.geo.API_ID"
-            android:value="${APP_ID}" />
     </application>
 
 </manifest>
