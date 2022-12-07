@@ -93,10 +93,12 @@ public class CaloriesActivity extends AppCompatActivity {
 
                 foodItems = new FoodApiVolley(CaloriesActivity.this);
                 sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
+
                 gson = new Gson();
                 json = sharedPrefs.getString("MYITEMS", "");
                 type = new TypeToken<List<FoodModel>>() {
                 }.getType();
+
                 foodItemsSearched = activity_calories_items_edit_text.getText().toString();
                 if (foodItemsSearched.equals("")) {
                     Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();

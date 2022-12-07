@@ -72,6 +72,7 @@ public class FoodApiVolley {
 
                     SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
                     SharedPreferences.Editor editor = sharedPrefs.edit();
+
                     Gson gson = new Gson();
                     String json = gson.toJson(items);
                     editor.putString("MYITEMS", json);
