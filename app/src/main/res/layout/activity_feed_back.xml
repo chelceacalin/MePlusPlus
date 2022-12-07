@@ -98,6 +98,7 @@
                     tools:visibility="visible" />
 
 
+
                 <Button
                     android:id="@+id/feedbackactivity_send_mail"
                     android:layout_width="wrap_content"

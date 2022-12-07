@@ -133,20 +133,16 @@
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_calories.xml" value="0.33" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_chatting.xml" value="0.27291666666666664" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_comment_detail.xml" value="0.2390625" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_drink_water.xml" value="0.25" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_edit_profile.xml" value="0.2390625" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_feed_back.xml" value="0.28072916666666664" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_forgot_password.xml" value="0.28072916666666664" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_login.xml" value="0.67" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_login.xml" value="0.2390625" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_message.xml" value="0.4" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_post.xml" value="0.2015625" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_progress.xml" value="0.33" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_register.xml" value="0.28072916666666664" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_splash_screen.xml" value="0.2390625" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_to_do.xml" value="0.33" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_workout.xml" value="0.33" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_workout_started.xml" value="0.33" />
+        <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_to_do.xml" value="0.19344262295081968" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/activity_zen_mode.xml" value="0.3778009379885357" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/comment_card_item.xml" value="0.2390625" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/content_chatting.xml" value="0.27291666666666664" />
@@ -162,53 +158,11 @@
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/people_card_item.xml" value="0.28072916666666664" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/people_card_item_chatting.xml" value="0.2703125" />
         <entry key="..\:/MePlusPlus/app/src/main/res/layout/social_page_post_item.xml" value="0.38177083333333334" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/workout_exercise.xml" value="0.3123931623931624" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/workout_split_item.xml" value="0.3807291666666667" />
-        <entry key="..\:/MePlusPlus/app/src/main/res/layout/workout_started_item.xml" value="0.3807291666666667" />
         <entry key="..\:/MePlusPlus/app/src/main/res/menu/drawer_menu.xml" value="0.271875" />
         <entry key="..\:/MePlusPlus/app/src/main/res/menu/listview_tasks.xml" value="0.3651041666666667" />
         <entry key="..\:/MePlusPlus/app/src/main/res/menu/menu.xml" value="0.38177083333333334" />
         <entry key="..\:/MePlusPlus/app/src/main/res/menu/menu_options_profile.xml" value="0.38177083333333334" />
       </map>
-    </option>
-  </component>
-  <component name="NullableNotNullManager">
-    <option name="myDefaultNullable" value="androidx.annotation.Nullable" />
-    <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
-    <option name="myNullables">
-      <value>
-        <list size="12">
-          <item index="0" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
-          <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
-          <item index="2" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
-          <item index="3" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
-          <item index="4" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
-          <item index="5" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
-          <item index="6" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
-          <item index="7" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
-          <item index="8" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
-          <item index="9" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
-          <item index="10" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
-          <item index="11" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
-        </list>
-      </value>
-    </option>
-    <option name="myNotNulls">
-      <value>
-        <list size="11">
-          <item index="0" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
-          <item index="1" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
-          <item index="2" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
-          <item index="3" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
-          <item index="4" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
-          <item index="5" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
-          <item index="6" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
-          <item index="7" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
-          <item index="8" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
-          <item index="9" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
-          <item index="10" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
-        </list>
-      </value>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
