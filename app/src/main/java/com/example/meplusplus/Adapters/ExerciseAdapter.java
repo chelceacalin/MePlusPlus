@@ -64,14 +64,10 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
             holder.workout_exercixe_split_muscles_worked.setTextColor(Color.CYAN);
 
         } else {
-
-            if (list.get(position).getMuscles_worked().equals("")) {
+            if (list.get(position).getMuscles_worked().equals(""))
                 holder.workout_exercixe_split_name.setPadding(15, 15, 15, 15);
-            } else {
+             else
                 holder.workout_exercixe_split_name.setPadding(10, 30, 10, 50);
-            }
-
-
         }
 
         holder.workout_exercise_cardview.setOnClickListener(view -> {
@@ -86,22 +82,17 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
             LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             return true;
         });
-
-
     }
 
     private void setDetails(ViewHolder holder, int position) {
-
         holder.workout_exercixe_split_name.setText(list.get(position).getExercise_name());
         holder.workout_exercixe_split_muscles_worked.setText(list.get(position).getMuscles_worked());
-
     }
 
     private void init() {
         //Firebase
         database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference("exercise");
-
     }
 
     @Override

@@ -40,6 +40,7 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     final List<PostItem> items;
     PostItem post;
 
+    //Firebase
     PhotoViewAttacher mAttacher;
     FirebaseUser user;
     FirebaseAuth auth;
@@ -50,7 +51,7 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     public AccountPhotos(Context mContext, List<PostItem> mPosts) {
         this.context = mContext;
         this.items = mPosts;
-        auth=FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -81,44 +82,37 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               imagePopup.viewPopup();
+                imagePopup.viewPopup();
             }
         });
 
 
+        holder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
 
-    holder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View view) {
-
-
-            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("Do you want to delete the post? ");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {
-                    user=auth.getCurrentUser();
-                reference.child(items.get(position).getPostid()).removeValue();
-
-                Toast.makeText(context, "The Post Has Been Deleted", Toast.LENGTH_SHORT).show();
-
-            });
-            alertDialog.show();
-
-
-            return false;
-        }
-    });
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("Do you want to delete the post? ");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {
+                    user = auth.getCurrentUser();
+                    reference.child(items.get(position).getPostid()).removeValue();
+                    Toast.makeText(context, "The Post Has Been Deleted", Toast.LENGTH_SHORT).show();
+                });
+                alertDialog.show();
+                return false;
+            }
+        });
     }
 
 
-    private void init(){
+    private void init() {
         database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference("posts");
     }
+
     private void setDetails(PostItem post, ViewHolder holder) {
         Picasso.get().load(post.getImageurl()).into(holder.imageView);
-        // mAttacher = new PhotoViewAttacher(holder.imageView);
-
     }
 
 

@@ -82,25 +82,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                     Picasso.get().load(u.getImageurl()).into(holder.recipepostitem_image_profile);
                 } else {
                     assert firebaseUser != null;
-                    if (firebaseUser.getPhotoUrl() == null) {
+                    if (firebaseUser.getPhotoUrl() == null)
                         holder.recipepostitem_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
-
-                    } else {
+                    else
                         Glide.with(context).load(firebaseUser.getPhotoUrl()).into(holder.recipepostitem_image_profile);
-                    }
                     mAttacher = new PhotoViewAttacher(holder.recipepostitem_content);
                 }
                 Picasso.get().load(p.getImageurl()).into(holder.recipepostitem_content);
-                if (!(p.getDescription().equals(""))) {
+                if (!(p.getDescription().equals("")))
                     holder.recipepostitem_description.setText(p.getDescription());
-                } else {
+                else
                     holder.recipepostitem_description.setVisibility(View.GONE);
-                }
                 holder.recipepostitem_ingredients.setText(p.getIngredients());
                 holder.recipepostitem_username.setText(u.getUsername());
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -108,7 +104,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     private void init() {
-
         //FirebaseDatabase
         database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");

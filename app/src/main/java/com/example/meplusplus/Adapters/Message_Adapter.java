@@ -30,7 +30,6 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     final List<Message> list;
     public boolean isSender;
     Message item;
-
     Message mesaj;
 
     //Firebase
@@ -53,11 +52,10 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (viewType == 2) {
+        if (viewType == 2)
             view = LayoutInflater.from(context).inflate(R.layout.message_received, parent, false);
-        } else {
+        else
             view = LayoutInflater.from(context).inflate(R.layout.message_sent, parent, false);
-        }
         return new Viewholder(view);
     }
 
@@ -66,22 +64,16 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
         item = list.get(position);
         holder.textView.setText(item.getMessage());
         init();
-
-
         holder.textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
 
             public boolean onLongClick(View view) {
-
-
                 if (list.get(position).getWhosentit().equals(user.getUid())) {
                     AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-
                     alertDialog.setTitle("Do you want to delete?");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) ->
                     {
-
                         pozitie=position;
                         Intent intent = new Intent("refresh_adapter");
                         intent.putExtra("pozitie",pozitie);
@@ -89,26 +81,18 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
                         intent.putExtra("messageReceiver",list.get(position).getToWhom());
                         intent.putExtra("refreshPLS",list.get(position).getMessageID());
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-
                         alertDialog.dismiss();
                     });
-
-
                     alertDialog.show();
                 }
-
                 return true;
             }
         });
-
-
     }
 
     private void init() {
         database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("messages");
-
-
     }
 
     @Override
