@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,6 +76,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
         comm = list.get(position);
         SeeDetails(comm, holder);
 
+
         holder.itemView.setOnClickListener(view -> {
             AlertDialog alertDialog = new AlertDialog.Builder(context).create();
             if (comm.getPublisher().equals(user.getUid())) {
@@ -83,8 +85,11 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) ->
                 {
 
-                    database.getReference().child("strikes")
-                            .child(ID).child(comm.getId()).removeValue().addOnCompleteListener(task -> {
+                    // post id Toast.makeText(context, ""+ID, Toast.LENGTH_SHORT).show();
+                    // comment id
+                   // Toast.makeText(context, ""+list.get(position).getId(), Toast.LENGTH_SHORT).show();
+                   reference1
+                            .child(ID).child(list.get(position).getId()).removeValue().addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
                                     dialog.dismiss();
                                 }
@@ -127,6 +132,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
         //FirebaseDatabase
         database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");
+        reference1=database.getReference().child("strikes");
 
 
     }
