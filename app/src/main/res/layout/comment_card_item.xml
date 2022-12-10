@@ -2,17 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:background="@color/navy"
+    android:layout_height="wrap_content"
+    android:background="#0C1C2E"
     android:paddingLeft="10dp"
     android:paddingTop="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:paddingBottom="5sp"
+    >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/comment_card_item_people_profile_image"
@@ -43,15 +46,12 @@
                 android:layout_marginTop="8dp"
                 android:text=""
                 android:textColor="@color/WhiteSmoke"
+                android:textStyle="bold|italic"
                 android:textSize="12sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentBottom="true"
-        android:background="#0C3993" />
+
 </RelativeLayout>

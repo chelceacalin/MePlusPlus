@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9sp"
+    >
 
 
     <androidx.cardview.widget.CardView
@@ -17,10 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#020D2F"
-            android:orientation="vertical"
-
-            >
-
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,39 +35,63 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     tools:ignore="ImageContrastCheck" />
-
-                <TextView
-                    android:id="@+id/recipepostitem_username"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:text="username"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/recipepostitem_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:gravity="start"
+                        android:text="username"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/recipepostitem_image_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elegantTextHeight="false"
+                        android:fadeScrollbars="false"
+                        android:gravity="center_vertical"
+                        android:minHeight="30dp"
+                        android:paddingStart="10sp"
+                        android:paddingBottom="2dp"
+                        android:text=""
+                        android:textColor="@color/AliceBlue"
+                        android:textSize="14sp"
+                        android:textStyle="bold|italic"
+                        tools:ignore="Deprecated,RtlSymmetry" />
+                </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/recipepostitem_image_description"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#03033F"
-                android:gravity="center_vertical"
-                android:minHeight="30dp"
-                android:paddingStart="10sp"
-                android:paddingBottom="2dp"
-                android:textColor="@color/AliceBlue"
-                android:textSize="14sp"
-                tools:ignore="RtlSymmetry" />
+                 android:orientation="vertical"
+               >
+
+                <com.github.chrisbanes.photoview.PhotoView
+                    android:id="@+id/recipepostitem_image_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="250sp"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/recipepostitem_ingredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#1C076B"
+                android:background="#E708113F"
                 android:gravity="center_vertical"
                 android:minHeight="30dp"
                 android:paddingStart="15sp"
@@ -77,18 +100,10 @@
                 android:textSize="14sp"
                 tools:ignore="RtlSymmetry" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2sp"
-                android:layout_marginBottom="25sp">
-
-                <com.github.chrisbanes.photoview.PhotoView
-                    android:id="@+id/recipepostitem_image_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="250sp"
-                    tools:ignore="ContentDescription,ImageContrastCheck" />
-            </LinearLayout>
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
+
+
+
 </RelativeLayout>

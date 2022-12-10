@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#051255"
+    android:background="#0C1C2E"
     tools:context=".Fragments.Social_PageFragment">
 
     <LinearLayout
@@ -45,7 +45,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/imgborder_maipatrat"
+            android:background="@color/transparent"
             android:orientation="horizontal"
             android:padding="5dp">
 
@@ -91,7 +91,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0.3"
-                android:backgroundTint="@color/purple_700"
+                android:backgroundTint="#071275"
                 android:gravity="center"
                 android:text=""
                 android:textColor="@color/white"
@@ -114,7 +114,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="1dp"
-                android:background="#02025F"
+                android:background="#11253C"
                 android:paddingStart="5dp"
                 android:text="@string/add_bio"
                 android:textColor="#c2c2c2"
