@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -31,7 +32,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +69,8 @@ public class CaloriesActivity extends AppCompatActivity {
     //Metoda 2
     FirebaseDatabase database;
     DatabaseReference reference;
+
+    int contorOnce = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,24 +124,23 @@ public class CaloriesActivity extends AppCompatActivity {
             }
         });
 
-        activity_calories_search_items.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-            }
-        });
-
         activity_calories_show_items.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
 
+                if (contorOnce == 2)
+                    contorOnce = 0;
+                else if (contorOnce == 1)
+                    contorOnce = 2;
+                else if(contorOnce==0)
+                    contorOnce = 1;
+
+
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //Daca stergi shared preferences aici o sa se blocheze
-
                         foodItems = new FoodApiVolley(CaloriesActivity.this);
                         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
 
@@ -153,22 +154,15 @@ public class CaloriesActivity extends AppCompatActivity {
                             Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();
                         } else
                             foodItems.search(activity_calories_items_edit_text.getText().toString());
-
                         arrayList = gson.fromJson(json, type);
                         Looper.prepare();
-
-                      for(FoodModel item:arrayList){
-                          Toast.makeText(CaloriesActivity.this, ""+item.toString(), Toast.LENGTH_SHORT).show();
-                      }
-
-                          runOnUiThread(new Runnable() {
+                        runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 //PT ListView
                                 if (arrayList != null) {
                                     arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1, arrayList);
                                     SeeItemsListView.setAdapter(arrayAdapter);
-
                                     sumCalories = 0;
                                     sumProtein = 0;
                                     sumCarbs = 0;
@@ -182,24 +176,29 @@ public class CaloriesActivity extends AppCompatActivity {
                                         sumSugar += item.getSugar();
                                     }
 
-                                    activity_calories_total_calories.setText(sumCalories + "");
-                                    activity_calories_protein.setText(sumProtein + "");
-                                    activity_calories_carbs.setText(sumCarbs + "");
-                                    activity_calories_fats.setText(sumFats + "");
-                                    activity_calories_sugar.setText(sumSugar + "");
+                                    if (contorOnce == 2) {
+                                        activity_calories_total_calories.setText(sumCalories + "");
+                                        activity_calories_protein.setText(sumProtein + "");
+                                        activity_calories_carbs.setText(sumCarbs + "");
+                                        activity_calories_fats.setText(sumFats + "");
+                                        activity_calories_sugar.setText(sumSugar + "");
+                                    }
                                 }
-
                             }
                         });
 
                     }
                 });
 
-thread.start();
+                thread.start();
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity_calories_show_items.performClick();
 
-                //Calculezi suma itemetelor din listview
-
-
+                    }
+                }, 100);
             }
         });
 
