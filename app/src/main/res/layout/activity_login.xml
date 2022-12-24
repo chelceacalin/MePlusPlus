@@ -115,29 +115,25 @@
                     android:textSize="15sp"
                     tools:ignore="HardcodedText" />
 
-
+                <ImageView
+                    android:id="@+id/login_activity_btn_google_sign_up"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    android:src="@drawable/ic_google"
+                    tools:ignore="ContentDescription" />
                 <ImageView
                     android:id="@+id/loginActivity_button_facebook_login"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_weight="1"
+                    android:layout_height="1dp"
                     android:contentDescription="TODO"
                     android:src="@drawable/ic_facebook"
                     tools:ignore="ContentDescription,HardcodedText"
                     android:visibility="invisible"
                     />
 
-                <ImageView
-                    android:id="@+id/login_activity_btn_google_sign_up"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="-10dp"
-                    android:layout_weight="1"
-                    android:visibility="invisible"
-                    android:src="@drawable/ic_google"
-                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/login_activity_imageview_next"

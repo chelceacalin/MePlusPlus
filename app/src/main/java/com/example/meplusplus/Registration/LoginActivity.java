@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Google
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("432467919065-e2s07mhf5b56sf3nusdefascua25qbih.apps.googleusercontent.com")
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -169,13 +170,14 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             }
         } catch (Exception e) {
-            new StyleableToast.Builder(LoginActivity.this)
+           /* new StyleableToast.Builder(LoginActivity.this)
                     .text("Error")
                     .textColor(Color.RED)
                     .backgroundColor(getResources().getColor(R.color.white))
                     .cornerRadius(25)
                     .iconStart(R.drawable.ic_baseline_error_outline_24)
-                    .show();
+                    .show();*/
+            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
