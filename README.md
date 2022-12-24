@@ -20,5 +20,6 @@ It has a lot of functionalities such as:
  -> Also, on the main page you have a motivational quote that changes based on a timer that keeps running even if you close the app so you won't see the same quote twice.
  -> You can view your profile and edit it and view your posts, with the ability to zoom on them. Also you can delete any individual post if you don't like it anymore.
  -> You also can search for people and view their profile and start a conversation with them
+ -> If you like the app and want to support the developer, you have the option to enable ads that will only be displayed on the main screen and won't affect the user experience, or you can turn them off if you don't want them.
  -> Dark Mode, White Mode, Give Feedback and a lot more!
 </pre>
