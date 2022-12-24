@@ -170,14 +170,14 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             }
         } catch (Exception e) {
-           /* new StyleableToast.Builder(LoginActivity.this)
-                    .text("Error")
+            new StyleableToast.Builder(LoginActivity.this)
+                    .text("Option unavailable at the moment. ")
                     .textColor(Color.RED)
                     .backgroundColor(getResources().getColor(R.color.white))
                     .cornerRadius(25)
                     .iconStart(R.drawable.ic_baseline_error_outline_24)
-                    .show();*/
-            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    .show();
+           // Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
