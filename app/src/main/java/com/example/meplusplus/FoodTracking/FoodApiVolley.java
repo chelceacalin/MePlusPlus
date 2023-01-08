@@ -87,7 +87,7 @@ public class FoodApiVolley {
             @Override
             public void onErrorResponse(VolleyError error) {
                 new StyleableToast.Builder(context)
-                        .text("You must complete all the fields")
+                        .text("Server unavailable right now !")
                         .textColor(Color.RED)
                         .backgroundColor(context.getResources().getColor(R.color.WhiteSmoke))
                         .cornerRadius(25)

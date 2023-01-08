@@ -137,9 +137,6 @@ public class CaloriesActivity extends AppCompatActivity {
                     contorOnce = 1;
 
 
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
                         //Daca stergi shared preferences aici o sa se blocheze
                         foodItems = new FoodApiVolley(CaloriesActivity.this);
                         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
@@ -155,10 +152,6 @@ public class CaloriesActivity extends AppCompatActivity {
                         } else
                             foodItems.search(activity_calories_items_edit_text.getText().toString());
                         arrayList = gson.fromJson(json, type);
-                        Looper.prepare();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
                                 //PT ListView
                                 if (arrayList != null) {
                                     arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1, arrayList);
@@ -185,21 +178,6 @@ public class CaloriesActivity extends AppCompatActivity {
                                     }
                                 }
                             }
-                        });
-
-                    }
-                });
-
-                thread.start();
-                final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        activity_calories_show_items.performClick();
-
-                    }
-                }, 100);
-            }
         });
 
 
