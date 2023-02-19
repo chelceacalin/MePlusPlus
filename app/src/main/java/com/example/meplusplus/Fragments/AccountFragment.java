@@ -215,7 +215,7 @@ public class AccountFragment extends Fragment {
 
         SharedPreferences S = getContext().getSharedPreferences("pleaseADS", Context.MODE_PRIVATE);
         final SharedPreferences.Editor E = S.edit();
-          wantadsOn = S.getBoolean("isWantadsOn", false);
+        wantadsOn = S.getBoolean("isWantadsOn", false);
 
 //        if (wantadsOn) {
 //            Toast.makeText(getContext(), "da", Toast.LENGTH_SHORT).show();
@@ -287,7 +287,7 @@ public class AccountFragment extends Fragment {
                         wantadsOn=!wantadsOn;
                         E.putBoolean("isWantadsOn", wantadsOn);
                         E.apply();
-                       // Toast.makeText(getContext(), "false", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(), "false", Toast.LENGTH_SHORT).show();
                         Toast.makeText(getContext(), "Stopped Supporting the Creator", Toast.LENGTH_SHORT).show();
                     } else {
                         wantadsOn=!wantadsOn;
