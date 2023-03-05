@@ -70,6 +70,7 @@
                     android:id="@+id/social_page_image_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="matrix"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
             </LinearLayout>
 

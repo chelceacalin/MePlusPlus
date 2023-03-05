@@ -81,6 +81,7 @@
                     android:id="@+id/recipepostitem_image_content"
                     android:layout_width="match_parent"
                     android:layout_height="250sp"
+                    android:scaleType="matrix"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
 
 
