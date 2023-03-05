@@ -58,12 +58,11 @@
 
         <ImageView
             android:id="@+id/editprofile_photo"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="300dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:contentDescription="@string/todo3"
-            android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_add_photo"
             tools:ignore="ContentDescription" />
 
@@ -72,7 +71,7 @@
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:background="@color/fui_transparent"
             android:backgroundTint="@color/fui_transparent"
             android:text="@string/change_image"
