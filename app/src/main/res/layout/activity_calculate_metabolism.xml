@@ -25,7 +25,7 @@
             <ImageView
                 android:id="@+id/activity_calculate_metabolism_close"
                 android:layout_width="40sp"
-                android:layout_height="wrap_content"
+                android:layout_height="40sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5sp"
                 android:layout_marginTop="2sp"
@@ -39,7 +39,7 @@
                 android:gravity="center_horizontal"
                 android:text=" Total Daily Expenditure"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -243,7 +243,7 @@
                 android:layout_height="40sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="5sp"
-                android:backgroundTint="@color/MediumBlue"
+                android:backgroundTint="@color/navy"
                 android:text="Calculate"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -256,7 +256,7 @@
                 android:layout_marginStart="5sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="5sp"
-                android:backgroundTint="@color/MediumBlue"
+                android:backgroundTint="@color/navy"
                 android:hint="Calories"
                 android:textColor="@color/white"
                 android:textColorHint="#c2c2c2"
@@ -270,7 +270,7 @@
                 android:layout_marginStart="5sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="5sp"
-                android:backgroundTint="@color/MediumBlue"
+                android:backgroundTint="@color/navy"
                 android:text="Save"
                 android:textColor="@color/white"
                 android:textStyle="bold"

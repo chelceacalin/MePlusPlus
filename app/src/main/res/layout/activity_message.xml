@@ -36,6 +36,7 @@
                 android:layout_width="40sp"
                 android:layout_height="35sp"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_baseline_person"
                 android:layout_marginTop="6sp" />
 
             <TextView

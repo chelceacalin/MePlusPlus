@@ -29,7 +29,6 @@ public class DrinkWater extends AppCompatActivity {
     TextView activity_drink_water_set_your_goals;
     TextView activity_drink_water_goal_water;
     ImageView activity_drink_water_close;
-    Button activity_drink_water_modify_your_goals;
     RadioGroup activity_drink_water_radiogroup;
     RadioButton activity_drink_water_ofcourse;
     RadioButton activity_drink_water_nothankyou;
@@ -88,23 +87,6 @@ public class DrinkWater extends AppCompatActivity {
             }
         });
 
-        activity_drink_water_modify_your_goals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (activity_drink_water_set_your_goals.getVisibility() == View.VISIBLE && activity_drink_water_seekbar.getVisibility() == View.VISIBLE
-                        || activity_drink_water_goal_water.getVisibility() == View.VISIBLE) {
-                    activity_drink_water_set_your_goals.setVisibility(View.GONE);
-                    activity_drink_water_seekbar.setVisibility(View.GONE);
-                    activity_drink_water_goal_water.setVisibility(View.GONE);
-                } else {
-                    activity_drink_water_set_your_goals.setVisibility(View.VISIBLE);
-                    activity_drink_water_seekbar.setVisibility(View.VISIBLE);
-                    activity_drink_water_goal_water.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
         //RadioGroup
         activity_drink_water_radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @SuppressLint("NonConstantResourceId")
@@ -147,7 +129,6 @@ public class DrinkWater extends AppCompatActivity {
 
     private void init() {
         //Controale
-        activity_drink_water_modify_your_goals = findViewById(R.id.activity_drink_water_modify_your_goals);
         activity_drink_water_set_your_goals = findViewById(R.id.activity_drink_water_set_your_goals);
         activity_drink_water_goal_water = findViewById(R.id.activity_drink_water_goal_water);
         activity_drink_water_seekbar = findViewById(R.id.activity_drink_water_seekbar);

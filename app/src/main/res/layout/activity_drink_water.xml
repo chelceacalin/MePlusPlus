@@ -46,45 +46,41 @@
         </LinearLayout>
 
 
-        <Button
-            android:id="@+id/activity_drink_water_modify_your_goals"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50sp"
-            android:backgroundTint="@color/MediumBlue"
-            android:text="Modify Your Goals"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:visibility="visible" />
-
-
+            android:background="#02192F"
+            android:orientation="vertical"
+            android:layout_marginTop="35sp"
+            >
         <TextView
             android:id="@+id/activity_drink_water_set_your_goals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25sp"
-            android:text="Set your goals: "
+            android:text="Set your daily water goals: "
             android:textColor="@color/white"
             android:textSize="23sp"
             android:textStyle="bold"
-            android:visibility="gone" />
+             />
 
 
-        <SeekBar
-            android:id="@+id/activity_drink_water_seekbar"
-            android:layout_width="200sp"
-            android:layout_height="30sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20sp"
-            android:max="4000"
-            android:progress="0"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:visibility="gone"
+            <SeekBar
+                android:id="@+id/activity_drink_water_seekbar"
+                android:layout_width="200sp"
+                android:layout_height="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35sp"
+                android:layout_marginBottom="15sp"
+                android:max="4000"
+                android:progress="0"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                />
+        </LinearLayout>
 
-            />
 
         <TextView
             android:id="@+id/activity_drink_water_goal_water"
@@ -108,6 +104,7 @@
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="200sp"
+        android:background="#02192F"
         >
 
         <!-- RADIO GROUP GENDER-->
@@ -139,7 +136,7 @@
                 android:id="@+id/activity_drink_water_ofcourse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Of Course"
+                android:text="YES"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -149,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15sp"
-                android:text="No, thank you"
+                android:text="NO"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />

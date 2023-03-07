@@ -208,7 +208,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8sp"
             android:layout_marginEnd="8sp"
-            android:background="@color/Blue"
+            android:background="@color/MediumBlue"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:padding="7sp"

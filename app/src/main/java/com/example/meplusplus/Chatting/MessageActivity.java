@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -249,6 +250,7 @@ public class MessageActivity extends AppCompatActivity {
         if (!imageurl.equals("")) {
             Glide.with(MessageActivity.this).load(imageurl).into(activity_message_profile_pic);
         } else {
+
             activity_message_profile_pic.setImageResource(R.drawable.ic_baseline_person_pin_24);
         }
 
