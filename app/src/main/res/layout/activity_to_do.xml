@@ -36,7 +36,7 @@
                 android:gravity="center"
                 android:text="Plan your day"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
@@ -47,12 +47,12 @@
             android:layout_height="35sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
-            android:background="#01013A"
+            android:background="#001122"
             android:gravity="center"
             android:orientation="horizontal"
             tools:ignore="ExtraText">
 
-            +<TextView
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -128,7 +128,7 @@
         android:layout_marginTop="10sp"
         android:layout_marginEnd="10sp"
         android:layout_marginBottom="5sp"
-        android:backgroundTint="#0909AF"
+        android:backgroundTint="#228DF8"
         android:clickable="true"
         android:padding="20sp"
         app:srcCompat="@drawable/ic_baseline_plus"

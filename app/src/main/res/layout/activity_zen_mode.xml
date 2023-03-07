@@ -129,6 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10sp"
                 android:backgroundTint="@color/navy"
+                android:textColor="@color/white"
                 android:text="Add 1 Minute"
                 tools:ignore="ButtonStyle" />
 
@@ -140,6 +141,7 @@
                 android:layout_marginStart="10sp"
                 android:backgroundTint="@color/navy"
                 android:text="Remove 1 Minute"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
                 tools:ignore="ButtonStyle" />
 
@@ -152,7 +154,7 @@
             android:layout_height="40sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25sp"
-            android:background="@drawable/maipatratnegru"
+            android:background="@drawable/maipatratborderalbastrudeschis"
             android:gravity="center_horizontal"
             android:padding="5sp"
             android:visibility="visible" />
