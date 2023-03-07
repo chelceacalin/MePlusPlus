@@ -25,21 +25,21 @@
             <ImageView
                 android:id="@+id/activity_zen_mode_close"
                 android:layout_width="40sp"
-                android:layout_height="wrap_content"
+                android:layout_height="40sp"
                 android:layout_marginStart="5sp"
                 android:background="@drawable/ic_baseline_close"
                 tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15sp"
                 android:fontFamily="@font/bigboldfont"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="Enter Zen Mode"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
 
@@ -60,7 +60,7 @@
                 android:layout_height="40sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="5sp"
-                android:backgroundTint="@color/SlateBlue"
+                android:backgroundTint="@color/navy"
                 android:text="15 min"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -72,7 +72,7 @@
                 android:layout_height="40sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="5sp"
-                android:backgroundTint="@color/SlateBlue"
+                android:backgroundTint="@color/navy"
                 android:text="10 min"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -84,7 +84,7 @@
                 android:layout_height="40sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="5sp"
-                android:backgroundTint="@color/SlateBlue"
+                android:backgroundTint="@color/navy"
                 android:text="5 min"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -128,7 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10sp"
-                android:backgroundTint="@color/SlateBlue"
+                android:backgroundTint="@color/navy"
                 android:text="Add 1 Minute"
                 tools:ignore="ButtonStyle" />
 
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="10sp"
-                android:backgroundTint="@color/SlateBlue"
+                android:backgroundTint="@color/navy"
                 android:text="Remove 1 Minute"
                 android:textAllCaps="false"
                 tools:ignore="ButtonStyle" />
