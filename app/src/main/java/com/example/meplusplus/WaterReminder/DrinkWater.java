@@ -73,6 +73,13 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_water);
 
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){ //ask for permission
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
+            }
+        }
+
         // Get reference to the UI components
         stepCountTextView = findViewById(R.id.step_count);
         calories_burned=findViewById(R.id.calories_burned);
@@ -213,7 +220,7 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
         }
     }
 int i=1;
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "SuspiciousIndentation"})
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
