@@ -79,20 +79,16 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
                 requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
             }
         }
+        init();
 
-        // Get reference to the UI components
-        stepCountTextView = findViewById(R.id.step_count);
-        calories_burned=findViewById(R.id.calories_burned);
 
-        // Get reference to the SensorManager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
         // Get reference to the step sensor if available
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if (stepSensor == null) {
             Toast.makeText(this, "Step sensor not available", Toast.LENGTH_SHORT).show();
         }
-        init();
+
         prefs = getSharedPreferences("wantReminders", MODE_PRIVATE);
         boolean wantReminders = prefs.getBoolean("yesToReminders", false);
         activity_drink_water_ofcourse.setChecked(wantReminders);
@@ -177,6 +173,10 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
         activity_drink_water_seekbar = findViewById(R.id.activity_drink_water_seekbar);
         activity_drink_water_close = findViewById(R.id.activity_drink_water_close);
 
+        // Get reference to the UI components
+        stepCountTextView = findViewById(R.id.step_count);
+        calories_burned=findViewById(R.id.calories_burned);
+
 
         //Radiogroup
         activity_drink_water_radiogroup = findViewById(R.id.activity_drink_water_radiogroup);
@@ -226,9 +226,6 @@ int i=1;
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             // Update the step count
             stepCount = (int) event.values[0];
-            stepCountTextView.setText(String.valueOf(stepCount));
-            int caloriesB=(int) ((double)stepCount*0.063);
-            calories_burned.setText(caloriesB+"");
 
             if(stepCount<1000)
             stepCountTextView.setTextColor(Color.BLUE);
@@ -236,6 +233,21 @@ int i=1;
             if(stepCount>8000){
                 stepCountTextView.setTextColor(Color.GREEN);
             }
+
+            if(stepCount>10000&stepCount<20000)
+                stepCount/=2;
+            if(stepCount>20000&stepCount<30000)
+                stepCount/=4;
+
+            if(stepCount>30000)
+                stepCount/=6;
+
+            stepCountTextView.setText(String.valueOf(stepCount));
+            int caloriesB=(int) ((double)stepCount*0.063);
+            calories_burned.setText(caloriesB+"");
+
+
+
         }
     }
 
