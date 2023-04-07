@@ -25,6 +25,7 @@ It has a lot of functionalities such as:
 </pre>
 
 
+<pre>
 Snippets:
 
 ![image](https://user-images.githubusercontent.com/76866499/230609433-3752dd75-25c5-45e3-a318-0900cb75d6c4.png)
@@ -32,6 +33,8 @@ Snippets:
 ![image](https://user-images.githubusercontent.com/76866499/230609465-eff63277-4359-4cff-89a7-e5fe9353d9f1.png)
 ![image](https://user-images.githubusercontent.com/76866499/230609567-4534d6c6-fbf0-489a-bf41-32459b44f3b9.png)
 ![image](https://user-images.githubusercontent.com/76866499/230609573-8bd6fa73-f2e9-4f12-b90b-42310ec77094.png)
+![image](https://user-images.githubusercontent.com/76866499/230609891-beb7d9c2-34fe-475e-8d3f-1f6887cccd63.png)
+![image](https://user-images.githubusercontent.com/76866499/230609912-b6e8b2eb-5d1a-4984-abec-a1cc2b7e8b97.png)
 
 
 What the DB would look like if it was relational ( it is NoSql, but for easier understanding I made a diagram):
@@ -41,3 +44,4 @@ What the DB would look like if it was relational ( it is NoSql, but for easier u
 The whole list of functionalities:
 ![image](https://user-images.githubusercontent.com/76866499/230609819-6bb07c3a-9eb5-4bbf-a796-7c57489f31c4.png)
 
+</pre>
