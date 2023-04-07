@@ -34,7 +34,7 @@ Snippets:
 ![image](https://user-images.githubusercontent.com/76866499/230609567-4534d6c6-fbf0-489a-bf41-32459b44f3b9.png)
 ![image](https://user-images.githubusercontent.com/76866499/230609573-8bd6fa73-f2e9-4f12-b90b-42310ec77094.png)
 ![image](https://user-images.githubusercontent.com/76866499/230609891-beb7d9c2-34fe-475e-8d3f-1f6887cccd63.png)
-![image](https://user-images.githubusercontent.com/76866499/230609912-b6e8b2eb-5d1a-4984-abec-a1cc2b7e8b97.png)
+
 
 
 What the DB would look like if it was relational ( it is NoSql, but for easier understanding I made a diagram):
