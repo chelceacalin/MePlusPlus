@@ -23,3 +23,21 @@ It has a lot of functionalities such as:
  -> If you like the app and want to support the developer, you have the option to enable ads that will only be displayed on the main screen and won't affect the user experience, or you can turn them off if you don't want them.
  -> Dark Mode, White Mode, Give Feedback and a lot more!
 </pre>
+
+
+Snippets:
+
+![image](https://user-images.githubusercontent.com/76866499/230609433-3752dd75-25c5-45e3-a318-0900cb75d6c4.png)
+![image](https://user-images.githubusercontent.com/76866499/230609454-573dc265-959a-40d3-850e-7fcc9cdc24f4.png)
+![image](https://user-images.githubusercontent.com/76866499/230609465-eff63277-4359-4cff-89a7-e5fe9353d9f1.png)
+![image](https://user-images.githubusercontent.com/76866499/230609567-4534d6c6-fbf0-489a-bf41-32459b44f3b9.png)
+![image](https://user-images.githubusercontent.com/76866499/230609573-8bd6fa73-f2e9-4f12-b90b-42310ec77094.png)
+
+
+What the DB would look like if it was relational ( it is NoSql, but for easier understanding I made a diagram):
+![image](https://user-images.githubusercontent.com/76866499/230609741-2ae48a64-c9aa-4f4c-b5d1-225fb11ee99f.png)
+
+
+The whole list of functionalities:
+![image](https://user-images.githubusercontent.com/76866499/230609819-6bb07c3a-9eb5-4bbf-a796-7c57489f31c4.png)
+
