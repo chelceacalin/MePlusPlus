@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,6 +28,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -168,25 +170,35 @@ public class PostActivity extends AppCompatActivity {
             progressDialog.show();
             reference = reference.child(System.currentTimeMillis() + "." + getFext());
             uploadtask = reference.putFile(imageviewuri);
+
+            Bitmap originalBitmap;
+            try {
+                originalBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageviewuri);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+            // Rotate the image as needed
+            if (rotationInit != 0) {
+                Matrix matrix = new Matrix();
+                matrix.postRotate(rotationInit);
+                originalBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+            }
+
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            originalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+
+
+            uploadtask = reference.putBytes(data);
             uploadtask.continueWithTask(task -> reference.getDownloadUrl()).addOnFailureListener(e -> {
                 progressDialog.dismiss();
-                new StyleableToast.Builder(PostActivity.this)
-                        .text("Error Uploading")
-                        .textColor(Color.RED)
-                        .backgroundColor(getResources().getColor(R.color.white))
-                        .cornerRadius(25)
-                        .iconStart(R.drawable.ic_baseline_error_outline_24)
-                        .show();
+                new StyleableToast.Builder(PostActivity.this).text("Error Uploading").textColor(Color.RED).backgroundColor(getResources().getColor(R.color.white)).cornerRadius(25).iconStart(R.drawable.ic_baseline_error_outline_24).show();
             }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
 
                 progressDialog.dismiss();
-                new StyleableToast.Builder(PostActivity.this)
-                        .text("Post Uploaded")
-                        .textColor(Color.BLUE)
-                        .backgroundColor(getResources().getColor(R.color.white))
-                        .cornerRadius(15)
-                        .textSize(17)
-                        .show();
+                new StyleableToast.Builder(PostActivity.this).text("Post Uploaded").textColor(Color.BLUE).backgroundColor(getResources().getColor(R.color.white)).cornerRadius(15).textSize(17).show();
 
                 Uri downloadUri = task.getResult();
                 imageURL = downloadUri.toString();
@@ -211,7 +223,6 @@ public class PostActivity extends AppCompatActivity {
                 assert UniqueID != null;
                 databaseReference.child(UniqueID).setValue(map);
 
-
                 // Schimbam din activitate in fragment
                 Intent intent = new Intent(PostActivity.this, MainActivity.class);
                 intent.putExtra("openSocialPageFragment", true);
@@ -220,13 +231,7 @@ public class PostActivity extends AppCompatActivity {
                 startActivity(intent);
             });
         } else {
-            new StyleableToast.Builder(PostActivity.this)
-                    .text("Please Select an Image")
-                    .textColor(Color.RED)
-                    .backgroundColor(getResources().getColor(R.color.white))
-                    .cornerRadius(25)
-                    .iconStart(R.drawable.ic_baseline_error_outline_24)
-                    .show();
+            new StyleableToast.Builder(PostActivity.this).text("Please Select an Image").textColor(Color.RED).backgroundColor(getResources().getColor(R.color.white)).cornerRadius(25).iconStart(R.drawable.ic_baseline_error_outline_24).show();
         }
     }
 

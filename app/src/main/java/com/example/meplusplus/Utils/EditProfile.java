@@ -5,9 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -43,8 +43,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import io.github.muddz.styleabletoast.StyleableToast;
 
 /*
         Status: RFP
@@ -181,19 +179,23 @@ public class EditProfile extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            Bitmap rotatedBitmap = Bitmap.createBitmap(editprofile_photo.getWidth(),
-                    editprofile_photo.getHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(rotatedBitmap);
+            Bitmap originalBitmap = ((BitmapDrawable) editprofile_photo.getDrawable()).getBitmap();
             Matrix matrix = new Matrix();
-            matrix.postRotate(rotationInit, editprofile_photo.getWidth() / 2f,
-                    editprofile_photo.getHeight() / 2f);
-            canvas.drawBitmap(((BitmapDrawable) editprofile_photo.getDrawable()).getBitmap(),
-                    matrix, new Paint());
+            matrix.postRotate(rotationInit, originalBitmap.getWidth() / 2f,
+                    originalBitmap.getHeight() / 2f);
+            RectF mappedRect = new RectF(0, 0, originalBitmap.getWidth(), originalBitmap.getHeight());
+            matrix.mapRect(mappedRect);
+
+            Bitmap rotatedBitmap = Bitmap.createBitmap((int) mappedRect.width(), (int) mappedRect.height(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(rotatedBitmap);
+            canvas.translate(-mappedRect.left, -mappedRect.top);
+            canvas.drawBitmap(originalBitmap, matrix, new Paint());
 
             // Compress the rotated Bitmap to reduce the image size
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
             byte[] data = baos.toByteArray();
+
 
             reference = reference.child(System.currentTimeMillis() + ".jpeg");
             uploadtask = reference.putBytes(data);

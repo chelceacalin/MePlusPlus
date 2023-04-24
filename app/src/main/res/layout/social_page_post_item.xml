@@ -58,8 +58,8 @@
                 android:minHeight="30dp"
                 android:paddingStart="10sp"
                 android:textColor="@color/DarkGray"
-                android:textStyle="bold|italic"
                 android:textSize="14sp"
+                android:textStyle="bold|italic"
                 tools:ignore="RtlSymmetry" />
 
             <LinearLayout

@@ -86,8 +86,6 @@ public class ActivityProgress extends AppCompatActivity {
                     activity_progress_weight.setText("");
                     Handler handler = new Handler();
                     handler.postDelayed(ActivityProgress.this::drawGraph, 1000);
-
-
                 } else {
                     Toast.makeText(ActivityProgress.this, "You must add an weight! ", Toast.LENGTH_SHORT).show();
                 }

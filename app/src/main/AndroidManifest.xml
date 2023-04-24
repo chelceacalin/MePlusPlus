@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.meplusplus"
     tools:ignore="LockedOrientationActivity">
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
-    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission
+        android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"
         tools:ignore="HighSamplingRate" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.SENSOR_ACCELEROMETER" />
@@ -37,8 +39,8 @@
         <activity
             android:name=".Workout.WorkoutStarted"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_workout_started"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Meplusplus.NoActionBar" />
         <activity
             android:name=".Workout.WorkoutActivity"

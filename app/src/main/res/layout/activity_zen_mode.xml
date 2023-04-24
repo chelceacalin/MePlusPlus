@@ -129,8 +129,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10sp"
                 android:backgroundTint="@color/navy"
-                android:textColor="@color/white"
                 android:text="Add 1 Minute"
+                android:textColor="@color/white"
                 tools:ignore="ButtonStyle" />
 
             <Button
@@ -141,8 +141,8 @@
                 android:layout_marginStart="10sp"
                 android:backgroundTint="@color/navy"
                 android:text="Remove 1 Minute"
-                android:textColor="@color/white"
                 android:textAllCaps="false"
+                android:textColor="@color/white"
                 tools:ignore="ButtonStyle" />
 
         </LinearLayout>

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,18 +27,6 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
-
-/*
-
-            Status: RFP
-            CREATED DATE: 8/28/2022
-            UPDATED DATE: 8/28/2022
-
-        1.
-        UPDATED DATE: 8/29/2022
-        Added Glide to put the profile image for Google Sign In users
- */
 
 public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHolder> {
 
@@ -84,11 +71,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) ->
                 {
-
-                    // post id Toast.makeText(context, ""+ID, Toast.LENGTH_SHORT).show();
-                    // comment id
-                   // Toast.makeText(context, ""+list.get(position).getId(), Toast.LENGTH_SHORT).show();
-                   reference1
+                    reference1
                             .child(ID).child(list.get(position).getId()).removeValue().addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
                                     dialog.dismiss();
@@ -118,7 +101,6 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -132,9 +114,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
         //FirebaseDatabase
         database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference().child("users");
-        reference1=database.getReference().child("strikes");
-
-
+        reference1 = database.getReference().child("strikes");
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

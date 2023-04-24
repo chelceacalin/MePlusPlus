@@ -26,16 +26,6 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-/*
-       Status: RFP
-       CREATED DATE: 8/22/2022
-       UPDATED DATE: 8/22/2022
-
-        1.
-         UPDATED DATE: 8/30/2022
-         Notes: When you click on someone it redirects you to their page
-
- */
 public class User_Adapter extends RecyclerView.Adapter<User_Adapter.ViewHolder> {
 
     final List<User> list;

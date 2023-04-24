@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -177,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
                     .cornerRadius(25)
                     .iconStart(R.drawable.ic_baseline_error_outline_24)
                     .show();
-           // Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

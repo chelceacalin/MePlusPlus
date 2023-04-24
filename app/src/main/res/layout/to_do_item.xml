@@ -1,56 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="#c0c0c0"
-            />
+            android:background="#c0c0c0" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1"
             android:background="@color/DarkSlateBlue"
-            >
+            android:orientation="horizontal"
+            android:weightSum="1">
 
 
             <TextView
+                android:id="@+id/to_do_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8sp"
+                android:layout_weight="0.7"
+                android:singleLine="false"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                android:layout_marginStart="8sp"
-                android:singleLine="false"
-                android:layout_weight="0.7"
-                android:layout_gravity="center"
-                android:id="@+id/to_do_tv"
-                />
+                android:textSize="13sp" />
 
             <CheckBox
+                android:id="@+id/to_do_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Completed:"
-                android:textColor="@color/white"
-                android:buttonTint="@color/white"
-                app:buttonTint="@color/white"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:layout_weight="0.2"
                 android:layout_gravity="end"
+                android:layout_weight="0.2"
+                android:button="@null"
+                android:buttonTint="@color/white"
+                android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
                 android:gravity="center"
-                android:id="@+id/to_do_status"
-                />
+                android:text="@string/completed"
+                android:textColor="@color/white"
+                app:buttonTint="@color/white" />
 
 
         </LinearLayout>

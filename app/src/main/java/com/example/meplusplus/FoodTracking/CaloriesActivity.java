@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -85,9 +83,8 @@ public class CaloriesActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
             finish();
             startActivity(intent);
-
-
         });
+
         activity_calories_add_items.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,8 +116,6 @@ public class CaloriesActivity extends AppCompatActivity {
                         Toast.makeText(CaloriesActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
             }
         });
 
@@ -133,51 +128,46 @@ public class CaloriesActivity extends AppCompatActivity {
                     contorOnce = 0;
                 else if (contorOnce == 1)
                     contorOnce = 2;
-                else if(contorOnce==0)
+                else if (contorOnce == 0)
                     contorOnce = 1;
 
 
-                        //Daca stergi shared preferences aici o sa se blocheze
-                        foodItems = new FoodApiVolley(CaloriesActivity.this);
-                        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
+                //Daca stergi shared preferences aici o sa se blocheze
+                foodItems = new FoodApiVolley(CaloriesActivity.this);
+                sharedPrefs = PreferenceManager.getDefaultSharedPreferences(CaloriesActivity.this);
 
-                        gson = new Gson();
-                        json = sharedPrefs.getString("MYITEMS", "");
-                        type = new TypeToken<List<FoodModel>>() {
-                        }.getType();
+                gson = new Gson();
+                json = sharedPrefs.getString("MYITEMS", "");
+                type = new TypeToken<List<FoodModel>>() {
+                }.getType();
 
-                        foodItemsSearched = activity_calories_items_edit_text.getText().toString();
-                        if (foodItemsSearched.equals("")) {
-                            Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();
-                        } else
-                            foodItems.search(activity_calories_items_edit_text.getText().toString());
-                        arrayList = gson.fromJson(json, type);
-                                //PT ListView
-                                if (arrayList != null) {
-                                    arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1, arrayList);
-                                    SeeItemsListView.setAdapter(arrayAdapter);
-                                    sumCalories = 0;
-                                    sumProtein = 0;
-                                    sumCarbs = 0;
-                                    sumFats = 0;
-                                    sumSugar = 0;
-                                    for (FoodModel item : arrayList) {
-                                        sumCalories += item.getCalories();
-                                        sumProtein += item.getProtein();
-                                        sumCarbs += item.getCarbs();
-                                        sumFats = item.getFats();
-                                        sumSugar += item.getSugar();
-                                    }
-
-                                    if (contorOnce == 2) {
-                                        activity_calories_total_calories.setText(sumCalories + "");
-                                        activity_calories_protein.setText(sumProtein + "");
-                                        activity_calories_carbs.setText(sumCarbs + "");
-                                        activity_calories_fats.setText(sumFats + "");
-                                        activity_calories_sugar.setText(sumSugar + "");
-                                    }
-                                }
-                            }
+                foodItemsSearched = activity_calories_items_edit_text.getText().toString();
+                if (foodItemsSearched.equals("")) {
+                    Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();
+                } else
+                    foodItems.search(activity_calories_items_edit_text.getText().toString());
+                arrayList = gson.fromJson(json, type);
+                //PT ListView
+                if (arrayList != null) {
+                    arrayAdapter = new ArrayAdapter<>(CaloriesActivity.this, android.R.layout.simple_list_item_1, arrayList);
+                    SeeItemsListView.setAdapter(arrayAdapter);
+                    sumCalories = sumProtein = sumCarbs = sumFats = sumSugar = 0;
+                    for (FoodModel item : arrayList) {
+                        sumCalories += item.getCalories();
+                        sumProtein += item.getProtein();
+                        sumCarbs += item.getCarbs();
+                        sumFats = item.getFats();
+                        sumSugar += item.getSugar();
+                    }
+                    if (contorOnce == 2) {
+                        activity_calories_total_calories.setText(sumCalories + "");
+                        activity_calories_protein.setText(sumProtein + "");
+                        activity_calories_carbs.setText(sumCarbs + "");
+                        activity_calories_fats.setText(sumFats + "");
+                        activity_calories_sugar.setText(sumSugar + "");
+                    }
+                }
+            }
         });
 
 
@@ -192,7 +182,6 @@ public class CaloriesActivity extends AppCompatActivity {
         activity_calories_add_items = findViewById(R.id.activity_calories_add_items);
         activity_calories_show_items = findViewById(R.id.activity_calories_show_items);
         SeeItemsListView = findViewById(R.id.SeeItemsListView);
-
 
         //Calories related
         activity_calories_total_calories = findViewById(R.id.activity_calories_total_calories);

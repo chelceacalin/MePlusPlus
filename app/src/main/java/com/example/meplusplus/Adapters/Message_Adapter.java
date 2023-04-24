@@ -39,6 +39,7 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     FirebaseUser user;
 
     int pozitie;
+
     public Message_Adapter(Context context, String uname, List<Message> list) {
         Uname = uname;
         this.context = context;
@@ -74,12 +75,12 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) ->
                     {
-                        pozitie=position;
+                        pozitie = position;
                         Intent intent = new Intent("refresh_adapter");
-                        intent.putExtra("pozitie",pozitie);
-                        intent.putExtra("messageHolder",user.getUid());
-                        intent.putExtra("messageReceiver",list.get(position).getToWhom());
-                        intent.putExtra("refreshPLS",list.get(position).getMessageID());
+                        intent.putExtra("pozitie", pozitie);
+                        intent.putExtra("messageHolder", user.getUid());
+                        intent.putExtra("messageReceiver", list.get(position).getToWhom());
+                        intent.putExtra("refreshPLS", list.get(position).getMessageID());
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                         alertDialog.dismiss();
                     });

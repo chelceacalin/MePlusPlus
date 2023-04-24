@@ -1,5 +1,6 @@
 package com.example.meplusplus.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ public class ToDoAdapter extends BaseAdapter {
 
     Context context;
     List<String> list;
-    boolean checked=false;
+    boolean checked = false;
 
     public ToDoAdapter(Context context, List<String> list) {
         this.context = context;
@@ -38,20 +39,22 @@ public class ToDoAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View v= LayoutInflater.from(context).inflate(R.layout.to_do_item,viewGroup,false);
+        View v;
+        v = LayoutInflater.from(context).inflate(R.layout.to_do_item, viewGroup, false);
 
-        String item=list.get(i);
-        TextView textView=v.findViewById(R.id.to_do_tv);
-        CheckBox checkBox=v.findViewById(R.id.to_do_status);
+        String item = list.get(i);
+        TextView textView = v.findViewById(R.id.to_do_tv);
+        CheckBox checkBox = v.findViewById(R.id.to_do_status);
 
 
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                checked=!checked;
+                checked = !checked;
                 checkBox.setChecked(checked);
 
             }

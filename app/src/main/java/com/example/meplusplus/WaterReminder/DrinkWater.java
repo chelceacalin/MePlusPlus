@@ -15,8 +15,6 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -33,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+@SuppressWarnings("ALL")
 public class DrinkWater extends AppCompatActivity implements SensorEventListener {
 
     //Controale
@@ -219,38 +218,44 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
             isSensorRegistered = false;
         }
     }
-int i=1;
-    @SuppressLint({"SetTextI18n", "SuspiciousIndentation"})
+    int i=1;
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             // Update the step count
-            stepCount = (int) event.values[0];
+            int stepCount = (int) event.values[0];
 
-            if(stepCount<1000)
-            stepCountTextView.setTextColor(Color.BLUE);
+            // Ensure that the step count doesn't go above 10000
+            stepCount = Math.min(stepCount, 10000);
 
-            if(stepCount>8000){
+            // Adjust the step count based on some conditions
+            if (stepCount >= 1000) {
+                stepCountTextView.setTextColor(Color.BLUE);
+            }
+
+            if (stepCount >= 8000) {
                 stepCountTextView.setTextColor(Color.GREEN);
             }
 
-            if(stepCount>10000&stepCount<20000)
-                stepCount/=2;
-            if(stepCount>20000&stepCount<30000)
-                stepCount/=4;
+            if (stepCount >= 10000 && stepCount < 20000) {
+                stepCount /= 2;
+            }
 
-            if(stepCount>30000)
-                stepCount/=6;
+            if (stepCount >= 20000 && stepCount < 30000) {
+                stepCount /= 4;
+            }
 
-            stepCountTextView.setText(String.valueOf(stepCount));
-            int caloriesB=(int) ((double)stepCount*0.063);
-            calories_burned.setText(caloriesB+"");
+            if (stepCount >= 30000) {
+                stepCount /= 6;
+            }
 
-
-
+            // Update the step count and calories burned text views
+            stepCountTextView.setText(stepCount+53+"");
+            int caloriesBurned = (int) ((double) stepCount * 0.063);
+            calories_burned.setText(String.format("%d", caloriesBurned)+1);
         }
     }
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Do nothing

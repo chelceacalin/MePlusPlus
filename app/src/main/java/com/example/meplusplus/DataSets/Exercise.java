@@ -5,18 +5,19 @@ public class Exercise {
     String muscles_worked;
     String exercise_link;
     String mainSplit;
+
     public Exercise() {
-        this.exercise_name="N/A";
+        this.exercise_name = "N/A";
         this.muscles_worked = "N/A";
-        this.exercise_link="N/A";
-        this.mainSplit="N/A";
+        this.exercise_link = "N/A";
+        this.mainSplit = "N/A";
     }
 
-    public Exercise(String exercise_name, String muscles_worked,String exercise_link,String mainSplit) {
+    public Exercise(String exercise_name, String muscles_worked, String exercise_link, String mainSplit) {
         this.exercise_name = exercise_name;
         this.muscles_worked = muscles_worked;
-        this.exercise_link=exercise_link;
-        this.mainSplit=mainSplit;
+        this.exercise_link = exercise_link;
+        this.mainSplit = mainSplit;
     }
 
     public String getMainSplit() {

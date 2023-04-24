@@ -118,8 +118,8 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
                     age = Integer.parseInt(activity_calculate_metabolism_age.getText().toString().trim());
                     height = Integer.parseInt(activity_calculate_metabolism_height.getText().toString().trim());
                     weight = Float.parseFloat(activity_calculate_metabolism_weight.getText().toString().trim());
-                    //Piechart
 
+                    //Piechart
                     showPieChart();
                 }
             }
@@ -162,8 +162,6 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
 
                 });
                 alertDialog.show();
-
-
             }
         });
 

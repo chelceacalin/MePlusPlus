@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Utils.FeedBackActivity"
-    android:weightSum="1"
     android:background="@drawable/maipatratnegru"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".Utils.FeedBackActivity"
 
     >
 
@@ -16,18 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="15sp"
-        android:orientation="vertical"
-        tools:ignore="InefficientWeight,UselessParent"
+        android:layout_marginRight="15dp"
         android:layout_weight="0.7"
-        >
+        android:orientation="vertical"
+        tools:ignore="InefficientWeight,UselessParent">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -38,10 +36,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:orientation="vertical"
                 android:layout_gravity="center_vertical"
-                >
+                android:layout_marginStart="22dp"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="100dp"
@@ -54,8 +51,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
                     android:text="@string/tell_us_something"
                     android:textColor="@color/white"
                     android:textSize="25sp"
@@ -67,12 +64,12 @@
                     android:layout_height="40sp"
                     android:layout_marginTop="55dp"
                     android:autofillHints=""
+                    android:background="@drawable/maipatratalb"
                     android:hint="   Subject"
                     android:paddingEnd="12dp"
                     android:selectAllOnFocus="false"
                     android:textColor="@color/black"
                     android:textColorHint="#504F4F"
-                    android:background="@drawable/maipatratalb"
                     android:textSize="14sp"
                     android:visibility="visible"
                     tools:ignore="HardcodedText,RtlSymmetry,TextFields"
@@ -84,19 +81,18 @@
                     android:layout_height="40sp"
                     android:layout_marginTop="25dp"
                     android:autofillHints=""
+                    android:background="@drawable/maipatratalb"
                     android:hint="    Your Message"
                     android:minHeight="100dp"
-                    android:singleLine="false"
                     android:paddingEnd="12dp"
                     android:selectAllOnFocus="false"
+                    android:singleLine="false"
                     android:textColor="@color/black"
                     android:textColorHint="#555353"
                     android:textSize="14sp"
-                    android:background="@drawable/maipatratalb"
                     android:visibility="visible"
                     tools:ignore="HardcodedText,RtlSymmetry,TextFields"
                     tools:visibility="visible" />
-
 
 
                 <Button
@@ -109,8 +105,8 @@
                     android:hint="@string/send_email"
                     android:paddingEnd="12dp"
                     android:textAlignment="center"
-                    android:textColorHint="@color/white"
                     android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:cornerRadius="20dp"

@@ -121,18 +121,18 @@
                     android:layout_height="40sp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:visibility="visible"
                     android:src="@drawable/ic_google"
-                    tools:ignore="ContentDescription" />
+                    android:visibility="visible"
+                    tools:ignore="ContentDescription,InefficientWeight" />
+
                 <ImageView
                     android:id="@+id/loginActivity_button_facebook_login"
                     android:layout_width="50dp"
                     android:layout_height="1dp"
                     android:contentDescription="TODO"
                     android:src="@drawable/ic_facebook"
-                    tools:ignore="ContentDescription,HardcodedText"
                     android:visibility="invisible"
-                    />
+                    tools:ignore="ContentDescription,HardcodedText" />
 
 
                 <ImageView

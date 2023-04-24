@@ -80,7 +80,7 @@ public class WorkoutStarted extends AppCompatActivity {
     Bundle extras;
     String workoutName;
     String tempWorkoutName = "";
-    int contor=0;
+    int contor = 0;
 
 
     @Override
@@ -233,10 +233,9 @@ public class WorkoutStarted extends AppCompatActivity {
                                         tempWorkoutName = workoutName;
                                     } else {
                                         workoutName = extras.getString("Random Workout");
-                                        if(workoutName!=null){
-                                            tempWorkoutName=workoutName;
-                                        }
-                                        else{
+                                        if (workoutName != null) {
+                                            tempWorkoutName = workoutName;
+                                        } else {
 
                                         }
                                     }
@@ -254,8 +253,8 @@ public class WorkoutStarted extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                contor=0;
-                int randomContor=0;
+                contor = 0;
+                int randomContor = 0;
                 for (DataSnapshot sn : snapshot.getChildren()) {
                     contor++;
 
@@ -271,28 +270,24 @@ public class WorkoutStarted extends AppCompatActivity {
                         if (sn.getValue(Exercise.class).getMainSplit().equals("Legs") || sn.getValue(Exercise.class).getMainSplit().equals("Core")) {
                             list.add(sn.getValue(Exercise.class));
                         }
-                    }
-                    else if (tempWorkoutName.equals("Full Body B")) {
-                        if(contor%3==0)
+                    } else if (tempWorkoutName.equals("Full Body B")) {
+                        if (contor % 3 == 0)
                             list.add(sn.getValue(Exercise.class));
-                    }
-                    else if (tempWorkoutName.equals("Full Body A")) {
-                        if(contor%2==0&&contor<=16)
+                    } else if (tempWorkoutName.equals("Full Body A")) {
+                        if (contor % 2 == 0 && contor <= 16)
                             list.add(sn.getValue(Exercise.class));
-                    }
-                    else if (tempWorkoutName.equals("Random Workout")) {
+                    } else if (tempWorkoutName.equals("Random Workout")) {
 
-                        Random random=new Random();
-                        boolean maybe=random.nextBoolean();
-                        if(maybe==true){
-                            if(randomContor<=7){
+                        Random random = new Random();
+                        boolean maybe = random.nextBoolean();
+                        if (maybe) {
+                            if (randomContor <= 7) {
                                 randomContor++;
                                 list.add(sn.getValue(Exercise.class));
                             }
                         }
 
-                    }
-                    else if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName)
+                    } else if (sn.getValue(Exercise.class).getMainSplit().equals(tempWorkoutName)
                             && !(tempWorkoutName.equals("Upper"))
                             && !(tempWorkoutName.equals("Lower"))
                             && !(tempWorkoutName.equals("Full Body A"))

@@ -80,7 +80,7 @@ public class AccountFragment extends Fragment {
     //Diverse
     String pID;
     int contor;
-    boolean wantadsOn=false ;
+    boolean wantadsOn = false;
 
     //Redirect
     String received;
@@ -144,13 +144,9 @@ public class AccountFragment extends Fragment {
 
         received = requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).getString("profileId", "empty");
         if (!received.equals("empty")) {
-            //DACA PRIMESC CEVA
             pID = received;
             requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).edit().clear().apply();
             fragment_account_edit_button.setVisibility(View.GONE);
-
-            //De completat cand fac partea de chat app
-
         } else {
             pID = user.getUid();
             fragment_account_edit_button.setText("Edit");
@@ -164,7 +160,6 @@ public class AccountFragment extends Fragment {
         adapter = new AccountPhotos(getContext(), items);
         fragment_account_recyclerView_posts.setLayoutManager(manager);
         fragment_account_recyclerView_posts.setAdapter(adapter);
-
         fragment_account_recyclerView_posts.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
@@ -194,7 +189,6 @@ public class AccountFragment extends Fragment {
                 } else {
                     Picasso.get().load(Objects.requireNonNull(snapshot.getValue(User.class)).getImageurl()).into(fragment_account_image_profile);
                 }
-
             }
 
             @Override
@@ -217,30 +211,16 @@ public class AccountFragment extends Fragment {
         final SharedPreferences.Editor E = S.edit();
         wantadsOn = S.getBoolean("isWantadsOn", false);
 
-//        if (wantadsOn) {
-//            Toast.makeText(getContext(), "da", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(getContext(), "nu", Toast.LENGTH_SHORT).show();
-//        }
-
 
         // Pop up menu
         fragment_account_options.setOnClickListener(view -> {
             popup = new PopupMenu(getContext(), fragment_account_options);
             menu = popup.getMenu();
-            //CAM TARANIE, AR TRB MODIFICAT
             popup.getMenuInflater().inflate(R.menu.menu_options_profile, menu);
-
 
             popup.setOnMenuItemClickListener(menuItem -> {
                 if (menuItem.getTitle().equals("Sign Out")) {
-                    new StyleableToast.Builder(getContext())
-                            .text("You have been signed out")
-                            .textColor(Color.BLUE)
-                            .backgroundColor(getResources().getColor(R.color.white))
-                            .textSize(19)
-                            .cornerRadius(25)
-                            .show();
+                    new StyleableToast.Builder(getContext()).text("You have been signed out").textColor(Color.BLUE).backgroundColor(getResources().getColor(R.color.white)).textSize(19).cornerRadius(25).show();
                     auth.signOut();
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);
@@ -252,26 +232,14 @@ public class AccountFragment extends Fragment {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         editor.putBoolean("isDarkModeOn", false);
                         editor.apply();
-                        new StyleableToast.Builder(getContext())
-                                .text("Dark Mode Turned OFF ")
-                                .textColor(Color.BLACK)
-                                .backgroundColor(getResources().getColor(R.color.WhiteSmoke))
-                                .cornerRadius(25)
-                                .iconStart(R.drawable.ic_baseline_dark_mode_24)
-                                .show();
+                        new StyleableToast.Builder(getContext()).text("Dark Mode Turned OFF ").textColor(Color.BLACK).backgroundColor(getResources().getColor(R.color.WhiteSmoke)).cornerRadius(25).iconStart(R.drawable.ic_baseline_dark_mode_24).show();
 
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         editor.putBoolean("isDarkModeOn", true);
                         editor.apply();
 
-                        new StyleableToast.Builder(getContext())
-                                .text("Dark Mode Turned ON")
-                                .textColor(Color.WHITE)
-                                .backgroundColor(getResources().getColor(R.color.Black))
-                                .cornerRadius(25)
-                                .iconStart(R.drawable.ic_baseline_dark_mode_24)
-                                .show();
+                        new StyleableToast.Builder(getContext()).text("Dark Mode Turned ON").textColor(Color.WHITE).backgroundColor(getResources().getColor(R.color.Black)).cornerRadius(25).iconStart(R.drawable.ic_baseline_dark_mode_24).show();
                     }
 
 
@@ -280,17 +248,15 @@ public class AccountFragment extends Fragment {
                     Intent i = new Intent(getActivity(), FeedBackActivity.class);
                     startActivity(i);
                     ((Activity) getActivity()).overridePendingTransition(R.anim.fade_in, R.anim.slide_out);
-                }
-                else if(menuItem.getTitle().equals("Support the developer")){
+                } else if (menuItem.getTitle().equals("Support the developer")) {
 
-                    if (wantadsOn==true) {
-                        wantadsOn=!wantadsOn;
+                    if (wantadsOn == true) {
+                        wantadsOn = !wantadsOn;
                         E.putBoolean("isWantadsOn", wantadsOn);
                         E.apply();
-                        // Toast.makeText(getContext(), "false", Toast.LENGTH_SHORT).show();
                         Toast.makeText(getContext(), "Stopped Supporting the Creator", Toast.LENGTH_SHORT).show();
                     } else {
-                        wantadsOn=!wantadsOn;
+                        wantadsOn = !wantadsOn;
                         E.putBoolean("isWantadsOn", wantadsOn);
                         E.apply();
                         Toast.makeText(getContext(), "Started Supporting the Creator", Toast.LENGTH_SHORT).show();

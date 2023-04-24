@@ -35,11 +35,10 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
     //Shared preferences
     SharedPreferences.Editor editor;
 
-
-
     //Shared Preferences pt padding
     SharedPreferences sharedPreferences;
     boolean wanted;
+
     public ExerciseAdapter(Context context, List<Exercise> list) {
         this.context = context;
         this.list = list;
@@ -54,7 +53,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         init();
-        setDetails(holder,position);
+        setDetails(holder, position);
 
         sharedPreferences = context.getSharedPreferences("wantPadding", Context.MODE_PRIVATE);
         wanted = sharedPreferences.getBoolean("yes", false);
@@ -66,19 +65,19 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
         } else {
             if (list.get(position).getMuscles_worked().equals(""))
                 holder.workout_exercixe_split_name.setPadding(15, 15, 15, 15);
-             else
+            else
                 holder.workout_exercixe_split_name.setPadding(10, 30, 10, 50);
         }
 
         holder.workout_exercise_cardview.setOnClickListener(view -> {
-            Intent intent=new Intent("android.intent.action.VIEW", Uri.parse(list.get(position).getExercise_link()));
+            Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(list.get(position).getExercise_link()));
             context.startActivity(intent);
         });
 
         holder.workout_exercise_cardview.setOnLongClickListener(view -> {
             holder.workout_exercie_background.setBackgroundColor(Color.DKGRAY);
             Intent intent = new Intent("custom-message");
-            intent.putExtra("schimba","startAgain");
+            intent.putExtra("schimba", "startAgain");
             LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             return true;
         });
@@ -113,8 +112,8 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
             workout_exercixe_split_name = itemView.findViewById(R.id.workout_exercixe_split_name);
             workout_exercixe_split_muscles_worked = itemView.findViewById(R.id.workout_exercixe_split_muscles_worked);
             workout_exercise_cardview = itemView.findViewById(R.id.workout_exercise_cardview);
-            workout_exercie_background=itemView.findViewById(R.id.workout_exercie_background);
-            workout_exercise_item_textview_muscles=itemView.findViewById(R.id.workout_exercise_item_textview_muscles);
+            workout_exercie_background = itemView.findViewById(R.id.workout_exercie_background);
+            workout_exercise_item_textview_muscles = itemView.findViewById(R.id.workout_exercise_item_textview_muscles);
         }
     }
 }

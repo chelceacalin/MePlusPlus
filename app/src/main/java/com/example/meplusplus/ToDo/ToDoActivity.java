@@ -2,7 +2,9 @@ package com.example.meplusplus.ToDo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,21 +28,23 @@ import java.util.ArrayList;
 
 public class ToDoActivity extends AppCompatActivity {
 
-    //controale
+    //controls
     FloatingActionButton activity_to_do_fab;
     EditText actvity_to_do_edittext;
     ImageButton activity_to_do_complete_all;
     ImageButton activity_to_do_delete_all;
     ImageView activity_to_do_close;
 
-    //Listview
+    //ListView
     ListView activity_to_do_listview;
 
     ArrayList<String> items = new ArrayList<>();
     ArrayAdapter<String> adapter;
 
-    //Diverse
-    String item;
+    //SharedPreferences
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREFS_NAME = "todolist_shared_prefs";
+    private static final String CHECKED_ITEMS_KEY = "checked_items";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +57,24 @@ public class ToDoActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, android.R.id.text1, items);
         activity_to_do_listview.setAdapter(adapter);
 
+        //Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE);
+
+        //Load checked items from SharedPreferences
+        String checkedItemsStr = sharedPreferences.getString(CHECKED_ITEMS_KEY, "");
+        String[] checkedItems = checkedItemsStr.split(",");
+        for (String item : checkedItems) {
+            int index = items.indexOf(item);
+            if (index != -1) {
+                activity_to_do_listview.setItemChecked(index, true);
+            }
+        }
+
         activity_to_do_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                item = actvity_to_do_edittext.getText().toString();
+                String item = actvity_to_do_edittext.getText().toString();
                 if (item.length() > 0) {
                     items.add(item);
                     actvity_to_do_edittext.setText("");
@@ -76,7 +93,6 @@ public class ToDoActivity extends AppCompatActivity {
                 BUILDER.setCancelable(false);
                 BUILDER.setTitle("DELETE");
                 BUILDER.setMessage("Do you want to DELETE? ");
-
 
                 BUILDER.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
@@ -110,6 +126,8 @@ public class ToDoActivity extends AppCompatActivity {
                 for (int i = 0; i < activity_to_do_listview.getCount(); i++) {
                     activity_to_do_listview.setItemChecked(i, true);
                 }
+                //Save checked items to SharedPreferences
+                saveCheckedItemsToPrefs();
             }
         });
 
@@ -129,42 +147,22 @@ public class ToDoActivity extends AppCompatActivity {
                 finish();
             }
         });
-      /*  activity_to_do_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AlertDialog.Builder BUILDER = new AlertDialog.Builder(ToDoActivity.this);
-                BUILDER.setCancelable(false);
-                BUILDER.setTitle("EDIT");
-                BUILDER.setMessage("Do you want to EDIT? ");
-
-
-                BUILDER.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int position) {
-                     *//*   items.remove(position);
-                        adapter.notifyDataSetChanged();
-                        FileHelper.writeData(items, MainActivity.this, "fisierText.txt");*//*
-         *//*  items.add(position,"ceva");
-                        adapter.notifyDataSetChanged();*//*
-
-                    }
-                });
-
-                BUILDER.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-
-                AlertDialog alertDialog = BUILDER.create();
-                alertDialog.show();
-
-            }
-        });*/
     }
 
-    private void init() {
+    private void saveCheckedItemsToPrefs() {
+        SparseBooleanArray checkedItems = activity_to_do_listview.getCheckedItemPositions();
+        StringBuilder checkedItemsStr = new StringBuilder();
+        for (int i = 0; i < checkedItems.size(); i++) {
+            int position = checkedItems.keyAt(i);
+            if (checkedItems.get(position)) {
+                checkedItemsStr.append(items.get(position)).append(",");
+            }
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(CHECKED_ITEMS_KEY, checkedItemsStr.toString());
+        editor.apply();
+    }
+       private void init() {
         activity_to_do_listview = findViewById(R.id.activity_to_do_listview);
         activity_to_do_fab = findViewById(R.id.activity_to_do_fab);
         actvity_to_do_edittext = findViewById(R.id.actvity_to_do_edittext);
@@ -193,6 +191,20 @@ public class ToDoActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //Save checked items to SharedPreferences
+        saveCheckedItemsToPrefs();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveCheckedItemsToPrefs();
     }
 
     @Override

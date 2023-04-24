@@ -55,7 +55,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         setDetails(holder, position);
         sharedPreferences = context.getSharedPreferences("wantPadding", Context.MODE_PRIVATE);
         wanted = sharedPreferences.getBoolean("yes", false);
-//Nu stiu de ce, asa ca am facut manual sa nu mai il modifice sa arate ca un Titlu de Workout
+        //Nu stiu de ce, asa ca am facut manual sa nu mai il modifice sa arate ca un Titlu de Workout
         if (list.get(position).getSplit_name().equals("Pull")) {
             holder.workout_split_split_name.setGravity(Gravity.START);
             holder.workout_split_split_name.setTextColor(Color.WHITE);
@@ -81,8 +81,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             public void onClick(View view) {
                 if (list.get(position).getMuscles_worked().equals("")) {
 
-                }
-                else{
+                } else {
                     switch (list.get(position).getSplit_name()) {
                         case "Push": {
                             Intent intent = new Intent(context, WorkoutStarted.class);
@@ -126,7 +125,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
                             context.startActivity(intent);
                             break;
                         }
-                        case "Random Workout":{
+                        case "Random Workout": {
                             Intent intent = new Intent(context, WorkoutStarted.class);
                             intent.putExtra("Random Workout", "Random Workout");
                             context.startActivity(intent);

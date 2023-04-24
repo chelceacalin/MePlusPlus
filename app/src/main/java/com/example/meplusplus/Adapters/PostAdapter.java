@@ -176,7 +176,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 u = snapshot.getValue(User.class);
-                assert u != null;
                 String imgURL = u.getImageurl();
                 if (!imgURL.equals("default")) {
                     holder.social_page_image_profile.setImageResource(R.drawable.ic_baseline_person_pin_24);

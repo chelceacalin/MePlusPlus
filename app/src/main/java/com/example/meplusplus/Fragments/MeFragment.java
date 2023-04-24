@@ -153,6 +153,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
     //ADDS
     AdView adView;
+
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -238,7 +239,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     }
 
 
-
     private void initView(@NonNull View view) {
         //Controale
         fragment_me_open_drawer = view.findViewById(R.id.fragment_me_open_drawer);
@@ -290,7 +290,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         waterUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //ADDS
-        adView=view.findViewById(R.id.adView);
+        adView = view.findViewById(R.id.adView);
 
 
     }
@@ -543,7 +543,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     }
 
 
-
     private void initListQuotes() {
         String[] listStr = new String[]{
                 "“Everything you can imagine is real.”",
@@ -576,7 +575,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     private void loadAdsOnStart(View view) {
 
         SharedPreferences S = getContext().getSharedPreferences("pleaseADS", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor E = S.edit();
+        @SuppressLint("CommitPrefEdits") final SharedPreferences.Editor E = S.edit();
         final boolean wantadsOn = S.getBoolean("isWantadsOn", false);
 
         if (wantadsOn) {
@@ -586,12 +585,12 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
                 }
             });
-            AdRequest adRequest=new AdRequest.Builder().build();
+            AdRequest adRequest = new AdRequest.Builder().build();
             adView.loadAd(adRequest);
-            circularProgress.getLayoutParams().height=350;
-       //  Toast.makeText(getContext(), "da", Toast.LENGTH_SHORT).show();
+            circularProgress.getLayoutParams().height = 350;
+            //  Toast.makeText(getContext(), "da", Toast.LENGTH_SHORT).show();
         } else {
-            adView.getLayoutParams().height=0;
+            adView.getLayoutParams().height = 0;
             //Toast.makeText(getContext(), "nu", Toast.LENGTH_SHORT).show();
         }
     }

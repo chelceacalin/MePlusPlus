@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     //Switch Between Fragments
     private void displayFragment(int itemId) {
         if (R.id.me_page == itemId) {
@@ -175,8 +174,6 @@ public class MainActivity extends AppCompatActivity {
         i.addCategory(Intent.CATEGORY_HOME);
         startActivity(i);
     }
-
-
 
 
     private void loadDarkWhiteModeOnStart() {

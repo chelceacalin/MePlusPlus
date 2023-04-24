@@ -7,8 +7,7 @@
     android:paddingLeft="10dp"
     android:paddingTop="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="5sp"
-    >
+    android:paddingBottom="5sp">
 
 
     <LinearLayout
@@ -46,8 +45,8 @@
                 android:layout_marginTop="8dp"
                 android:text=""
                 android:textColor="@color/WhiteSmoke"
-                android:textStyle="bold|italic"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 

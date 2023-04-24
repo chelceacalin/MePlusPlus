@@ -54,20 +54,12 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
 
                     @Override
                     public void countdownFinished() {
-                        new StyleableToast
-                                .Builder(ZenModeActivity.this)
-                                .text("Good Job!")
-                                .textColor(Color.BLACK)
-                                .backgroundColor(Color.GREEN)
-                                .cornerRadius(25)
-                                .iconStart(R.drawable.ic_baseline_check_circle_24)
-                                .show();
+                        new StyleableToast.Builder(ZenModeActivity.this).text("Good Job!").textColor(Color.BLACK).backgroundColor(Color.GREEN).cornerRadius(25).iconStart(R.drawable.ic_baseline_check_circle_24).show();
                         if (mediaPlayer != null) {
                             mediaPlayer.release();
                             mediaPlayer = null;
                         }
-                        ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                        toneGen1.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
+                        playSound();
                     }
                 });
             }
@@ -85,21 +77,12 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
 
                     @Override
                     public void countdownFinished() {
-                        new StyleableToast
-                                .Builder(ZenModeActivity.this)
-                                .text("Good Job!")
-                                .textColor(Color.BLACK)
-                                .backgroundColor(Color.GREEN)
-                                .cornerRadius(25)
-                                .iconStart(R.drawable.ic_baseline_check_circle_24)
-                                .show();
+                        new StyleableToast.Builder(ZenModeActivity.this).text("Good Job!").textColor(Color.BLACK).backgroundColor(Color.GREEN).cornerRadius(25).iconStart(R.drawable.ic_baseline_check_circle_24).show();
                         if (mediaPlayer != null) {
                             mediaPlayer.release();
                             mediaPlayer = null;
                         }
-//SUNET CAND SE OPRESTE TIMERUL
-                        ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                        toneGen1.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
+                        playSound();
                     }
                 });
             }
@@ -118,20 +101,12 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
 
                     @Override
                     public void countdownFinished() {
-                        new StyleableToast
-                                .Builder(ZenModeActivity.this)
-                                .text("Good Job!")
-                                .textColor(Color.BLACK)
-                                .backgroundColor(Color.GREEN)
-                                .cornerRadius(25)
-                                .iconStart(R.drawable.ic_baseline_check_circle_24)
-                                .show();
+                        new StyleableToast.Builder(ZenModeActivity.this).text("Good Job!").textColor(Color.BLACK).backgroundColor(Color.GREEN).cornerRadius(25).iconStart(R.drawable.ic_baseline_check_circle_24).show();
                         if (mediaPlayer != null) {
                             mediaPlayer.release();
                             mediaPlayer = null;
                         }
-                        ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                        toneGen1.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
+                        playSound();
                     }
                 });
             }
@@ -144,7 +119,6 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
                 COUNTDOWNTIME += 1000;
                 countDownClock.startCountDown(COUNTDOWNTIME * 60L);
 
-
                 countDownClock.setCountdownListener(new CountDownClock.CountdownCallBack() {
                     @Override
                     public void countdownAboutToFinish() {
@@ -152,21 +126,12 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
 
                     @Override
                     public void countdownFinished() {
-                        new StyleableToast
-                                .Builder(ZenModeActivity.this)
-                                .text("Good Job!")
-                                .textColor(Color.BLACK)
-                                .backgroundColor(Color.GREEN)
-                                .cornerRadius(25)
-                                .iconStart(R.drawable.ic_baseline_check_circle_24)
-                                .show();
+                        new StyleableToast.Builder(ZenModeActivity.this).text("Good Job!").textColor(Color.BLACK).backgroundColor(Color.GREEN).cornerRadius(25).iconStart(R.drawable.ic_baseline_check_circle_24).show();
                         if (mediaPlayer != null) {
                             mediaPlayer.release();
                             mediaPlayer = null;
                         }
-
-                        ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                        toneGen1.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
+                        playSound();
                     }
                 });
 
@@ -194,43 +159,23 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
 
                         @Override
                         public void countdownFinished() {
-                            new StyleableToast
-                                    .Builder(ZenModeActivity.this)
-                                    .text("Good Job!")
-                                    .textColor(Color.BLACK)
-                                    .backgroundColor(Color.GREEN)
-                                    .cornerRadius(25)
-                                    .iconStart(R.drawable.ic_baseline_check_circle_24)
-                                    .show();
+                            new StyleableToast.Builder(ZenModeActivity.this).text("Good Job!").textColor(Color.BLACK).backgroundColor(Color.GREEN).cornerRadius(25).iconStart(R.drawable.ic_baseline_check_circle_24).show();
                             if (mediaPlayer != null) {
                                 mediaPlayer.release();
                                 mediaPlayer = null;
-
-                                ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                                toneGen1.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
+                                playSound();
                             }
                         }
                     });
                 } else {
-
-                    new StyleableToast
-                            .Builder(ZenModeActivity.this)
-                            .text("Good Job!")
-                            .textColor(Color.BLACK)
-                            .backgroundColor(Color.GREEN)
-                            .cornerRadius(25)
-                            .iconStart(R.drawable.ic_baseline_check_circle_24)
-                            .show();
-
-
+                    new StyleableToast.Builder(ZenModeActivity.this).text("Good Job!").textColor(Color.BLACK).backgroundColor(Color.GREEN).cornerRadius(25).iconStart(R.drawable.ic_baseline_check_circle_24).show();
                     countDownClock.resetCountdownTimer();
                     if (mediaPlayer != null) {
                         mediaPlayer.release();
                         mediaPlayer = null;
 
                     }
-                    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                    toneGen1.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
+                    playSound();
                 }
 
             }
@@ -249,6 +194,11 @@ public class ZenModeActivity extends AppCompatActivity implements AdapterView.On
                 finish();
             }
         });
+    }
+
+    private void playSound() {
+        ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+        toneGen1.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 650);
     }
 
     //Controale

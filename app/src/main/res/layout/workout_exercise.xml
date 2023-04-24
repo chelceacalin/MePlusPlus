@@ -11,9 +11,9 @@
         android:id="@+id/workout_exercise_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
         android:layout_marginLeft="3sp"
         android:layout_marginRight="3sp"
+        android:layout_marginBottom="2dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
@@ -35,10 +35,10 @@
                     android:id="@+id/workout_exercixe_split_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5sp"
                     android:layout_weight="0.98"
                     android:padding="20sp"
                     android:text="Name"
-                    android:layout_marginStart="5sp"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -47,10 +47,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="8sp"
                     android:layout_marginTop="2sp"
-                    >
+                    android:layout_marginEnd="8sp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/workout_exercise_item_textview_muscles"

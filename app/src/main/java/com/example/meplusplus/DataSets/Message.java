@@ -12,17 +12,17 @@ public class Message {
     String toWhom;
 
     public Message() {
-        this.messageID="N/A";
+        this.messageID = "N/A";
         this.message = "N/A";
         this.whosentit = "N/A";
-        this.toWhom="N/A";
+        this.toWhom = "N/A";
     }
 
-    public Message(String messageID,String message, String whosentit,String toWhom) {
-        this.messageID=messageID;
+    public Message(String messageID, String message, String whosentit, String toWhom) {
+        this.messageID = messageID;
         this.message = message;
         this.whosentit = whosentit;
-        this.toWhom=toWhom;
+        this.toWhom = toWhom;
     }
 
     @NonNull

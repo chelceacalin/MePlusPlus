@@ -75,7 +75,7 @@ public class SearchPeopleFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                searchUser(charSequence.toString().toLowerCase().trim());
+                searchUser(charSequence.toString().trim());
             }
 
             @Override

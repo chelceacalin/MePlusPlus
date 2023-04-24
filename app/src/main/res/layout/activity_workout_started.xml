@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flipTimer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:flipTimer="http://schemas.android.com/apk/res-auto"
-    tools:context=".Workout.WorkoutStarted"
-    android:background="@drawable/ic_blurry_gradient_haikei__1_">
+    android:background="@drawable/ic_blurry_gradient_haikei__1_"
+    tools:context=".Workout.WorkoutStarted">
 
 
     <LinearLayout
@@ -15,17 +15,15 @@
         tools:ignore="UselessParent">
 
 
-
-            <ImageView
-                android:id="@+id/activity_workout_started_close"
-                android:layout_width="40sp"
-                android:layout_height="40sp"
-                android:layout_marginStart="5sp"
-                android:background="@drawable/ic_baseline_close"
-                tools:ignore="ContentDescription"
-                android:layout_marginTop="15sp"
-                android:layout_marginLeft="5sp"
-                />
+        <ImageView
+            android:id="@+id/activity_workout_started_close"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginStart="5sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="15sp"
+            android:background="@drawable/ic_baseline_close"
+            tools:ignore="ContentDescription,RtlHardcoded" />
 
 
         <com.asp.fliptimerviewlibrary.CountDownClock
@@ -34,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="15sp"
+            android:layout_marginBottom="5sp"
             android:layout_weight="0.6"
             android:background="@drawable/maipatratnegru"
             android:padding="10sp"
@@ -48,8 +47,7 @@
             flipTimer:halfDigitHeight="22dp"
             flipTimer:resetSymbol="0"
             flipTimer:splitterPadding="0dp"
-            android:layout_marginBottom="5sp"
-            />
+            tools:ignore="InefficientWeight" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,8 +55,7 @@
             android:layout_marginTop="5sp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:weightSum="1"
-            >
+            android:weightSum="1">
 
             <Button
                 android:id="@+id/activity_workout_started_start_button"
@@ -66,13 +63,12 @@
                 android:layout_height="40sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="5sp"
+                android:layout_weight="0.33"
                 android:backgroundTint="@color/navy"
                 android:text="Start"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                tools:ignore="ButtonStyle,HardcodedText"
-                android:layout_weight="0.33"
-                />
+                tools:ignore="ButtonStyle,HardcodedText" />
 
 
             <Button
@@ -81,72 +77,69 @@
                 android:layout_height="40sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="5sp"
+                android:layout_weight="0.33"
                 android:backgroundTint="@color/navy"
                 android:text="Reset"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                tools:ignore="ButtonStyle,HardcodedText"
-                android:layout_weight="0.33"
-                />
+                tools:ignore="ButtonStyle,HardcodedText" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="1"
-            >
+            android:weightSum="1">
 
             <Button
                 android:id="@+id/inv1"
                 android:layout_width="wrap_content"
                 android:layout_height="40sp"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
+                android:layout_weight="0.33"
                 android:backgroundTint="@color/navy"
+                android:gravity="center_horizontal"
                 android:text="Add 15 "
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                tools:ignore="ButtonStyle,HardcodedText"
                 android:visibility="invisible"
-                android:layout_weight="0.33"
-                />
+                tools:ignore="ButtonStyle,HardcodedText" />
+
             <Button
                 android:id="@+id/activity_workout_started_add_15_seconds"
                 android:layout_width="wrap_content"
                 android:layout_height="40sp"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
+                android:layout_weight="0.33"
                 android:backgroundTint="@color/navy"
+                android:gravity="center_horizontal"
                 android:text="Add 15 seconds"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                tools:ignore="ButtonStyle,HardcodedText"
-                android:layout_weight="0.33"
-                />
+                tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
                 android:id="@+id/inv2"
                 android:layout_width="wrap_content"
                 android:layout_height="40sp"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
+                android:layout_weight="0.33"
                 android:backgroundTint="@color/navy"
+                android:gravity="center_horizontal"
                 android:text="Add 15 "
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                tools:ignore="ButtonStyle,HardcodedText"
                 android:visibility="invisible"
-                android:layout_weight="0.33"
-                />
+                tools:ignore="ButtonStyle,HardcodedText" />
         </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activity_workout_started_recyclerview"
             android:layout_width="match_parent"
-            android:layout_marginTop="15sp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
 
             />
 

@@ -67,24 +67,15 @@ public class WorkoutActivity extends AppCompatActivity {
         activity_workout_switch_compact_mode.setChecked(switchStatus);
 
 
-
         activity_workout_switch_compact_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean istoggled) {
-                if (istoggled) {
-                    editor = getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
-                    editor.clear();
-                    editor.putBoolean("yes", true);
-                    editor.apply();
-                    adapter.notifyDataSetChanged();
-                } else {
-                    editor = getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
-                    editor.clear();
-                    editor.putBoolean("no", true);
-                    editor.apply();
-                    adapter.notifyDataSetChanged();
-                }
+                editor = getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
+                editor.clear();
+                editor.putBoolean(istoggled  ? "yes" : "no", true);
+                editor.apply();
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -130,7 +121,6 @@ public class WorkoutActivity extends AppCompatActivity {
         adapter = new WorkoutAdapter(WorkoutActivity.this, list);
         activity_workout_recycler_view.setAdapter(adapter);
     }
-
 
 
     @Override

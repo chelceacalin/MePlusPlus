@@ -97,6 +97,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 holder.recipepostitem_username.setText(u.getUsername());
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }

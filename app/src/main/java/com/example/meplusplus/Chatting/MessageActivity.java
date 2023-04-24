@@ -32,7 +32,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +49,7 @@ import io.github.muddz.styleabletoast.StyleableToast;
         UPDATED DATE: 09/04/2022
 
         */
+@SuppressWarnings("ALL")
 public class MessageActivity extends AppCompatActivity {
 
     //Controale
@@ -67,30 +67,6 @@ public class MessageActivity extends AppCompatActivity {
     Map<String, Object> map;
     FirebaseAuth auth;
     FirebaseUser user;
-
-
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String messageID = intent.getStringExtra("refreshPLS");
-            String sender=intent.getStringExtra("messageHolder");
-            String receiver=intent.getStringExtra("messageReceiver");
-            Integer pozitie=intent.getIntExtra("pozitie",0);
-            if(messageID!=null&&sender!=null&&receiver!=null&&pozitie!=null){
-                list.remove(pozitie);
-                reference.child(sender).child(receiver).child(messageID).removeValue();
-                reference.child(receiver).child(sender).child(messageID).removeValue();
-                list.clear();
-                readMessagesAfterDelete();
-            }
-            else
-            {
-                Toast.makeText(context, "Pozitie nula", Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
-    };
     // Messages
     String sender;
     String sendToTargetID;
@@ -100,6 +76,26 @@ public class MessageActivity extends AppCompatActivity {
     //Firebase
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String messageID = intent.getStringExtra("refreshPLS");
+            String sender = intent.getStringExtra("messageHolder");
+            String receiver = intent.getStringExtra("messageReceiver");
+            Integer pozitie = intent.getIntExtra("pozitie", 0);
+            if (messageID != null && sender != null && receiver != null && pozitie != null) {
+                list.remove(pozitie);
+                reference.child(sender).child(receiver).child(messageID).removeValue();
+                reference.child(receiver).child(sender).child(messageID).removeValue();
+                list.clear();
+                readMessagesAfterDelete();
+            } else {
+                Toast.makeText(context, "Pozitie nula", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +103,6 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         init();
         setdetails();
-      //  readMessages();
         readMessagesAfterDelete();
 
         activity_message_close.setOnClickListener(view -> {
@@ -121,13 +116,7 @@ public class MessageActivity extends AppCompatActivity {
             if (!message.equals("")) {
                 send(message);
             } else {
-                new StyleableToast.Builder(MessageActivity.this)
-                        .text("No message to send")
-                        .textColor(Color.RED)
-                        .backgroundColor(getResources().getColor(R.color.white))
-                        .cornerRadius(25)
-                        .iconStart(R.drawable.ic_baseline_error_outline_24)
-                        .show();
+                new StyleableToast.Builder(MessageActivity.this).text("No message to send").textColor(Color.RED).backgroundColor(getResources().getColor(R.color.white)).cornerRadius(25).iconStart(R.drawable.ic_baseline_error_outline_24).show();
             }
         });
 
@@ -168,7 +157,7 @@ public class MessageActivity extends AppCompatActivity {
         //activity_message_recyclerView.setAdapter(adapter);
         activity_message_recyclerView.setAdapter(adapter);
 
-      //BROADCAST CA SA DAM REFRESH LA ADAPTER
+        //BROADCAST CA SA DAM REFRESH LA ADAPTER
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("refresh_adapter"));
 
@@ -198,6 +187,7 @@ public class MessageActivity extends AppCompatActivity {
 
 
     }
+
     @SuppressLint("NotifyDataSetChanged")
     private void readMessages() {
         list.clear();
@@ -208,9 +198,9 @@ public class MessageActivity extends AppCompatActivity {
                 list.add(snapshot.getValue(Message.class));
                 adapter.notifyDataSetChanged();
                 activity_message_recyclerView.scrollToPosition(list.size() - 1);
-                int i=0;
-                for(Message message:list){
-             //       Toast.makeText(MessageActivity.this, "Added:"+" "+(++i)+" - "+message.getMessage(), Toast.LENGTH_SHORT).show();
+                int i = 0;
+                for (Message message : list) {
+                    //       Toast.makeText(MessageActivity.this, "Added:"+" "+(++i)+" - "+message.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -221,10 +211,10 @@ public class MessageActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-             int i=0;
-             for(Message message:list){
-                 Toast.makeText(MessageActivity.this, "Removed :"+(++i)+" - "+message.getMessage(), Toast.LENGTH_SHORT).show();
-             }
+                int i = 0;
+                for (Message message : list) {
+                    Toast.makeText(MessageActivity.this, "Removed :" + (++i) + " - " + message.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
