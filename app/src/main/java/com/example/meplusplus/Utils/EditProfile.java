@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -33,6 +38,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -168,47 +174,44 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
-
     private void fuploadImage() {
 
         if (imageviewuri != null) {
+
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
+
+            Bitmap rotatedBitmap = Bitmap.createBitmap(editprofile_photo.getWidth(),
+                    editprofile_photo.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(rotatedBitmap);
+            Matrix matrix = new Matrix();
+            matrix.postRotate(rotationInit, editprofile_photo.getWidth() / 2f,
+                    editprofile_photo.getHeight() / 2f);
+            canvas.drawBitmap(((BitmapDrawable) editprofile_photo.getDrawable()).getBitmap(),
+                    matrix, new Paint());
+
+            // Compress the rotated Bitmap to reduce the image size
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+            byte[] data = baos.toByteArray();
+
             reference = reference.child(System.currentTimeMillis() + ".jpeg");
-            uploadtask = reference.putFile(imageviewuri);
+            uploadtask = reference.putBytes(data);
 
             uploadtask.continueWithTask(task -> reference.getDownloadUrl()).addOnFailureListener(e -> {
                         progressDialog.dismiss();
-                        new StyleableToast.Builder(EditProfile.this)
-                                .text("Error Uploading")
-                                .textColor(Color.RED)
-                                .backgroundColor(getResources().getColor(R.color.white))
-                                .cornerRadius(25)
-                                .iconStart(R.drawable.ic_baseline_error_outline_24)
-                                .show();
+                        Toast.makeText(this, "Error uploading picture", Toast.LENGTH_SHORT).show();
                     })
                     .addOnCompleteListener((OnCompleteListener<Uri>) task -> {
                         if (!task.isSuccessful()) {
-                            new StyleableToast.Builder(EditProfile.this)
-                                    .text("Error")
-                                    .textColor(Color.RED)
-                                    .backgroundColor(getResources().getColor(R.color.white))
-                                    .cornerRadius(25)
-                                    .iconStart(R.drawable.ic_baseline_error_outline_24)
-                                    .show();
+                            Toast.makeText(this, "Error updating profile", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         } else {
                             progressDialog.dismiss();
                             imgURiDownload = task.getResult();
                             imageURL = imgURiDownload.toString();
                             ref.child(user.getUid()).child("imageurl").setValue(imageURL);
-                            new StyleableToast.Builder(EditProfile.this)
-                                    .text("Profile Updated")
-                                    .textColor(Color.WHITE)
-                                    .backgroundColor(getResources().getColor(R.color.blue))
-                                    .cornerRadius(25)
-                                    .iconStart(R.drawable.ic_baseline_check_circle_24)
-                                    .show();
+                            Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show();
                             map.put("username", editprofile_username.getText().toString());
                             map.put("bio", editprofile_bio.getText().toString());
                             ref.child(user.getUid()).updateChildren(map);
@@ -219,13 +222,7 @@ public class EditProfile extends AppCompatActivity {
             map.put("username", editprofile_username.getText().toString());
             map.put("bio", editprofile_bio.getText().toString());
             ref.child(user.getUid()).updateChildren(map);
-            new StyleableToast.Builder(EditProfile.this)
-                    .text("Profile Updated Without Profile Image ")
-                    .textColor(Color.WHITE)
-                    .textSize(17)
-                    .backgroundColor(getResources().getColor(R.color.navy))
-                    .cornerRadius(15)
-                    .show();
+            Toast.makeText(this, "Profile updated without profile image", Toast.LENGTH_SHORT).show();
 
         }
     }
