@@ -147,6 +147,8 @@ public class AccountFragment extends Fragment {
             pID = received;
             requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).edit().clear().apply();
             fragment_account_edit_button.setVisibility(View.GONE);
+            fragment_account_options.setVisibility(View.GONE);
+
         } else {
             pID = user.getUid();
             fragment_account_edit_button.setText("Edit");

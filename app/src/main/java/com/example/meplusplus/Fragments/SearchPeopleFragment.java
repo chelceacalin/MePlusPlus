@@ -30,15 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/*
-       Status: RFP
-       CREATED DATE: 8/24/2022
-       UPDATED DATE: 8/24/2022
 
-       1.
-       UPDATED DATE: 8/30/2022
-         Notes: When you click on someone it redirects you to their page
- */
 public class SearchPeopleFragment extends Fragment {
 
     //Controale

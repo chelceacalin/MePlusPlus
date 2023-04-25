@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,8 +66,12 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
 
 
         holder.itemView.setOnClickListener(view -> {
-            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+//            Toast.makeText(context, "Publisher: "+ comm.getPublisher()
+//                    +" User ID: "+user.getUid(), Toast.LENGTH_SHORT).show();
+            comm = list.get(position);
             if (comm.getPublisher().equals(user.getUid())) {
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+
                 alertDialog.setTitle("Do you want to delete?");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "NO", (dialog, which) -> dialog.dismiss());
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) ->
