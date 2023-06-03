@@ -73,9 +73,10 @@ public class WorkoutStarted extends AppCompatActivity {
                     activity_workout_started_start_button.performClick();
                 }
             }
-
         }
     };
+
+
     //Sa fol acelasi recyclerview pt toate
     Bundle extras;
     String workoutName;

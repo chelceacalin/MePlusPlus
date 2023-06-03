@@ -206,27 +206,21 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             waterReference.child(waterUserID).child(itemID).setValue(map);
         });
 
+        fragment_me_water.setText(0 + "");
+        circularProgress.setProgress(0, 0);
         //Set water levels
         waterReference.child(waterUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                long nrChildren = snapshot.getChildrenCount();
-                if (nrChildren > 0) {
-                    fragment_me_water.setText((200 * nrChildren) + "");
-                    if (waterDrank > 0) {
-                        circularProgress.setProgress((200 * nrChildren), waterDrank);
-                    } else
-                        circularProgress.setProgress((200 * nrChildren), 2000);
 
+                long nrChildren = snapshot.getChildrenCount();
+                    fragment_me_water.setText((200 * nrChildren) + "");
+                        circularProgress.setProgress((200 * nrChildren), Math.max(Integer.parseInt(fragment_me_max_water.getText().toString().trim()),(200*nrChildren)));
 
                     if ((200 * nrChildren) >= waterDrank) {
                         circularProgress.setProgressColor(Color.GREEN);
                         circularProgress.setDotColor(Color.GRAY);
                     }
-                } else {
-                    fragment_me_water.setText(0 + "");
-                    circularProgress.setProgress(0, 0);
-                }
             }
 
             @Override
@@ -469,7 +463,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
     private void setWaterMaxValue() {
         prefs = getContext().getSharedPreferences("msp", Context.MODE_PRIVATE);
-        waterDrank = prefs.getInt("waterDrank", 0);
+        waterDrank = prefs.getInt("waterDrank", 2000);
         if (waterDrank > 0) {
             fragment_me_max_water.setText(waterDrank + "");
         } else {

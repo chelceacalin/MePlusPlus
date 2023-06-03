@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +33,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.github.muddz.styleabletoast.StyleableToast;
@@ -113,6 +115,16 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
                             .cornerRadius(25)
                             .iconStart(R.drawable.ic_baseline_error_outline_24)
                             .show();
+
+
+                    // In caz ca nu a selectat  nimic
+                    weight=76.9f;
+                    age=20;
+                    height=167;
+                    nivelactivitate=1;
+                    isMale=true;
+                    showPieChart();
+
 
                 } else {
                     age = Integer.parseInt(activity_calculate_metabolism_age.getText().toString().trim());
@@ -229,6 +241,8 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
+
+
     @SuppressLint("SetTextI18n")
     private void showPieChart() {
 
@@ -251,6 +265,9 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
         l.setDrawInside(false);
         l.setEnabled(true);
 
+
+
+       // Toast.makeText(this, ""+BMR, Toast.LENGTH_SHORT).show();
         if (isMale) {
             BMR = Math.round(((float) (66 + (13.7 * weight) + (5 * height) - (6.8 * age)) * volumactivitate));
         } else {
@@ -258,8 +275,15 @@ public class CalculateMetabolismActivity extends AppCompatActivity implements Ad
             BMR = BMR * volumactivitate;
         }
 
+
+        if((Float)BMR ==null||BMR<1000){
+            BMR=2000;
+        }
+
+
+
         ArrayList<PieEntry> entries = new ArrayList<>();
-        activity_calculate_metabolism_caloriestoconsume.setText("C: " + BMR);
+        activity_calculate_metabolism_caloriestoconsume.setText("C: " +(int)BMR );
         pp = (float) ((0.25 * BMR) / 4);
         cc = (float) ((0.5 * BMR) / 4);
         ff = (float) ((0.25 * BMR) / 9);

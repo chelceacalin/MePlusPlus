@@ -94,7 +94,7 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
         activity_drink_water_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                activity_drink_water_goal_water.setText(String.valueOf(progress));
+                activity_drink_water_goal_water.setText(String.valueOf(progress)+ " ml of water");
                 waterDrank = progress;
             }
 

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.DataSets.Weight;
@@ -99,9 +100,22 @@ public class ActivityProgress extends AppCompatActivity {
                 reference.child(FirebaseAuth.getInstance().getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        drawGraph();
-                        Toast.makeText(ActivityProgress.this, "Progress Has Been Reset", Toast.LENGTH_SHORT).show();
-                        activity_progress_weight.setText("");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityProgress.this);
+                        builder.setTitle("Warning !");
+                        builder.setMessage("Are you sure you want to delete your progress?");
+                        builder.setPositiveButton("YES",(dialog, which) -> {
+                           Toast.makeText(ActivityProgress.this, "Progress Has Been Reset", Toast.LENGTH_SHORT).show();
+                           activity_progress_weight.setText("");
+                            drawGraph();
+
+                        });
+                        builder.setNegativeButton("NO",(dialog, which) -> {
+                            Toast.makeText(ActivityProgress.this, "Reset Cancelled", Toast.LENGTH_SHORT).show();
+                        });
+
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+
                     }
                 });
 

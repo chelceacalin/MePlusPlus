@@ -73,6 +73,7 @@
                 android:background="@drawable/maipatratalb"
                 android:hint=" kg "
                 android:importantForAutofill="no"
+                android:inputType="number"
                 android:paddingStart="20sp"
                 android:textColor="@color/black"
                 android:textColorHint="#c2c2c2"
