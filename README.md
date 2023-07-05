@@ -35,14 +35,16 @@ Snippets:
 ![Social](https://github.com/chelceacalin/MePlusPlus/assets/76866499/e9227544-171b-40f2-8a11-a5e70b4f48a4)
 ![MyProfile](https://github.com/chelceacalin/MePlusPlus/assets/76866499/a44bdaf3-db80-406c-a97f-701c36c1cc25)
 ![Comments](https://github.com/chelceacalin/MePlusPlus/assets/76866499/8db8c31c-4cf1-4176-9765-3fd6fe7e3f32)
+![Drawer](https://github.com/chelceacalin/MePlusPlus/assets/76866499/056eb2b4-f01b-40d4-a0af-3a9932409d95)
+![TDEE](https://github.com/chelceacalin/MePlusPlus/assets/76866499/669b5988-dbd6-4044-86e0-c122415180e5)
 
 
 
 What the DB would look like if it was relational ( it is NoSql, but for easier understanding I made a diagram):
-![image](https://user-images.githubusercontent.com/76866499/230609741-2ae48a64-c9aa-4f4c-b5d1-225fb11ee99f.png)
+![DIAGRAM_DB](https://user-images.githubusercontent.com/76866499/230609741-2ae48a64-c9aa-4f4c-b5d1-225fb11ee99f.png)
 
 
 The whole list of functionalities:
-![image](https://user-images.githubusercontent.com/76866499/230609819-6bb07c3a-9eb5-4bbf-a796-7c57489f31c4.png)
+![DIAGRAM_USE_CASES](https://user-images.githubusercontent.com/76866499/230609819-6bb07c3a-9eb5-4bbf-a796-7c57489f31c4.png)
 
 
