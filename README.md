@@ -31,8 +31,8 @@ Snippets:
 ![image](https://user-images.githubusercontent.com/76866499/230609433-3752dd75-25c5-45e3-a318-0900cb75d6c4.png)
 ![image](https://user-images.githubusercontent.com/76866499/230609454-573dc265-959a-40d3-850e-7fcc9cdc24f4.png)
 ![image](https://user-images.githubusercontent.com/76866499/230609465-eff63277-4359-4cff-89a7-e5fe9353d9f1.png)
-![Mesaj](https://github.com/chelceacalin/MePlusPlus/assets/76866499/34237ad4-e1ce-48ea-b866-0346d72d5a65)
-![image](https://user-images.githubusercontent.com/76866499/230609573-8bd6fa73-f2e9-4f12-b90b-42310ec77094.png)
+![Mesagerie](https://github.com/chelceacalin/MePlusPlus/assets/76866499/45f5c5c3-74d5-442b-9033-5487e850ea8f)
+![Social](https://github.com/chelceacalin/MePlusPlus/assets/76866499/e9227544-171b-40f2-8a11-a5e70b4f48a4)
 ![image](https://user-images.githubusercontent.com/76866499/230609891-beb7d9c2-34fe-475e-8d3f-1f6887cccd63.png)
 ![image](https://user-images.githubusercontent.com/76866499/230609912-b6e8b2eb-5d1a-4984-abec-a1cc2b7e8b97.png)
 
