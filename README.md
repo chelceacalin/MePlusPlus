@@ -33,8 +33,9 @@ Snippets:
 ![image](https://user-images.githubusercontent.com/76866499/230609465-eff63277-4359-4cff-89a7-e5fe9353d9f1.png)
 ![Mesagerie](https://github.com/chelceacalin/MePlusPlus/assets/76866499/45f5c5c3-74d5-442b-9033-5487e850ea8f)
 ![Social](https://github.com/chelceacalin/MePlusPlus/assets/76866499/e9227544-171b-40f2-8a11-a5e70b4f48a4)
-![image](https://user-images.githubusercontent.com/76866499/230609891-beb7d9c2-34fe-475e-8d3f-1f6887cccd63.png)
-![image](https://user-images.githubusercontent.com/76866499/230609912-b6e8b2eb-5d1a-4984-abec-a1cc2b7e8b97.png)
+![MyProfile](https://github.com/chelceacalin/MePlusPlus/assets/76866499/a44bdaf3-db80-406c-a97f-701c36c1cc25)
+![Comments](https://github.com/chelceacalin/MePlusPlus/assets/76866499/8db8c31c-4cf1-4176-9765-3fd6fe7e3f32)
+
 
 
 What the DB would look like if it was relational ( it is NoSql, but for easier understanding I made a diagram):
