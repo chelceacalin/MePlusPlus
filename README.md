@@ -30,7 +30,6 @@ Snippets:
 
 ![image](https://user-images.githubusercontent.com/76866499/230609433-3752dd75-25c5-45e3-a318-0900cb75d6c4.png)
 ![image](https://user-images.githubusercontent.com/76866499/230609454-573dc265-959a-40d3-850e-7fcc9cdc24f4.png)
-![image](https://user-images.githubusercontent.com/76866499/230609465-eff63277-4359-4cff-89a7-e5fe9353d9f1.png)
 ![Mesagerie](https://github.com/chelceacalin/MePlusPlus/assets/76866499/45f5c5c3-74d5-442b-9033-5487e850ea8f)
 ![Social](https://github.com/chelceacalin/MePlusPlus/assets/76866499/e9227544-171b-40f2-8a11-a5e70b4f48a4)
 ![MyProfile](https://github.com/chelceacalin/MePlusPlus/assets/76866499/a44bdaf3-db80-406c-a97f-701c36c1cc25)
