@@ -27,18 +27,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.meplusplus.Adapters.AccountPhotos;
-import com.example.meplusplus.DataSets.PostItem;
-import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Registration.LoginActivity;
 import com.example.meplusplus.Utils.EditProfile;
 import com.example.meplusplus.Utils.FeedBackActivity;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.PostItem;
+import com.example.meplusplus.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -67,7 +67,6 @@ public class AccountFragment extends Fragment {
     //Firebase
     FirebaseAuth auth;
     FirebaseUser user;
-    FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference referencePosts;
 
@@ -81,6 +80,7 @@ public class AccountFragment extends Fragment {
     String pID;
     int contor;
     boolean wantadsOn = false;
+    DbContext dbContext = DbContext.getInstance();
 
     //Redirect
     String received;
@@ -137,9 +137,8 @@ public class AccountFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("users");
-        referencePosts = database.getReference("posts");
+        reference = dbContext.getReference("users");
+        referencePosts = dbContext.getReference("posts");
         pID = user.getUid();
 
         received = requireContext().getSharedPreferences("PID", Context.MODE_PRIVATE).getString("profileId", "empty");

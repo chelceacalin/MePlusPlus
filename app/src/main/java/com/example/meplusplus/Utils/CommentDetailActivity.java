@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.Adapters.Comment_Adapter;
-import com.example.meplusplus.DataSets.Comm;
-import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Comm;
+import com.example.meplusplus.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -49,15 +49,14 @@ public class CommentDetailActivity extends AppCompatActivity {
     List<Comm> list;
     LinearLayoutManager manager;
 
-    //Firebase
     FirebaseAuth auth;
     FirebaseUser user;
-    FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference strikes;
     Map<String, Object> map;
     //Intent
     String postID;
+    DbContext dbContext = DbContext.getInstance();
 
     //Diverse
     String comment = "";
@@ -72,7 +71,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         activity_comment_detail_button_post.setOnClickListener(view -> {
             comment = activity_comment_detail_edit_Text_comment.getText().toString().trim();
-            if (comment.equals("")) {
+            if (comment.isEmpty()) {
                 new StyleableToast.Builder(CommentDetailActivity.this)
                         .text("Comment cannot be empty!")
                         .textColor(Color.RED)
@@ -154,9 +153,8 @@ public class CommentDetailActivity extends AppCompatActivity {
         //Firebase
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference().child("users");
-        strikes = database.getReference().child("strikes");
+        reference = dbContext.getReference().child("users");
+        strikes = dbContext.getReference().child("strikes");
 
         //Diverse
         map = new HashMap<>();

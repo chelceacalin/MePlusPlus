@@ -1,9 +1,14 @@
-package com.example.meplusplus.DataSets;
+package com.example.meplusplus.model;
 
 import androidx.annotation.NonNull;
 
 import java.util.Objects;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class FoodModel {
     String name;
     String MeasureUnits;
@@ -49,70 +54,6 @@ public class FoodModel {
     @Override
     public int hashCode() {
         return Objects.hash(name, calories, quantity, MeasureUnits, fats, carbs, protein, sugar);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public float getCalories() {
-        return calories;
-    }
-
-    public void setCalories(float calories) {
-        this.calories = calories;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getMeasureUnits() {
-        return MeasureUnits;
-    }
-
-    public void setMeasureUnits(String measureUnits) {
-        this.MeasureUnits = measureUnits;
-    }
-
-    public float getFats() {
-        return fats;
-    }
-
-    public void setFats(float fats) {
-        this.fats = fats;
-    }
-
-    public float getCarbs() {
-        return carbs;
-    }
-
-    public void setCarbs(float carbs) {
-        this.carbs = carbs;
-    }
-
-    public float getProtein() {
-        return protein;
-    }
-
-    public void setProtein(float protein) {
-        this.protein = protein;
-    }
-
-    public float getSugar() {
-        return sugar;
-    }
-
-    public void setSugar(float sugar) {
-        this.sugar = sugar;
     }
 
     @NonNull

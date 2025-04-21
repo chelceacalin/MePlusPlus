@@ -21,13 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.asp.fliptimerviewlibrary.CountDownClock;
 import com.example.meplusplus.Adapters.ExerciseAdapter;
-import com.example.meplusplus.DataSets.Exercise;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Exercise;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -51,7 +51,6 @@ public class WorkoutStarted extends AppCompatActivity {
     List<Exercise> list;
 
     //Firebase
-    FirebaseDatabase database;
     DatabaseReference reference;
 
     // Rest Timer
@@ -60,6 +59,8 @@ public class WorkoutStarted extends AppCompatActivity {
 
     //Shared Preferences ca sa resetam cand dam long click
     SharedPreferences preferences;
+
+    DbContext dbContext = DbContext.getInstance();
 
     //Diverse
     String ItemName;
@@ -188,8 +189,7 @@ public class WorkoutStarted extends AppCompatActivity {
 
 
         //Firebase
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("exercise");
+        reference = dbContext.getReference("exercise");
 
     }
 

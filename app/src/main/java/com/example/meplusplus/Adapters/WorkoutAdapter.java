@@ -16,11 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meplusplus.DataSets.Workout_Split;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Workout.WorkoutStarted;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Workout_Split;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -30,7 +30,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     Context context;
     List<Workout_Split> list;
     //Firebase
-    FirebaseDatabase database;
     DatabaseReference reference;
 
 
@@ -66,7 +65,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
             holder.workout_split_item_textview_muscles.setVisibility(View.GONE);
         } else {
 
-            if (list.get(position).getMuscles_worked().equals("")) {
+            if (list.get(position).getMuscles_worked().isEmpty()) {
                 holder.workout_split_split_name.setPadding(15, 15, 15, 15);
             } else {
                 holder.workout_split_split_name.setPadding(10, 30, 10, 50);
@@ -79,7 +78,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
         holder.workout_split_item_cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (list.get(position).getMuscles_worked().equals("")) {
+                if (list.get(position).getMuscles_worked().isEmpty()) {
 
                 } else {
                     switch (list.get(position).getSplit_name()) {
@@ -142,7 +141,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     private void setDetails(ViewHolder holder, int position) {
 
 
-        if (list.get(position).getMuscles_worked().equals("")) {
+        if (list.get(position).getMuscles_worked().isEmpty()) {
 
             holder.workout_split_item_layoutbackgroundcolor.setBackgroundColor(context.getResources().getColor(R.color.DimGray));
             holder.workout_split_split_muscles_worked.setVisibility(View.GONE);
@@ -161,8 +160,8 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
 
     private void init() {
         //Firebase
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("workout");
+        DbContext dbContext = DbContext.getInstance();
+        reference = dbContext.getReference("workout");
 
         //Diverse
         wanted = false;

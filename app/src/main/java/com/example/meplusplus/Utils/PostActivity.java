@@ -20,10 +20,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -67,12 +67,13 @@ public class PostActivity extends AppCompatActivity {
     String UniqueID;
     //Firebase - Stocare Postare
     FirebaseAuth auth;
-    FirebaseDatabase database;
     DatabaseReference databaseReference;
     StorageTask uploadtask;
     Map<String, Object> map;
     Uri imageviewuri;
     int rotationInit;
+    DbContext dbContext = DbContext.getInstance();
+
 
     //Diverse
     String imageURL;
@@ -146,8 +147,7 @@ public class PostActivity extends AppCompatActivity {
         //Firebase
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference("posts");
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        databaseReference = database.getReference("posts");
+        databaseReference = dbContext.getReference("posts");
         auth = FirebaseAuth.getInstance();
 
         //Diverse

@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.Adapters.WorkoutAdapter;
-import com.example.meplusplus.DataSets.Workout_Split;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Workout_Split;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class WorkoutActivity extends AppCompatActivity {
     LinearLayoutManager manager;
 
     //Firebase
-    FirebaseDatabase database;
+    DbContext dbContext = DbContext.getInstance();
     DatabaseReference reference;
 
     // Recycler
@@ -73,7 +73,7 @@ public class WorkoutActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean istoggled) {
                 editor = getSharedPreferences("wantPadding", MODE_PRIVATE).edit();
                 editor.clear();
-                editor.putBoolean(istoggled  ? "yes" : "no", true);
+                editor.putBoolean(istoggled ? "yes" : "no", true);
                 editor.apply();
                 adapter.notifyDataSetChanged();
             }
@@ -110,8 +110,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
 
         //Firebase
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("workout");
+        reference = dbContext.getReference("workout");
 
         //RecyclerView
         activity_workout_recycler_view = findViewById(R.id.activity_workout_recycler_view);

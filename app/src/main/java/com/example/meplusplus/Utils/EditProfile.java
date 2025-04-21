@@ -23,15 +23,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -66,7 +66,6 @@ public class EditProfile extends AppCompatActivity {
     ImageView editprofile_rotate_image;
 
     //Firebase
-    FirebaseDatabase database;
     DatabaseReference ref;
     FirebaseAuth auth;
     FirebaseUser user;
@@ -85,6 +84,9 @@ public class EditProfile extends AppCompatActivity {
     //Update
     Map<String, Object> map;
     Uri imgURiDownload;
+
+    DbContext dbContext = DbContext.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,8 +162,7 @@ public class EditProfile extends AppCompatActivity {
         //Firebase
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        ref = database.getReference().child("users");
+        ref = dbContext.getReference().child("users");
         progressDialog = new ProgressDialog(this);
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference("uploads");

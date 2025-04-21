@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.Chatting.MessageActivity;
-import com.example.meplusplus.DataSets.User;
+import com.example.meplusplus.model.User;
 import com.example.meplusplus.Fragments.AccountFragment;
 import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;

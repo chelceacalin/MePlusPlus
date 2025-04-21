@@ -27,9 +27,9 @@ import androidx.core.content.ContextCompat;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 @SuppressWarnings("ALL")
 public class DrinkWater extends AppCompatActivity implements SensorEventListener {
@@ -42,8 +42,6 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
     RadioGroup activity_drink_water_radiogroup;
     RadioButton activity_drink_water_ofcourse;
     RadioButton activity_drink_water_nothankyou;
-    //Firebase
-    FirebaseDatabase database;
     DatabaseReference reference;
     FirebaseAuth auth;
 
@@ -54,8 +52,6 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
     //Shared Preferences pt reminder
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-
-
 
 
     //  Steps counter
@@ -72,8 +68,8 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_water);
 
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){ //ask for permission
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED) { //ask for permission
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
             }
@@ -94,7 +90,7 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
         activity_drink_water_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                activity_drink_water_goal_water.setText(String.valueOf(progress)+ " ml of water");
+                activity_drink_water_goal_water.setText(String.valueOf(progress) + " ml of water");
                 waterDrank = progress;
             }
 
@@ -174,7 +170,7 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
 
         // Get reference to the UI components
         stepCountTextView = findViewById(R.id.step_count);
-        calories_burned=findViewById(R.id.calories_burned);
+        calories_burned = findViewById(R.id.calories_burned);
 
 
         //Radiogroup
@@ -185,8 +181,8 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
 
         //Firebase
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference();
+        DbContext dbContext = DbContext.getInstance();
+        reference = dbContext.getReference();
     }
 
 
@@ -218,7 +214,9 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
             isSensorRegistered = false;
         }
     }
-    int i=1;
+
+    int i = 1;
+
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -251,11 +249,12 @@ public class DrinkWater extends AppCompatActivity implements SensorEventListener
             }
 
             // Update the step count and calories burned text views
-            stepCountTextView.setText(stepCount+53+"");
+            stepCountTextView.setText(stepCount + 53 + "");
             int caloriesBurned = (int) ((double) stepCount * 0.063);
-            calories_burned.setText(String.format("%d", caloriesBurned)+1);
+            calories_burned.setText(String.format("%d", caloriesBurned) + 1);
         }
     }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Do nothing

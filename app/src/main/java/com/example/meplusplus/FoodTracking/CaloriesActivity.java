@@ -17,15 +17,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.meplusplus.DataSets.FoodModel;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.FoodModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -64,8 +64,6 @@ public class CaloriesActivity extends AppCompatActivity {
     String foodItemsSearched;
 
     String user;
-    //Metoda 2
-    FirebaseDatabase database;
     DatabaseReference reference;
 
     int contorOnce = 0;
@@ -142,7 +140,7 @@ public class CaloriesActivity extends AppCompatActivity {
                 }.getType();
 
                 foodItemsSearched = activity_calories_items_edit_text.getText().toString();
-                if (foodItemsSearched.equals("")) {
+                if (foodItemsSearched.isEmpty()) {
                     Toast.makeText(CaloriesActivity.this, "You have to add items", Toast.LENGTH_SHORT).show();
                 } else
                     foodItems.search(activity_calories_items_edit_text.getText().toString());
@@ -200,8 +198,8 @@ public class CaloriesActivity extends AppCompatActivity {
         sumCarbs = 0;
         sumFats = 0;
         sumSugar = 0;
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("foods");
+        DbContext dbContext = DbContext.getInstance();
+        reference = dbContext.getReference("foods");
 
     }
 

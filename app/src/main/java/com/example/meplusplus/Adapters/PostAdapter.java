@@ -13,10 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.meplusplus.DataSets.PostItem;
-import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
 import com.example.meplusplus.Utils.CommentDetailActivity;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.PostItem;
+import com.example.meplusplus.model.User;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -53,9 +53,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     //Utilitati
     PostItem p;
     User u;
-    FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference referenceHearts;
+    DbContext dbContext = DbContext.getInstance();
+
     DatabaseReference referenceStrikes;
     String ID;
     //Zoom in
@@ -194,7 +195,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 }
                 Picasso.get().load(p.getImageurl()).into(holder.social_page_image_content);
                 holder.social_page_username.setText(u.getUsername());
-                if (!(p.getDescription().equals(""))) {
+                if (!(p.getDescription().isEmpty())) {
                     holder.social_page_image_description.setText(p.getDescription());
                 } else {
                     holder.social_page_image_description.setVisibility(View.GONE);
@@ -213,10 +214,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private void init() {
 
         //FirebaseDatabase
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference().child("users");
-        referenceHearts = database.getReference().child("hearts");
-        referenceStrikes = database.getReference().child("strikes");
+
+        reference = dbContext.getReference().child("users");
+        referenceHearts = dbContext.getReference().child("hearts");
+        referenceStrikes = dbContext.getReference().child("strikes");
     }
 
     @Override

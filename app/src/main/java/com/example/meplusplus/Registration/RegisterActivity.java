@@ -9,27 +9,21 @@ import android.text.method.PasswordTransformationMethod;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import io.github.muddz.styleabletoast.StyleableToast;
 
-/*
-       Status: RFP
 
-       CREATED DATE: 8/18/2022
-       UPDATED DATE: 8/18/2022
- */
 public class RegisterActivity extends AppCompatActivity {
     //Controale
     Button registerActivity_btn_register, registerActivity_button_Login;
@@ -40,9 +34,6 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     CheckBox showpasswordCheckBox;
 
-    //Firebase
-    FirebaseDatabase database;
-    DatabaseReference reference;
     FirebaseAuth auth;
     Map<String, Object> map;
 
@@ -50,6 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
     String username, name, email, password;
     boolean isFieldChecked = false;
     String userID;
+
+    DbContext dbContext = DbContext.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
             password = registerActivity_edit_text_password.getText().toString();
             isFieldChecked = CheckValidations();
             if (isFieldChecked) {
-                if (!username.equals("") && !name.equals("") && !email.equals("") && !password.equals("")) {
+                if (!username.isEmpty() && !name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
                     registerUser(username, name, email, password);
                 } else {
                     new StyleableToast.Builder(RegisterActivity.this)
@@ -111,8 +105,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Firebase
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference();
         map = new HashMap<>();
 
 
@@ -120,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private boolean validatePass(String uPass) {
-        if (uPass.equals("") || uPass.length() < 4) {
+        if (uPass.isEmpty() || uPass.length() < 4) {
             registerActivity_edit_text_password.setError("Your password must be at least 4 characters in length");
             return false;
         } else
@@ -128,15 +120,16 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean validateName(String uName) {
-        if (uName.length() > 12) {
-            registeractivity_edit_text_name.setError("Your name must be shorter than 12 characters in length");
+        if (uName.length() > 15) {
+            registeractivity_edit_text_name.setError("Your name must be shorter than 15 characters");
             return false;
         } else if (uName.length() < 3) {
-            registeractivity_edit_text_name.setError("Your name must be longer than 2 characters in length");
+            registeractivity_edit_text_name.setError("Your name must be longer than 2 characters");
             return false;
         } else
             return true;
     }
+
 
     private boolean validateUser(String uUsername) {
         if (uUsername.length() > 15) {
@@ -163,47 +156,74 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private void registerUser(String username, String name, String email, String password) {
-        progressDialog.setMessage("Loading");
+        progressDialog.setMessage("Loading...");
         progressDialog.show();
 
         auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+            if (auth.getCurrentUser() == null) {
+                progressDialog.dismiss();
+                StyleableToast.makeText(this, "Eroare: Utilizatorul este null!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            userID = auth.getCurrentUser().getUid();
+
             map.put("username", username);
             map.put("name", name);
             map.put("email", email);
-            userID = auth.getCurrentUser().getUid();
-            map.put("id", Objects.requireNonNull(userID));
+            map.put("id", userID);
             map.put("bio", "");
             map.put("imageurl", "default");
 
-            reference.child("users").child(userID).setValue(map).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    progressDialog.dismiss();
-                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
+            dbContext.getReference().child("users").child(userID).setValue(map)
+                    .addOnCompleteListener(task -> {
+                        progressDialog.dismiss();
+                        if (task.isSuccessful()) {
+                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                            overridePendingTransition(R.anim.fade_in, R.anim.slide_right_to_left_transition);
 
-                    new StyleableToast
-                            .Builder(RegisterActivity.this)
-                            .text("Registration Completed")
-                            .textColor(Color.GREEN)
-                            .backgroundColor(getResources().getColor(R.color.white))
-                            .cornerRadius(25)
-                            .iconStart(R.drawable.ic_baseline_check_circle_24)
-                            .show();
-                }
-            });
+                            new StyleableToast
+                                    .Builder(RegisterActivity.this)
+                                    .text("Registration Completed")
+                                    .textColor(Color.GREEN)
+                                    .backgroundColor(getResources().getColor(R.color.white))
+                                    .cornerRadius(25)
+                                    .iconStart(R.drawable.ic_baseline_check_circle_24)
+                                    .show();
+                        } else {
+                            new StyleableToast
+                                    .Builder(RegisterActivity.this)
+                                    .text("Eroare la salvarea în Firebase Database")
+                                    .textColor(Color.RED)
+                                    .backgroundColor(getResources().getColor(R.color.white))
+                                    .cornerRadius(25)
+                                    .iconStart(R.drawable.ic_baseline_error_outline_24)
+                                    .show();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        new StyleableToast
+                                .Builder(RegisterActivity.this)
+                                .text("Database error: " + e.getMessage())
+                                .textColor(Color.RED)
+                                .backgroundColor(getResources().getColor(R.color.white))
+                                .cornerRadius(25)
+                                .iconStart(R.drawable.ic_baseline_error_outline_24)
+                                .show();
+                    });
+
         }).addOnFailureListener(e -> {
-
-
+            progressDialog.dismiss();
             new StyleableToast
                     .Builder(RegisterActivity.this)
-                    .text("User Already Exists")
+                    .text("Firebase Auth error: " + e.getMessage())
                     .textColor(Color.RED)
                     .backgroundColor(getResources().getColor(R.color.white))
                     .cornerRadius(25)
                     .iconStart(R.drawable.ic_baseline_error_outline_24)
                     .show();
-
-            progressDialog.dismiss();
         });
     }
+
 }

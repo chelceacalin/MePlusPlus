@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -29,7 +30,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
     //Firebase
     private FirebaseAuth auth;
     private FirebaseUser user;
-    private FirebaseDatabase database;
     private DatabaseReference reference;
 
     @Override
@@ -124,13 +123,15 @@ public class LoginActivity extends AppCompatActivity {
         //Firebase
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference();
+        DbContext dbContext = DbContext.getInstance();
+
+        reference = dbContext.getReference();
         map = new HashMap<>();
 
+        String webClientId="235648702052-aejgvcjisimb9678vetq2jk57qg17r9f.apps.googleusercontent.com";
         //Google
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(webClientId)
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);

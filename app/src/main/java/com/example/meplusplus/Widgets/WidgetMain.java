@@ -13,7 +13,6 @@ import com.example.meplusplus.R;
 
 public class WidgetMain extends AppWidgetProvider {
 
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {

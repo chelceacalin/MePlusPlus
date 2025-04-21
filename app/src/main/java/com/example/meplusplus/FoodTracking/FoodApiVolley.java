@@ -5,14 +5,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.meplusplus.DataSets.FoodModel;
 import com.example.meplusplus.R;
+import com.example.meplusplus.model.FoodModel;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -47,7 +48,8 @@ public class FoodApiVolley {
         try {
             data.put("query", name);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("FoodApiVolley", "Error " + e);
+
         }
         foodItems = new ArrayList<>();
 
@@ -81,7 +83,7 @@ public class FoodApiVolley {
                     editor.apply();
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d("FoodApiVolley", "Error " + e);
                 }
             }
         }, new Response.ErrorListener() {

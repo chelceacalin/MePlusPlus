@@ -15,20 +15,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.Adapters.User_Adapter;
-import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class SearchPeopleFragment extends Fragment {
@@ -42,8 +41,6 @@ public class SearchPeopleFragment extends Fragment {
     User_Adapter user_adapter;
     Query q;
 
-    //Firebase
-    FirebaseDatabase database;
     DatabaseReference databaseReference;
 
     FirebaseAuth auth;
@@ -91,9 +88,9 @@ public class SearchPeopleFragment extends Fragment {
         users = new ArrayList<>();
         user_adapter = new User_Adapter(getContext(), users, true);
 
-        // Firebase ( for reading the users)
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        databaseReference = database.getReference().child("users");
+        DbContext dbContext = DbContext.getInstance();
+
+        databaseReference = dbContext.getReference().child("users");
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -106,7 +103,7 @@ public class SearchPeopleFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 stringText = searchPeopleEditText.getText().toString();
-                if (stringText.equals("")) {
+                if (stringText.isEmpty()) {
                     users.clear();
                     for (DataSnapshot i : dataSnapshot.getChildren()) {
                         if (!i.getValue(User.class).getId().equals(user.getUid()))

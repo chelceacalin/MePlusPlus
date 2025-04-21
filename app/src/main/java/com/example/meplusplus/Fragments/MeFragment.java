@@ -25,8 +25,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.meplusplus.CalorieCalculator.CalculateMetabolismActivity;
 import com.example.meplusplus.Chatting.ChattingActivity;
-import com.example.meplusplus.DataSets.Food;
-import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.FoodTracking.CaloriesActivity;
 import com.example.meplusplus.ProgressTracking.ActivityProgress;
 import com.example.meplusplus.R;
@@ -37,6 +35,9 @@ import com.example.meplusplus.Utils.PostActivity;
 import com.example.meplusplus.WaterReminder.DrinkWater;
 import com.example.meplusplus.Workout.WorkoutActivity;
 import com.example.meplusplus.ZenMode.ZenModeActivity;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Food;
+import com.example.meplusplus.model.User;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -51,7 +52,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -103,8 +103,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     CircleImageView drawer_circle_image_view_profile;
     TextView header_for_drawer_text_username;
     Button header_for_drawer_button_view_profile;
-    //Firebase -- to set drawer picture and username
-    FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference foodsReference;
     DatabaseReference waterReference;
@@ -277,10 +275,11 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         //Firebase
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("users");
-        foodsReference = database.getReference("foods");
-        waterReference = database.getReference("water");
+        DbContext dbContext = DbContext.getInstance();
+
+        reference = dbContext.getReference("users");
+        foodsReference = dbContext.getReference("foods");
+        waterReference = dbContext.getReference("water");
         waterUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //ADDS
@@ -380,7 +379,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue(User.class) != null) {
-                    if (snapshot.getValue(User.class).getImageurl().equals("")) {
+                    if (snapshot.getValue(User.class).getImageurl().isEmpty()) {
                     } else {
                         if (!(snapshot.getValue(User.class).getImageurl().equals("default"))) {
                             Picasso.get().load(snapshot.getValue(User.class).getImageurl()).into(drawer_circle_image_view_profile);

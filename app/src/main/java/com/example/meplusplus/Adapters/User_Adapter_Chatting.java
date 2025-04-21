@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.Chatting.MessageActivity;
-import com.example.meplusplus.DataSets.User;
+import com.example.meplusplus.model.User;
 import com.example.meplusplus.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

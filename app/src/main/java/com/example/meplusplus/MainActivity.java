@@ -23,18 +23,6 @@ import com.example.meplusplus.Fragments.Social_PageFragment;
 import com.example.meplusplus.WaterReminder.ReminderBroadcast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-/*
-
-       Status: RFP
-       CREATED DATE: 08/21/2022
-       UPDATED DATE: 08/21/2022
-
-       1.
-       Updated Date: 09/02/2022
-       Notes: Changed logic and redirect fragments when onBackPressed
-
-
- */
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
 

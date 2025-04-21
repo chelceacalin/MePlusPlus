@@ -16,10 +16,10 @@ import androidx.cardview.widget.CardView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meplusplus.DataSets.Exercise;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Exercise;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -28,8 +28,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
     Context context;
     List<Exercise> list;
 
-    //Firebase
-    FirebaseDatabase database;
     DatabaseReference reference;
 
     //Shared preferences
@@ -63,7 +61,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
             holder.workout_exercixe_split_muscles_worked.setTextColor(Color.CYAN);
 
         } else {
-            if (list.get(position).getMuscles_worked().equals(""))
+            if (list.get(position).getMuscles_worked().isEmpty())
                 holder.workout_exercixe_split_name.setPadding(15, 15, 15, 15);
             else
                 holder.workout_exercixe_split_name.setPadding(10, 30, 10, 50);
@@ -89,9 +87,9 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
     }
 
     private void init() {
+        DbContext dbContext = DbContext.getInstance();
         //Firebase
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("exercise");
+        reference = dbContext.getReference("exercise");
     }
 
     @Override

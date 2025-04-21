@@ -1,45 +1,26 @@
 {
   "project_info": {
-    "project_number": "636383616502",
-    "firebase_url": "https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "applicenta-8582b",
-    "storage_bucket": "applicenta-8582b.appspot.com"
+    "project_number": "235648702052",
+    "project_id": "meplusplus-c1c2e",
+    "storage_bucket": "meplusplus-c1c2e.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:636383616502:android:e0cd754e9e649849a9bbd7",
+        "mobilesdk_app_id": "1:235648702052:android:b5a2674e90ac0b60603171",
         "android_client_info": {
           "package_name": "com.example.meplusplus"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "636383616502-dgoepja0l2m8jpaq6knbideujuu5idco.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.meplusplus",
-            "certificate_hash": "488bfcfc747f5c2d0110b7453a2002d67ad6d4f7"
-          }
-        },
-        {
-          "client_id": "636383616502-p6jufrendeotds8j9akgihvsg1mpr761.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDUwLMumKKMQ5Hh4EtBPDKNElKJF_B7Bjo"
+          "current_key": "AIzaSyBzF0-ebjU_6Mva2-X70ohgKIaGsNyqUDY"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "636383616502-p6jufrendeotds8j9akgihvsg1mpr761.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

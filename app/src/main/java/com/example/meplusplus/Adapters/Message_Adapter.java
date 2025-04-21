@@ -13,12 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meplusplus.DataSets.Message;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Message;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -32,8 +32,6 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     Message item;
     Message mesaj;
 
-    //Firebase
-    FirebaseDatabase database;
     DatabaseReference reference;
     FirebaseAuth auth;
     FirebaseUser user;
@@ -92,8 +90,8 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     }
 
     private void init() {
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference().child("messages");
+        DbContext dbContext = DbContext.getInstance();
+        reference = dbContext.getReference().child("messages");
     }
 
     @Override

@@ -6,20 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meplusplus.DataSets.Comm;
-import com.example.meplusplus.DataSets.User;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Comm;
+import com.example.meplusplus.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -39,10 +38,11 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
     final String ID;
     Comm comm;
     User u;
-    //Firebase
-    FirebaseDatabase database;
     DatabaseReference reference;
     DatabaseReference reference1;
+
+    DbContext dbContext = DbContext.getInstance();
+
 
     public Comment_Adapter(Context context, String ID, List<Comm> list) {
         this.context = context;
@@ -66,8 +66,6 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
 
 
         holder.itemView.setOnClickListener(view -> {
-//            Toast.makeText(context, "Publisher: "+ comm.getPublisher()
-//                    +" User ID: "+user.getUid(), Toast.LENGTH_SHORT).show();
             comm = list.get(position);
             if (comm.getPublisher().equals(user.getUid())) {
                 AlertDialog alertDialog = new AlertDialog.Builder(context).create();
@@ -117,9 +115,8 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
 
     private void init() {
         //FirebaseDatabase
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference().child("users");
-        reference1 = database.getReference().child("strikes");
+        reference = dbContext.getReference().child("users");
+        reference1 = dbContext.getReference().child("strikes");
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

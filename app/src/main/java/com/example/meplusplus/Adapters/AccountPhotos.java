@@ -15,12 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ceylonlabs.imageviewpopup.ImagePopup;
-import com.example.meplusplus.DataSets.PostItem;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.PostItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -28,13 +28,13 @@ import java.util.List;
 
 public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder> {
 
-    private final Context context;
-    private final List<PostItem> items;
-    private final FirebaseAuth auth;
-    private PostItem post;
-    private FirebaseUser user;
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
+    final Context context;
+    final List<PostItem> items;
+    final FirebaseAuth auth;
+    PostItem post;
+    FirebaseUser user;
+    DatabaseReference reference;
+
 
     public AccountPhotos(Context mContext, List<PostItem> mPosts) {
         this.context = mContext;
@@ -87,8 +87,8 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     }
 
     private void init() {
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("posts");
+        DbContext dbContext = DbContext.getInstance();
+        reference = dbContext.getReference("posts");
     }
 
     private void setDetails(PostItem post, ViewHolder holder) {

@@ -14,9 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.meplusplus.DataSets.Weight;
 import com.example.meplusplus.MainActivity;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.Weight;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -28,7 +29,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -44,8 +44,6 @@ public class ActivityProgress extends AppCompatActivity {
     EditText activity_progress_weight;
     Button activity_progress_add_weight;
     Button activity_progress_reset_weight;
-    //Firebase
-    FirebaseDatabase database;
     DatabaseReference reference;
     FirebaseAuth auth;
     String user;
@@ -79,7 +77,7 @@ public class ActivityProgress extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 strWeight = activity_progress_weight.getText().toString().trim();
-                if (!(strWeight.equals(""))) {
+                if (!(strWeight.isEmpty())) {
                     String progressID = reference.push().getKey();
                     map.put("weight", strWeight);
                     user = auth.getCurrentUser().getUid();
@@ -109,9 +107,7 @@ public class ActivityProgress extends AppCompatActivity {
                             drawGraph();
 
                         });
-                        builder.setNegativeButton("NO",(dialog, which) -> {
-                            Toast.makeText(ActivityProgress.this, "Reset Cancelled", Toast.LENGTH_SHORT).show();
-                        });
+                        builder.setNegativeButton("NO",(dialog, which) -> Toast.makeText(ActivityProgress.this, "Reset Cancelled", Toast.LENGTH_SHORT).show());
 
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
@@ -175,9 +171,9 @@ public class ActivityProgress extends AppCompatActivity {
         activity_progress_add_weight = findViewById(R.id.activity_progress_add_weight);
         activity_progress_reset_weight = findViewById(R.id.activity_progress_reset_weight);
         lineChart = findViewById(R.id.activity_progress_graph);
-        //Firebase
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("progress");
+        DbContext dbContext = DbContext.getInstance();
+
+        reference = dbContext.getReference("progress");
         auth = FirebaseAuth.getInstance();
 
         //Diverse

@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meplusplus.Adapters.RecipeAdapter;
-import com.example.meplusplus.DataSets.PostItem;
 import com.example.meplusplus.R;
+import com.example.meplusplus.context.DbContext;
+import com.example.meplusplus.model.PostItem;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,8 +32,6 @@ public class RecipesFragment extends Fragment {
     LinearLayoutManager manager;
     PostItem pItem;
 
-    //Firebase
-    FirebaseDatabase database;
     DatabaseReference reference;
 
 
@@ -49,9 +47,9 @@ public class RecipesFragment extends Fragment {
 
     private void init(View view) {
 
+        DbContext dbContext = DbContext.getInstance();
         //Firebase
-        database = FirebaseDatabase.getInstance("https://applicenta-8582b-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference().child("posts");
+        reference = dbContext.getReference().child("posts");
         //Controale
         fragment_recipes_recyclerviewRecipes = view.findViewById(R.id.fragment_recipes_recyclerviewRecipes);
 
@@ -75,7 +73,7 @@ public class RecipesFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();
                 for (DataSnapshot i : snapshot.getChildren()) {
-                    if (!(i.getValue(PostItem.class).getIngredients().equals("")))
+                    if (!(i.getValue(PostItem.class).getIngredients().isEmpty()))
                         items.add(i.getValue(PostItem.class));
                 }
                 adapter.notifyDataSetChanged();
