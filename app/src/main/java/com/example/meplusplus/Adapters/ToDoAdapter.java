@@ -42,8 +42,7 @@ public class ToDoAdapter extends BaseAdapter {
     @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View v;
-        v = LayoutInflater.from(context).inflate(R.layout.to_do_item, viewGroup, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.to_do_item, viewGroup, false);
 
         String item = list.get(i);
         TextView textView = v.findViewById(R.id.to_do_tv);

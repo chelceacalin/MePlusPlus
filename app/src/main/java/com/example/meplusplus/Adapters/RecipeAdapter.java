@@ -44,6 +44,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     //Zoom in
     PhotoViewAttacher mAttacher;
 
+    DbContext dbContext = DbContext.getInstance();
+
+
     public RecipeAdapter(List<PostItem> items, Context context) {
         this.items = items;
         this.context = context;
@@ -60,7 +63,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        init();
+        reference = dbContext.getReferenceChild("users");
+
         //Photoview to be full scale
         holder.recipepostitem_content.setScaleType(ImageView.ScaleType.FIT_XY);
         p = items.get(position);
@@ -102,13 +106,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             }
         });
     }
-
-    private void init() {
-        //FirebaseDatabase
-        DbContext dbContext = DbContext.getInstance();
-        reference = dbContext.getReference().child("users");
-    }
-
 
     @Override
     public int getItemCount() {

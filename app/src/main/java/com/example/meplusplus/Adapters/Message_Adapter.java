@@ -30,11 +30,14 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     final List<Message> list;
     public boolean isSender;
     Message item;
-    Message mesaj;
+    Message message;
 
     DatabaseReference reference;
     FirebaseAuth auth;
     FirebaseUser user;
+
+    DbContext dbContext = DbContext.getInstance();
+
 
     int pozitie;
 
@@ -62,7 +65,7 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
     public void onBindViewHolder(@NonNull Viewholder holder, @SuppressLint("RecyclerView") int position) {
         item = list.get(position);
         holder.textView.setText(item.getMessage());
-        init();
+        reference = dbContext.getReference().child("messages");
         holder.textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
 
@@ -87,11 +90,6 @@ public class Message_Adapter extends RecyclerView.Adapter<Message_Adapter.Viewho
                 return true;
             }
         });
-    }
-
-    private void init() {
-        DbContext dbContext = DbContext.getInstance();
-        reference = dbContext.getReference().child("messages");
     }
 
     @Override

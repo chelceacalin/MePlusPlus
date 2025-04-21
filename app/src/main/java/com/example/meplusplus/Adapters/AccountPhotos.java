@@ -34,6 +34,8 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     PostItem post;
     FirebaseUser user;
     DatabaseReference reference;
+    DbContext dbContext = DbContext.getInstance();
+
 
 
     public AccountPhotos(Context mContext, List<PostItem> mPosts) {
@@ -51,7 +53,8 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         post = items.get(position);
-        init();
+        reference = dbContext.getReference("posts");
+
         setDetails(post, holder);
         initiateImagePopup(holder);
 
@@ -84,11 +87,6 @@ public class AccountPhotos extends RecyclerView.Adapter<AccountPhotos.ViewHolder
         }
 
         holder.imageView.setOnClickListener(view -> imagePopup.viewPopup());
-    }
-
-    private void init() {
-        DbContext dbContext = DbContext.getInstance();
-        reference = dbContext.getReference("posts");
     }
 
     private void setDetails(PostItem post, ViewHolder holder) {

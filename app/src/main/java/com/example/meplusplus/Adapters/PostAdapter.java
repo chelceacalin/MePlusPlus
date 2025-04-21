@@ -212,12 +212,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     private void init() {
-
-        //FirebaseDatabase
-
-        reference = dbContext.getReference().child("users");
-        referenceHearts = dbContext.getReference().child("hearts");
-        referenceStrikes = dbContext.getReference().child("strikes");
+        reference = dbContext.getReferenceChild("users");
+        referenceHearts = dbContext.getReferenceChild("hearts");
+        referenceStrikes = dbContext.getReferenceChild("strikes");
     }
 
     @Override

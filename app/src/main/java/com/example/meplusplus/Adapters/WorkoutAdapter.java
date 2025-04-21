@@ -32,6 +32,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
     //Firebase
     DatabaseReference reference;
 
+    DbContext dbContext = DbContext.getInstance();
 
     //Shared Preferences pt padding
     SharedPreferences sharedPreferences;
@@ -160,7 +161,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
 
     private void init() {
         //Firebase
-        DbContext dbContext = DbContext.getInstance();
         reference = dbContext.getReference("workout");
 
         //Diverse

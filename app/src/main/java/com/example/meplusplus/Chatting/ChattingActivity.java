@@ -25,14 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-
-Status: TC- add itemclicklistener
-
-        CREATED DATE: 09/04/2022
-        UPDATED DATE: 09/04/2022
-
- */
 
 public class ChattingActivity extends AppCompatActivity {
 
@@ -46,6 +38,9 @@ public class ChattingActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseUser user;
+
+    DbContext dbContext = DbContext.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +68,7 @@ public class ChattingActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // Firebase ( for reading the users)
-        DbContext dbContext = DbContext.getInstance();
-        databaseReference = dbContext.getReference().child("users");
+        databaseReference = dbContext.getReferenceChild("users");
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();

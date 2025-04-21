@@ -36,4 +36,11 @@ public class DbContext {
         }
         return database.getReference();
     }
+
+    public DatabaseReference getReferenceChild(String name) {
+        if (database == null) {
+            throw new RuntimeException("Database is null");
+        }
+        return database.getReference().child(name);
+    }
 }

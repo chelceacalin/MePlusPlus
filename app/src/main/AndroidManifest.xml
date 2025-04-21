@@ -3,175 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="LockedOrientationActivity">
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <!-- Features -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-    <uses-permission
-        android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"
-        tools:ignore="HighSamplingRate" />
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" tools:ignore="HighSamplingRate" />
     <uses-permission android:name="android.permission.SENSOR_ACCELEROMETER" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/icon_app_mobile"
-        android:label="Me++"
         android:roundIcon="@drawable/icon_app_mobile"
+        android:label="Me++"
         android:supportsRtl="true"
         android:theme="@style/Theme.Meplusplus"
         tools:replace="android:label"
         tools:targetApi="31">
 
-        <activity
-            android:name=".Workout.WorkoutStarted"
-            android:exported="true"
-            android:label="@string/title_activity_workout_started"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".Workout.WorkoutActivity"
-            android:exported="true"
-            android:label="@string/title_activity_workout"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".ProgressTracking.ActivityProgress"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".WaterReminder.DrinkWater"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".ToDo.ToDoActivity"
-            android:exported="true"
-            android:label="@string/title_activity_to_do"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".ZenMode.ZenModeActivity"
-            android:exported="true"
-            android:label="@string/title_activity_zen_mode"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".CalorieCalculator.CalculateMetabolismActivity"
-            android:exported="true"
-            android:label="CalculateMetabolismActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".FoodTracking.CaloriesActivity"
-            android:exported="true"
-            android:label="@string/title_activity_calories"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".Chatting.MessageActivity"
-            android:exported="true"
-            android:label="MessageActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".Chatting.ChattingActivity"
-            android:exported="true"
-            android:label="@string/title_activity_chatting"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".Utils.FeedBackActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".Utils.EditProfile"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".Utils.CommentDetailActivity"
-            android:exported="true"
-            android:label="@string/title_activity_comment_detail"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar" />
-        <activity
-            android:name=".Utils.PostActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="com.example.meplusplus.Registration.ForgotPassword"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="com.example.meplusplus.Registration.RegisterActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="com.example.meplusplus.MainActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="com.example.meplusplus.Registration.LoginActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name="com.example.meplusplus.Registration.SplashScreen"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Meplusplus.NoActionBar"
-            tools:ignore="LockedOrientationActivity">
+        <!-- Activities -->
+        <activity android:name=".Workout.WorkoutStarted" android:exported="true" android:label="@string/title_activity_workout_started" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".Workout.WorkoutActivity" android:exported="true" android:label="@string/title_activity_workout" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".ProgressTracking.ActivityProgress" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".WaterReminder.DrinkWater" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".ToDo.ToDoActivity" android:exported="true" android:label="@string/title_activity_to_do" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".ZenMode.ZenModeActivity" android:exported="true" android:label="@string/title_activity_zen_mode" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".CalorieCalculator.CalculateMetabolismActivity" android:exported="true" android:label="CalculateMetabolismActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".FoodTracking.CaloriesActivity" android:exported="true" android:label="@string/title_activity_calories" android:launchMode="singleTop" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".Chatting.MessageActivity" android:exported="true" android:label="MessageActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".Chatting.ChattingActivity" android:exported="true" android:label="@string/title_activity_chatting" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".Utils.FeedBackActivity" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".Utils.EditProfile" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".Utils.CommentDetailActivity" android:exported="true" android:label="@string/title_activity_comment_detail" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" />
+        <activity android:name=".Utils.PostActivity" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.example.meplusplus.Registration.ForgotPassword" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.example.meplusplus.Registration.RegisterActivity" android:exported="false" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.example.meplusplus.MainActivity" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.example.meplusplus.Registration.LoginActivity" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.example.meplusplus.Registration.SplashScreen" android:exported="true" android:screenOrientation="portrait" android:theme="@style/Theme.Meplusplus.NoActionBar" tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Pt Notificari -->
-        <receiver android:name=".WaterReminder.ReminderBroadcast" /> <!-- Pt Widget -->
-        <receiver
-            android:name=".Widgets.WidgetMain"
-            android:exported="true">
+        </activity>
+
+        <!-- Broadcast Receivers -->
+        <receiver android:name=".WaterReminder.ReminderBroadcast" />
+        <receiver android:name=".Widgets.WidgetMain" android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widgetinfo" />
+        </receiver>
 
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widgetinfo" />
-        </receiver> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+        <!-- AdMob -->
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713" />
+
     </application>
-
 </manifest>

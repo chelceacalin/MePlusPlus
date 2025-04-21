@@ -207,6 +207,7 @@ public class CaloriesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Schimbam din activitate in fragment
+        super.onBackPressed();
         Intent intent = new Intent(CaloriesActivity.this, MainActivity.class);
         intent.putExtra("MetabolismToMeFragment", true);
         overridePendingTransition(R.anim.fade_in, R.anim.slide_out);

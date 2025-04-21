@@ -144,7 +144,7 @@ public class MessageActivity extends AppCompatActivity {
         //Diverse
         map = new HashMap<>();
         //Firebase
-        reference = dbContext.getReference().child("messages");
+        reference = dbContext.getReferenceChild("messages");
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
